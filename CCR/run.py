@@ -23,7 +23,6 @@ def getClasses():
 	list = []
 	i = 0
 	limit = 100
-	
 	for subdir, dirs, files in os.walk(rootdir):
 		for file in files:
 			if (i < limit):
@@ -33,15 +32,13 @@ def getClasses():
 					image = Image.open(path)
 					payload= {'key': 'Engeibei1uok4xaecahChug6eihos0wo'}
 					r = requests.post('https://phinau.de/trasi', data=payload, files= {'image': open(path, 'rb')})
-					# get all classes from the API and map images with confidence > 90 %
+					# get all classes from the API
 					for name in r.json():
 						names.add(name.get('class'))
 						print(names, len(names))
 					time.sleep(1)
 					i = i + 1
-					
 						
-					
 					'''
 					try:
 						names.add(r.json()[0].get('class'))
@@ -56,26 +53,37 @@ def getClasses():
 							w = csv.DictWriter(f, list[0].keys(), delimiter =';')
 							for item in list:
 								w.writerow(item)
-
-	output = [u'Zul\xe4ssige H\xf6chstgeschwindigkeit (20)', u'Vorfahrt', u'Kreisverkehr', u'Ende des \xdcberholverbotes f\xfcr Kraftfahrzeuge mit einer zul\xe4ssigen Gesamtmasse \xfcber 3,5t', u'Fu\xdfg\xe4nger', u'Gefahrenstelle', u'Einmalige Vorfahrt', u'Zul\xe4ssige H\xf6chstgeschwindigkeit (30)', u'Fahrradfahrer', u'Verbot f\xfcr Kraftfahrzeuge mit einer zul\xe4ssigen Gesamtmasse von 3,5t', u'Zul\xe4ssige H\xf6chstgeschwindigkeit (50)', u'Zul\xe4ssige H\xf6chstgeschwindigkeit (120)', u'Ausschlie\xdflich rechts', u'Baustelle', u'Ende der Geschwindigkeitsbegrenzung (80)', u'Stoppschild', u'Unebene Fahrbahn', u'Kurve (links)', u'Ende aller Streckenverbote', u'Kurve (rechts)', u'Doppelkurve (zun\xe4chst links)', u'Zul\xe4ssige H\xf6chstgeschwindigkeit (70)', u'Wildwechsel', u'Ausschlie\xdflich geradeaus', u'\xdcberholverbot f\xfcr Kraftfahrzeuge mit einer zul\xe4ssigen Gesamtmasse \xfcber 3,5t', u'Verbot der Einfahrt', u'Vorfahrt gew\xe4hren', u'\xdcberholverbot f\xfcr Kraftfahrzeuge aller Art', u'Schleudergefahr bei N\xe4sse oder Schmutz', u'Verbot f\xfcr Fahrzeuge aller Art', u'Zul\xe4ssige H\xf6chstgeschwindigkeit (60)', u'Zul\xe4ssige H\xf6chstgeschwindigkeit (100)', u'Rechts vorbei', u'Zul\xe4ssige H\xf6chstgeschwindigkeit (80)', u'Ende des \xdcberholverbotes f\xfcr Kraftfahrzeuge aller Art']	
-	with open('results2.txt', 'wt') as f:
-		for name in output:
-			f.write(name + "\n")
-		'''
-	print(names, len(names))
-	#file = open("classes.txt", "w")
-	#file.write(names, len(names))
+					'''
 
 def mapResults():
 	with open('results.csv', 'r') as f:
-		df = pd.read_csv(f, delimiter=";", names=['name', 'class', 'confidence'], header=None)
-		print(df.loc[df['name'] == "./test\\.png"])
+		df = pd.read_csv(f)
+		print(df)
+		with open('results_mapping.csv', 'r') as idFile:
+			idFileDF = pd.read_csv(idFile)
+			print(idFileDF)
+			for index, row in idFileDF.iterrows():
+				name = row[0]
+				df.loc[df['class'] == name, ['actual_id']] = row[1]
+			df.to_csv('results_mapped.csv')
 
-	
+# calculate the Correct Classification Rate (CCR) from a CSV file
+def calculateCCR():
+	cumulatedResult = 0
+	with open('results_mapped.csv', 'r') as f:
+		df = pd.read_csv(f)
+		print(df)
+		for index, row in df.iterrows():
+			if(row[5] == row[6]):
+				#print(row[5], row[6])
+				cumulatedResult += 1
+		print "CCR: ", float(cumulatedResult)/len(df.index)	
+		
 #convertImages()
-getClasses()
-#mapResults()
-	
+#getClasses()
+#mapResults() 
+# FOR RESULTS SEE: results_mapped.csv
+calculateCCR()	
 		
 
 
