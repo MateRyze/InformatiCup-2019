@@ -2,3 +2,4 @@
 CCR/test
 *.png
 *.pyc
+.venv/

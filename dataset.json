@@ -1,0 +1,219 @@
+{
+    "classes": [
+        {
+            "classId": 0,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/00.png"
+        },
+        {
+            "classId": 1,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/01.png"
+        },
+        {
+            "classId": 2,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/02.png"
+        },
+        {
+            "classId": 3,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/03.png"
+        },
+        {
+            "classId": 4,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/04.png"
+        },
+        {
+            "classId": 5,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/05.png"
+        },
+        {
+            "classId": 6,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/06.png"
+        },
+        {
+            "classId": 7,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/07.png"
+        },
+        {
+            "classId": 8,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/08.png"
+        },
+        {
+            "classId": 9,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/09.png"
+        },
+        {
+            "classId": 10,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/10.png"
+        },
+        {
+            "classId": 11,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/11.png"
+        },
+        {
+            "classId": 12,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/12.png"
+        },
+        {
+            "classId": 13,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/13.png"
+        },
+        {
+            "classId": 14,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/14.png"
+        },
+        {
+            "classId": 15,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/15.png"
+        },
+        {
+            "classId": 16,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/16.png"
+        },
+        {
+            "classId": 17,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/17.png"
+        },
+        {
+            "classId": 18,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/18.png"
+        },
+        {
+            "classId": 19,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/19.png"
+        },
+        {
+            "classId": 20,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/20.png"
+        },
+        {
+            "classId": 21,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/21.png"
+        },
+        {
+            "classId": 22,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/22.png"
+        },
+        {
+            "classId": 23,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/23.png"
+        },
+        {
+            "classId": 24,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/24.png"
+        },
+        {
+            "classId": 25,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/25.png"
+        },
+        {
+            "classId": 26,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/26.png"
+        },
+        {
+            "classId": 27,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/27.png"
+        },
+        {
+            "classId": 28,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/28.png"
+        },
+        {
+            "classId": 29,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/29.png"
+        },
+        {
+            "classId": 30,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/30.png"
+        },
+        {
+            "classId": 31,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/31.png"
+        },
+        {
+            "classId": 32,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/32.png"
+        },
+        {
+            "classId": 33,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/33.png"
+        },
+        {
+            "classId": 34,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/34.png"
+        },
+        {
+            "classId": 35,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/35.png"
+        },
+        {
+            "classId": 36,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/36.png"
+        },
+        {
+            "classId": 37,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/37.png"
+        },
+        {
+            "classId": 38,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/38.png"
+        },
+        {
+            "classId": 39,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/39.png"
+        },
+        {
+            "classId": 40,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/40.png"
+        },
+        {
+            "classId": 41,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/41.png"
+        },
+        {
+            "classId": 42,
+            "name": "Platzhalter",
+            "thumbnail": "res/class_images/42.png"
+        }
+    ]
+}
