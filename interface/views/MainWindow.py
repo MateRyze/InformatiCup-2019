@@ -1,33 +1,11 @@
 #!/usr/bin/env python3
 import os
 import time
-import json
-from PyQt5.QtCore import QUrl, Qt
-from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QMainWindow, QWidget, QTableWidget, QVBoxLayout, QAction, QDialog, QTableWidgetItem, QVBoxLayout, QTextEdit, QMenu
-
-class DatasetTable(QTableWidget):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.customContextMenuRequested.connect(self.showContextMenu)
-        self.verticalHeader().setVisible(False)
-        self.horizontalHeader().setStretchLastSection(True)
-        self.setColumnCount(3)
-        self.setColumnWidth(0, 48)
-        self.setColumnWidth(1, 64)
-        self.setColumnWidth(2, 256)
-        self.setHorizontalHeaderLabels([
-            'ClassID',
-            'Preview',
-            'Textual Name',
-        ])
-
-    def showContextMenu(self, pos):
-        tableMenu = QMenu()
-        tableMenu.addAction('Generate Fooling Image')
-        tableMenu.addAction('Send Sample to API')
-        tableMenu.addAction('Edit Entry...')
-        tableMenu._exec()
+import webbrowser
+from PyQt5.QtCore import QUrl, Qt, QSize
+from PyQt5.QtGui import QCursor
+from PyQt5.QtWidgets import QMainWindow, QWidget, QAction, QDialog, QVBoxLayout, QTextEdit, QMenu, QSplitter
+from interface.views.DatasetTableWidget import DatasetTableWidget
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -36,15 +14,15 @@ class MainWindow(QMainWindow):
         self.__initMenuBar()
         self.__initTable()
         self.__initConsole()
+        self.main_widget.setSizes([512, 128])
         self.show()
 
     def __initWindow(self):
         self.setWindowTitle('Penis')
         self.setGeometry(10, 10, 1280, 720)
 
-        self.statusBar().showMessage('Message in statusbar.')
-
-        self.main_widget = QWidget()
+        self.main_widget = QSplitter()
+        self.main_widget.setOrientation(Qt.Vertical)
         self.layout = QVBoxLayout(self.main_widget)
         self.main_widget.setLayout(self.layout)
         self.setCentralWidget(self.main_widget)
@@ -73,42 +51,20 @@ class MainWindow(QMainWindow):
         menuHelp.addAction(actionViewHelp)
 
     def __initTable(self):
-        self.table = DatasetTable(self.main_widget)
-        self.table.setRowCount(43)
+        self.table = DatasetTableWidget(self, self.main_widget)
         self.layout.addWidget(self.table)
-        self.displayDatasetFromFile('dataset.json')
 
     def __initConsole(self):
         self.console = QTextEdit(self.main_widget)
-        self.console.setMaximumHeight(128)
         self.console.setReadOnly(True)
-        self.console.setText(':D')
+        self.log('Started...')
         self.layout.addWidget(self.console)
 
-    def displayDatasetFromFile(self, filename):
-        with open(filename, 'r') as fo:
-            dataset = json.load(fo)
-            i = 0
-            for classdef in dataset['classes']:
-                classId = QTableWidgetItem(str(classdef['classId']))
-                classId.setFlags(classId.flags() ^ Qt.ItemIsEditable);
-
-                preview = QTableWidgetItem()
-                preview.setData(Qt.DecorationRole, QPixmap(classdef['thumbnail']))
-                preview.setFlags(preview.flags() ^ Qt.ItemIsEditable);
-
-                name = QTableWidgetItem(classdef['name'])
-                name.setFlags(name.flags() ^ Qt.ItemIsEditable);
-
-                self.table.setItem(i, 0, classId)
-                self.table.setItem(i, 1, preview)
-                self.table.setItem(i, 2, name)
-                self.table.setRowHeight(i, 64)
-                i += 1
-
-    def tableClick(self, x, y):
-        self.table.selectRow(x)
-        self.console.setText('%i/%i\n'%(x, y))
+    def log(self, text):
+        date = time.strftime('%H:%M:%S')
+        self.console.setText('%s\n%s: %s'%(self.console.toPlainText(), date, text))
+        self.console.verticalScrollBar().setValue(self.console.verticalScrollBar().maximum())
+        self.statusBar().showMessage(text)
 
     def help(self, x = 0, y = 1):
-        self.statusBar().showMessage('%i/%i'%(x, y))
+        webbrowser.open('https://google.com')
