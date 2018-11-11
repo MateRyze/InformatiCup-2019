@@ -4,8 +4,31 @@ import time
 import json
 from PyQt5.QtCore import QUrl, Qt
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QMainWindow, QWidget, QTableWidget, QVBoxLayout, QAction, QDialog, QTableWidgetItem, QVBoxLayout, QTextEdit
+from PyQt5.QtWidgets import QMainWindow, QWidget, QTableWidget, QVBoxLayout, QAction, QDialog, QTableWidgetItem, QVBoxLayout, QTextEdit, QMenu
 from PyQt5.QtWebEngineWidgets import QWebEngineView
+
+class DatasetTable(QTableWidget):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.customContextMenuRequested.connect(self.showContextMenu)
+        self.verticalHeader().setVisible(False)
+        self.horizontalHeader().setStretchLastSection(True)
+        self.setColumnCount(3)
+        self.setColumnWidth(0, 48)
+        self.setColumnWidth(1, 64)
+        self.setColumnWidth(2, 256)
+        self.setHorizontalHeaderLabels([
+            'ClassID',
+            'Preview',
+            'Textual Name',
+        ])
+
+    def showContextMenu(self, pos):
+        tableMenu = QMenu()
+        tableMenu.addAction('Generate Fooling Image')
+        tableMenu.addAction('Send Sample to API')
+        tableMenu.addAction('Edit Entry...')
+        tableMenu._exec()
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -24,18 +47,8 @@ class MainWindow(QMainWindow):
         layout = QVBoxLayout(self.main_widget)
         self.main_widget.setLayout(layout)
 
-        self.table = QTableWidget(self.main_widget)
-        self.table.verticalHeader().setVisible(False)
-        self.table.setColumnCount(3)
-        self.table.setColumnWidth(0, 48)
-        self.table.setColumnWidth(1, 64)
-        self.table.setColumnWidth(2, 500)
+        self.table = DatasetTable(self.main_widget)
         self.table.setRowCount(43)
-        self.table.setHorizontalHeaderLabels([
-            'ClassID',
-            'Preview',
-            'Textual Name',
-        ])
         layout.addWidget(self.table)
 
         self.console = QTextEdit(self.main_widget)
@@ -78,7 +91,6 @@ class MainWindow(QMainWindow):
                 self.table.setItem(i, 1, preview)
                 self.table.setItem(i, 2, name)
                 self.table.setRowHeight(i, 64)
-                self.table.cellClicked.connect(self.tableClick)
                 i += 1
 
     def tableClick(self, x, y):
