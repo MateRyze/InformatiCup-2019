@@ -5,7 +5,6 @@ import json
 from PyQt5.QtCore import QUrl, Qt
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QMainWindow, QWidget, QTableWidget, QVBoxLayout, QAction, QDialog, QTableWidgetItem, QVBoxLayout, QTextEdit, QMenu
-from PyQt5.QtWebEngineWidgets import QWebEngineView
 
 class DatasetTable(QTableWidget):
     def __init__(self, *args, **kwargs):
@@ -33,44 +32,58 @@ class DatasetTable(QTableWidget):
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.width = 800
-        self.height = 600
-        self.init_ui()
+        self.__initWindow()
+        self.__initMenuBar()
+        self.__initTable()
+        self.__initConsole()
+        self.show()
 
-    def init_ui(self):
+    def __initWindow(self):
         self.setWindowTitle('Penis')
         self.setGeometry(10, 10, 1280, 720)
 
         self.statusBar().showMessage('Message in statusbar.')
 
         self.main_widget = QWidget()
-        layout = QVBoxLayout(self.main_widget)
-        self.main_widget.setLayout(layout)
+        self.layout = QVBoxLayout(self.main_widget)
+        self.main_widget.setLayout(self.layout)
+        self.setCentralWidget(self.main_widget)
 
+    def __initMenuBar(self):
+        self.menu = self.menuBar()
+
+        actionLoadDataset = QAction('Open Dataset Specification', self)
+        actionQuit = QAction('Close', self)
+        actionViewHelp = QAction('View Documentation', self)
+        actionViewHelp.triggered.connect(self.help)
+        actionGenerationPrefs = QAction('Data Generation', self)
+        actionApiPrefs = QAction('API', self)
+        actionGuiPrefs = QAction('GUI', self)
+
+        menuFile = self.menu.addMenu('File')
+        menuPrefs = self.menu.addMenu('Preferences')
+        menuHelp = self.menu.addMenu('Help')
+
+        menuFile.addAction(actionLoadDataset)
+        menuFile.addSeparator()
+        menuFile.addAction(actionQuit)
+        menuPrefs.addAction(actionGenerationPrefs)
+        menuPrefs.addAction(actionApiPrefs)
+        menuPrefs.addAction(actionGuiPrefs)
+        menuHelp.addAction(actionViewHelp)
+
+    def __initTable(self):
         self.table = DatasetTable(self.main_widget)
         self.table.setRowCount(43)
-        layout.addWidget(self.table)
+        self.layout.addWidget(self.table)
+        self.displayDatasetFromFile('dataset.json')
 
+    def __initConsole(self):
         self.console = QTextEdit(self.main_widget)
         self.console.setMaximumHeight(128)
         self.console.setReadOnly(True)
         self.console.setText(':D')
-        layout.addWidget(self.console)
-
-        self.displayDatasetFromFile('dataset.json')
-
-        viewHelp = QAction('View Documentation', self)
-        viewHelp.triggered.connect(self.help)
-
-        menu = self.menuBar()
-        menu.addMenu('File')
-        menu.addMenu('Generation')
-        menu.addMenu('Preferences')
-        menuHelp = menu.addMenu('Help')
-        menuHelp.addAction(viewHelp)
-
-        self.setCentralWidget(self.main_widget)
-        self.show()
+        self.layout.addWidget(self.console)
 
     def displayDatasetFromFile(self, filename):
         with open(filename, 'r') as fo:
