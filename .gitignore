@@ -3,3 +3,4 @@ CCR/test
 *.png
 *.pyc
 .venv/
+__pycache__/
