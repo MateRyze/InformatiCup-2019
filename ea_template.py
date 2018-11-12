@@ -1,5 +1,6 @@
 import requests
 import os
+import tempfile
 import math
 import time
 import skimage
@@ -13,15 +14,21 @@ class Polygon():
     position = (0, 0)
     color = (128, 128, 128)
 
-    def __init__(self):
-        edgesCount = random.randint(3, 8)
-        for i in range(edgesCount):
-            step = (i / edgesCount) * math.pi * 2
-            edge = (math.cos(step), math.sin(step))
-            self.edges.append(edge)
-        self.color = (random.randint(0, 256), random.randint(0, 256), random.randint(0, 256))
-        self.scale = 8.0
-        self.position = (32, 32)
+    def __init__(self, original=None):
+        if original == None:
+            edgesCount = random.randint(3, 8)
+            for i in range(edgesCount):
+                step = (i / edgesCount) * math.pi * 2
+                edge = (math.cos(step), math.sin(step))
+                self.edges.append(edge)
+            self.color = (random.randint(0, 256), random.randint(0, 256), random.randint(0, 256))
+            self.scale = 8.0
+            self.position = (32, 32)
+        else:
+            self.edges = copy.deepcopy(original.edges)
+            self.color = copy.copy(original.color)
+            self.scale = original.scale
+            self.position = copy.copy(original.position)
 
     def __moveEdge(self):
         i = random.randint(0, len(self.edges) - 1)
@@ -77,7 +84,8 @@ class PolygonField():
             self.polygons.append(Polygon())
             self.background = (random.randint(0, 256), random.randint(0, 256), random.randint(0, 256))
         else:
-            self.polygons = copy.deepcopy(original.polygons)
+            for polygon in original.polygons:
+                self.polygons.append(Polygon(original=polygon))
             self.background = copy.copy(original.background)
 
     def mutate(self, factor = 1.0):
@@ -96,6 +104,7 @@ class PolygonField():
             polygon.render(draw)
         return img
 
+tmpDir = tempfile.mkdtemp()
 population = []
 
 def generateField():
@@ -104,7 +113,7 @@ def generateField():
 # eval fitness for each individual
 def evalFitness():
     for individual in population:
-        name = 'toEval%f.png'%time.time()
+        name = os.path.join(tmpDir, 'classify.png')
         image = individual["field"].render()
         image.save(name)
         payload= {'key': 'Engeibei1uok4xaecahChug6eihos0wo'}
@@ -145,11 +154,11 @@ def crossover():
 def mutate():
     length = len(population)
     for i in range(length):
-        newField = PolygonField(original=population[i]["field"])
+        newField = copy.deepcopy(population[i]["field"])
         newField.mutate()
         population.append({"field": newField, "confidence": 0})
     #DELETE OR NOT?
-    del population[:5]
+    del population[:SELECTED_COUNT]
 
 def printResults():
     for individual in population:
@@ -171,7 +180,7 @@ def getCountThatMatch(confidence):
     return count
 
 INITIAL_POPULATION = 10
-SELECTED_COUNT = 5
+SELECTED_COUNT = 1
 DESIRED_CONFIDENCE = 0.90
 
 initPopulation(INITIAL_POPULATION)
