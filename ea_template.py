@@ -9,26 +9,22 @@ import copy
 from PIL import Image, ImageDraw
 
 class Polygon():
-    edges = []
-    scale = 1.0
-    position = (0, 0)
-    color = (128, 128, 128)
-
-    def __init__(self, original=None):
-        if original == None:
-            edgesCount = random.randint(3, 8)
-            for i in range(edgesCount):
-                step = (i / edgesCount) * math.pi * 2
-                edge = (math.cos(step), math.sin(step))
-                self.edges.append(edge)
-            self.color = (random.randint(0, 256), random.randint(0, 256), random.randint(0, 256))
-            self.scale = 8.0
-            self.position = (32, 32)
-        else:
-            self.edges = copy.deepcopy(original.edges)
-            self.color = copy.copy(original.color)
-            self.scale = original.scale
-            self.position = copy.copy(original.position)
+    def __init__(self):
+        self.edges = []
+        self.scale = 1.0
+        self.position = (0, 0)
+        self.color = (128, 128, 128)
+        edgesCount = random.randint(3, 8)
+        for i in range(edgesCount):
+            step = (i / edgesCount) * math.pi * 2
+            edge = (math.cos(step), math.sin(step))
+            self.edges.append(edge)
+        self.color = (random.randint(0, 256), random.randint(0, 256), random.randint(0, 256))
+        self.scale = 8.0
+        self.position = (
+            random.randint(0, 64),
+            random.randint(0, 64),
+        )
 
     def __moveEdge(self):
         i = random.randint(0, len(self.edges) - 1)
@@ -76,22 +72,31 @@ class Polygon():
         draw.polygon(self.getScaledEdges(), fill=self.color)
 
 class PolygonField():
-    background = (0, 0, 0)
-    polygons = []
-
-    def __init__(self, original = None):
-        if original == None:
+    def __init__(self):
+        self.background = (0, 0, 0)
+        self.polygons = []
+        for i in range(random.randint(10, 20)):
             self.polygons.append(Polygon())
-            self.background = (random.randint(0, 256), random.randint(0, 256), random.randint(0, 256))
-        else:
-            for polygon in original.polygons:
-                self.polygons.append(Polygon(original=polygon))
-            self.background = copy.copy(original.background)
+        self.background = (random.randint(0, 256), random.randint(0, 256), random.randint(0, 256))
+
+    def __insertPolygon(self):
+        polygon = Polygon()
+        self.polygons.insert(random.randint(0, len(self.polygons) + 1), polygon)
+
+    def __removePolygon(self):
+        if len(self.polygons) > 3:
+            del self.polygons[random.randint(0, len(self.polygons) - 1)]
 
     def mutate(self, factor = 1.0):
+        # have a higher chance of inserting a polygon
+        # the API net REALLY seems to like multiple polygons in an image
+        if random.random() > 0.75:
+            self.__removePolygon()
+        else:
+            self.__insertPolygon()
         for polygon in self.polygons:
             polygon.mutate(factor)
-        self.background = ( 
+        self.background = (
             self.background[0] + random.randint(-1, 1),
             self.background[1] + random.randint(-1, 1),
             self.background[2] + random.randint(-1, 1),
@@ -104,11 +109,13 @@ class PolygonField():
             polygon.render(draw)
         return img
 
+# temporary directory in which generated images are stored
 tmpDir = tempfile.mkdtemp()
 population = []
 
 def generateField():
-    return {"field": PolygonField(), "confidence": 0}
+    field = PolygonField()
+    return {"field": field, "confidence": 0}
 
 # eval fitness for each individual
 def evalFitness():
@@ -130,7 +137,6 @@ def selection(bestCount):
     population.sort(key=lambda individual: individual["confidence"], reverse=True)
     del population[bestCount:]
 
-"""
 def crossover():
     # cross rectangles, generate new images
     # TODO: fit for more individuals
@@ -149,7 +155,6 @@ def crossover():
         for i in range(4):
             draw.rectangle(positions[i], fill=colors[i])
         population.append({"image": img, "confidence": 0, "colors": colors})
-"""
 
 def mutate():
     length = len(population)
@@ -180,7 +185,7 @@ def getCountThatMatch(confidence):
     return count
 
 INITIAL_POPULATION = 10
-SELECTED_COUNT = 1
+SELECTED_COUNT = 5
 DESIRED_CONFIDENCE = 0.90
 
 initPopulation(INITIAL_POPULATION)
