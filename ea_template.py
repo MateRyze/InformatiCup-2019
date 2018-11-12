@@ -1,24 +1,11 @@
 import requests
 import os
 import skimage
-import time
-import csv
 import random
 from PIL import Image, ImageDraw
-import pandas as pd
-# dir with test images
-rootdir = './Images'
-population = []
 
-# resize images to 64x64 and convert from PPM to PNG format
-def convertImages():
-	for subdir, dirs, files in os.walk(rootdir):
-		for file in files:
-				path = os.path.join(subdir, file)
-				print(path)
-				data = skimage.io.imread(path)
-				data = skimage.transform.resize(data, (64, 64))
-				skimage.io.imsave(path.replace('.ppm', '.png'), data)
+
+population = []
 
 def generateImage():
     img = Image.new('RGB', (64, 64), color='black')
@@ -112,21 +99,24 @@ def getCountThatMatch(confidence):
             count += 1
     return count
 
-initPopulation(5)
+INITIAL_POPULATION = 10
+SELECTED_COUNT = 5
+DESIRED_CONFIDENCE = 0.90
+
+initPopulation(INITIAL_POPULATION)
 evalFitness()
-selection(3)
+selection(SELECTED_COUNT)
 printResults()
-while getCountThatMatch(0.90) < 3:
+while getCountThatMatch(DESIRED_CONFIDENCE) < SELECTED_COUNT:
     crossover()
     mutate()
     evalFitness()
-    selection(3)
+    selection(SELECTED_COUNT)
     printResults()
 for i in range(len(population)):
     image = population[i]["image"]
     image.save("img" + str(i) + ".png")
 
-
-		
+#TODO: add test functions and calculate API callss
 
 
