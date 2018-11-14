@@ -6,9 +6,13 @@ import unittest
 import json
 from PIL import Image, ImageDraw
 
+# initial random generation of an image
 def generateImage():
+    # set image format
     img = Image.new('RGB', (64, 64), color='black')
     draw = ImageDraw.Draw(img)
+
+    # draw four rectangles with random colors
     positions = [
         ((0, 0), (32, 32)),
         ((32, 0), (64, 32)),
@@ -20,6 +24,7 @@ def generateImage():
         color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255), 255)
         draw.rectangle(position, fill=color)
         colors.append(color)
+
     return {"image": img, "confidence": 0, "colors": colors}
 
 
@@ -34,7 +39,6 @@ def evalFitness():
         image.save(name)
         payload= {'key': 'Engeibei1uok4xaecahChug6eihos0wo'}
         r = requests.post('https://phinau.de/trasi', data=payload, files={'image': open(name, 'rb')})
-        #print(r.json()[0]["confidence"])
         api_calls += 1
         try:
             individual["confidence"] = r.json()[0]["confidence"]
@@ -44,15 +48,17 @@ def evalFitness():
             break
         
         
-
+# create initial population
 def initPopulation(count):
     for i in range(count):
         population.append(generateImage())
 
+# select best individuals from population
 def selection(bestCount):
     population.sort(key=lambda individual: individual["confidence"], reverse=True)
     del population[bestCount:]
 
+# crossover between individuals in the population
 def crossover():
     # cross rectangles, generate new images
     for j in range(len(population)-1):
@@ -71,6 +77,7 @@ def crossover():
             draw.rectangle(positions[i], fill=colors[i])
         population.append({"image": img, "confidence": 0, "colors": colors})
 
+# mutate each individual in the population and delete old population
 def mutate(confidence):
     population_size = len(population)
     for j in range(len(population)):
@@ -118,7 +125,7 @@ def getCountThatMatch(confidence):
     return count
 
 
-# Initiale Parameter
+# init parameters
 population = []
 global api_calls
 stop = False
@@ -127,7 +134,7 @@ INITIAL_POPULATION = 10
 SELECTED_COUNT = 5
 DESIRED_CONFIDENCE = 0.90
 
-
+#TODO: add more test functions
 class MyTest(unittest.TestCase):
     def test(self):
         initPopulation(INITIAL_POPULATION)
@@ -149,7 +156,6 @@ if __name__ == '__main__':
         image.save("img" + str(i) + ".png")
     print(api_calls)
 else:
-    #TODO: add test functions and calculate API callss
     unittest.main()
 
 
