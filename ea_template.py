@@ -2,7 +2,6 @@ import requests
 import os
 import skimage
 import random
-import unittest
 import json
 from PIL import Image, ImageDraw
 
@@ -43,7 +42,7 @@ def evalFitness():
         try:
             individual["confidence"] = r.json()[0]["confidence"]
         except ValueError:
-            print("Decoding JSON failed", api_calls)
+            print("Decoding JSON failed")
             stop = True
             break
         
@@ -134,12 +133,7 @@ INITIAL_POPULATION = 10
 SELECTED_COUNT = 5
 DESIRED_CONFIDENCE = 0.90
 
-#TODO: add more test functions
-class MyTest(unittest.TestCase):
-    def test(self):
-        initPopulation(INITIAL_POPULATION)
-        self.assertEqual(len(population), INITIAL_POPULATION)
-
+# run evolutionary algorithm (init -> selection -> loop(crossover-> mutate -> selection) until confidence matches all images)
 if __name__ == '__main__':
     initPopulation(INITIAL_POPULATION)
     evalFitness()
@@ -154,12 +148,4 @@ if __name__ == '__main__':
     for i in range(len(population)):
         image = population[i]["image"]
         image.save("img" + str(i) + ".png")
-    print(api_calls)
-else:
-    unittest.main()
-
-
-
-
-
-
+    print("api calls: ", api_calls)
