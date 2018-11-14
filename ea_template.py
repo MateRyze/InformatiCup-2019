@@ -9,6 +9,13 @@ import copy
 from PIL import Image, ImageDraw
 
 class Polygon():
+    """
+    This class represents a single polygon, which can be colored, moved about and resized.
+    It is initialised with a random amount of edges forming a circle, a fixed color and a random position.
+    Each mutation causes the polygon to move randomly about, modify its color, be resized and move its individual 
+    edges. New edges may also be added and existing edges may be removed.
+    """
+
     def __init__(self):
         self.edges = []
         self.scale = 1.0
@@ -27,6 +34,9 @@ class Polygon():
         )
 
     def __moveEdge(self):
+        """
+        Moves a random edge into a random direction.
+        """
         i = random.randint(0, len(self.edges) - 1)
         self.edges[i] = (
             self.edges[i][0] + random.random() * 0.2 - 0.1,
@@ -34,14 +44,24 @@ class Polygon():
         )
 
     def __insertEdge(self):
+        """
+        Insert a new edge between to randomly selected existing ones. Its position will be fully arbitrary.
+        """
         edge = (random.randrange(-1.0, 1.0), random.randrange(-1.0, 1.0))
         self.edges.insert(random.randint(0, len(self.edges) + 1), edge)
 
     def __removeEdge(self):
+        """
+        Remove a random edge of the polygon.
+        """
         if len(self.edges) > 3:
             del self.edges[random.randint(0, len(self.edges) - 1)]
 
     def getScaledEdges(self):
+        """
+        Returns a list of edges, which were transformed from the polygon's internal space, to the world space.
+        I.e.: The position and scale values are applied.
+        """
         scaledEdges = []
         for edge in self.edges:
             scaledEdge = (edge[0] * self.scale + self.position[0], edge[1] * self.scale + self.position[1])
@@ -49,6 +69,9 @@ class Polygon():
         return scaledEdges
 
     def mutate(self, factor = 1.0):
+        """
+        Mutate the polygon.
+        """
         changeEdges = random.random()
         if changeEdges > 0.9:
             if random.random() > 0.5:
@@ -69,9 +92,18 @@ class Polygon():
         self.scale += random.random() * 2 - 1
 
     def render(self, draw):
+        """
+        Render the polygon onto the PIL surface given in "draw".
+        """
         draw.polygon(self.getScaledEdges(), fill=self.color)
 
 class PolygonField():
+    """
+    A polygon field represents a collection of polygons. It is initialised with random polygons.
+    Each mutation, the individual polygons and the background color will be mutated. Polygons may also be added
+    or removed.
+    """
+
     def __init__(self):
         self.background = (0, 0, 0)
         self.polygons = []
