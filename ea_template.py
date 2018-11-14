@@ -2,10 +2,9 @@ import requests
 import os
 import skimage
 import random
+import unittest
+import json
 from PIL import Image, ImageDraw
-
-
-population = []
 
 def generateImage():
     img = Image.new('RGB', (64, 64), color='black')
@@ -23,8 +22,12 @@ def generateImage():
         colors.append(color)
     return {"image": img, "confidence": 0, "colors": colors}
 
+
+
 # eval fitness for each individual
 def evalFitness():
+    global api_calls
+    global stop
     for individual in population:
         name = 'toEval.png'
         image = individual["image"]
@@ -32,7 +35,15 @@ def evalFitness():
         payload= {'key': 'Engeibei1uok4xaecahChug6eihos0wo'}
         r = requests.post('https://phinau.de/trasi', data=payload, files={'image': open(name, 'rb')})
         #print(r.json()[0]["confidence"])
-        individual["confidence"] = r.json()[0]["confidence"]
+        api_calls += 1
+        try:
+            individual["confidence"] = r.json()[0]["confidence"]
+        except ValueError:
+            print("Decoding JSON failed", api_calls)
+            stop = True
+            break
+        
+        
 
 def initPopulation(count):
     for i in range(count):
@@ -44,8 +55,7 @@ def selection(bestCount):
 
 def crossover():
     # cross rectangles, generate new images
-    # TODO: fit for more individuals
-    for j in range(2):
+    for j in range(len(population)-1):
         colorsFirst = population[0 + j]["colors"]
         colorsSecond = population[1 + j]["colors"]
         img = Image.new('RGB', (64, 64), color='black')
@@ -61,7 +71,8 @@ def crossover():
             draw.rectangle(positions[i], fill=colors[i])
         population.append({"image": img, "confidence": 0, "colors": colors})
 
-def mutate():
+def mutate(confidence):
+    population_size = len(population)
     for j in range(len(population)):
         img = Image.new('RGB', (64, 64), color='black')
         draw = ImageDraw.Draw(img)
@@ -72,13 +83,20 @@ def mutate():
             ((32, 32), (64, 64)),
         ]
         colors = population[j]["colors"]
-        rect = random.randint(0, 3)
-        colors[rect] = (colors[rect][0] + 1, colors[rect][1] + 1, colors[rect][2] + 1, 255)
+        if(population[j]["confidence"] < confidence):
+            # change the color of a random square
+            rect = random.randint(0, 3)
+            colors[rect] = (
+                colors[rect][0] + random.randint(-10, 10),
+                colors[rect][1] + random.randint(-10, 10),
+                colors[rect][2] + random.randint(-10, 10),
+                255)
+
         for i in range(4):
             draw.rectangle(positions[i], fill=colors[i])
         population.append({"image": img, "confidence": 0, "colors": colors})
-    #DELETE OR NOT?
-    del population[:5]
+    # delete old
+    del population[:population_size]
 
 def printResults():
     for individual in population:
@@ -99,24 +117,43 @@ def getCountThatMatch(confidence):
             count += 1
     return count
 
+
+# Initiale Parameter
+population = []
+global api_calls
+stop = False
+api_calls = 0
 INITIAL_POPULATION = 10
 SELECTED_COUNT = 5
 DESIRED_CONFIDENCE = 0.90
 
-initPopulation(INITIAL_POPULATION)
-evalFitness()
-selection(SELECTED_COUNT)
-printResults()
-while getCountThatMatch(DESIRED_CONFIDENCE) < SELECTED_COUNT:
-    crossover()
-    mutate()
+
+class MyTest(unittest.TestCase):
+    def test(self):
+        initPopulation(INITIAL_POPULATION)
+        self.assertEqual(len(population), INITIAL_POPULATION)
+
+if __name__ == '__main__':
+    initPopulation(INITIAL_POPULATION)
     evalFitness()
     selection(SELECTED_COUNT)
     printResults()
-for i in range(len(population)):
-    image = population[i]["image"]
-    image.save("img" + str(i) + ".png")
+    while getCountThatMatch(DESIRED_CONFIDENCE) < SELECTED_COUNT and stop == False:
+        crossover()
+        mutate(DESIRED_CONFIDENCE)
+        evalFitness()
+        selection(SELECTED_COUNT)
+        printResults()
+    for i in range(len(population)):
+        image = population[i]["image"]
+        image.save("img" + str(i) + ".png")
+    print(api_calls)
+else:
+    #TODO: add test functions and calculate API callss
+    unittest.main()
 
-#TODO: add test functions and calculate API callss
+
+
+
 
 
