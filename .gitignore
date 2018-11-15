@@ -1,2 +1,4 @@
 .vscode/
 CCR/test
+*.png
+*.pyc

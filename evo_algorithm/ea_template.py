@@ -3,7 +3,17 @@ import os
 import skimage
 import random
 import json
+import webbrowser
 from PIL import Image, ImageDraw
+
+global population
+global api_calls
+global stop
+global MUTATION_RATE
+population = []
+api_calls = 0
+stop = False
+MUTATION_RATE = 10
 
 # initial random generation of an image
 def generateImage():
@@ -20,13 +30,11 @@ def generateImage():
     ]
     colors = []
     for position in positions:
-        color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255), 255)
+        color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
         draw.rectangle(position, fill=color)
         colors.append(color)
 
-    return {"image": img, "confidence": 0, "colors": colors}
-
-
+    return {"image": img, "confidence": 0, "colors": colors, "class": ""}
 
 # eval fitness for each individual
 def evalFitness():
@@ -41,8 +49,9 @@ def evalFitness():
         api_calls += 1
         try:
             individual["confidence"] = r.json()[0]["confidence"]
+            individual["class"] = r.json()[0]["class"]
         except ValueError:
-            print("Decoding JSON failed")
+            print("Decoding JSON failed -> hit API rate :(")
             stop = True
             break
         
@@ -59,7 +68,8 @@ def selection(bestCount):
 
 # crossover between individuals in the population
 def crossover():
-    # cross rectangles, generate new images
+    # IMPLEMENT HERE YOUR CROSSOVER FUNCTION
+    # EXAMPLE: cross rectangles, generate new images
     for j in range(len(population)-1):
         colorsFirst = population[0 + j]["colors"]
         colorsSecond = population[1 + j]["colors"]
@@ -74,10 +84,12 @@ def crossover():
         colors = [colorsFirst[0], colorsFirst[1], colorsSecond[2], colorsSecond[3]]
         for i in range(4):
             draw.rectangle(positions[i], fill=colors[i])
-        population.append({"image": img, "confidence": 0, "colors": colors})
+        population.append({"image": img, "confidence": 0, "colors": colors, "class": ""})
 
 # mutate each individual in the population and delete old population
 def mutate(confidence):
+    # IMPLEMENT HERE YOUR MUTATION FUNCTION
+    # EXAMPLE: mutate colors of random rectangle
     population_size = len(population)
     for j in range(len(population)):
         img = Image.new('RGB', (64, 64), color='black')
@@ -93,20 +105,19 @@ def mutate(confidence):
             # change the color of a random square
             rect = random.randint(0, 3)
             colors[rect] = (
-                colors[rect][0] + random.randint(-10, 10),
-                colors[rect][1] + random.randint(-10, 10),
-                colors[rect][2] + random.randint(-10, 10),
-                255)
+                colors[rect][0] + 1 + random.randint(-10, 10) * MUTATION_RATE,
+                colors[rect][1] + 1 + random.randint(-10, 10) * MUTATION_RATE,
+                colors[rect][2] + 1 + random.randint(-10, 10) * MUTATION_RATE)
 
         for i in range(4):
             draw.rectangle(positions[i], fill=colors[i])
-        population.append({"image": img, "confidence": 0, "colors": colors})
+        population.append({"image": img, "confidence": 0, "colors": colors, "class": ""})
     # delete old
     del population[:population_size]
 
 def printResults():
     for individual in population:
-        print(individual["confidence"])
+        print("confidence: ", individual["confidence"], " class: ", individual["class"])
     print("..")
 
 def getBestResult():
@@ -115,7 +126,7 @@ def getBestResult():
         if(individual["confidence"] > best):
             best = individual["confidence"]
     return best
-
+# get the count of images that match the confidence
 def getCountThatMatch(confidence):
     count = 0
     for individual in population:
@@ -125,16 +136,12 @@ def getCountThatMatch(confidence):
 
 
 # init parameters
-population = []
-global api_calls
-stop = False
-api_calls = 0
-INITIAL_POPULATION = 10
-SELECTED_COUNT = 5
-DESIRED_CONFIDENCE = 0.90
+INITIAL_POPULATION = 10 # EXPERIMENT
+SELECTED_COUNT = 5  # specification
+DESIRED_CONFIDENCE = 0.90 # specification
 
 # run evolutionary algorithm (init -> selection -> loop(crossover-> mutate -> selection) until confidence matches all images)
-if __name__ == '__main__':
+def runEvoAlgorithm():
     initPopulation(INITIAL_POPULATION)
     evalFitness()
     selection(SELECTED_COUNT)
@@ -144,8 +151,21 @@ if __name__ == '__main__':
         mutate(DESIRED_CONFIDENCE)
         evalFitness()
         selection(SELECTED_COUNT)
-        printResults()
+        if (stop == False):
+            printResults()
+
+# save generated images with desired confidence
+def saveImages():
     for i in range(len(population)):
-        image = population[i]["image"]
-        image.save("img" + str(i) + ".png")
+        if(population[i]["confidence"] > DESIRED_CONFIDENCE):
+            image = population[i]["image"]
+            name = "img" + \
+                str(i) + "_" + str(population[i]["confidence"]
+                                    ) + "_" + str(population[i]["class"]) + ".png"
+            image.save(name)
+            webbrowser.open(name)
+
+if __name__ == '__main__':
+    runEvoAlgorithm()
+    saveImages()
     print("api calls: ", api_calls)
