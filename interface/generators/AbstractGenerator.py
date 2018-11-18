@@ -4,5 +4,8 @@ class AbstractGenerator():
     def __init__(self):
         pass
 
+    def getImage(self):
+        return None
+
     def step(self, onSuccess, onFailure):
         pass
