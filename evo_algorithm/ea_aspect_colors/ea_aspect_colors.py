@@ -4,6 +4,9 @@ import skimage
 import random
 import json
 import webbrowser
+import pandas as pd
+import numpy as np
+import time
 from PIL import Image, ImageDraw
 
 global population
@@ -11,6 +14,7 @@ global api_calls
 global stop
 global MUTATION_RATE
 population = []
+lastEvaluatedPopulation = []
 api_calls = 0
 stop = False
 MUTATION_RATE = 10
@@ -36,6 +40,21 @@ def generateImage():
 
     return {"image": img, "confidence": 0, "colors": colors, "class": ""}
 
+# initial random generation of an image
+def generateImageOneRect():
+    # set image format
+    img = Image.new('RGB', (64, 64), color='black')
+    draw = ImageDraw.Draw(img)
+
+    # draw four rectangles with random colors
+    color = (0, 0, 0)
+    draw.rectangle(((0,0), (64,64)), fill=color)
+    return {"image": img, "confidence": 0, "color": color, "class": ""}
+
+
+
+
+
 # eval fitness for each individual
 def evalFitness():
     global api_calls
@@ -59,7 +78,7 @@ def evalFitness():
 # create initial population
 def initPopulation(count):
     for i in range(count):
-        population.append(generateImage())
+        population.append(generateImageOneRect())
 
 # select best individuals from population
 def selection(bestCount):
@@ -85,6 +104,7 @@ def crossover():
         for i in range(4):
             draw.rectangle(positions[i], fill=colors[i])
         population.append({"image": img, "confidence": 0, "colors": colors, "class": ""})
+
 
 # mutate each individual in the population and delete old population
 def mutate(confidence):
@@ -115,6 +135,27 @@ def mutate(confidence):
     # delete old
     del population[:population_size]
 
+# mutate each individual in the population and delete old population
+def mutateOneRect(confidence):
+    population_size = len(population)
+    for j in range(len(population)):
+        img = Image.new('RGB', (64, 64), color='black')
+        draw = ImageDraw.Draw(img)
+        color = population[j]["color"]
+        if(population[j]["confidence"] < confidence):
+            # change the color 
+            color = (
+                (color[0] + 5),
+                (color[1] + 5),
+                (color[2] + 5)
+                )
+
+        draw.rectangle(((0,0), (64,64)), fill=color)
+        population.append({"image": img, "confidence": 0, "color": color, "class": ""})
+    # delete old
+    del population[:population_size]
+
+
 def printResults():
     for individual in population:
         print("confidence: ", individual["confidence"], " class: ", individual["class"])
@@ -136,9 +177,9 @@ def getCountThatMatch(confidence):
 
 
 # init parameters
-INITIAL_POPULATION = 10 # EXPERIMENT
+INITIAL_POPULATION = 5 # EXPERIMENT
 SELECTED_COUNT = 5  # specification
-DESIRED_CONFIDENCE = 0.90 # specification
+DESIRED_CONFIDENCE = 0.20 # specification
 
 # run evolutionary algorithm (init -> selection -> loop(crossover-> mutate -> selection) until confidence matches all images)
 def runEvoAlgorithm():
@@ -146,18 +187,20 @@ def runEvoAlgorithm():
     evalFitness()
     selection(SELECTED_COUNT)
     printResults()
-    while getCountThatMatch(DESIRED_CONFIDENCE) < SELECTED_COUNT and stop == False:
-        crossover()
-        mutate(DESIRED_CONFIDENCE)
+    while getCountThatMatch(DESIRED_CONFIDENCE) < SELECTED_COUNT and stop == False and api_calls < 50:
+        #crossover()
+        mutateOneRect(DESIRED_CONFIDENCE)
         evalFitness()
         selection(SELECTED_COUNT)
         if (stop == False):
-            printResults()
+            printResults()    
+
+
 
 # save generated images with desired confidence
 def saveImages():
     for i in range(len(population)):
-        if(population[i]["confidence"] > DESIRED_CONFIDENCE):
+        if(population[i]["confidence"] > 0.05):
             image = population[i]["image"]
             name = "img" + \
                 str(i) + "_" + str(population[i]["confidence"]
@@ -165,10 +208,46 @@ def saveImages():
             image.save(name)
             webbrowser.open(name)
 
+# TODO
 def evaluateResults():
-    print("TODO")
+    df = pd.DataFrame(population, columns=["class", "confidence", "color"])
+    print(df)
+
+def generateAndEval():
+    # set image format
+    color = (0, 0, 0)
+    img = Image.new('RGB', (64, 64), color=color)
+    
+    for i in range(10):
+        for j in range(10):
+            for k in range(10):
+                color = (i*25, j*25, k*25)
+                img = Image.new('RGB', (64, 64), color=color)
+                individual = {"image": img, "confidence": 0, "color": color, "class": ""}
+                # eval
+                name = 'toEval.png'
+                image = img
+                image.save(name)
+                payload= {'key': 'Engeibei1uok4xaecahChug6eihos0wo'}
+                r = requests.post('https://phinau.de/trasi', data=payload, files={'image': open(name, 'rb')})
+                time.sleep(1)
+                try:
+                    individual["confidence"] = r.json()[0]["confidence"]
+                    individual["class"] = r.json()[0]["class"]
+                    population.append(individual)
+                    df = pd.DataFrame(population, columns=["class", "confidence", "color"])
+                    print(df)
+                    df.to_csv("results_uni_color.csv")
+                except ValueError:
+                    print("Decoding JSON failed -> hit API rate :(")
+                    stop = True
+                    break
 
 if __name__ == '__main__':
-    runEvoAlgorithm()
-    saveImages()
-    print("api calls: ", api_calls)
+    #generateAndEval()
+    df = pd.read_csv("results_uni_color.csv")
+    print(df)
+    #runEvoAlgorithm()
+    #saveImages()
+    #print("api calls: ", api_calls)
+    #evaluateResults()
