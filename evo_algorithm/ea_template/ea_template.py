@@ -5,7 +5,10 @@ import json
 import webbrowser
 import math
 import copy
+import time
+import io
 from PIL import Image, ImageDraw
+from pandas import DataFrame
 
 global population
 global api_calls
@@ -15,6 +18,13 @@ population = []
 api_calls = 0
 stop = False
 MUTATION_RATE = 10
+statisticsRecords = []
+
+def reset():
+    population.clear()
+    statisticsRecords.clear()
+    stop = False
+    api_calls = 0
 
 class Polygon():
     """
@@ -105,6 +115,23 @@ class Polygon():
         """
         draw.polygon(self.getScaledEdges(), fill=self.color)
 
+    def getMetadata(self):
+        return {
+            "color": {
+                "r": self.color[0],
+                "g": self.color[1],
+                "b": self.color[2],
+            },
+            "position": {
+                "x": self.position[0],
+                "y": self.position[1],
+            },
+            "edges": [
+                {"x": edge[0], "y": edge[1]} for edge in self.edges
+            ],
+            "scale": self.scale,
+        }
+
 class PolygonField():
     """
     A polygon field represents a collection of polygons. It is initialised with random polygons.
@@ -115,7 +142,7 @@ class PolygonField():
     def __init__(self, polygons = None, background = None):
         if polygons == None:
             self.polygons = []
-            for i in range(random.randint(10, 20)):
+            for i in range(random.randint(1, 20)):
                 self.polygons.append(Polygon())
         else:
             self.polygons = polygons
@@ -131,8 +158,10 @@ class PolygonField():
         self.polygons.insert(random.randint(0, len(self.polygons) + 1), polygon)
 
     def __removePolygon(self):
-        if len(self.polygons) > 3:
+        if len(self.polygons) > 2:
             del self.polygons[random.randint(0, len(self.polygons) - 1)]
+        elif len(self.polygons) == 2:
+            self.polygons.clear()
 
     def mutate(self, factor = 1.0):
         # have a higher chance of inserting a polygon
@@ -156,6 +185,18 @@ class PolygonField():
             polygon.render(draw)
         return img
 
+    def getMetadata(self):
+        return {
+            "background": {
+                "r": self.background[0],
+                "g": self.background[1],
+                "b": self.background[2],
+            },
+            "polygons": [
+                polygon.getMetadata() for polygon in self.polygons
+            ]
+        }
+
     @staticmethod
     def crossover(a, b):
         newPoly = copy.deepcopy(a.polygons) + copy.deepcopy(b.polygons)
@@ -168,24 +209,32 @@ def generateField():
     field = PolygonField()
     return {"field": field, "confidence": 0}
 
- # eval fitness for each individual
-def evalFitness():
+# call api to rate an individual. wait for a random amount of time if the api limit was reached
+def updateIndividualByApi(individual):
     global api_calls
-    global stop
-    for individual in population:
-        name = 'toEval.png'
-        image = individual["field"].render()
-        image.save(name)
-        payload= {'key': 'Engeibei1uok4xaecahChug6eihos0wo'}
-        r = requests.post('https://phinau.de/trasi', data=payload, files={'image': open(name, 'rb')})
-        api_calls += 1
+    buf = io.BytesIO()
+    image = individual["field"].render()
+    image.save(buf, format="png")
+    payload= {'key': 'Engeibei1uok4xaecahChug6eihos0wo'}
+    success = False
+    while not success:
         try:
+            buf.seek(0)
+            r = requests.post('https://phinau.de/trasi', data=payload, files={'image': buf})
             individual["confidence"] = r.json()[0]["confidence"]
             individual["class"] = r.json()[0]["class"]
+            writeToRecords(individual["field"], individual["class"], individual["confidence"])
+            success = True
         except ValueError:
-            print("Decoding JSON failed -> hit API rate :(")
-            stop = True
-            break
+            seconds = random.randrange(1, 30)
+            print("Hit Api limit... waiting for %i seconds"%seconds)
+            time.sleep(seconds)
+    api_calls += 1
+
+ # eval fitness for each individual
+def evalFitness():
+    for individual in population:
+        updateIndividualByApi(individual)
 
 # create initial population
 def initPopulation(count):
@@ -257,17 +306,37 @@ def runEvoAlgorithm():
             printResults()
 
 # save generated images with desired confidence
-def saveImages():
+def saveImages(prefix=""):
+    if not os.path.exists("images"):
+        os.mkdir("images")
     for i in range(len(population)):
         if(population[i]["confidence"] > DESIRED_CONFIDENCE):
             image = population[i]["field"].render()
-            name = "img" + \
+            name = prefix + "_" + \
                 str(i) + "_" + str(population[i]["confidence"]
                                     ) + "_" + str(population[i]["class"]) + ".png"
+            name = os.path.join("images", name)
             image.save(name)
-            webbrowser.open(name)
+
+def saveRecords(prefix=""):
+    df = DataFrame(data=statisticsRecords)
+    if not os.path.exists("stats"):
+        os.mkdir("stats")
+    df.to_csv(os.path.join("stats", "%s-meta.csv"%prefix))
+
+def writeToRecords(polygonField, classname, confidence):
+    statisticsRecords.append({
+        "metadata": polygonField.getMetadata(),
+        "classname": classname,
+        "confidence": confidence,
+    })
 
 if __name__ == '__main__':
-    runEvoAlgorithm()
-    saveImages()
-    print("api calls: ", api_calls)
+    for i in range(10):
+        print("Iteration: ", i)
+        runEvoAlgorithm()
+        prefix = "%03i"%i
+        saveImages(prefix)
+        saveRecords(prefix)
+        print("api calls: ", api_calls)
+        reset()
