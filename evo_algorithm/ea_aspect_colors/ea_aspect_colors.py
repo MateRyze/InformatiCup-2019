@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 import requests
 import os
 import skimage
@@ -8,6 +9,7 @@ import pandas as pd
 import numpy as np
 import time
 from PIL import Image, ImageDraw
+from ast import literal_eval as make_tuple
 
 global population
 global api_calls
@@ -39,21 +41,6 @@ def generateImage():
         colors.append(color)
 
     return {"image": img, "confidence": 0, "colors": colors, "class": ""}
-
-# initial random generation of an image
-def generateImageOneRect():
-    # set image format
-    img = Image.new('RGB', (64, 64), color='black')
-    draw = ImageDraw.Draw(img)
-
-    # draw four rectangles with random colors
-    color = (0, 0, 0)
-    draw.rectangle(((0,0), (64,64)), fill=color)
-    return {"image": img, "confidence": 0, "color": color, "class": ""}
-
-
-
-
 
 # eval fitness for each individual
 def evalFitness():
@@ -87,8 +74,7 @@ def selection(bestCount):
 
 # crossover between individuals in the population
 def crossover():
-    # IMPLEMENT HERE YOUR CROSSOVER FUNCTION
-    # EXAMPLE: cross rectangles, generate new images
+    # cross rectangles, generate new images
     for j in range(len(population)-1):
         colorsFirst = population[0 + j]["colors"]
         colorsSecond = population[1 + j]["colors"]
@@ -108,8 +94,7 @@ def crossover():
 
 # mutate each individual in the population and delete old population
 def mutate(confidence):
-    # IMPLEMENT HERE YOUR MUTATION FUNCTION
-    # EXAMPLE: mutate colors of random rectangle
+    # mutate colors of random rectangle
     population_size = len(population)
     for j in range(len(population)):
         img = Image.new('RGB', (64, 64), color='black')
@@ -135,25 +120,6 @@ def mutate(confidence):
     # delete old
     del population[:population_size]
 
-# mutate each individual in the population and delete old population
-def mutateOneRect(confidence):
-    population_size = len(population)
-    for j in range(len(population)):
-        img = Image.new('RGB', (64, 64), color='black')
-        draw = ImageDraw.Draw(img)
-        color = population[j]["color"]
-        if(population[j]["confidence"] < confidence):
-            # change the color 
-            color = (
-                (color[0] + 5),
-                (color[1] + 5),
-                (color[2] + 5)
-                )
-
-        draw.rectangle(((0,0), (64,64)), fill=color)
-        population.append({"image": img, "confidence": 0, "color": color, "class": ""})
-    # delete old
-    del population[:population_size]
 
 
 def printResults():
@@ -189,7 +155,7 @@ def runEvoAlgorithm():
     printResults()
     while getCountThatMatch(DESIRED_CONFIDENCE) < SELECTED_COUNT and stop == False and api_calls < 50:
         #crossover()
-        mutateOneRect(DESIRED_CONFIDENCE)
+        mutate(DESIRED_CONFIDENCE)
         evalFitness()
         selection(SELECTED_COUNT)
         if (stop == False):
@@ -208,12 +174,10 @@ def saveImages():
             image.save(name)
             webbrowser.open(name)
 
-# TODO
-def evaluateResults():
-    df = pd.DataFrame(population, columns=["class", "confidence", "color"])
-    print(df)
 
-def generateAndEval():
+
+# make request with 1000 single color images and save results to CSV file
+def getApiResultsForSingleColors():
     # set image format
     color = (0, 0, 0)
     img = Image.new('RGB', (64, 64), color=color)
@@ -243,11 +207,24 @@ def generateAndEval():
                     stop = True
                     break
 
-if __name__ == '__main__':
-    #generateAndEval()
+# varying marker colors (= generated image colors)
+def scatterPlot():
     df = pd.read_csv("results_uni_color.csv")
     print(df)
+    colors = [make_tuple(row) for row in df["color"]]
+    colors = [[elem/255 for elem in row] for row in colors]
+    colorsSummed = [(row[0] + row[1] + row[2])*255 for row in colors]
+    print(colors)
+    plt.scatter(df["confidence"], colorsSummed, c=colors, s=2000, marker=[(1,3), (0,3), (0,0), (1,0)])
+    plt.title('Einfarbige Bilder, 1000 Stück')
+    plt.xlabel('Konfidenz')
+    plt.ylabel('Summe der Farbwerte (R + G + B)')
+    plt.show()
+
+
+if __name__ == '__main__':
+    #generateAndEval()
     #runEvoAlgorithm()
     #saveImages()
     #print("api calls: ", api_calls)
-    #evaluateResults()
+    scatterPlot()
