@@ -4,12 +4,14 @@ import skimage
 import random
 import json
 import webbrowser
+import time
 from PIL import Image, ImageDraw
 
 global population
 global api_calls
 global stop
 global MUTATION_RATE
+shape = ((random.randint(5, 55),random.randint(5, 55)),(random.randint(5, 55),random.randint(5, 55)), (random.randint(5, 55),random.randint(5, 55)),(random.randint(5, 55),random.randint(5, 55)))
 population = []
 api_calls = 0
 stop = False
@@ -26,7 +28,7 @@ def generateImage():
     draw.rectangle(((0,0),(64,64)), background)
     #draw shape
     foreground = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
-    draw.polygon(((10,10),(54,10),(32,54)), foreground)
+    draw.polygon(shape, foreground)
     
     return {"image": img, "confidence": 0, "background": background, "foreground": foreground, "class": ""}
 
@@ -41,6 +43,9 @@ def evalFitness():
         payload= {'key': 'Engeibei1uok4xaecahChug6eihos0wo'}
         r = requests.post('https://phinau.de/trasi', data=payload, files={'image': open(name, 'rb')})
         api_calls += 1
+        if api_calls >= 60:
+            time.sleep(60)
+            api_calls = 0
         try:
             individual["confidence"] = r.json()[0]["confidence"]
             individual["class"] = r.json()[0]["class"]
@@ -72,7 +77,7 @@ def crossover():
         
         draw.rectangle(((0,0),(64,64)), background)
         
-        draw.polygon(((10,10),(54,10),(32,54)), foreground)
+        draw.polygon(shape, foreground)
     
         population.append({"image": img, "confidence": 0, "background": background, "foreground": foreground, "class": ""})
 
@@ -98,7 +103,7 @@ def mutate(confidence):
                 foreground[2] + random.randint(-10, 10) * MUTATION_RATE)
         
         draw.rectangle(((0,0),(64,64)), background)
-        draw.polygon(((10,10),(54,10),(32,54)), foreground)
+        draw.polygon(shape, foreground)
         
         population.append({"image": img, "confidence": 0, "background": background, "foreground": foreground, "class": ""})
     # delete old
@@ -145,14 +150,16 @@ def runEvoAlgorithm():
 
 # save generated images with desired confidence
 def saveImages():
+    f = open("data.txt", "a")
     for i in range(len(population)):
         if(population[i]["confidence"] > DESIRED_CONFIDENCE):
             image = population[i]["image"]
-            name = "img" + \
-                str(i) + "_" + str(population[i]["confidence"]
-                                    ) + "_" + str(population[i]["class"]) + ".png"
-            image.save(name)
-            webbrowser.open(name)
+            name = (str(shape) + ';' + str(population[i]["confidence"]) + ';' + str(population[i]["background"])
+                    + ';' + str(population[i]["foreground"]) + ';' + population[i]["class"]).encode('utf-8')
+            f.write( name + '\n')
+            image.save(name + ".png")
+            webbrowser.open(name + ".png")
+    f.close()
 
 if __name__ == '__main__':
     runEvoAlgorithm()
