@@ -5,13 +5,14 @@ import random
 import json
 import webbrowser
 import time
+import pandas as pd
 from PIL import Image, ImageDraw
 
 global population
 global api_calls
 global stop
 global MUTATION_RATE
-shape = ((random.randint(5, 55),random.randint(5, 55)),(random.randint(5, 55),random.randint(5, 55)), (random.randint(5, 55),random.randint(5, 55)),(random.randint(5, 55),random.randint(5, 55)))
+shape = ((16, 16), (16,48), (48,48), (48,16))
 population = []
 api_calls = 0
 stop = False
@@ -132,7 +133,7 @@ def getCountThatMatch(confidence):
 # init parameters
 INITIAL_POPULATION = 10 # EXPERIMENT
 SELECTED_COUNT = 5  # specification
-DESIRED_CONFIDENCE = 0.90 # specification
+DESIRED_CONFIDENCE = 0.50 # specification
 
 # run evolutionary algorithm (init -> selection -> loop(crossover-> mutate -> selection) until confidence matches all images)
 def runEvoAlgorithm():
@@ -150,18 +151,21 @@ def runEvoAlgorithm():
 
 # save generated images with desired confidence
 def saveImages():
-    f = open("data.txt", "a")
     for i in range(len(population)):
         if(population[i]["confidence"] > DESIRED_CONFIDENCE):
             image = population[i]["image"]
             name = (str(shape) + ';' + str(population[i]["confidence"]) + ';' + str(population[i]["background"])
                     + ';' + str(population[i]["foreground"]) + ';' + population[i]["class"]).encode('utf-8')
-            f.write( name + '\n')
             image.save(name + ".png")
             webbrowser.open(name + ".png")
-    f.close()
+
+
+def saveResults():
+    df = pd.DataFrame(population, columns=["class", "confidence", "background", "foreground"])
+    print(df)
+    df.to_csv("results_contrast_color.csv")
 
 if __name__ == '__main__':
     runEvoAlgorithm()
-    saveImages()
+    saveResults()
     print("api calls: ", api_calls)
