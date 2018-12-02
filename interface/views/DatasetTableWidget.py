@@ -1,8 +1,8 @@
-import json
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap, QCursor
 from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem, QMenu
 from interface.util import api
+from interface.models.Dataset import Dataset
 
 class DatasetTableWidget(QTableWidget):
     """
@@ -24,8 +24,8 @@ class DatasetTableWidget(QTableWidget):
             'Preview',
             'Textual Name',
         ])
-        self.__dataset = None
-        self.displayDatasetFromFile('dataset.json')
+        self.__dataset = mainWindow.getDataset()
+        self.renderDataset()
 
     def contextMenuEvent(self, event):
         """
@@ -65,36 +65,33 @@ class DatasetTableWidget(QTableWidget):
             res = api.classifyFile(c['thumbnail'])
             self.mainWindow.log(res)
 
-    def displayDatasetFromFile(self, filename):
+    def renderDataset(self):
         """
         Open a json formatted dataset specification from a file and display the contained information.
         """
-        with open(filename, 'r') as fo:
-            self.__dataset = json.load(fo)
-            i = 0
-            # the amount of rows in the table needs to be set first, thus we use the length of the 'classes' array
-            self.setRowCount(len(self.__dataset['classes']))
-            for classdef in self.__dataset['classes']:
-                classId = QTableWidgetItem(str(classdef['classId']))
-                # disable editing of the class id
-                # this is done for all cells within this row (and for every row)
-                classId.setFlags(classId.flags() ^ Qt.ItemIsEditable)
+        self.setRowCount(self.__dataset.getClassesCount())
+        i = 0
+        for c in self.__dataset.getClasses():
+            classId = QTableWidgetItem(str(c.id))
+            # disable editing of the class id
+            # this is done for all cells within this row (and for every row)
+            classId.setFlags(classId.flags() ^ Qt.ItemIsEditable)
 
-                preview = QTableWidgetItem()
-                # classdef['thumbnail'] contains a filename, passing this value to the constructor of QPixmap
-                # automatically loads an image
-                preview.setData(Qt.DecorationRole, QPixmap(classdef['thumbnail']))
-                preview.setFlags(preview.flags() ^ Qt.ItemIsEditable)
+            preview = QTableWidgetItem()
+            # c.thumbnailPath contains a filename, passing this value to the constructor of QPixmap
+            # automatically loads an image
+            preview.setData(Qt.DecorationRole, QPixmap(c.thumbnailPath))
+            preview.setFlags(preview.flags() ^ Qt.ItemIsEditable)
 
-                name = QTableWidgetItem(classdef['name'])
-                name.setFlags(name.flags() ^ Qt.ItemIsEditable)
+            name = QTableWidgetItem(c.name)
+            name.setFlags(name.flags() ^ Qt.ItemIsEditable)
 
-                self.setItem(i, 0, classId)
-                self.setItem(i, 1, preview)
-                self.setItem(i, 2, name)
-                # make sure the row is as large as the image within (we just assume a height of 64 pixels)
-                self.setRowHeight(i, 64)
-                i += 1
+            self.setItem(i, 0, classId)
+            self.setItem(i, 1, preview)
+            self.setItem(i, 2, name)
+            # make sure the row is as large as the image within (we just assume a height of 64 pixels)
+            self.setRowHeight(i, 64)
+            i += 1
 
     def tableClick(self, x, y):
         self.selectRow(x)

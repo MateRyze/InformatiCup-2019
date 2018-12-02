@@ -7,6 +7,7 @@ from PyQt5.QtGui import QCursor
 from PyQt5.QtWidgets import QMainWindow, QWidget, QAction, QDialog, QVBoxLayout, QTextEdit, QMenu, QSplitter
 from interface.views.DatasetTableWidget import DatasetTableWidget
 from interface.views.GeneratingWindow import GeneratingWindow
+from interface.models.Dataset import Dataset
 
 class MainWindow(QMainWindow):
     """
@@ -16,6 +17,7 @@ class MainWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
+        self.__initDataset()
         self.__initWindow()
         self.__initMenuBar()
         self.__initTable()
@@ -100,6 +102,13 @@ class MainWindow(QMainWindow):
         self.console.setReadOnly(True)
         self.log('Started...')
         self.layout.addWidget(self.console)
+
+    def __initDataset(self):
+        self.__dataset = Dataset()
+        self.__dataset.loadFromFile('dataset.json')
+
+    def getDataset(self):
+        return self.__dataset
 
     def openGeneratingWindow(self):
         self.generatingWindow = GeneratingWindow(self)
