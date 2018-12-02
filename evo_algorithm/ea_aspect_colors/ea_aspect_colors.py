@@ -65,7 +65,7 @@ def evalFitness():
 # create initial population
 def initPopulation(count):
     for i in range(count):
-        population.append(generateImageOneRect())
+        population.append(generateImage())
 
 # select best individuals from population
 def selection(bestCount):
@@ -207,6 +207,50 @@ def getApiResultsForSingleColors():
                     stop = True
                     break
 
+                    # make request with 1000 single color images and save results to CSV file
+
+
+def getApiResultsForTwoColors():
+    # set image format
+    color = (0, 0, 0)
+    img = Image.new('RGB', (64, 64), color=color)
+    colorTwo = (0,0,0)
+    colorOne = (0,0,0)
+
+    for imageNr in range(2):
+        for i in range(5):
+            for j in range(5):
+                for k in range(5):
+                    if(imageNr == 0):
+                        colorOne = (i*25, j*25, k*25)
+                    else:
+                        colorTwo = (i*25, j*25, k*25)
+                    draw = ImageDraw.Draw(img)
+                    draw.rectangle(((0,0), (32,64)), fill=colorOne)
+                    draw.rectangle(((32,0), (64,64)), fill=colorTwo)
+                    individual = {"image": img, "confidence": 0,
+                                "colorOne": colorOne, "colorTwo": colorTwo, "class": ""}
+                    # eval
+                    name = 'toEval.png'
+                    image = img
+                    image.save(name)
+                    payload = {'key': 'Engeibei1uok4xaecahChug6eihos0wo'}
+                    r = requests.post('https://phinau.de/trasi',
+                                    data=payload, files={'image': open(name, 'rb')})
+                    time.sleep(1)
+                    try:
+                        individual["confidence"] = r.json()[0]["confidence"]
+                        individual["class"] = r.json()[0]["class"]
+                        population.append(individual)
+                        df = pd.DataFrame(population, columns=[
+                                        "class", "confidence", "colorOne", "colorTwo"])
+                        print(df)
+                        df.to_csv("results_two_colors.csv")
+                    except ValueError:
+                        print("Decoding JSON failed -> hit API rate :(")
+                        stop = True
+                        break
+
 # varying marker colors (= generated image colors)
 def scatterPlot():
     df = pd.read_csv("results_uni_color.csv")
@@ -221,10 +265,32 @@ def scatterPlot():
     plt.ylabel('Summe der Farbwerte (R + G + B)')
     plt.show()
 
+# varying marker colors (= generated image colors)
+
+
+def scatterTwoColorsPlot():
+    df = pd.read_csv("results_two_colors.csv")
+    print(df)
+    colorsOne = [make_tuple(row) for row in df["colorOne"]]
+    colorsOne = [[elem/255 for elem in row] for row in colorsOne]
+    colorsTwo = [make_tuple(row) for row in df["colorTwo"]]
+    colorsTwo = [[elem/255 for elem in row] for row in colorsTwo]
+    colorsOneSum = [(row[0] + row[1] + row[2])*255 for row in colorsOne]
+    colorsTwoSum = [(row[0] + row[1] + row[2])*255 for row in colorsTwo]
+    colorsDiff = [(row[0] + row[1] + row[2])*255 for row in colorsTwo]
+    plt.scatter(df["confidence"], colorsOneSum, c=colorsOne, s=500, marker='^')
+    plt.scatter(df["confidence"], colorsTwoSum, c=colorsTwo, s=500, marker='o')
+    plt.title('Einfarbige Bilder, 1000 Stück')
+    plt.xlabel('Konfidenz')
+    plt.ylabel('Summe der Farbwerte (R + G + B)')
+    plt.show()
+
 
 if __name__ == '__main__':
     #generateAndEval()
     #runEvoAlgorithm()
     #saveImages()
     #print("api calls: ", api_calls)
-    scatterPlot()
+    #scatterPlot()
+    #getApiResultsForTwoColors()
+    scatterTwoColorsPlot()
