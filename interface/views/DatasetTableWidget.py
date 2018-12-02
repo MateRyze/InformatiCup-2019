@@ -3,7 +3,6 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap, QCursor
 from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem, QMenu
 from interface.util import api
-from interface.views.GeneratingWindow import GeneratingWindow
 
 class DatasetTableWidget(QTableWidget):
     """
@@ -35,7 +34,7 @@ class DatasetTableWidget(QTableWidget):
         """
         tableMenu = QMenu()
         generateAction = tableMenu.addAction('Generate Fooling Image')
-        generateAction.triggered.connect(self.generateSelected)
+        generateAction.triggered.connect(self.mainWindow.openGeneratingWindow)
 
         sendSampleAction = tableMenu.addAction('Send Sample to API')
         sendSampleAction.triggered.connect(self.classifySelected)
@@ -65,9 +64,6 @@ class DatasetTableWidget(QTableWidget):
         for c in classes:
             res = api.classifyFile(c['thumbnail'])
             self.mainWindow.log(res)
-
-    def generateSelected(self):
-        self.generatingWindow = GeneratingWindow(self.mainWindow)
 
     def displayDatasetFromFile(self, filename):
         """

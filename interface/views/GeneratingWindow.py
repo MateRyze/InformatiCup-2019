@@ -53,15 +53,27 @@ class GeneratingWindow(QDialog):
         self.generateButton.setGeometry(32, 264, 200, 32)
         self.generateButton.clicked.connect(self.__generate)
 
+    def __onStepCallback(self, classId, confidence):
+        self.updatePreview(classId, self.generator.getImage())
+
+    def __onFailureCallback(self):
+        pass
+
+    def __onFinishedCallback(self):
+        self.generateButton.setEnabled(True)
+
     def __generate(self):
         self.generateButton.setEnabled(False)
         self.generator = SpammingGenerator(self)
-        self.generatorThread = threading.Thread(target = self.generator.generate)
+        target = self.generator.generate
+        # currying of the callback functions to pass the "self" parameter
+        stepCallback = lambda *args, **kwargs: self.__onStepCallback(*args, **kwargs)
+        finishedCallback = lambda *args, **kwargs: self.__onFinishedCallback(*args, **kwargs)
+        failureCallback = lambda *args, **kwargs: self.__onFailureCallback(*args, **kwargs)
+        args = (stepCallback, finishedCallback, failureCallback)
+        self.generatorThread = threading.Thread(target=target, args=args)
         self.generatorThread.start()
 
     def updatePreview(self, classId, previewPixmap):
         tempQImage = QImage(previewPixmap, 64, 64, QImage.Format_RGB888)
         self.generatedLabel.setPixmap(QPixmap.fromImage(tempQImage))
-
-    def onFinished(self):
-        self.generateButton.setEnabled(True)

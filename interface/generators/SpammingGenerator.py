@@ -79,9 +79,12 @@ class SpammingGenerator(AbstractGenerator):
         else:
             self.createText()
 
-    def generate(self):
+    def getImage(self):
+        return self.image.tobytes('raw', 'RGB')
+
+    def generate(self, onStep, onFinished, onFailure):
         confidence = 0
-        classId = -1
+        classId = ""
         while confidence < 0.9:
             self.createRandomShape()
             classification = api.classifyPILImage(self.image)
@@ -89,5 +92,7 @@ class SpammingGenerator(AbstractGenerator):
             confidence = classification[0]['confidence']
             print(confidence)
             time.sleep(1)
-            self.parentWindow.updatePreview(classId, self.image.tobytes('raw', 'RGB'))
-        self.parentWindow.onFinished()
+            if confidence > 0.9:
+                self.__finished = True
+            onStep(classId, confidence)
+        onFinished()

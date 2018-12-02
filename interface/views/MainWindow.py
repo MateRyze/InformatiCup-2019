@@ -6,6 +6,7 @@ from PyQt5.QtCore import QUrl, Qt, QSize
 from PyQt5.QtGui import QCursor
 from PyQt5.QtWidgets import QMainWindow, QWidget, QAction, QDialog, QVBoxLayout, QTextEdit, QMenu, QSplitter
 from interface.views.DatasetTableWidget import DatasetTableWidget
+from interface.views.GeneratingWindow import GeneratingWindow
 
 class MainWindow(QMainWindow):
     """
@@ -48,6 +49,9 @@ class MainWindow(QMainWindow):
         actionQuit = QAction('Close', self)
         actionQuit.triggered.connect(self.close)
 
+        actionOpenGeneratorWindow = QAction('Generate Fooling Image', self)
+        actionOpenGeneratorWindow.triggered.connect(self.openGeneratingWindow)
+
         actionViewHelp = QAction('View Documentation', self)
         actionViewHelp.triggered.connect(self.help)
 
@@ -59,6 +63,7 @@ class MainWindow(QMainWindow):
 
         # top-level menus
         menuFile = self.menu.addMenu('File')
+        menuTools = self.menu.addMenu('Tools')
         menuPrefs = self.menu.addMenu('Preferences')
         menuHelp = self.menu.addMenu('Help')
 
@@ -66,6 +71,9 @@ class MainWindow(QMainWindow):
         menuFile.addAction(actionLoadDataset)
         menuFile.addSeparator()
         menuFile.addAction(actionQuit)
+
+        # "Tools" menu
+        menuTools.addAction(actionOpenGeneratorWindow)
 
         # "Preferences" menu
         menuPrefs.addAction(actionGenerationPrefs)
@@ -92,6 +100,9 @@ class MainWindow(QMainWindow):
         self.console.setReadOnly(True)
         self.log('Started...')
         self.layout.addWidget(self.console)
+
+    def openGeneratingWindow(self):
+        self.generatingWindow = GeneratingWindow(self)
 
     def log(self, text):
         """
