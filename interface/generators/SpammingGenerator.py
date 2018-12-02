@@ -30,9 +30,8 @@ class SpammingGenerator(AbstractGenerator):
         ':D',
     ]
 
-    def __init__(self, parentWindow):
+    def __init__(self):
         super().__init__()
-        self.parentWindow = parentWindow
         self.image = Image.new('RGB', (64, 64), color=(0, 0, 0))
         self.draw = ImageDraw.Draw(self.image)
         for i in range(random.randrange(1, 5)):
@@ -82,17 +81,12 @@ class SpammingGenerator(AbstractGenerator):
     def getImage(self):
         return self.image.tobytes('raw', 'RGB')
 
-    def generate(self, onStep, onFinished, onFailure):
-        confidence = 0
-        classId = ""
-        while confidence < 0.9:
-            self.createRandomShape()
-            classification = api.classifyPILImage(self.image)
-            classId = classification[0]['class']
-            confidence = classification[0]['confidence']
-            print(confidence)
-            time.sleep(1)
-            if confidence > 0.9:
-                self.__finished = True
-            onStep(classId, confidence)
-        onFinished()
+    def step(self):
+        self.createRandomShape()
+        classification = api.classifyPILImage(self.image)
+        classId = classification[0]['class']
+        confidence = classification[0]['confidence']
+        print(confidence)
+        if confidence > 0.9:
+            self.finish()
+        self.onStep(classId, confidence)
