@@ -2,10 +2,13 @@ from interface.util import api
 
 class AbstractGenerator():
     def __init__(self):
-        pass
+        self.__finished = False
+
+    def hasFinished(self):
+        return self.__finished
 
     def getImage(self):
         return None
 
-    def step(self, onSuccess, onFailure):
+    def generate(self, onStep, onFinished, onFailure):
         pass
