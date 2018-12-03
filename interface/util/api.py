@@ -2,8 +2,9 @@ import io
 import requests
 import json
 import random
+import time
 from PIL import Image
-from interface.util import config
+from interface.util import config, logging
 
 def __sendToApi(data):
     """
@@ -13,16 +14,18 @@ def __sendToApi(data):
     key = config.get('API', 'key')
     url = config.get('API', 'url')
     success = False
+    resJson = None
     while not success:
         try:
             res = requests.post(url, data={'key': key}, files={'image': data})
+            resJson = res.json()
             success = True
         except json.decoder.JSONDecodeError:
             sleepTime = random.randrange(10, 30)
-            print('Rate limiting detected!')
-            print('Sleeping for %i seconds'%sleepTime)
+            logging.log('Rate limiting detected!')
+            logging.log('Sleeping for %i seconds'%sleepTime)
             time.sleep(sleepTime)
-    return res.json()
+    return resJson
 
 def classifyFile(path):
     """
