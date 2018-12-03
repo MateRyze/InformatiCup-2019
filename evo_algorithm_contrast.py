@@ -5,6 +5,7 @@ import random
 import json
 import webbrowser
 import time
+import itertools
 import pandas as pd
 from PIL import Image, ImageDraw
 
@@ -12,26 +13,29 @@ global population
 global api_calls
 global stop
 global MUTATION_RATE
-shape = ((16, 16), (16,48), (48,48), (48,16))
+shape = ((16, 16), (48,16), (16,48), (48,48))
 population = []
 api_calls = 0
 stop = False
 MUTATION_RATE = 10
 
-# initial random generation of an image
-def generateImage():
+
+def contrast(color1, color2):
+    return abs(color1[0] - color2[0]) + abs(color1[1] - color2[1]) + abs(color1[2] - color2[2])
+
+
+def generateImage(foreground, background):
     # set image format
     img = Image.new('RGB', (64, 64), color='black')
     draw = ImageDraw.Draw(img)
 
     #background fill
-    background = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
     draw.rectangle(((0,0),(64,64)), background)
     #draw shape
-    foreground = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
     draw.polygon(shape, foreground)
     
-    return {"image": img, "confidence": 0, "background": background, "foreground": foreground, "class": ""}
+    return {"image": img, "confidence": 0, "background": background, "foreground": foreground, "class": "", "contrast": contrast(foreground, background)}
+
 
 # eval fitness for each individual
 def evalFitness():
@@ -45,11 +49,12 @@ def evalFitness():
         r = requests.post('https://phinau.de/trasi', data=payload, files={'image': open(name, 'rb')})
         api_calls += 1
         if api_calls >= 60:
+            #print(individual["foreground"])
             time.sleep(60)
             api_calls = 0
         try:
             individual["confidence"] = r.json()[0]["confidence"]
-            individual["class"] = r.json()[0]["class"]
+            individual["class"] = r.json()[0]["class"].encode('utf-8')
         except ValueError:
             print("Decoding JSON failed -> hit API rate :(")
             stop = True
@@ -61,6 +66,12 @@ def initPopulation(count):
     for i in range(count):
         population.append(generateImage())
 
+#create population of contrast combinations
+def initConstrastPopulation():
+    seq = [ 28 * i for i in range(10)]
+    for (r, g, b) in itertools.product(seq, seq, seq):
+        population.append(generateImage( (r, g, b), (255 - r, 255 - g, 255 - b) ))
+        
 # select best individuals from population
 def selection(bestCount):
     population.sort(key=lambda individual: individual["confidence"], reverse=True)
@@ -161,11 +172,13 @@ def saveImages():
 
 
 def saveResults():
-    df = pd.DataFrame(population, columns=["class", "confidence", "background", "foreground"])
+    df = pd.DataFrame(population, columns=["class", "confidence", "background", "foreground", "contrast"])
     print(df)
     df.to_csv("results_contrast_color.csv")
 
 if __name__ == '__main__':
-    runEvoAlgorithm()
+    initConstrastPopulation()
+    evalFitness()
     saveResults()
     print("api calls: ", api_calls)
+    
