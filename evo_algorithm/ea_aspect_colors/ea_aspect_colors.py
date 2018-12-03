@@ -260,7 +260,7 @@ def scatterPlot():
     colorsSummed = [(row[0] + row[1] + row[2])*255 for row in colors]
     print(colors)
     plt.scatter(df["confidence"], colorsSummed, c=colors, s=2000, marker=[(1,3), (0,3), (0,0), (1,0)])
-    plt.title('Einfarbige Bilder, 1000 Stück')
+    plt.title('Einfarbige Bilder, 1000 Stueck')
     plt.xlabel('Konfidenz')
     plt.ylabel('Summe der Farbwerte (R + G + B)')
     plt.show()
@@ -272,17 +272,18 @@ def scatterTwoColorsPlot():
     df = pd.read_csv("results_two_colors.csv")
     print(df)
     colorsOne = [make_tuple(row) for row in df["colorOne"]]
-    colorsOne = [[elem/255 for elem in row] for row in colorsOne]
+    colorsOne = [[elem for elem in row] for row in colorsOne]
     colorsTwo = [make_tuple(row) for row in df["colorTwo"]]
-    colorsTwo = [[elem/255 for elem in row] for row in colorsTwo]
+    colorsTwo = [[elem for elem in row] for row in colorsTwo]
     colorsOneSum = [(row[0] + row[1] + row[2])*255 for row in colorsOne]
     colorsTwoSum = [(row[0] + row[1] + row[2])*255 for row in colorsTwo]
-    colorsDiff = [(row[0] + row[1] + row[2])*255 for row in colorsTwo]
-    plt.scatter(df["confidence"], colorsOneSum, c=colorsOne, s=500, marker='^')
-    plt.scatter(df["confidence"], colorsTwoSum, c=colorsTwo, s=500, marker='o')
-    plt.title('Einfarbige Bilder, 1000 Stück')
+    colorsDiff = [sum([abs(ele[0][i] - ele[1][i]) for i in range(3)]) for ele in zip(colorsOne, colorsTwo)]
+    print(colorsDiff)
+    plt.scatter(df["confidence"], colorsDiff, s=100, marker='^')
+    #plt.scatter(df["confidence"], colorsTwoSum, c=colorsTwo, s=100, marker='o')
+    plt.title('Zweifarbige Bilder, 250 Stueck')
+    plt.ylabel('Summe Farbwerte Rechteck 1')
     plt.xlabel('Konfidenz')
-    plt.ylabel('Summe der Farbwerte (R + G + B)')
     plt.show()
 
 
