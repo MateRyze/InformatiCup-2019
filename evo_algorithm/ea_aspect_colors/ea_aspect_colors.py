@@ -281,8 +281,8 @@ def scatterTwoColorsPlot():
     print(colorsDiff)
     plt.scatter(df["confidence"], colorsDiff, s=100, marker='^')
     #plt.scatter(df["confidence"], colorsTwoSum, c=colorsTwo, s=100, marker='o')
-    plt.title('Zweifarbige Bilder, 250 Stueck')
-    plt.ylabel('Summe Farbwerte Rechteck 1')
+    plt.title('Zweifarbige Bilder (bis RGB(100,100,100)), 250 Stueck')
+    plt.ylabel('Kontrast')
     plt.xlabel('Konfidenz')
     plt.show()
 
