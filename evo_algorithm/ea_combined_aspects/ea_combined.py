@@ -16,7 +16,7 @@ stop = False
 MUTATION_RATE = 10
 
 # defined constraints/aspects for the generation 
-COLORS_RANGE = (100, 100, 100)
+COLORS_RANGE = ((0,200), (0,200), (0, 200))
 SHAPES = [[((0, 0), (32, 32)),((32, 0), (64, 32)),((0, 32), (32, 64)),((32, 32), (64, 64))]]
 CONTRAST_RANGE = (100,400)
 FIELD_DIMENSION = 5 # 5x5?
@@ -37,7 +37,11 @@ def generateImage():
     ]
     colors = []
     for position in positions:
-        color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+        color = (
+            random.randint(COLORS_RANGE[0][0], COLORS_RANGE[0][1]),
+            random.randint(COLORS_RANGE[1][0], COLORS_RANGE[1][1]),
+            random.randint(COLORS_RANGE[2][0], COLORS_RANGE[2][1])
+        )
         draw.rectangle(position, fill=color)
         colors.append(color)
 
@@ -109,12 +113,23 @@ def mutate(confidence):
         ]
         colors = population[j]["colors"]
         if(population[j]["confidence"] < confidence):
-            # change the color of a random square
-            rect = random.randint(0, 3)
-            colors[rect] = (
-                colors[rect][0] + 1 + random.randint(-10, 10) * MUTATION_RATE,
-                colors[rect][1] + 1 + random.randint(-10, 10) * MUTATION_RATE,
-                colors[rect][2] + 1 + random.randint(-10, 10) * MUTATION_RATE)
+        
+            colors[0] = (
+                colors[0][0] + random.randint(5, 10),
+                colors[0][1] + random.randint(5, 10),
+                colors[0][2] + random.randint(5, 10))
+            colors[1] = (
+                colors[1][0] - random.randint(5, 10),
+                colors[1][1] - random.randint(5, 10),
+                colors[1][2] - random.randint(5, 10))
+            colors[2] = (
+                colors[2][0] + random.randint(5, 10),
+                colors[2][1] + random.randint(5, 10),
+                colors[2][2] + random.randint(5, 10))
+            colors[3] = (
+                colors[3][0] - random.randint(5, 10),
+                colors[3][1] - random.randint(5, 10),
+                colors[3][2] - random.randint(5, 10))
 
         for i in range(4):
             draw.rectangle(positions[i], fill=colors[i])
@@ -154,7 +169,7 @@ def runEvoAlgorithm():
     selection(SELECTED_COUNT)
     printResults()
     while getCountThatMatch(DESIRED_CONFIDENCE) < SELECTED_COUNT and stop == False:
-        crossover()
+        #crossover()
         mutate(DESIRED_CONFIDENCE)
         evalFitness()
         selection(SELECTED_COUNT)
