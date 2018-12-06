@@ -54,6 +54,13 @@ class Polygon():
             edge = (math.cos(step), math.sin(step))
             self.edges.append(edge)
 
+    def mutateEdges(self, factor):
+        for i in range(len(self.edges)):
+            edge = self.edges[i]
+            x = edge[0] + random.triangular(-factor, factor, 0.0)
+            y = edge[1] + random.triangular(-factor, factor, 0.0)
+            self.edges[i] = (x, y)
+
     def increaseEdgeCount(self):
         count = len(self.edges) + 1
         self.setEdgeCount(count)
@@ -210,7 +217,6 @@ def updateIndividualByApi(individual):
             r = requests.post('https://phinau.de/trasi', data=payload, files={'image': buf})
             individual["confidence"] = r.json()[0]["confidence"]
             individual["class"] = r.json()[0]["class"]
-            writeToRecords(individual["field"], individual["class"], individual["confidence"])
             success = True
         except ValueError:
             seconds = random.randrange(1, 30)
@@ -307,9 +313,10 @@ def saveRecords(prefix=""):
         os.mkdir("stats")
     df.to_csv(os.path.join("stats", "%s-meta.csv"%prefix))
 
-def writeToRecords(polygonField, classname, confidence):
+def writeToRecords(edges, mutation, classname, confidence):
     statisticsRecords.append({
-        "metadata": polygonField.getMetadata(),
+        "edges": edges,
+        "mutation": mutation,
         "classname": classname,
         "confidence": confidence,
     })
@@ -321,14 +328,26 @@ if __name__ == '__main__':
         "class": "",
     }
     prefix = "single"
-    folder = "images_polytest_%i" % ROTATION_OFFSET_DEG
+    folder = "images_polytest_fuckup"
+    polygon = individual["field"].polygons[0]
     if not os.path.exists(folder):
         os.makedirs(folder)
-    for i in range(60):
-        updateIndividualByApi(individual)
-        image = individual["field"].render()
-        name = "%i_%s_%f"%(i, individual["class"], individual["confidence"])
-        image.save(os.path.join(folder, "%s.png"%name))
-        individual["field"].mutate()
+    for i in range(30):
+        for j in range(40):
+            factor = j/20
+            polygon.setEdgeCount(i + 3)
+            polygon.mutateEdges(factor)
+            updateIndividualByApi(individual)
+            image = individual["field"].render()
+            name = "%i_%.2f_%s_%f"%(
+                i,
+                factor,
+                individual["class"],
+                individual["confidence"],
+            )
+            image.save(os.path.join(folder, "%s.png"%name))
+            writeToRecords(len(polygon.edges), factor, individual["class"], individual["confidence"])
+            print("%.1f%%"%(((i*40+j)/(30*40))*100), end="\r")
     print("api calls: ", api_calls)
+    saveRecords("fuckup-1")
     reset()
