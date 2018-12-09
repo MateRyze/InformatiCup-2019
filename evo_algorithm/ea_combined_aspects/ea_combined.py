@@ -16,36 +16,52 @@ stop = False
 MUTATION_RATE = 10
 
 # defined constraints/aspects for the generation 
-COLORS_RANGE = ((0,200), (0,200), (0, 200))
-SHAPES = [[((0, 0), (32, 32)),((32, 0), (64, 32)),((0, 32), (32, 64)),((32, 32), (64, 64))]]
-CONTRAST_RANGE = (100,400)
-FIELD_DIMENSION = 5 # 5x5?
-FIELD_COUNTS = 42
+COLORS_RANGE = ((0,150), (0,150), (0, 150))
+CONTRAST_RANGE = (25, 400)
+SHAPES = [((16, 16), (48, 16), (48, 48), (16, 48)),
+          ((16, 16), (48, 16), (16, 48), (48, 48))]
+
+colors = []
 
 # initial random generation of an image
 def generateImage():
     # set image format
     img = Image.new('RGB', (64, 64), color='black')
     draw = ImageDraw.Draw(img)
+    # how many colors do we need?
+    generateColorsWithContrast(2)
+    drawShapes(draw, colors)
 
-    # draw four rectangles with random colors
-    positions = [
-        ((0, 0), (32, 32)),
-        ((32, 0), (64, 32)),
-        ((0, 32), (32, 64)),
-        ((32, 32), (64, 64)),
-    ]
+    return {"image": img, "confidence": 0, "colors": colors, "class": ""}
+
+def drawShapes(draw, colors):
+    background = colors[0]
+    draw.rectangle(((0, 0), (64, 64)), background)
+    foreground = colors[1]
+    draw.polygon(SHAPES[0], foreground)
+
+# generate colors with distributed contrast 
+def generateColorsWithContrast(count):
+    global colors
     colors = []
-    for position in positions:
+    for i in range(count):
         color = (
             random.randint(COLORS_RANGE[0][0], COLORS_RANGE[0][1]),
             random.randint(COLORS_RANGE[1][0], COLORS_RANGE[1][1]),
-            random.randint(COLORS_RANGE[2][0], COLORS_RANGE[2][1])
-        )
-        draw.rectangle(position, fill=color)
+            random.randint(COLORS_RANGE[2][0], COLORS_RANGE[2][1]))
+        if(i > 0):
+            # distribute the contrast between the colors 
+            while(contrast(color, colors[i-1]) < CONTRAST_RANGE[0]/(count-1) or contrast(color, colors[i-1]) > CONTRAST_RANGE[1]/(count-1)):
+                color = (
+                    random.randint(COLORS_RANGE[0][0], COLORS_RANGE[0][1]),
+                    random.randint(COLORS_RANGE[1][0], COLORS_RANGE[1][1]),
+                    random.randint(COLORS_RANGE[2][0], COLORS_RANGE[2][1]))
         colors.append(color)
 
-    return {"image": img, "confidence": 0, "colors": colors, "class": ""}
+
+def contrast(color1, color2):
+    return abs(color1[0] - color2[0]) + abs(color1[1] - color2[1]) + abs(color1[2] - color2[2])
+
 
 # eval fitness for each individual
 def evalFitness():
@@ -79,61 +95,28 @@ def selection(bestCount):
 
 # crossover between individuals in the population
 def crossover():
-    # IMPLEMENT HERE YOUR CROSSOVER FUNCTION
-    # EXAMPLE: cross rectangles, generate new images
-    for j in range(len(population)-1):
-        colorsFirst = population[0 + j]["colors"]
-        colorsSecond = population[1 + j]["colors"]
-        img = Image.new('RGB', (64, 64), color='black')
-        draw = ImageDraw.Draw(img)
-        positions = [
-            ((0, 0), (32, 32)),
-            ((32, 0), (64, 32)),
-            ((0, 32), (32, 64)),
-            ((32, 32), (64, 64)),
-        ]
-        colors = [colorsFirst[0], colorsFirst[1], colorsSecond[2], colorsSecond[3]]
-        for i in range(4):
-            draw.rectangle(positions[i], fill=colors[i])
-        population.append({"image": img, "confidence": 0, "colors": colors, "class": ""})
+    img = None
+    population.append({"image": img, "confidence": 0, "colors": colors, "class": ""})
 
 # mutate each individual in the population and delete old population
 def mutate(confidence):
     # IMPLEMENT HERE YOUR MUTATION FUNCTION
-    # EXAMPLE: mutate colors of random rectangle
     population_size = len(population)
-    for j in range(len(population)):
+    for i in range(population_size):
         img = Image.new('RGB', (64, 64), color='black')
         draw = ImageDraw.Draw(img)
-        positions = [
-            ((0, 0), (32, 32)),
-            ((32, 0), (64, 32)),
-            ((0, 32), (32, 64)),
-            ((32, 32), (64, 64)),
-        ]
-        colors = population[j]["colors"]
-        if(population[j]["confidence"] < confidence):
+        colors = population[i]["colors"]
+        colors = list(map(lambda color: (color[0] + 1, color[1] + 1, color[2] + 1), colors))
+        drawShapes(draw, colors)
+        population.append({"image": img, "confidence": 0,
+                           "colors": colors, "class": ""})
+        """ # distribute the contrast between the colors
+        while(contrast(colors[0], colors[1]) < CONTRAST_RANGE[0] or contrast(colors[0], colors[1]) > CONTRAST_RANGE[1]):
+                colors = (
+                    random.randint(COLORS_RANGE[0][0], COLORS_RANGE[0][1]),
+                    random.randint(COLORS_RANGE[1][0], COLORS_RANGE[1][1]),
+                    random.randint(COLORS_RANGE[2][0], COLORS_RANGE[2][1])) """
         
-            colors[0] = (
-                colors[0][0] + random.randint(5, 10),
-                colors[0][1] + random.randint(5, 10),
-                colors[0][2] + random.randint(5, 10))
-            colors[1] = (
-                colors[1][0] - random.randint(5, 10),
-                colors[1][1] - random.randint(5, 10),
-                colors[1][2] - random.randint(5, 10))
-            colors[2] = (
-                colors[2][0] + random.randint(5, 10),
-                colors[2][1] + random.randint(5, 10),
-                colors[2][2] + random.randint(5, 10))
-            colors[3] = (
-                colors[3][0] - random.randint(5, 10),
-                colors[3][1] - random.randint(5, 10),
-                colors[3][2] - random.randint(5, 10))
-
-        for i in range(4):
-            draw.rectangle(positions[i], fill=colors[i])
-        population.append({"image": img, "confidence": 0, "colors": colors, "class": ""})
     # delete old
     del population[:population_size]
 
@@ -169,7 +152,7 @@ def runEvoAlgorithm():
     selection(SELECTED_COUNT)
     printResults()
     while getCountThatMatch(DESIRED_CONFIDENCE) < SELECTED_COUNT and stop == False:
-        #crossover()
+        # crossover()
         mutate(DESIRED_CONFIDENCE)
         evalFitness()
         selection(SELECTED_COUNT)
@@ -187,7 +170,13 @@ def saveImages():
             image.save(name)
             webbrowser.open(name)
 
+def evalInitialPopulation():
+    initPopulation(INITIAL_POPULATION)
+    evalFitness()
+    printResults()
+
 if __name__ == '__main__':
     runEvoAlgorithm()
-    saveImages()
+    #saveImages()
+    #evalInitialPopulation()
     print("api calls: ", api_calls)
