@@ -68,19 +68,20 @@ def evalFitness():
     global api_calls
     global stop
     for individual in population:
-        name = 'toEval.png'
-        image = individual["image"]
-        image.save(name)
-        payload= {'key': 'Engeibei1uok4xaecahChug6eihos0wo'}
-        r = requests.post('https://phinau.de/trasi', data=payload, files={'image': open(name, 'rb')})
-        api_calls += 1
-        try:
-            individual["confidence"] = r.json()[0]["confidence"]
-            individual["class"] = r.json()[0]["class"]
-        except ValueError:
-            print("Decoding JSON failed -> hit API rate :(")
-            stop = True
-            break
+        if(individual["class"] == ""):
+            name = 'toEval.png'
+            image = individual["image"]
+            image.save(name)
+            payload= {'key': 'Engeibei1uok4xaecahChug6eihos0wo'}
+            r = requests.post('https://phinau.de/trasi', data=payload, files={'image': open(name, 'rb')})
+            api_calls += 1
+            try:
+                individual["confidence"] = r.json()[0]["confidence"]
+                individual["class"] = r.json()[0]["class"]
+            except ValueError:
+                print("Decoding JSON failed -> hit API rate :(")
+                stop = True
+                break
         
         
 # create initial population
@@ -90,6 +91,7 @@ def initPopulation(count):
 
 # select best individuals from population
 def selection(bestCount):
+    # TODO: select best from duplicates
     population.sort(key=lambda individual: individual["confidence"], reverse=True)
     del population[bestCount:]
 
@@ -105,8 +107,9 @@ def mutate(confidence):
     for i in range(population_size):
         img = Image.new('RGB', (64, 64), color='black')
         draw = ImageDraw.Draw(img)
+        # mutate colors
         colors = population[i]["colors"]
-        colors = list(map(lambda color: (color[0] + 1, color[1] + 1, color[2] + 1), colors))
+        colors = list(map(lambda color: (color[0] + random.randint(-MUTATION_RATE, MUTATION_RATE), color[1] + random.randint(-MUTATION_RATE, MUTATION_RATE), color[2] + random.randint(-MUTATION_RATE, MUTATION_RATE)), colors))
         drawShapes(draw, colors)
         population.append({"image": img, "confidence": 0,
                            "colors": colors, "class": ""})
@@ -116,9 +119,10 @@ def mutate(confidence):
                     random.randint(COLORS_RANGE[0][0], COLORS_RANGE[0][1]),
                     random.randint(COLORS_RANGE[1][0], COLORS_RANGE[1][1]),
                     random.randint(COLORS_RANGE[2][0], COLORS_RANGE[2][1])) """
+        # TODO: mutate polygon points 
+        # TODO: add fancy stuff for creativity
+
         
-    # delete old
-    del population[:population_size]
 
 def printResults():
     for individual in population:
@@ -171,12 +175,18 @@ def saveImages():
             webbrowser.open(name)
 
 def evalInitialPopulation():
+    global population
     initPopulation(INITIAL_POPULATION)
     evalFitness()
     printResults()
+    while(len(set(individual["class"] for individual in population)) < 5):
+        population = []
+        initPopulation(INITIAL_POPULATION)
+        evalFitness()
+        printResults()
 
 if __name__ == '__main__':
     runEvoAlgorithm()
-    #saveImages()
+    saveImages()
     #evalInitialPopulation()
     print("api calls: ", api_calls)
