@@ -7,7 +7,6 @@ Dafür wurde eine Vorlage mit folgende Schritten implementiert:
 * Crossover
 * Mutation
 
-
 # Einrichten
 ## Benötigte Tools
 * `Python` (getestet mit 3.7.1) [Download](https://www.python.org/downloads/windows/)
