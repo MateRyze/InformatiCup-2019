@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import requests
 import os
 import skimage
@@ -10,6 +9,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 from PIL import Image, ImageDraw
+import csv 
+from itertools import izip
 
 global population
 global api_calls
@@ -26,16 +27,26 @@ MUTATION_RATE = 10
 # initial random generation of an image
 def generateImage():
     # set image format
-    img = Image.new('RGB', (64, 64), color='black')
+    img = Image.new('RGB', (64, 64), (0,0,0))
     draw = ImageDraw.Draw(img)
 
     # draw four rectangles with random colors
+    """positions = [
+        ((0, 0), (32, 32)),
+        ((32, 0), (64, 32)),
+        ((0, 32), (32, 64)),
+        ((32, 32), (64, 64)),
+    ]"""
 
     positions = [
         ((0, 0), (16, 16)), 
         ((16, 0), (32, 16)), 
         ((0, 16), (16, 32)), 
         ((16, 16), (32, 32)),
+        ((0, 0), (16, 16)), 
+        ((16, 0), (32, 16)),
+        ((0, 16), (16, 32)), 
+        ((16, 16), (32, 32)), 
         ((0, 32), (16, 48)),
         ((16, 32), (32, 48)),
         ((0, 48), (16, 64)),
@@ -98,86 +109,26 @@ def crossover():
     # IMPLEMENT HERE YOUR CROSSOVER FUNCTION
     # EXAMPLE: cross rectangles, generate new images
     for j in range(len(population)-1):
-        colorsFirst = population[0 + j]["colors"]# + population[0 + j]["colors"] + population[0 + j]["colors"] + population[0 + j]["colors"]
-        colorsSecond = population[1 + j]["colors"]# + population[1 + j]["colors"] + population[1 + j]["colors"] + population[1 + j]["colors"]
+        colorsFirst = population[0 + j]["colors"]
+        colorsSecond = population[1 + j]["colors"]
+        colorsThird = population[0 + j]["colors"]
         img = Image.new('RGB', (64, 64), color='black')
         draw = ImageDraw.Draw(img)
-        
+        """positions = [
+            ((0, 0), (32, 32)),
+            ((32, 0), (64, 32)),
+            ((0, 32), (32, 64)),
+            ((32, 32), (64, 64)),
+        ]"""
         positions = [
-            ((0, 0), (16, 16)), 
-            ((16, 0), (32, 16)), 
-            ((0, 16), (16, 32)), 
-            ((16, 16), (32, 32)),
-            ((0, 32), (16, 48)),
-            ((16, 32), (32, 48)),
-            ((0, 48), (16, 64)),
-            ((16, 48), (32, 64)), 
-            ((32,0), (48, 16)),
-            ((48, 0), (64, 16)),
-            ((32, 16), (48, 32)),
-            ((48, 16), (64, 32)),
-            ((32, 32), (48, 48)),
-            ((48, 32), (64, 48)),
-            ((32, 48), (48, 64)),
-            ((48, 48), (64, 64)),
-        ]
-        colors = colorsFirst[:8] + colorsSecond[:8]##[colorsFirst[0], colorsFirst[1], colorsSecond[2], colorsSecond[3]]
-        for i in range(16):
-            draw.rectangle(positions[i], fill=colors[i])
-        population.append({"image": img, "confidence": 0, "colors": colors, "class": ""})
-
-# mutate each individual in the population and delete old population
-def mutate(confidence):
-    # IMPLEMENT HERE YOUR MUTATION FUNCTION
-    # EXAMPLE: mutate colors of random rectangle
-    population_size = len(population)
-    for j in range(len(population)):
-        img = Image.new('RGB', (64, 64), color='black')
-        draw = ImageDraw.Draw(img)
-        positions = [
-            ((0, 0), (16, 16)), 
-            ((16, 0), (32, 16)), 
-            ((0, 16), (16, 32)), 
-            ((16, 16), (32, 32)),
-            ((0, 32), (16, 48)),
-            ((16, 32), (32, 48)),
-            ((0, 48), (16, 64)),
-            ((16, 48), (32, 64)), 
-            ((32,0), (48, 16)),
-            ((48, 0), (64, 16)),
-            ((32, 16), (48, 32)),
-            ((48, 16), (64, 32)),
-            ((32, 32), (48, 48)),
-            ((48, 32), (64, 48)),
-            ((32, 48), (48, 64)),
-            ((48, 48), (64, 64)),
-        ]
-        
-        colors = population[j]["colors"]# + population[j]["colors"] + population[j]["colors"] + population[j]["colors"] + population[j]["colors"]
-        if(population[j]["confidence"] < confidence):
-            # change the color of a random square
-            rect = random.randint(0, 3)
-            colors[rect] = (
-                colors[rect][0] + 1 + random.randint(-10, 10) * MUTATION_RATE,
-                colors[rect][1] + 1 + random.randint(-10, 10) * MUTATION_RATE,
-                colors[rect][2] + 1 + random.randint(-10, 10) * MUTATION_RATE
-                )
-                
-
-        for i in range(16):
-            draw.rectangle(positions[i], fill=colors[i])
-            
-        population.append({"image": img, "confidence": 0, "colors": colors, "class": ""})
-    # delete old
-    del population[:population_size]
-
-
-def generateFields(n):
-    positions = [
         ((0, 0), (16, 16)), 
         ((16, 0), (32, 16)), 
         ((0, 16), (16, 32)), 
         ((16, 16), (32, 32)),
+        ((0, 0), (16, 16)), 
+        ((16, 0), (32, 16)),
+        ((0, 16), (16, 32)), 
+        ((16, 16), (32, 32)), 
         ((0, 32), (16, 48)),
         ((16, 32), (32, 48)),
         ((0, 48), (16, 64)),
@@ -191,26 +142,139 @@ def generateFields(n):
         ((32, 48), (48, 64)),
         ((48, 48), (64, 64)),
     ]
-    # beschreibt die Ursprungsform des geteilten Bildes mit vier gleichgroßen Rechtecken
-    positions_origin = [
+        colors = [colorsFirst[0], colorsFirst[1], colorsSecond[2], colorsThird[3], colorsThird[4]]
+        for i in range(5):
+            draw.rectangle(positions[i], fill=colors[i])
+        population.append({"image": img, "confidence": 0, "colors": colors, "class": ""})
+
+# mutate each individual in the population and delete old population
+def mutate(confidence):
+    # IMPLEMENT HERE YOUR MUTATION FUNCTION
+    # EXAMPLE: mutate colors of random rectangle
+    population_size = len(population)
+    for j in range(len(population)):
+        img = Image.new('RGB', (64, 64), color='white')
+        draw = ImageDraw.Draw(img)
+        """positions = [
+            ((0, 0), (32, 32)),
+            ((32, 0), (64, 32)),
+            ((0, 32), (32, 64)),
+            ((32, 32), (64, 64)),
+        ]"""
+        positions = [
+        ((0, 0), (16, 16)), 
+        ((16, 0), (32, 16)), 
+        ((0, 16), (16, 32)), 
+        ((16, 16), (32, 32)),
+        ((0, 0), (16, 16)), 
+        ((16, 0), (32, 16)),
+        ((0, 16), (16, 32)), 
+        ((16, 16), (32, 32)), 
+        ((0, 32), (16, 48)),
+        ((16, 32), (32, 48)),
+        ((0, 48), (16, 64)),
+        ((16, 48), (32, 64)), 
+        ((32,0), (48, 16)),
+        ((48, 0), (64, 16)),
+        ((32, 16), (48, 32)),
+        ((48, 16), (64, 32)),
+        ((32, 32), (48, 48)),
+        ((48, 32), (64, 48)),
+        ((32, 48), (48, 64)),
+        ((48, 48), (64, 64)),
+    ]
+        colors = population[j]["colors"]
+        if(False): #population[j]["confidence"] < confidence
+            # change the color of a random square
+            rect = random.randint(0, 3)
+            colors[rect] = (
+                colors[rect][0] + 1 + random.randint(-10, 10) * MUTATION_RATE,
+                colors[rect][1] + 1 + random.randint(-10, 10) * MUTATION_RATE,
+                colors[rect][2] + 1 + random.randint(-10, 10) * MUTATION_RATE,
+                colors[rect][0] + 1 + random.randint(-10, 10) * MUTATION_RATE
+                )
+                
+
+        for i in range(5):
+            draw.rectangle(positions[i], fill=colors[i])
+            
+        population.append({"image": img, "confidence": 0, "colors": colors, "class": ""})
+    # delete old
+    del population[:population_size]
+
+
+def generateFields(n):
+    positions = [
+        ((0, 0), (16, 16)), 
+        ((16, 0), (32, 16)), 
+        ((0, 16), (16, 32)), 
+        ((16, 16), (32, 32)),
+        ((0, 0), (16, 16)), 
+        ((16, 0), (32, 16)),
+        ((0, 16), (16, 32)), 
+        ((16, 16), (32, 32)), 
+        ((0, 32), (16, 48)),
+        ((16, 32), (32, 48)),
+        ((0, 48), (16, 64)),
+        ((16, 48), (32, 64)), 
+        ((32,0), (48, 16)),
+        ((48, 0), (64, 16)),
+        ((32, 16), (48, 32)),
+        ((48, 16), (64, 32)),
+        ((32, 32), (48, 48)),
+        ((48, 32), (64, 48)),
+        ((32, 48), (48, 64)),
+        ((48, 48), (64, 64)),
+    ]
+    """positions = [
+        ((0, 0), (16, 16)),
+        ((16, 0), (32, 16)),
+        ((0, 16), (16, 32)),
+        ((16, 16), (32, 32)),
+        ((16, 32), (32, 64)),
+        ((32, 16), (64, 32)),
+        ((16, 32), (32, 64)),
+        ((32, 32), (64, 64)),
         ((0, 0), (32, 32)),
         ((32, 0), (64, 32)),
         ((0, 32), (32, 64)),
-        ((32, 32), (64, 64)),
-    ]
-    dimension = 16
-    #die Ursprungsform wird skaliert, um diese dann als Grundlage für die Generierung weiterer Rechtecke zu benutzen
+        ((32, 64), (64, 64))
+    ]"""
+    dimension = n
     position_scaled = [[(point[0]/dimension, point[1]/dimension) for point in row] for row in positions_origin]
-    #print(position_scaled)
+    print(position_scaled)
     positions = []
-    #die weiteren Rechtecke werden generiert und in der Variable position als eine Liste mit Listen aus Tupeln gespeichert
     for i in range(dimension):
         for j in range(dimension):
             offset = 64/dimension
             position= [tuple([(point[0] + offset*i, point[1] + offset*j) for point in k]) for k in position_scaled]
             positions.append(position)
-    # keine Endlosschleife :D sondern die Konsolenausgabe war sehr gross
-    # print(positions)
+    print(positions)
+    return positions
+
+def testAlgo():
+    positions = [
+        ((0, 0), (16, 16)), 
+        ((16, 0), (32, 16)), 
+        ((0, 16), (16, 32)), 
+        ((16, 16), (32, 32)),
+        ((0, 0), (16, 16)), 
+        ((16, 0), (32, 16)),
+        ((0, 16), (16, 32)), 
+        ((16, 16), (32, 32)), 
+        ((0, 32), (16, 48)),
+        ((16, 32), (32, 48)),
+        ((0, 48), (16, 64)),
+        ((16, 48), (32, 64)), 
+        ((32,0), (48, 16)),
+        ((48, 0), (64, 16)),
+        ((32, 16), (48, 32)),
+        ((48, 16), (64, 32)),
+        ((32, 32), (48, 48)),
+        ((48, 32), (64, 48)),
+        ((32, 48), (48, 64)),
+        ((48, 48), (64, 64)),
+    ]
     return positions
 
 def saveResults():
@@ -220,7 +284,7 @@ def saveResults():
     colors = [(255,0,0), (0,255,0), (0,0,255), (0,0,0)]
     
     for i in range(32):
-        for fields in generateFields(i+1):
+        for fields in generateFields(i):
             for j in range(len(fields)):
                 draw.rectangle(fields[j], fill=colors[j])
 
@@ -282,6 +346,38 @@ def saveImages():
                                     ) + "_" + str(population[i]["class"].encode('utf-8')) + ".png"
             image.save(name)
             webbrowser.open(name)
+
+def listToCSV():
+    print("Fange an")
+    new_class = clearList(classList)
+    print("Bin hier")
+    #print(new_class)
+    data = zip(confidenceList, new_class)
+    #data = [[confidenceList], [new_class]]
+    #df = pd.DataFrame(confidenceList, columns=["Konfidenzen"], classList, columns=["Klassen"])
+    df = pd.DataFrame(data)
+    #df = pd.DataFrame('confidence':confidenceList, 'class': classList)
+    df.to_csv('result.csv', index=False)
+    print(df)
+    plt.title('Einfarbige Bilder')
+    plt.xlabel('Konfidenz')
+    plt.ylabel('Klassifikation')
+    plt.scatter(df[0], df[1])
+    plt.show()
+    #plt.plot(x, avg_y1)
+    #plt.plot(confidenceList, confidenceList)
+    #plt.plot(x, avg_y3)
+
+    #plt.plot(x_ref, avg_y1_ref)
+    #plt.plot(x_ref, avg_y2_ref)
+    #plt.plot(x_ref, avg_y3_ref)
+
+    #plt.xlabel('Konfidenzwerte')
+    #plt.ylabel('Anzahl der Versuche')
+    #plt.title('Gruen u. Rot = Referenzwerte / Orange u. Blau = Ergebnisse')
+    #plt.grid(True)
+    #plt.show()
+
 def clearList(listy):
     data = []
     counter = len(listy)
@@ -292,25 +388,10 @@ def clearList(listy):
         data.append(string.encode("utf-8"))
     return data
 
-def listToCSV():
-    
-    new_class = clearList(classList)
-    data = zip(confidenceList, new_class)
-    df = pd.DataFrame(data)
-    df.to_csv('result.csv', index=False)
-    print(df)
-    plt.title('Einfarbige Bilder')
-    plt.xlabel('Konfidenz')
-    plt.ylabel('Klassifikation')
-    plt.scatter(df[0], df[1])
-    plt.show()
-
 
 if __name__ == '__main__':
     runEvoAlgorithm()
     saveImages()
-    print("api calls: ", api_calls)
-    generateFields(4)
-    saveResults()
     listToCSV()
-    
+    print("api calls: ", api_calls)
+    #generateFields(4)
