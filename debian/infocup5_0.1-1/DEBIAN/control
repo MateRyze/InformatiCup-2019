@@ -1,0 +1,10 @@
+Package: infocup5
+Version: 0.1-1
+Section: base
+Priority: optional
+Architecture: amd64
+Depends: python3 (>= 3.6.0), python3-requests, python3-pillow, python3-pyqt5
+Maintainer: Jan Wolff <janw@mailbox.org>
+Description: Das ist noch ein Platzhalter.
+ Aber wir koennen hier bestimmt ne Menge
+ coole Infos reinschreiben :D
