@@ -1,8 +1,8 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap, QCursor
 from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem, QMenu
-from interface.util import api
-from interface.models.Dataset import Dataset
+from kollektiv5gui.util import api
+from kollektiv5gui.models.Dataset import Dataset
 
 class DatasetTableWidget(QTableWidget):
     """

@@ -1,5 +1,5 @@
 from threading import Thread
-from interface.util import api
+from kollektiv5gui.util import api
 
 class AbstractGenerator(Thread):
     def __init__(self):

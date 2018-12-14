@@ -1,4 +1,4 @@
 #!/usr/bin/env python3
-import interface
+import kollektiv5gui
 if __name__ == '__main__':
-    interface.main()
+    kollektiv5gui.main()

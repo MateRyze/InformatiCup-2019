@@ -5,13 +5,13 @@ import webbrowser
 from PyQt5.QtCore import QUrl, Qt, QSize
 from PyQt5.QtGui import QCursor
 from PyQt5.QtWidgets import QMainWindow, QWidget, QAction, QDialog, QVBoxLayout, QTextEdit, QMenu, QSplitter
-from interface.views.DatasetTableWidget import DatasetTableWidget
-from interface.views.GeneratingWindow import GeneratingWindow
-from interface.models.Dataset import Dataset
+from kollektiv5gui.views.DatasetTableWidget import DatasetTableWidget
+from kollektiv5gui.views.GeneratingWindow import GeneratingWindow
+from kollektiv5gui.models.Dataset import Dataset
 
 class MainWindow(QMainWindow):
     """
-    This class represents the main window of the interface. It contains a table, which displays an overview of all
+    This class represents the main window of the kollektiv5gui. It contains a table, which displays an overview of all
     classes in the dataset, a menu at the top, and a read-only textbox below the table.
     """
 
@@ -31,7 +31,7 @@ class MainWindow(QMainWindow):
         """
         Initialize the main properties of the window.
         """
-        self.setWindowTitle('Image Faker')
+        self.setWindowTitle('Kollektiv 5 GUI')
         self.setGeometry(0, 0, 1280, 720)
 
         self.mainWidget = QSplitter()

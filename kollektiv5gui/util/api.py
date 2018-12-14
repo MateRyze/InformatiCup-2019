@@ -4,7 +4,7 @@ import json
 import random
 import time
 from PIL import Image
-from interface.util import config, logging
+from kollektiv5gui.util import config, logging
 
 def __sendToApi(data):
     """
