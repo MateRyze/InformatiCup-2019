@@ -1,3 +1,4 @@
+import json
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap, QCursor
 from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem, QMenu
@@ -52,7 +53,7 @@ class DatasetTableWidget(QTableWidget):
             for i in indexes:
                 rows.add(i.row())
             for row in rows:
-                classes.append(self.__dataset['classes'][row])
+                classes.append(self.__dataset.getClasses()[row])
             return classes
         return []
 
@@ -62,8 +63,8 @@ class DatasetTableWidget(QTableWidget):
         """
         classes = self.getSelectedClasses()
         for c in classes:
-            res = api.classifyFile(c['thumbnail'])
-            self.mainWindow.log(res)
+            res = api.classifyFile(c.thumbnailPath)
+            self.mainWindow.log(json.dumps(res))
 
     def renderDataset(self):
         """
