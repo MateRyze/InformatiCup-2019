@@ -1,4 +1,5 @@
 import json
+import os
 from collections import namedtuple
 
 DatasetClass = namedtuple('DatasetClass', 'id name thumbnailPath')
@@ -30,5 +31,6 @@ class Dataset():
                 self.__classes.append(DatasetClass(
                     id=classdef['classId'],
                     name=classdef['name'],
-                    thumbnailPath=classdef['thumbnail']
+                    # treat the thumbnail path as relative to the dataset definition's path
+                    thumbnailPath=os.path.join(os.path.dirname(filename), classdef['thumbnail'])
                 ))
