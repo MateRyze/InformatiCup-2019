@@ -14,8 +14,8 @@ import copy
 import json
 import io
 from PIL import Image, ImageDraw
-from interface.util import api
-from interface.generators.AbstractGenerator import AbstractGenerator
+from kollektiv5gui.util import api
+from kollektiv5gui.generators.AbstractGenerator import AbstractGenerator
 
 class SpammingGenerator(AbstractGenerator):
     # Some shapes may be based on masks as given by image files on disk.

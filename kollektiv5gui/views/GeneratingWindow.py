@@ -6,7 +6,7 @@ import threading
 from PyQt5.QtCore import QUrl, Qt, QSize
 from PyQt5.QtGui import QCursor, QPixmap, QImage
 from PyQt5.QtWidgets import QWidget, QDialog, QLabel, QGroupBox, QVBoxLayout, QPushButton, QSizePolicy, QFileDialog, QComboBox
-from interface.generators.SpammingGenerator import SpammingGenerator
+from kollektiv5gui.generators.SpammingGenerator import SpammingGenerator
 
 class GeneratingWindow(QDialog):
     """

@@ -4,3 +4,4 @@ CCR/test
 *.pyc
 .venv/
 __pycache__/
+debian/kollektiv5/usr/
