@@ -1,4 +1,6 @@
 *.pyc
 __pycache__/
 .venv/
-debian/kollektiv5/usr/
+debian/kollektiv5/usr/bin
+debian/kollektiv5/usr/lib
+debian/kollektiv5/*.deb

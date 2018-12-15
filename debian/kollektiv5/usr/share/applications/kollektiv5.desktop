@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Kollektiv5
+GenericName=Fake Image Generator
+Comment=Entry for Informaticup2018
+
+#Icon=audacity
+
+Type=Application
+Categories=Utility;
+
+Exec=kollektiv5 %F
+StartupNotify=false
+Terminal=false

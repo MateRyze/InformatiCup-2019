@@ -5,7 +5,7 @@ import webbrowser
 from PyQt5.QtCore import QUrl, Qt, QSize
 from PyQt5.QtGui import QCursor
 from PyQt5.QtWidgets import QMainWindow, QWidget, QAction, QDialog, QVBoxLayout, QTextEdit, QMenu, QSplitter
-import kollektiv5gui
+from kollektiv5gui.util.paths import getResourcePath
 from kollektiv5gui.views.DatasetTableWidget import DatasetTableWidget
 from kollektiv5gui.views.GeneratingWindow import GeneratingWindow
 from kollektiv5gui.models.Dataset import Dataset
@@ -106,7 +106,7 @@ class MainWindow(QMainWindow):
 
     def __initDataset(self):
         self.__dataset = Dataset()
-        self.__dataset.loadFromFile(os.path.join(kollektiv5gui.getModuleRoot(), 'resources', 'dataset.json'))
+        self.__dataset.loadFromFile(os.path.join(getResourcePath(), 'dataset.json'))
 
     def getDataset(self):
         return self.__dataset
