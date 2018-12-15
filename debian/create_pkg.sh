@@ -1,7 +1,6 @@
 #!/bin/bash
 SRCDIR='..'
 PKGROOT='./kollektiv5'
-rm -r $PKGROOT/usr
 mkdir -p $PKGROOT/usr/bin
 mkdir -p $PKGROOT/usr/lib/python3/dist-packages
 cp $SRCDIR/kollektiv5.py $PKGROOT/usr/bin/kollektiv5

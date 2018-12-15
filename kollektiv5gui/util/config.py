@@ -1,6 +1,10 @@
+import os
+import shutil
 import configparser
+from kollektiv5gui.util.paths import getResourcePath
 
-__DEFAULT_FILENAME = './config.ini'
+__DEFAULT_CONFIG_FILENAME = os.path.join(getResourcePath(), 'default.ini')
+__USER_CONFIG_FILENAME = os.path.expanduser('~/.kollektiv5.ini')
 __CONFIG = None
 
 def load_config(filename):
@@ -17,5 +21,8 @@ def get(section, option):
     value is extracted from it.
     """
     if __CONFIG is None:
-        load_config(__DEFAULT_FILENAME)
+        if not os.path.exists(__USER_CONFIG_FILENAME):
+            # if the user has no config, copy the default one to the expected location
+            shutil.copy(__DEFAULT_CONFIG_FILENAME, __USER_CONFIG_FILENAME)
+        load_config(__USER_CONFIG_FILENAME)
     return __CONFIG.get(section, option)
