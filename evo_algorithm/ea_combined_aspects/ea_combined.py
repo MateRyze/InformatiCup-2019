@@ -91,8 +91,18 @@ def initPopulation(count):
 
 # select best individuals from population
 def selection(bestCount):
-    # TODO: select best from duplicates
+    global population
+    # sort by confidence
     population.sort(key=lambda individual: individual["confidence"], reverse=True)
+    # take best individuals from same classes  
+    classesContained = []
+    selectedPopulation = []
+    for individual in population:
+        if(classesContained.count(individual["class"]) == 0):
+            selectedPopulation.append(individual)
+            classesContained.append(individual["class"])
+    population = selectedPopulation
+    # reduce individuals -> reduce API calls
     del population[bestCount:]
 
 # crossover between individuals in the population
@@ -121,6 +131,7 @@ def mutate(confidence):
                     random.randint(COLORS_RANGE[2][0], COLORS_RANGE[2][1])) """
         # TODO: mutate polygon points 
         # TODO: add fancy stuff for creativity
+    
 
         
 
@@ -151,6 +162,7 @@ DESIRED_CONFIDENCE = 0.90 # specification
 
 # run evolutionary algorithm (init -> selection -> loop(crossover-> mutate -> selection) until confidence matches all images)
 def runEvoAlgorithm():
+    global population
     initPopulation(INITIAL_POPULATION)
     evalFitness()
     selection(SELECTED_COUNT)
@@ -187,6 +199,6 @@ def evalInitialPopulation():
 
 if __name__ == '__main__':
     runEvoAlgorithm()
-    saveImages()
+    #saveImages()
     #evalInitialPopulation()
     print("api calls: ", api_calls)
