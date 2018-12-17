@@ -162,6 +162,7 @@ def mutate(confidence):
 
             # TODO: add fancy stuff for creativity
     #del population[:population_size]
+
     
 
         
@@ -229,6 +230,6 @@ def evalInitialPopulation():
 
 if __name__ == '__main__':
     runEvoAlgorithm()
-    saveImages()
+    #saveImages()
     #evalInitialPopulation()
     print("api calls: ", api_calls)
