@@ -1,0 +1,4 @@
+#!/bin/sh
+# remove leftover compiled python files in install folder
+cd /usr/lib/python3/dist-packages/kollektiv5gui
+find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf
