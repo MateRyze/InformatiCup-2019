@@ -14,6 +14,7 @@ population = []
 api_calls = 0
 stop = False
 MUTATION_RATE = 10
+SHAPE_MUTATION_RATE = 4
 
 # defined constraints/aspects for the generation 
 COLORS_RANGE = ((0,150), (0,150), (0, 150))
@@ -30,15 +31,16 @@ def generateImage():
     draw = ImageDraw.Draw(img)
     # how many colors do we need?
     generateColorsWithContrast(2)
-    drawShapes(draw, colors)
+    shape = SHAPES[0]
+    drawShapes(draw, colors, shape)
 
-    return {"image": img, "confidence": 0, "colors": colors, "class": ""}
+    return {"image": img, "confidence": 0, "colors": colors, "class": "", "shape": shape}
 
-def drawShapes(draw, colors):
+def drawShapes(draw, colors, shape):
     background = colors[0]
     draw.rectangle(((0, 0), (64, 64)), background)
     foreground = colors[1]
-    draw.polygon(SHAPES[0], foreground)
+    draw.polygon(shape, foreground)
 
 # generate colors with distributed contrast 
 def generateColorsWithContrast(count):
@@ -95,10 +97,15 @@ def selection(bestCount):
     population.sort(key=lambda individual: individual["confidence"], reverse=True)
     del population[bestCount:]
 
-# crossover between individuals in the population
+"""# crossover between individuals in the population
 def crossover():
     img = None
     population.append({"image": img, "confidence": 0, "colors": colors, "class": ""})
+"""
+        
+
+def mutateCoord(oldCoord):
+    return min(63, max(1, oldCoord + random.randint(-SHAPE_MUTATION_RATE, SHAPE_MUTATION_RATE)))
 
 # mutate each individual in the population and delete old population
 def mutate(confidence):
@@ -110,16 +117,20 @@ def mutate(confidence):
         # mutate colors
         colors = population[i]["colors"]
         colors = list(map(lambda color: (color[0] + random.randint(-MUTATION_RATE, MUTATION_RATE), color[1] + random.randint(-MUTATION_RATE, MUTATION_RATE), color[2] + random.randint(-MUTATION_RATE, MUTATION_RATE)), colors))
-        drawShapes(draw, colors)
+        #mutate shape
+        shape = population[i]["shape"]
+        shape = list(map(lambda x: (mutateCoord(x[0]), mutateCoord(x[1])), shape))
+        
+        drawShapes(draw, colors, population[i]["shape"])
         population.append({"image": img, "confidence": 0,
-                           "colors": colors, "class": ""})
+                           "colors": colors, "class": "", "shape": shape})
         """ # distribute the contrast between the colors
         while(contrast(colors[0], colors[1]) < CONTRAST_RANGE[0] or contrast(colors[0], colors[1]) > CONTRAST_RANGE[1]):
                 colors = (
                     random.randint(COLORS_RANGE[0][0], COLORS_RANGE[0][1]),
                     random.randint(COLORS_RANGE[1][0], COLORS_RANGE[1][1]),
                     random.randint(COLORS_RANGE[2][0], COLORS_RANGE[2][1])) """
-        # TODO: mutate polygon points 
+
         # TODO: add fancy stuff for creativity
 
         
@@ -170,7 +181,7 @@ def saveImages():
             image = population[i]["image"]
             name = "img" + \
                 str(i) + "_" + str(population[i]["confidence"]
-                                    ) + "_" + str(population[i]["class"]) + ".png"
+                                    ) + "_" + str(population[i]["class"].encode('utf-8')) + str(population[i]["shape"]) + ".png"
             image.save(name)
             webbrowser.open(name)
 
