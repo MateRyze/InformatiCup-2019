@@ -4,6 +4,7 @@ import skimage
 import random
 import json
 import webbrowser
+import time
 from PIL import Image, ImageDraw
 
 global population
@@ -19,8 +20,8 @@ SHAPE_MUTATION_RATE = 4
 # defined constraints/aspects for the generation 
 COLORS_RANGE = ((0,150), (0,150), (0, 150))
 CONTRAST_RANGE = (25, 400)
-SHAPES = [((16, 16), (48, 16), (48, 48), (16, 48)),
-          ((16, 16), (48, 16), (16, 48), (48, 48))]
+SHAPES = [[(16, 16), (48, 16), (48, 48), (16, 48)],
+          [(16, 16), (48, 16), (16, 48), (48, 48)]]
 
 colors = []
 
@@ -35,6 +36,10 @@ def generateImage():
     drawShapes(draw, colors, shape)
 
     return {"image": img, "confidence": 0, "colors": colors, "class": "", "shape": shape}
+
+def generateRandomImage():
+    print("TODO")
+    # (random.randrange(0, 64),random.randrange(0, 64))
 
 def drawShapes(draw, colors, shape):
     background = colors[0]
@@ -74,16 +79,23 @@ def evalFitness():
             name = 'toEval.png'
             image = individual["image"]
             image.save(name)
-            payload= {'key': 'Engeibei1uok4xaecahChug6eihos0wo'}
-            r = requests.post('https://phinau.de/trasi', data=payload, files={'image': open(name, 'rb')})
-            api_calls += 1
-            try:
-                individual["confidence"] = r.json()[0]["confidence"]
-                individual["class"] = r.json()[0]["class"]
-            except ValueError:
-                print("Decoding JSON failed -> hit API rate :(")
-                stop = True
-                break
+            while(True):
+                payload= {'key': 'Engeibei1uok4xaecahChug6eihos0wo'}
+                r = requests.post('https://phinau.de/trasi', data=payload, files={'image': open(name, 'rb')})
+                api_calls += 1
+                # if(api_calls >= 60):
+                #     time.sleep(60)
+                #     api_calls = 0
+                # time.sleep(1)
+                try:
+                    individual["confidence"] = r.json()[0]["confidence"]
+                    individual["class"] = r.json()[0]["class"]
+                    break
+                except ValueError:
+                    time.sleep(1)
+                    # print("Decoding JSON failed -> hit API rate :(")
+                    # stop = True
+                    
         
         
 # create initial population
@@ -93,9 +105,19 @@ def initPopulation(count):
 
 # select best individuals from population
 def selection(bestCount):
-    # TODO: select best from duplicates
+    global population
+    # sort by confidence
     population.sort(key=lambda individual: individual["confidence"], reverse=True)
-    del population[bestCount:]
+    # take best individuals from same classes  
+    classesContained = []
+    selectedPopulation = []
+    for individual in population:
+        if(classesContained.count(individual["class"]) < 1):
+            selectedPopulation.append(individual)
+            classesContained.append(individual["class"])
+    population = selectedPopulation
+    # reduce individuals -> reduce API calls
+    del population[bestCount*2:]
 
 """# crossover between individuals in the population
 def crossover():
@@ -112,26 +134,36 @@ def mutate(confidence):
     # IMPLEMENT HERE YOUR MUTATION FUNCTION
     population_size = len(population)
     for i in range(population_size):
-        img = Image.new('RGB', (64, 64), color='black')
-        draw = ImageDraw.Draw(img)
-        # mutate colors
-        colors = population[i]["colors"]
-        colors = list(map(lambda color: (color[0] + random.randint(-MUTATION_RATE, MUTATION_RATE), color[1] + random.randint(-MUTATION_RATE, MUTATION_RATE), color[2] + random.randint(-MUTATION_RATE, MUTATION_RATE)), colors))
-        #mutate shape
-        shape = population[i]["shape"]
-        shape = list(map(lambda x: (mutateCoord(x[0]), mutateCoord(x[1])), shape))
-        
-        drawShapes(draw, colors, population[i]["shape"])
-        population.append({"image": img, "confidence": 0,
-                           "colors": colors, "class": "", "shape": shape})
-        """ # distribute the contrast between the colors
-        while(contrast(colors[0], colors[1]) < CONTRAST_RANGE[0] or contrast(colors[0], colors[1]) > CONTRAST_RANGE[1]):
-                colors = (
-                    random.randint(COLORS_RANGE[0][0], COLORS_RANGE[0][1]),
-                    random.randint(COLORS_RANGE[1][0], COLORS_RANGE[1][1]),
-                    random.randint(COLORS_RANGE[2][0], COLORS_RANGE[2][1])) """
+        if(population[i]["confidence"] < 0.9):
+            img = Image.new('RGB', (64, 64), color='black')
+            draw = ImageDraw.Draw(img)
+            # mutate colors
+            colors = population[i]["colors"]
+            colors = list(map(lambda color: (color[0] + random.randint(-MUTATION_RATE, MUTATION_RATE), color[1] + random.randint(-MUTATION_RATE, MUTATION_RATE), color[2] + random.randint(-MUTATION_RATE, MUTATION_RATE)), colors))
+            #mutate shape
+            shape = population[i]["shape"]
+            if random.random() < 1:
+                idx = random.randrange(0, len(shape))
+                if len(shape) > 3 and random.random() < 0.5:
+                    del shape[idx]
+                else:
+                    shape.insert(idx,(random.randrange(0, 64),random.randrange(0, 64)))
+            shape = list(map(lambda x: (mutateCoord(x[0]), mutateCoord(x[1])), shape))
+            
+            drawShapes(draw, colors, shape)
+            population.append({"image": img, "confidence": 0,
+                            "colors": colors, "class": "", "shape": shape})
+            """ # distribute the contrast between the colors
+            while(contrast(colors[0], colors[1]) < CONTRAST_RANGE[0] or contrast(colors[0], colors[1]) > CONTRAST_RANGE[1]):
+                    colors = (
+                        random.randint(COLORS_RANGE[0][0], COLORS_RANGE[0][1]),
+                        random.randint(COLORS_RANGE[1][0], COLORS_RANGE[1][1]),
+                        random.randint(COLORS_RANGE[2][0], COLORS_RANGE[2][1])) """
 
-        # TODO: add fancy stuff for creativity
+            # TODO: add fancy stuff for creativity
+    #del population[:population_size]
+
+    
 
         
 
@@ -156,12 +188,13 @@ def getCountThatMatch(confidence):
 
 
 # init parameters
-INITIAL_POPULATION = 10 # EXPERIMENT
+INITIAL_POPULATION = 5 # EXPERIMENT
 SELECTED_COUNT = 5  # specification
 DESIRED_CONFIDENCE = 0.90 # specification
 
 # run evolutionary algorithm (init -> selection -> loop(crossover-> mutate -> selection) until confidence matches all images)
 def runEvoAlgorithm():
+    global population
     initPopulation(INITIAL_POPULATION)
     evalFitness()
     selection(SELECTED_COUNT)
@@ -177,13 +210,12 @@ def runEvoAlgorithm():
 # save generated images with desired confidence
 def saveImages():
     for i in range(len(population)):
-        if(population[i]["confidence"] > DESIRED_CONFIDENCE):
-            image = population[i]["image"]
-            name = "img" + \
-                str(i) + "_" + str(population[i]["confidence"]
-                                    ) + "_" + str(population[i]["class"].encode('utf-8')) + str(population[i]["shape"]) + ".png"
-            image.save(name)
-            webbrowser.open(name)
+        image = population[i]["image"]
+        name = "img" + \
+            str(i) + "_" + str(population[i]["confidence"]
+                                ) + "_" + str(population[i]["class"].encode('utf-8')) + str(population[i]["shape"]) + ".png"
+        image.save(name)
+        webbrowser.open(name)
 
 def evalInitialPopulation():
     global population
@@ -198,6 +230,6 @@ def evalInitialPopulation():
 
 if __name__ == '__main__':
     runEvoAlgorithm()
-    saveImages()
+    #saveImages()
     #evalInitialPopulation()
     print("api calls: ", api_calls)
