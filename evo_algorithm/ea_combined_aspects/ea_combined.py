@@ -25,6 +25,9 @@ SHAPES = [[(16, 16), (48, 16), (48, 48), (16, 48)],
 
 colors = []
 
+def randomCoord():
+    return (random.randrange(0, 64),random.randrange(0, 64))
+
 # initial random generation of an image
 def generateImage():
     # set image format
@@ -32,14 +35,10 @@ def generateImage():
     draw = ImageDraw.Draw(img)
     # how many colors do we need?
     generateColorsWithContrast(2)
-    shape = SHAPES[0]
+    shape = [randomCoord(), randomCoord(), randomCoord(), randomCoord()]
     drawShapes(draw, colors, shape)
 
     return {"image": img, "confidence": 0, "colors": colors, "class": "", "shape": shape}
-
-def generateRandomImage():
-    print("TODO")
-    # (random.randrange(0, 64),random.randrange(0, 64))
 
 def drawShapes(draw, colors, shape):
     background = colors[0]
@@ -89,7 +88,7 @@ def evalFitness():
                 # time.sleep(1)
                 try:
                     individual["confidence"] = r.json()[0]["confidence"]
-                    individual["class"] = r.json()[0]["class"]
+                    individual["class"] = str(r.json()[0]["class"])
                     break
                 except ValueError:
                     time.sleep(1)
@@ -142,12 +141,12 @@ def mutate(confidence):
             colors = list(map(lambda color: (color[0] + random.randint(-MUTATION_RATE, MUTATION_RATE), color[1] + random.randint(-MUTATION_RATE, MUTATION_RATE), color[2] + random.randint(-MUTATION_RATE, MUTATION_RATE)), colors))
             #mutate shape
             shape = population[i]["shape"]
-            if random.random() < 1:
+            if random.random() < 0.5:
                 idx = random.randrange(0, len(shape))
                 if len(shape) > 3 and random.random() < 0.5:
                     del shape[idx]
                 else:
-                    shape.insert(idx,(random.randrange(0, 64),random.randrange(0, 64)))
+                    shape.insert(idx,randomCoord())
             shape = list(map(lambda x: (mutateCoord(x[0]), mutateCoord(x[1])), shape))
             
             drawShapes(draw, colors, shape)
@@ -190,7 +189,7 @@ def getCountThatMatch(confidence):
 # init parameters
 INITIAL_POPULATION = 5 # EXPERIMENT
 SELECTED_COUNT = 5  # specification
-DESIRED_CONFIDENCE = 0.90 # specification
+DESIRED_CONFIDENCE = 0.9 # specification
 
 # run evolutionary algorithm (init -> selection -> loop(crossover-> mutate -> selection) until confidence matches all images)
 def runEvoAlgorithm():
@@ -213,7 +212,7 @@ def saveImages():
         image = population[i]["image"]
         name = "img" + \
             str(i) + "_" + str(population[i]["confidence"]
-                                ) + "_" + str(population[i]["class"].encode('utf-8')) + str(population[i]["shape"]) + ".png"
+                                ) + "_" + str(population[i]["class"]) + str(population[i]["shape"]) + ".png"
         image.save(name)
         webbrowser.open(name)
 
@@ -230,6 +229,6 @@ def evalInitialPopulation():
 
 if __name__ == '__main__':
     runEvoAlgorithm()
-    #saveImages()
+    saveImages()
     #evalInitialPopulation()
     print("api calls: ", api_calls)
