@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import os
 import time
 import webbrowser
@@ -15,7 +14,7 @@ class GeneratingWindow(QDialog):
     """
 
     def __init__(self, mainWindow):
-        super().__init__()
+        super().__init__(mainWindow)
         self.mainWindow = mainWindow
         self.generator = None
         self.generatedPixmap = None
@@ -30,7 +29,7 @@ class GeneratingWindow(QDialog):
 
     def __initWindow(self):
         self.setWindowTitle('Generate Fooling Image')
-        self.setGeometry(0, 0, 640, 360)
+        self.setFixedSize(730, 360)
 
     def __initLayout(self):
         self.boxLeft = QGroupBox(self)
@@ -58,25 +57,37 @@ class GeneratingWindow(QDialog):
         self.detectedImageLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.boxRightLayout.addWidget(self.detectedImageLabel)
 
-        self.detectedLabel = QLabel(self)
-        self.detectedLabel.setText('123123')
-        self.detectedLabel.setGeometry(32, 232, 600, 32)
+        self.classnameLabel = QLabel(self)
+        self.classnameLabel.setText('')
+        self.classnameLabel.setGeometry(32, 250, 500, 32)
+
+        self.outputLabel = QLabel(self)
+        self.outputLabel.setWordWrap(True)
+        self.outputLabel.setText('')
+        self.outputLabel.setGeometry(500, 32, 500, 100)
 
         self.generatorSelection = QComboBox(self)
         self.generatorSelection.addItem('Spamming')
-        self.generatorSelection.setGeometry(64, 0, 200, 24)
+        self.generatorSelection.setGeometry(32, 300, 200, 32)
 
         self.generateButton = QPushButton('Generate Image', self)
-        self.generateButton.setGeometry(264, 296, 200, 32)
+        self.generateButton.setGeometry(264, 300, 200, 32)
         self.generateButton.clicked.connect(self.__generate)
 
         self.saveButton = QPushButton('Save Image', self)
-        self.saveButton.setGeometry(32, 296, 200, 32)
+        self.saveButton.setGeometry(496, 300, 200, 32)
         self.saveButton.clicked.connect(self.__saveGenerated)
         self.saveButton.setEnabled(False)
 
+    def printStatistics(self, classname, confidence, apiCalls, startTime):
+        stats = ('Confidence: %i%%\n'%(confidence*100) +
+            'API Calls: %d\n'%(apiCalls) +
+            'Runtime: %.0fs\n'%(time.time() - startTime))
+        self.outputLabel.setText(stats)
+        self.classnameLabel.setText(classname)
+
     def __onStepCallback(self, classId, confidence):
-        self.detectedLabel.setText('(%03i%%) %s'%(confidence*100, classId))
+        self.printStatistics(classId, confidence, self.generator.getApiCalls(), self.generator.getStartTime())
         self.updatePreview(classId, self.generator.getImage())
 
     def __onFailureCallback(self):
