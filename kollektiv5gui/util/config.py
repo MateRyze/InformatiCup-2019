@@ -7,13 +7,16 @@ __DEFAULT_CONFIG_FILENAME = os.path.join(getResourcePath(), 'default.ini')
 __USER_CONFIG_FILENAME = os.path.expanduser('~/.kollektiv5.ini')
 __CONFIG = None
 
-def load_config(filename):
+def __loadConfig():
     """
     Load an .ini based config file.
     """
     global __CONFIG
+    if not os.path.exists(__USER_CONFIG_FILENAME):
+        # if the user has no config, copy the default one to the expected location
+        shutil.copy(__DEFAULT_CONFIG_FILENAME, __USER_CONFIG_FILENAME)
     __CONFIG = configparser.ConfigParser()
-    __CONFIG.read(filename)
+    __CONFIG.read(__USER_CONFIG_FILENAME)
 
 def get(section, option):
     """
@@ -21,8 +24,16 @@ def get(section, option):
     value is extracted from it.
     """
     if __CONFIG is None:
-        if not os.path.exists(__USER_CONFIG_FILENAME):
-            # if the user has no config, copy the default one to the expected location
-            shutil.copy(__DEFAULT_CONFIG_FILENAME, __USER_CONFIG_FILENAME)
-        load_config(__USER_CONFIG_FILENAME)
+        __loadConfig()
     return __CONFIG.get(section, option)
+
+def set(section, option, value):
+    if __CONFIG is None:
+        __loadConfig()
+    __CONFIG.set(section, option, value)
+
+def flush():
+    global __CONFIG
+    if __CONFIG is not None:
+        with open(__USER_CONFIG_FILENAME, 'w') as configfile:
+            __CONFIG.write(configfile)

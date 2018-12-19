@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import os
 import time
 import webbrowser
@@ -8,6 +7,7 @@ from PyQt5.QtWidgets import QMainWindow, QWidget, QAction, QDialog, QVBoxLayout,
 from kollektiv5gui.util.paths import getResourcePath
 from kollektiv5gui.views.DatasetTableWidget import DatasetTableWidget
 from kollektiv5gui.views.GeneratingWindow import GeneratingWindow
+from kollektiv5gui.views.ConfigureApiWindow import ConfigureApiWindow
 from kollektiv5gui.models.Dataset import Dataset
 
 class MainWindow(QMainWindow):
@@ -33,7 +33,7 @@ class MainWindow(QMainWindow):
         Initialize the main properties of the window.
         """
         self.setWindowTitle('Kollektiv 5 GUI')
-        self.setGeometry(0, 0, 1280, 720)
+        self.resize(1280, 720)
 
         self.mainWidget = QSplitter()
         self.mainWidget.setOrientation(Qt.Vertical)
@@ -58,11 +58,8 @@ class MainWindow(QMainWindow):
         actionViewHelp = QAction('View Documentation', self)
         actionViewHelp.triggered.connect(self.help)
 
-        actionGenerationPrefs = QAction('Data Generation', self)
-
         actionApiPrefs = QAction('API', self)
-
-        actionGuiPrefs = QAction('GUI', self)
+        actionApiPrefs.triggered.connect(self.openApiSettings)
 
         # top-level menus
         menuFile = self.menu.addMenu('File')
@@ -79,9 +76,7 @@ class MainWindow(QMainWindow):
         menuTools.addAction(actionOpenGeneratorWindow)
 
         # "Preferences" menu
-        menuPrefs.addAction(actionGenerationPrefs)
         menuPrefs.addAction(actionApiPrefs)
-        menuPrefs.addAction(actionGuiPrefs)
 
         # "Help" menu
         menuHelp.addAction(actionViewHelp)
@@ -114,6 +109,9 @@ class MainWindow(QMainWindow):
     def openGeneratingWindow(self):
         self.generatingWindow = GeneratingWindow(self)
 
+    def openApiSettings(self):
+        self.configureApiWindow = ConfigureApiWindow(self)
+
     def log(self, text):
         """
         Print a text to the read-only textbox at the bottom of the window.
@@ -123,5 +121,5 @@ class MainWindow(QMainWindow):
         self.console.verticalScrollBar().setValue(self.console.verticalScrollBar().maximum())
         self.statusBar().showMessage(text)
 
-    def help(self, x = 0, y = 1):
-        webbrowser.open('https://google.com')
+    def help(self):
+        webbrowser.open('https://lmgtfy.com/?s=d&q=Wie+schreibt+man+eine+gute+Dokumentation%3F')

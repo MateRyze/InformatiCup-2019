@@ -84,6 +84,7 @@ class SpammingGenerator(AbstractGenerator):
     def step(self):
         self.createRandomShape()
         classification = api.classifyPILImage(self.image)
+        self._countApiCall()
         classId = classification[0]['class']
         confidence = classification[0]['confidence']
         print(confidence)
