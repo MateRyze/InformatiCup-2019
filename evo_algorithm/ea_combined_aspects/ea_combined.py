@@ -16,11 +16,13 @@ api_calls = 0
 stop = False
 MUTATION_RATE = 10
 SHAPE_MUTATION_RATE = 4
+SHAPE_POINTS_COUNT = (5,10)
+SHAPE_COUNT = 2
 
 # defined constraints/aspects for the generation 
 COLORS_RANGE = ((0,150), (0,150), (0, 150))
-CONTRAST_RANGE = (25, 400)
-SHAPES = [[(16, 16), (48, 16), (48, 48), (16, 48)],
+CONTRAST_RANGE = (100, 300)
+FRAME_SHAPE = [[(16, 16), (48, 16), (48, 48), (16, 48)],
           [(16, 16), (48, 16), (16, 48), (48, 48)]]
 
 colors = []
@@ -35,7 +37,13 @@ def generateImage():
     draw = ImageDraw.Draw(img)
     # how many colors do we need?
     generateColorsWithContrast(2)
-    shape = [randomCoord(), randomCoord(), randomCoord(), randomCoord()]
+    # init shape
+    shape = []
+    pointCount = random.randrange(SHAPE_POINTS_COUNT[0], SHAPE_POINTS_COUNT[1])
+    for i in range(pointCount): 
+        #idx = random.randrange(0, len(shape))
+        shape.insert(i,(random.randrange(0, 64),random.randrange(0, 64)))
+        shape = list(map(lambda x: (mutateCoord(x[0]), mutateCoord(x[1])), shape))
     drawShapes(draw, colors, shape)
 
     return {"image": img, "confidence": 0, "colors": colors, "class": "", "shape": shape}
@@ -118,11 +126,14 @@ def selection(bestCount):
     # reduce individuals -> reduce API calls
     del population[bestCount*2:]
 
-"""# crossover between individuals in the population
+# crossover between individuals in the population
 def crossover():
+    # use only for same classes from inital population
     img = None
-    population.append({"image": img, "confidence": 0, "colors": colors, "class": ""})
-"""
+    population_size = len(population)
+    for i in range(population_size):
+        print("do crossover")
+
         
 
 def mutateCoord(oldCoord):
@@ -130,7 +141,6 @@ def mutateCoord(oldCoord):
 
 # mutate each individual in the population and delete old population
 def mutate(confidence):
-    # IMPLEMENT HERE YOUR MUTATION FUNCTION
     population_size = len(population)
     for i in range(population_size):
         if(population[i]["confidence"] < 0.9):
@@ -143,7 +153,7 @@ def mutate(confidence):
             shape = population[i]["shape"]
             if random.random() < 0.5:
                 idx = random.randrange(0, len(shape))
-                if len(shape) > 3 and random.random() < 0.5:
+                if len(shape) > SHAPE_POINTS_COUNT and random.random() < 0.5:
                     del shape[idx]
                 else:
                     shape.insert(idx,randomCoord())
@@ -187,7 +197,7 @@ def getCountThatMatch(confidence):
 
 
 # init parameters
-INITIAL_POPULATION = 5 # EXPERIMENT
+INITIAL_POPULATION = 60 # EXPERIMENT
 SELECTED_COUNT = 5  # specification
 DESIRED_CONFIDENCE = 0.9 # specification
 
@@ -216,12 +226,14 @@ def runEvoAlgorithm():
 
 # save generated images with desired confidence
 def saveImages():
+    directory = "generated_api_calls_" + str(api_calls)
+    if not os.path.exists(directory):
+        os.makedirs(directory)
     for i in range(len(population)):
         image = population[i]["image"]
-        name = "img" + \
+        name = str(directory) + "/" + "img" + \
             str(i) + "_" + str(population[i]["confidence"]
-                               ) + "_" + str(population[i]["class"]) + str(population[i]["shape"]
-                               ) + ".png"
+                                ) + "_" + str(population[i]["class"].encode('utf-8')) + ".png"
         image.save(name)
         webbrowser.open(name)
 
@@ -229,12 +241,9 @@ def evalInitialPopulation():
     global population
     initPopulation(INITIAL_POPULATION)
     evalFitness()
+    selection(SELECTED_COUNT)
     printResults()
-    while(len(set(individual["class"] for individual in population)) < 5):
-        population = []
-        initPopulation(INITIAL_POPULATION)
-        evalFitness()
-        printResults()
+    saveImages()
 
 if __name__ == '__main__':
     runEvoAlgorithm()
