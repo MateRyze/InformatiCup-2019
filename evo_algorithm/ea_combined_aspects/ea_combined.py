@@ -191,6 +191,9 @@ INITIAL_POPULATION = 5 # EXPERIMENT
 SELECTED_COUNT = 5  # specification
 DESIRED_CONFIDENCE = 0.9 # specification
 
+def addRandomImage():
+    population.append(generateImage())
+
 # run evolutionary algorithm (init -> selection -> loop(crossover-> mutate -> selection) until confidence matches all images)
 def runEvoAlgorithm():
     global population
@@ -198,13 +201,18 @@ def runEvoAlgorithm():
     evalFitness()
     selection(SELECTED_COUNT)
     printResults()
-    while getCountThatMatch(DESIRED_CONFIDENCE) < SELECTED_COUNT and stop == False:
+    matchCount = getCountThatMatch(DESIRED_CONFIDENCE)
+    while matchCount < SELECTED_COUNT and stop == False:
         # crossover()
         mutate(DESIRED_CONFIDENCE)
         evalFitness()
         selection(SELECTED_COUNT)
         if (stop == False):
             printResults()
+        newMatchCount = getCountThatMatch(DESIRED_CONFIDENCE)
+        if newMatchCount == matchCount:
+            addRandomImage()
+        matchCount = newMatchCount
 
 # save generated images with desired confidence
 def saveImages():
@@ -212,7 +220,8 @@ def saveImages():
         image = population[i]["image"]
         name = "img" + \
             str(i) + "_" + str(population[i]["confidence"]
-                                ) + "_" + str(population[i]["class"]) + str(population[i]["shape"]) + ".png"
+                               ) + "_" + str(population[i]["class"]) + str(population[i]["shape"]
+                               ) + ".png"
         image.save(name)
         webbrowser.open(name)
 
