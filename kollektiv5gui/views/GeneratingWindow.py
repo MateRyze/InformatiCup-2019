@@ -1,11 +1,11 @@
 import os
 import time
 import webbrowser
-import threading
 from PyQt5.QtCore import QUrl, Qt, QSize
 from PyQt5.QtGui import QCursor, QPixmap, QImage
 from PyQt5.QtWidgets import QWidget, QDialog, QLabel, QGroupBox, QVBoxLayout, QPushButton, QSizePolicy, QFileDialog, QComboBox
 from kollektiv5gui.generators.SpammingGenerator import SpammingGenerator
+from kollektiv5gui.generators.EAGenerator import EAGenerator
 
 class GeneratingWindow(QDialog):
     """
@@ -67,6 +67,7 @@ class GeneratingWindow(QDialog):
         self.outputLabel.setGeometry(500, 32, 500, 100)
 
         self.generatorSelection = QComboBox(self)
+        self.generatorSelection.addItem('Evolutionary Algorithm')
         self.generatorSelection.addItem('Spamming')
         self.generatorSelection.setGeometry(32, 300, 200, 32)
 
@@ -104,7 +105,8 @@ class GeneratingWindow(QDialog):
         stepCallback = lambda *args, **kwargs: self.__onStepCallback(*args, **kwargs)
         finishedCallback = lambda *args, **kwargs: self.__onFinishedCallback(*args, **kwargs)
         failureCallback = lambda *args, **kwargs: self.__onFailureCallback(*args, **kwargs)
-        self.generator = SpammingGenerator()
+        self.generator = EAGenerator()
+        #self.generator = SpammingGenerator()
         self.generator.setCallbacks(stepCallback, finishedCallback, failureCallback)
         self.generator.start()
 
