@@ -1,7 +1,9 @@
 import time
+from multiprocessing import Process
 from threading import Thread
 from kollektiv5gui.util import api
 
+#class AbstractGenerator(Process):
 class AbstractGenerator(Thread):
     def __init__(self):
         super().__init__()

@@ -3,8 +3,11 @@ import requests
 import json
 import random
 import time
+import threading
 from PIL import Image
 from kollektiv5gui.util import config, logging
+
+__lock = threading.Lock()
 
 def __sendToApi(data):
     """
@@ -15,16 +18,17 @@ def __sendToApi(data):
     url = config.get('API', 'url')
     success = False
     resJson = None
-    while not success:
-        try:
-            res = requests.post(url, data={'key': key}, files={'image': data})
-            resJson = res.json()
-            success = True
-        except json.decoder.JSONDecodeError:
-            sleepTime = random.randrange(10, 30)
-            logging.log('Rate limiting detected!')
-            logging.log('Sleeping for %i seconds'%sleepTime)
-            time.sleep(sleepTime)
+    with __lock:
+        while not success:
+            try:
+                res = requests.post(url, data={'key': key}, files={'image': data})
+                resJson = res.json()
+                success = True
+            except json.decoder.JSONDecodeError:
+                sleepTime = random.randrange(10, 30)
+                logging.log('Rate limiting detected!')
+                logging.log('Sleeping for %i seconds'%sleepTime)
+                time.sleep(sleepTime)
     return resJson
 
 def classifyFile(path):
