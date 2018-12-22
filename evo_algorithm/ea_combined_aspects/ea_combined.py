@@ -27,8 +27,7 @@ TEXTS = [
     ":)",
     "Cool",
     "Hallo",
-    "Vorfahrt",
-    "Schild",
+    "Werbung"
     "Ja",
     "Nein",
 ]
@@ -113,6 +112,8 @@ def evalFitness():
                     time.sleep(1)
                     # print("Decoding JSON failed -> hit API rate :(")
                     # stop = True
+                except requests.exceptions.ConnectionError:
+                    time.sleep(1)
                     
         
         
