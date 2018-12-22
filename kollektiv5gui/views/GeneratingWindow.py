@@ -1,9 +1,10 @@
 import os
 import time
 import webbrowser
+from collections import namedtuple
 from PyQt5.QtCore import QUrl, Qt, QSize
 from PyQt5.QtGui import QCursor, QPixmap, QImage
-from PyQt5.QtWidgets import QWidget, QDialog, QLabel, QGroupBox, QVBoxLayout, QPushButton, QSizePolicy, QFileDialog, QComboBox
+from PyQt5.QtWidgets import QWidget, QDialog, QLabel, QGroupBox, QHBoxLayout, QVBoxLayout, QPushButton, QSizePolicy, QFileDialog, QComboBox, QHBox
 from kollektiv5gui.generators.SpammingGenerator import SpammingGenerator
 from kollektiv5gui.generators.EAGenerator import EAGenerator
 
@@ -13,10 +14,18 @@ class GeneratingWindow(QDialog):
     and an example image of the detected class on the other side.
     """
 
+    GENERATORS = [
+        ('Evolutionary Algorithm', EAGenerator),
+        ('Spamming', SpammingGenerator),
+    ]
+
+    PreviewContainer = namedtuple('PreviewContainer', 'boxLeft boxLeftLayout boxRight boxRightLayout generatedImage generatedImageLabel detectedImageLabel classnameLabel')
+
     def __init__(self, mainWindow):
         super().__init__(mainWindow)
         self.mainWindow = mainWindow
         self.generator = None
+        self.selectedGeneratorId = 0
         self.generatedPixmap = None
 
         self.__initWindow()
@@ -31,54 +40,87 @@ class GeneratingWindow(QDialog):
         self.setWindowTitle('Generate Fooling Image')
         self.setFixedSize(730, 360)
 
+    def __clearPreviews(self):
+        for preview in self.previews:
+            preview.boxLeft.setParent(None)
+
     def __initLayout(self):
-        self.boxLeft = QGroupBox(self)
-        self.boxLeft.setGeometry(32, 32, 200, 200)
-        self.boxLeft.setTitle('Generated')
-        self.boxLeftLayout = QVBoxLayout()
-        self.boxLeft.setLayout(self.boxLeftLayout)
+        self.layout = QVBoxLayout()
 
-        self.boxRight = QGroupBox(self)
-        self.boxRight.setGeometry(264, 32, 200, 200)
-        self.boxRight.setTitle('Detected')
-        self.boxRightLayout = QVBoxLayout()
-        self.boxRight.setLayout(self.boxRightLayout)
+        self.buttonsContainer = QHBox()
 
-        self.generatedImageLabel = QLabel(self.boxLeft)
-        self.generatedImage = QImage()
-        self.generatedImageLabel.setPixmap(QPixmap.fromImage(self.generatedImage))
-        self.generatedImageLabel.setScaledContents(True)
-        self.generatedImageLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        self.boxLeftLayout.addWidget(self.generatedImageLabel)
+        self.generatorSelection = QComboBox()
+        for generator in self.GENERATORS:
+            self.generatorSelection.addItem(generator[0])
+        self.generatorSelection.setGeometry(32, 32, 200, 32)
+        self.generatorSelection.currentIndexChanged.connect(self.__selectGenerator)
+        self.generatorSelection.setCurrentIndex(self.selectedGeneratorId)
+        self.buttonsContainer.addWidget(self.generatorSelection)
 
-        self.detectedImageLabel = QLabel(self.boxRight)
-        self.detectedImageLabel.setPixmap(QPixmap('res/class_images/00.png'))
-        self.detectedImageLabel.setScaledContents(True)
-        self.detectedImageLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        self.boxRightLayout.addWidget(self.detectedImageLabel)
+        self.generateButton = QPushButton('Generate Image')
+        self.generateButton.setGeometry(264, 32, 200, 32)
+        self.generateButton.clicked.connect(self.__generate)
+        self.buttonsContainer.addWidget(self.generateButton)
 
-        self.classnameLabel = QLabel(self)
-        self.classnameLabel.setText('')
-        self.classnameLabel.setGeometry(32, 250, 500, 32)
+        self.saveButton = QPushButton('Save Image')
+        self.saveButton.setGeometry(496, 32, 200, 32)
+        self.saveButton.clicked.connect(self.__saveGenerated)
+        self.saveButton.setEnabled(False)
+        self.buttonsContainer.addWidget(self.saveButton)
+
+        self.layout.addWidget(self.buttonsContainer)
+
+        self.previews = []
+        for i in range(self.GENERATORS[self.selectedGeneratorId][1].IMAGE_COUNT):
+            x = i % 3
+            y = i // 3
+            xPos = 32 + x * 200
+            yPos = 96 + y * 116
+
+            boxLeft = QGroupBox(self)
+            boxLeft.setGeometry(xPos, yPos, 100, 100)
+            boxLeft.setTitle('Generated')
+            boxLeftLayout = QVBoxLayout()
+            boxLeft.setLayout(boxLeftLayout)
+
+            boxRight = QGroupBox(self)
+            boxRight.setGeometry(xPos + 100, yPos, 100, 100)
+            boxRight.setTitle('Detected')
+            boxRightLayout = QVBoxLayout()
+            boxRight.setLayout(boxRightLayout)
+
+            generatedImageLabel = QLabel(boxLeft)
+            generatedImage = QImage()
+            generatedImageLabel.setPixmap(QPixmap.fromImage(generatedImage))
+            generatedImageLabel.setScaledContents(True)
+            generatedImageLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+            boxLeftLayout.addWidget(generatedImageLabel)
+
+            detectedImageLabel = QLabel(boxRight)
+            detectedImageLabel.setPixmap(QPixmap('res/class_images/00.png'))
+            detectedImageLabel.setScaledContents(True)
+            detectedImageLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+            boxRightLayout.addWidget(detectedImageLabel)
+
+            classnameLabel = QLabel(self)
+            classnameLabel.setText('')
+            classnameLabel.setGeometry(32, 300, 500, 32)
+
+            self.previews.append(self.PreviewContainer(
+                boxLeft,
+                boxLeftLayout,
+                boxRight,
+                boxRightLayout,
+                generatedImage,
+                generatedImageLabel,
+                detectedImageLabel,
+                classnameLabel,
+            ))
 
         self.outputLabel = QLabel(self)
         self.outputLabel.setWordWrap(True)
         self.outputLabel.setText('')
-        self.outputLabel.setGeometry(500, 32, 500, 100)
-
-        self.generatorSelection = QComboBox(self)
-        self.generatorSelection.addItem('Evolutionary Algorithm')
-        self.generatorSelection.addItem('Spamming')
-        self.generatorSelection.setGeometry(32, 300, 200, 32)
-
-        self.generateButton = QPushButton('Generate Image', self)
-        self.generateButton.setGeometry(264, 300, 200, 32)
-        self.generateButton.clicked.connect(self.__generate)
-
-        self.saveButton = QPushButton('Save Image', self)
-        self.saveButton.setGeometry(496, 300, 200, 32)
-        self.saveButton.clicked.connect(self.__saveGenerated)
-        self.saveButton.setEnabled(False)
+        self.outputLabel.setGeometry(500, 96, 500, 100)
 
     def printStatistics(self, classname, confidence, apiCalls, startTime):
         stats = ('Confidence: %i%%\n'%(confidence*100) +
@@ -105,14 +147,18 @@ class GeneratingWindow(QDialog):
         stepCallback = lambda *args, **kwargs: self.__onStepCallback(*args, **kwargs)
         finishedCallback = lambda *args, **kwargs: self.__onFinishedCallback(*args, **kwargs)
         failureCallback = lambda *args, **kwargs: self.__onFailureCallback(*args, **kwargs)
-        self.generator = EAGenerator()
-        #self.generator = SpammingGenerator()
+        self.generator = self.GENERATORS[self.selectedGeneratorId][1]()
         self.generator.setCallbacks(stepCallback, finishedCallback, failureCallback)
         self.generator.start()
 
     def __saveGenerated(self):
         filename = QFileDialog.getSaveFileName(self, filter='Image Files (*.png *.jpg *.bmp)')[0]
         self.generatedPixmap.save(filename)
+
+    def __selectGenerator(self, generatorId):
+        self.selectedGeneratorId = generatorId
+        self.__clearPreviews()
+        self.__initLayout()
 
     def updatePreview(self, classname, previewPixmap):
         tempQImage = QImage(previewPixmap, 64, 64, QImage.Format_RGB888)

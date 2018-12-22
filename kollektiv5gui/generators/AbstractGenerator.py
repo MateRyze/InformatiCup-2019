@@ -5,6 +5,9 @@ from kollektiv5gui.util import api
 
 #class AbstractGenerator(Process):
 class AbstractGenerator(Thread):
+
+    IMAGE_COUNT = 1
+
     def __init__(self):
         super().__init__()
         self.__finished = False

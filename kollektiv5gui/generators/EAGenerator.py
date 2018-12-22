@@ -12,6 +12,8 @@ from kollektiv5gui.generators.AbstractGenerator import AbstractGenerator
 
 class EAGenerator(AbstractGenerator):
 
+    IMAGE_COUNT = 5
+
     # defined constraints/aspects for the generation
     MUTATION_RATE = 10
     SHAPE_MUTATION_RATE = 4
