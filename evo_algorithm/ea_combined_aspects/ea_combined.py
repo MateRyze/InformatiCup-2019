@@ -5,7 +5,10 @@ import random
 import json
 import webbrowser
 import time
+from collections import namedtuple
 from PIL import Image, ImageDraw
+
+TextObject = namedtuple('TextObject', 'position string color')
 
 global population
 global api_calls
@@ -18,6 +21,17 @@ MUTATION_RATE = 10
 SHAPE_MUTATION_RATE = 4
 
 # defined constraints/aspects for the generation 
+TEXTS = [
+    ":D",
+    "xD",
+    ":)",
+    "Cool",
+    "Hallo",
+    "Vorfahrt",
+    "Schild",
+    "Ja",
+    "Nein",
+]
 COLORS_RANGE = ((0,150), (0,150), (0, 150))
 CONTRAST_RANGE = (25, 400)
 SHAPES = [[(16, 16), (48, 16), (48, 48), (16, 48)],
@@ -35,7 +49,7 @@ def generateImage():
     shape = SHAPES[0]
     drawShapes(draw, colors, shape)
 
-    return {"image": img, "confidence": 0, "colors": colors, "class": "", "shape": shape}
+    return {"image": img, "confidence": 0, "colors": colors, "class": "", "shape": shape, "texts": []}
 
 def generateRandomImage():
     print("TODO")
@@ -46,6 +60,10 @@ def drawShapes(draw, colors, shape):
     draw.rectangle(((0, 0), (64, 64)), background)
     foreground = colors[1]
     draw.polygon(shape, foreground)
+
+def drawTexts(draw, texts):
+    for text in texts:
+        draw.text(text.position, text.string, text.color)
 
 # generate colors with distributed contrast 
 def generateColorsWithContrast(count):
@@ -119,13 +137,12 @@ def selection(bestCount):
     # reduce individuals -> reduce API calls
     del population[bestCount*2:]
 
-"""# crossover between individuals in the population
+# crossover between individuals in the population
 def crossover():
     img = None
+    # TODO
     population.append({"image": img, "confidence": 0, "colors": colors, "class": ""})
-"""
         
-
 def mutateCoord(oldCoord):
     return min(63, max(1, oldCoord + random.randint(-SHAPE_MUTATION_RATE, SHAPE_MUTATION_RATE)))
 
@@ -140,6 +157,14 @@ def mutate(confidence):
             # mutate colors
             colors = population[i]["colors"]
             colors = list(map(lambda color: (color[0] + random.randint(-MUTATION_RATE, MUTATION_RATE), color[1] + random.randint(-MUTATION_RATE, MUTATION_RATE), color[2] + random.randint(-MUTATION_RATE, MUTATION_RATE)), colors))
+            
+            """ # distribute the contrast between the colors
+            while(contrast(colors[0], colors[1]) < CONTRAST_RANGE[0] or contrast(colors[0], colors[1]) > CONTRAST_RANGE[1]):
+                    colors = (
+                        random.randint(COLORS_RANGE[0][0], COLORS_RANGE[0][1]),
+                        random.randint(COLORS_RANGE[1][0], COLORS_RANGE[1][1]),
+                        random.randint(COLORS_RANGE[2][0], COLORS_RANGE[2][1])) """
+
             #mutate shape
             shape = population[i]["shape"]
             if random.random() < 1:
@@ -151,19 +176,37 @@ def mutate(confidence):
             shape = list(map(lambda x: (mutateCoord(x[0]), mutateCoord(x[1])), shape))
             
             drawShapes(draw, colors, shape)
+            # mutate texts
+            texts = population[i]["texts"]
+            for i in range(len(texts)):
+                text = texts[i]
+                textPosition = (
+                    text.position[0] + random.randint(-MUTATION_RATE, MUTATION_RATE),
+                    text.position[1] + random.randint(-MUTATION_RATE, MUTATION_RATE),
+                )
+                textColor = (
+                    text.color[0] + random.randint(-MUTATION_RATE, MUTATION_RATE),
+                    text.color[1] + random.randint(-MUTATION_RATE, MUTATION_RATE),
+                    text.color[2] + random.randint(-MUTATION_RATE, MUTATION_RATE),
+                )
+                texts[i] = TextObject(
+                    textPosition,
+                    text.string,
+                    textColor,
+                )
+            textRand = random.random()
+            if textRand > 0.75:
+                texts.append(TextObject(
+                    (random.randint(-16, 64), random.randint(-16, 64)),
+                    TEXTS[random.randrange(0, len(TEXTS))],
+                    (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)),
+                ))
+            elif textRand < 0.25 and len(texts) > 0:
+                del texts[random.randrange(0, len(texts))]
+            drawTexts(draw, texts)
+
             population.append({"image": img, "confidence": 0,
-                            "colors": colors, "class": "", "shape": shape})
-            """ # distribute the contrast between the colors
-            while(contrast(colors[0], colors[1]) < CONTRAST_RANGE[0] or contrast(colors[0], colors[1]) > CONTRAST_RANGE[1]):
-                    colors = (
-                        random.randint(COLORS_RANGE[0][0], COLORS_RANGE[0][1]),
-                        random.randint(COLORS_RANGE[1][0], COLORS_RANGE[1][1]),
-                        random.randint(COLORS_RANGE[2][0], COLORS_RANGE[2][1])) """
-
-            # TODO: add fancy stuff for creativity
-    #del population[:population_size]
-
-    
+                               "colors": colors, "class": "", "shape": shape, "texts": texts})
 
         
 
@@ -230,6 +273,6 @@ def evalInitialPopulation():
 
 if __name__ == '__main__':
     runEvoAlgorithm()
-    #saveImages()
+    saveImages()
     #evalInitialPopulation()
     print("api calls: ", api_calls)
