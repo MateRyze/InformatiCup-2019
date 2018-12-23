@@ -19,7 +19,7 @@ class GeneratingWindow(QDialog):
         ('Spamming', SpammingGenerator),
     ]
 
-    Preview = namedtuple('PreviewContainer', 'generatedImageLabel detectedImageLabel classnameLabel confidenceLabel')
+    Preview = namedtuple('PreviewContainer', 'generatedImageLabel detectedImageLabel classnameLabel confidenceLabel saveButton')
 
     def __init__(self, mainWindow):
         super().__init__(mainWindow)
@@ -62,12 +62,6 @@ class GeneratingWindow(QDialog):
         self.generateButton.clicked.connect(self.__generate)
         self.buttonsContainer.addWidget(self.generateButton)
 
-        self.saveButton = QPushButton('Save Image')
-        self.saveButton.setGeometry(496, 32, 200, 32)
-        self.saveButton.clicked.connect(self.__saveGenerated)
-        self.saveButton.setEnabled(False)
-        self.buttonsContainer.addWidget(self.saveButton)
-
         self.layout.addLayout(self.buttonsContainer)
 
         self.outputLabel = QLabel()
@@ -80,22 +74,31 @@ class GeneratingWindow(QDialog):
         self.previewsContainer = QGridLayout()
         for i in range(self.GENERATORS[self.selectedGeneratorId][1].IMAGE_COUNT):
             boxLeft = QGroupBox()
-            boxLeft.setTitle('Generated')
             boxLeftLayout = QVBoxLayout()
             boxLeft.setLayout(boxLeftLayout)
 
             boxRight = QGroupBox()
-            boxRight.setTitle('Detected')
             boxRightLayout = QVBoxLayout()
             boxRight.setLayout(boxRightLayout)
 
+            # This way the heading is only on the leftmost image
+            # However, we still need to reserve space for the heading label for all other images
+            if i == 0:
+                boxLeft.setTitle('Generated')
+                boxRight.setTitle('Detected')
+            else:
+                boxLeft.setTitle('')
+                boxRight.setTitle('')
+
             generatedImageLabel = QLabel(boxLeft)
             generatedImageLabel.setScaledContents(True)
+            generatedImageLabel.setFixedSize(160, 160)
             generatedImageLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
             boxLeftLayout.addWidget(generatedImageLabel)
 
             detectedImageLabel = QLabel(boxRight)
             detectedImageLabel.setScaledContents(True)
+            detectedImageLabel.setFixedSize(160, 160)
             detectedImageLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
             boxRightLayout.addWidget(detectedImageLabel)
 
@@ -105,16 +108,23 @@ class GeneratingWindow(QDialog):
             confidenceLabel = QLabel()
             confidenceLabel.setText('')
 
+            saveButton = QPushButton('Save Image')
+            clickedFunction = lambda _, num=i: self.__saveGenerated(num)
+            saveButton.clicked.connect(clickedFunction)
+            saveButton.setEnabled(False)
+
             self.previewsContainer.addWidget(boxLeft, 0, i)
             self.previewsContainer.addWidget(boxRight, 1, i)
             self.previewsContainer.addWidget(classnameLabel, 2, i)
             self.previewsContainer.addWidget(confidenceLabel, 3, i)
+            self.previewsContainer.addWidget(saveButton, 4, i)
 
             self.previews.append(self.Preview(
                 generatedImageLabel,
                 detectedImageLabel,
                 classnameLabel,
                 confidenceLabel,
+                saveButton,
             ))
 
         self.layout.addLayout(self.previewsContainer)
@@ -127,8 +137,9 @@ class GeneratingWindow(QDialog):
     def __onStepCallback(self, classes):
         for i in range(len(classes)):
             classname = classes[i][0]
+            shortenedClassname = classname[:20] + '...' if len(classname) > 20 else classname
             confidence = classes[i][1]
-            self.previews[i].classnameLabel.setText(classname)
+            self.previews[i].classnameLabel.setText(shortenedClassname)
             self.previews[i].confidenceLabel.setText('%d%%'%(confidence*100))
 
             previewPixmap = self.generator.getImage(i)
@@ -146,11 +157,11 @@ class GeneratingWindow(QDialog):
 
     def __onFinishedCallback(self):
         self.generateButton.setEnabled(True)
-        self.saveButton.setEnabled(True)
+        for preview in self.previews: preview.saveButton.setEnabled(True)
 
     def __generate(self):
         self.generateButton.setEnabled(False)
-        self.saveButton.setEnabled(False)
+        for preview in self.previews: preview.saveButton.setEnabled(False)
         # currying of the callback functions to pass the "self" parameter
         stepCallback = lambda *args, **kwargs: self.__onStepCallback(*args, **kwargs)
         finishedCallback = lambda *args, **kwargs: self.__onFinishedCallback(*args, **kwargs)
@@ -159,9 +170,9 @@ class GeneratingWindow(QDialog):
         self.generator.setCallbacks(stepCallback, finishedCallback, failureCallback)
         self.generator.start()
 
-    def __saveGenerated(self):
+    def __saveGenerated(self, i):
         filename = QFileDialog.getSaveFileName(self, filter='Image Files (*.png *.jpg *.bmp)')[0]
-        self.generatedPixmap.save(filename)
+        self.previews[i].generatedImageLabel.pixmap().save(filename)
 
     def __selectGenerator(self, generatorId):
         self.selectedGeneratorId = generatorId
