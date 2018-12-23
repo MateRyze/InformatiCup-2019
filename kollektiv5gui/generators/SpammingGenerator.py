@@ -78,7 +78,7 @@ class SpammingGenerator(AbstractGenerator):
         else:
             self.createText()
 
-    def getImage(self):
+    def getImage(self, i):
         return self.image.tobytes('raw', 'RGB')
 
     def step(self):
@@ -90,4 +90,4 @@ class SpammingGenerator(AbstractGenerator):
         print(confidence)
         if confidence > 0.9:
             self.finish()
-        self.onStep(classId, confidence)
+        self.onStep([(classId, confidence)])

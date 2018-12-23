@@ -85,7 +85,7 @@ class EAGenerator(AbstractGenerator):
                 self._countApiCall()
                 individual["confidence"] = r[0]["confidence"]
                 individual["class"] = str(r[0]["class"])
-                self.callOnStepCallback()
+        self.callOnStepCallback()
 
     # create initial population
     def initPopulation(self, count):
@@ -151,24 +151,19 @@ class EAGenerator(AbstractGenerator):
                 count += 1
         return count
 
-    def getBestResult(self):
-        best = {"confidence": 0}
-        for individual in self.population:
-            if(individual["confidence"] > best["confidence"]):
-                best = individual
-        return best
-
     def addRandomImage(self):
         self.population.append(self.generateImage())
 
-    def getImage(self):
-        best = self.getBestResult()
-        print(best)
-        return best["image"].tobytes('raw', 'RGB')
+    def getBestIndividials(self, amount):
+        return list(reversed(sorted(self.population, key=lambda individual: individual["confidence"])))[:amount]
+
+    def getImage(self, i):
+        best = self.getBestIndividials(self.IMAGE_COUNT)
+        return best[i]["image"].tobytes('raw', 'RGB')
 
     def callOnStepCallback(self):
-        best = self.getBestResult()
-        self.onStep(best["class"], best["confidence"])
+        best = self.getBestIndividials(self.IMAGE_COUNT)
+        self.onStep([(b['class'], b['confidence']) for b in best])
 
     def step(self):
         if not self.initialized:

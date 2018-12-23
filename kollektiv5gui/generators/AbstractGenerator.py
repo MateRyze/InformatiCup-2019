@@ -43,7 +43,7 @@ class AbstractGenerator(Thread):
     def _countApiCall(self):
         self.__apiCalls += 1
 
-    def getImage(self):
+    def getImage(self, i):
         return None
 
     def getStartTime(self):
