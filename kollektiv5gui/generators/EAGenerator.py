@@ -184,5 +184,3 @@ class EAGenerator(AbstractGenerator):
 
         if self.matchCount > self.SELECTED_COUNT:
             self.finish()
-        else:
-            self.finish()

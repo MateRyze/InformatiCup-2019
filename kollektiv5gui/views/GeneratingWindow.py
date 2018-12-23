@@ -24,12 +24,15 @@ class GeneratingWindow(QDialog):
     def __init__(self, mainWindow):
         super().__init__(mainWindow)
         self.mainWindow = mainWindow
-        self.generator = None
         self.selectedGeneratorId = 0
+        self.previews = []
+        self.previewsContainer = None
+        self.generator = None
         self.generatedPixmap = None
 
         self.__initWindow()
         self.__initLayout()
+        self.__selectGenerator(self.selectedGeneratorId)
         self.show()
 
     def closeEvent(self, event):
@@ -42,6 +45,10 @@ class GeneratingWindow(QDialog):
 
     def __clearPreviews(self):
         self.previews = []
+        if self.previewsContainer is not None:
+            for i in reversed(range(self.previewsContainer.count())):
+                self.previewsContainer.itemAt(i).widget().setParent(None)
+            self.previewsContainer.setParent(None)
 
     def __initLayout(self):
         self.layout = QVBoxLayout()
@@ -70,6 +77,7 @@ class GeneratingWindow(QDialog):
         self.outputLabel.setText("OUTPUT")
         self.layout.addWidget(self.outputLabel)
 
+    def __initPreviews(self):
         self.previews = []
         self.previewsContainer = QGridLayout()
         for i in range(self.GENERATORS[self.selectedGeneratorId][1].IMAGE_COUNT):
@@ -177,4 +185,4 @@ class GeneratingWindow(QDialog):
     def __selectGenerator(self, generatorId):
         self.selectedGeneratorId = generatorId
         self.__clearPreviews()
-        self.__initLayout()
+        self.__initPreviews()
