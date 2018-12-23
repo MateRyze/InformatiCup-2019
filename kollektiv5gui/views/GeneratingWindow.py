@@ -4,7 +4,7 @@ import webbrowser
 from collections import namedtuple
 from PyQt5.QtCore import QUrl, Qt, QSize
 from PyQt5.QtGui import QCursor, QPixmap, QImage
-from PyQt5.QtWidgets import QWidget, QDialog, QLabel, QGroupBox, QHBoxLayout, QVBoxLayout, QPushButton, QSizePolicy, QFileDialog, QComboBox, QHBox
+from PyQt5.QtWidgets import QWidget, QDialog, QLabel, QGroupBox, QPushButton, QSizePolicy, QFileDialog, QComboBox, QGridLayout, QHBoxLayout, QVBoxLayout
 from kollektiv5gui.generators.SpammingGenerator import SpammingGenerator
 from kollektiv5gui.generators.EAGenerator import EAGenerator
 
@@ -19,7 +19,7 @@ class GeneratingWindow(QDialog):
         ('Spamming', SpammingGenerator),
     ]
 
-    PreviewContainer = namedtuple('PreviewContainer', 'boxLeft boxLeftLayout boxRight boxRightLayout generatedImage generatedImageLabel detectedImageLabel classnameLabel')
+    Preview = namedtuple('PreviewContainer', 'generatedImageLabel detectedImageLabel classnameLabel confidenceLabel')
 
     def __init__(self, mainWindow):
         super().__init__(mainWindow)
@@ -38,16 +38,16 @@ class GeneratingWindow(QDialog):
 
     def __initWindow(self):
         self.setWindowTitle('Generate Fooling Image')
-        self.setFixedSize(730, 360)
+        #self.setSize(730, 360)
 
     def __clearPreviews(self):
-        for preview in self.previews:
-            preview.boxLeft.setParent(None)
+        self.previews = []
 
     def __initLayout(self):
         self.layout = QVBoxLayout()
+        self.setLayout(self.layout)
 
-        self.buttonsContainer = QHBox()
+        self.buttonsContainer = QHBoxLayout()
 
         self.generatorSelection = QComboBox()
         for generator in self.GENERATORS:
@@ -68,70 +68,78 @@ class GeneratingWindow(QDialog):
         self.saveButton.setEnabled(False)
         self.buttonsContainer.addWidget(self.saveButton)
 
-        self.layout.addWidget(self.buttonsContainer)
+        self.layout.addLayout(self.buttonsContainer)
+
+        self.outputLabel = QLabel()
+        self.outputLabel.setWordWrap(True)
+        self.outputLabel.setText('')
+        self.outputLabel.setText("OUTPUT")
+        self.layout.addWidget(self.outputLabel)
 
         self.previews = []
+        self.previewsContainer = QGridLayout()
         for i in range(self.GENERATORS[self.selectedGeneratorId][1].IMAGE_COUNT):
-            x = i % 3
-            y = i // 3
-            xPos = 32 + x * 200
-            yPos = 96 + y * 116
-
-            boxLeft = QGroupBox(self)
-            boxLeft.setGeometry(xPos, yPos, 100, 100)
+            boxLeft = QGroupBox()
             boxLeft.setTitle('Generated')
             boxLeftLayout = QVBoxLayout()
             boxLeft.setLayout(boxLeftLayout)
 
-            boxRight = QGroupBox(self)
-            boxRight.setGeometry(xPos + 100, yPos, 100, 100)
+            boxRight = QGroupBox()
             boxRight.setTitle('Detected')
             boxRightLayout = QVBoxLayout()
             boxRight.setLayout(boxRightLayout)
 
             generatedImageLabel = QLabel(boxLeft)
-            generatedImage = QImage()
-            generatedImageLabel.setPixmap(QPixmap.fromImage(generatedImage))
             generatedImageLabel.setScaledContents(True)
             generatedImageLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
             boxLeftLayout.addWidget(generatedImageLabel)
 
             detectedImageLabel = QLabel(boxRight)
-            detectedImageLabel.setPixmap(QPixmap('res/class_images/00.png'))
             detectedImageLabel.setScaledContents(True)
             detectedImageLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
             boxRightLayout.addWidget(detectedImageLabel)
 
-            classnameLabel = QLabel(self)
+            classnameLabel = QLabel()
             classnameLabel.setText('')
-            classnameLabel.setGeometry(32, 300, 500, 32)
 
-            self.previews.append(self.PreviewContainer(
-                boxLeft,
-                boxLeftLayout,
-                boxRight,
-                boxRightLayout,
-                generatedImage,
+            confidenceLabel = QLabel()
+            confidenceLabel.setText('')
+
+            self.previewsContainer.addWidget(boxLeft, 0, i)
+            self.previewsContainer.addWidget(boxRight, 1, i)
+            self.previewsContainer.addWidget(classnameLabel, 2, i)
+            self.previewsContainer.addWidget(confidenceLabel, 3, i)
+
+            self.previews.append(self.Preview(
                 generatedImageLabel,
                 detectedImageLabel,
                 classnameLabel,
+                confidenceLabel,
             ))
 
-        self.outputLabel = QLabel(self)
-        self.outputLabel.setWordWrap(True)
-        self.outputLabel.setText('')
-        self.outputLabel.setGeometry(500, 96, 500, 100)
+        self.layout.addLayout(self.previewsContainer)
 
-    def printStatistics(self, classname, confidence, apiCalls, startTime):
-        stats = ('Confidence: %i%%\n'%(confidence*100) +
-            'API Calls: %d\n'%(apiCalls) +
+    def printStatistics(self, apiCalls, startTime):
+        stats = ('API Calls: %d\n'%(apiCalls) +
             'Runtime: %.0fs\n'%(time.time() - startTime))
         self.outputLabel.setText(stats)
-        self.classnameLabel.setText(classname)
 
-    def __onStepCallback(self, classId, confidence):
-        self.printStatistics(classId, confidence, self.generator.getApiCalls(), self.generator.getStartTime())
-        self.updatePreview(classId, self.generator.getImage())
+    def __onStepCallback(self, classes):
+        for i in range(len(classes)):
+            classname = classes[i][0]
+            confidence = classes[i][1]
+            self.previews[i].classnameLabel.setText(classname)
+            self.previews[i].confidenceLabel.setText('%d%%'%(confidence*100))
+
+            previewPixmap = self.generator.getImage(i)
+            tempQImage = QImage(previewPixmap, 64, 64, QImage.Format_RGB888)
+            generatedPixmap = QPixmap.fromImage(tempQImage)
+            self.previews[i].generatedImageLabel.setPixmap(generatedPixmap)
+
+            c = self.mainWindow.getDataset().getClassByName(classname)
+            self.previews[i].detectedImageLabel.setPixmap(QPixmap(c.thumbnailPath))
+
+        self.printStatistics(self.generator.getApiCalls(), self.generator.getStartTime())
 
     def __onFailureCallback(self):
         pass
@@ -159,11 +167,3 @@ class GeneratingWindow(QDialog):
         self.selectedGeneratorId = generatorId
         self.__clearPreviews()
         self.__initLayout()
-
-    def updatePreview(self, classname, previewPixmap):
-        tempQImage = QImage(previewPixmap, 64, 64, QImage.Format_RGB888)
-        self.generatedPixmap = QPixmap.fromImage(tempQImage)
-        self.generatedImageLabel.setPixmap(self.generatedPixmap)
-
-        c = self.mainWindow.getDataset().getClassByName(classname)
-        self.detectedImageLabel.setPixmap(QPixmap(c.thumbnailPath))
