@@ -1,6 +1,5 @@
 import requests
 import os
-import skimage
 import random
 import json
 import webbrowser
