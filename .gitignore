@@ -2,3 +2,5 @@
 CCR/test
 *.png
 *.pyc
+.pytest_cache/*
+

@@ -42,11 +42,11 @@ def generateImage():
     pointCount = random.randrange(SHAPE_POINTS_COUNT[0], SHAPE_POINTS_COUNT[1])
     for i in range(pointCount): 
         #idx = random.randrange(0, len(shape))
-        shape.insert(i,(random.randrange(0, 64),random.randrange(0, 64)))
+        shape.insert(i, (randomCoord()))
         shape = list(map(lambda x: (mutateCoord(x[0]), mutateCoord(x[1])), shape))
     drawShapes(draw, colors, shape)
 
-    return {"image": img, "confidence": 0, "colors": colors, "class": "", "shape": shape}
+    return {"image": img, "confidence": 0, "colors": colors, "class": ""}
 
 def drawShapes(draw, colors, shape):
     background = colors[0]
@@ -78,9 +78,10 @@ def contrast(color1, color2):
 
 
 # eval fitness for each individual
-def evalFitness():
+def evalFitness(population):
     global api_calls
     global stop
+    print("doing api calls (evaluation)")
     for individual in population:
         if(individual["class"] == ""):
             name = 'toEval.png'
@@ -102,16 +103,19 @@ def evalFitness():
                     time.sleep(1)
                     # print("Decoding JSON failed -> hit API rate :(")
                     # stop = True
+
                     
         
         
 # create initial population
 def initPopulation(count):
+    print("generating initial population")
     for i in range(count):
         population.append(generateImage())
 
 # select best individuals from population
 def selection(bestCount):
+    print("doing selection")
     global population
     # sort by confidence
     population.sort(key=lambda individual: individual["confidence"], reverse=True)
@@ -119,7 +123,7 @@ def selection(bestCount):
     classesContained = []
     selectedPopulation = []
     for individual in population:
-        if(classesContained.count(individual["class"]) < 1):
+        if(classesContained.count(individual["class"]) < 2):
             selectedPopulation.append(individual)
             classesContained.append(individual["class"])
     population = selectedPopulation
@@ -128,13 +132,28 @@ def selection(bestCount):
 
 # crossover between individuals in the population
 def crossover():
+    print("doing crossover")
     # use only for same classes from inital population
-    img = None
-    population_size = len(population)
-    for i in range(population_size):
-        print("do crossover")
+    # sort duplicates
+    duplicates = []
+    for individual in population:
+        entry = (individual, None)
+        duplicates.append(entry)
+    for index, entry in enumerate(duplicates):
+        for individual in population:
+            if individual != entry[0] and individual["class"] == entry[0]["class"]:
+                duplicates[index] = (entry[0], individual)
+    print(duplicates)
+    beforeCrossover = []
+    # make crossover by cropping images with Image.crop
+    afterCrossover = []
+    img = population[0]["image"]
+    croppedImg = img.crop((0,0,32,64))
+    croppedImg.show()
+    # for testing crossover method
+    return [beforeCrossover, afterCrossover]
 
-        
+      
 
 def mutateCoord(oldCoord):
     return min(63, max(1, oldCoord + random.randint(-SHAPE_MUTATION_RATE, SHAPE_MUTATION_RATE)))
@@ -153,7 +172,7 @@ def mutate(confidence):
             shape = population[i]["shape"]
             if random.random() < 0.5:
                 idx = random.randrange(0, len(shape))
-                if len(shape) > SHAPE_POINTS_COUNT and random.random() < 0.5:
+                if len(shape) > SHAPE_POINTS_COUNT[1] and random.random() < 0.5:
                     del shape[idx]
                 else:
                     shape.insert(idx,randomCoord())
@@ -208,17 +227,18 @@ def addRandomImage():
 def runEvoAlgorithm():
     global population
     initPopulation(INITIAL_POPULATION)
-    evalFitness()
+    evalFitness(population)
     selection(SELECTED_COUNT)
     printResults()
     matchCount = getCountThatMatch(DESIRED_CONFIDENCE)
     while matchCount < SELECTED_COUNT and stop == False:
         # crossover()
         mutate(DESIRED_CONFIDENCE)
-        evalFitness()
+        evalFitness(population)
         selection(SELECTED_COUNT)
         if (stop == False):
             printResults()
+        # avoid local maxima by adding new random image    
         newMatchCount = getCountThatMatch(DESIRED_CONFIDENCE)
         if newMatchCount == matchCount:
             addRandomImage()
@@ -240,7 +260,7 @@ def saveImages():
 def evalInitialPopulation():
     global population
     initPopulation(INITIAL_POPULATION)
-    evalFitness()
+    evalFitness(population)
     selection(SELECTED_COUNT)
     printResults()
     saveImages()

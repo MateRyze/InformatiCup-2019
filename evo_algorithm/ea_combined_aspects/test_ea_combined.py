@@ -4,7 +4,7 @@ import unittest
 # TODO: add more test functions
 
 
-class TestEA(unittest.TestCase):
+class Test_EA(unittest.TestCase):
 
     def setUp(self):
         ea_combined.population.clear()
@@ -27,11 +27,14 @@ class TestEA(unittest.TestCase):
 
     def test_crossover(self):
         ea_combined.initPopulation(ea_combined.INITIAL_POPULATION)
-        self.assertEqual(len(ea_combined.population),
-                         ea_combined.INITIAL_POPULATION)
+        ea_combined.evalFitness(ea_combined.population)
+        ea_combined.selection(ea_combined.SELECTED_COUNT)
         ea_combined.crossover()
-        self.assertEqual(len(ea_combined.population),
-                         ea_combined.INITIAL_POPULATION*2 - 1)
+        # crossover should add new individuals
+        self.assertGreater(len(ea_combined.population),
+                         ea_combined.INITIAL_POPULATION)
+        # crossover should improve confidence
+        ea_combined.evalFitness(ea_combined.population)
 
     def test_mutate(self):
         ea_combined.initPopulation(ea_combined.INITIAL_POPULATION)
