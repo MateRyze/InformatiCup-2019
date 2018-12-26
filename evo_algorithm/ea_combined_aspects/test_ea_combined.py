@@ -29,12 +29,18 @@ class Test_EA(unittest.TestCase):
         ea_combined.initPopulation(ea_combined.INITIAL_POPULATION)
         ea_combined.evalFitness(ea_combined.population)
         ea_combined.selection(ea_combined.SELECTED_COUNT)
-        ea_combined.crossover()
-        # crossover should add new individuals
-        self.assertGreater(len(ea_combined.population),
-                         ea_combined.INITIAL_POPULATION)
+        crossoverResults = ea_combined.crossover()
         # crossover should improve confidence
-        ea_combined.evalFitness(ea_combined.population)
+        results = ea_combined.evalFitness(crossoverResults["after"])
+        print("before: ", crossoverResults["before"])
+        print("after: ", results)
+        resultsPassed = 0
+        for index, entry in enumerate(results):
+            confidence = entry["confidence"]
+            if confidence > crossoverResults["before"][index][0]["confidence"] and confidence > crossoverResults["before"][index][1]["confidence"] and entry["class"] == crossoverResults["before"][index][0]["class"]:
+                resultsPassed += 1
+        self.assertEqual(resultsPassed, len(crossoverResults["before"]), "no improvement after crossover")
+
 
     def test_mutate(self):
         ea_combined.initPopulation(ea_combined.INITIAL_POPULATION)

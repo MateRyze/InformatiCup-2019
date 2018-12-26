@@ -46,7 +46,7 @@ def generateImage():
         shape = list(map(lambda x: (mutateCoord(x[0]), mutateCoord(x[1])), shape))
     drawShapes(draw, colors, shape)
 
-    return {"image": img, "confidence": 0, "colors": colors, "class": ""}
+    return {"image": img, "confidence": 0, "colors": colors, "class": "", "shape": shape}
 
 def drawShapes(draw, colors, shape):
     background = colors[0]
@@ -88,14 +88,16 @@ def evalFitness(population):
             image = individual["image"]
             image.save(name)
             while(True):
-                payload= {'key': 'Engeibei1uok4xaecahChug6eihos0wo'}
-                r = requests.post('https://phinau.de/trasi', data=payload, files={'image': open(name, 'rb')})
-                api_calls += 1
+                
                 # if(api_calls >= 60):
                 #     time.sleep(60)
                 #     api_calls = 0
                 # time.sleep(1)
                 try:
+                    payload = {'key': 'Engeibei1uok4xaecahChug6eihos0wo'}
+                    r = requests.post('https://phinau.de/trasi',
+                                  data=payload, files={'image': open(name, 'rb')})
+                    api_calls += 1
                     individual["confidence"] = r.json()[0]["confidence"]
                     individual["class"] = str(r.json()[0]["class"])
                     break
@@ -103,7 +105,10 @@ def evalFitness(population):
                     time.sleep(1)
                     # print("Decoding JSON failed -> hit API rate :(")
                     # stop = True
-
+                except:
+                    print("Unexpected error, retrying!")
+                    time.sleep(1)
+    return population
                     
         
         
@@ -128,30 +133,42 @@ def selection(bestCount):
             classesContained.append(individual["class"])
     population = selectedPopulation
     # reduce individuals -> reduce API calls
-    del population[bestCount*2:]
+    #del population[bestCount*2:]
 
 # crossover between individuals in the population
 def crossover():
     print("doing crossover")
     # use only for same classes from inital population
-    # sort duplicates
+    # sort duplicates with same classes like [vorfahrt99%, vorfahrt97%, ...]
+    seen = []
     duplicates = []
-    for individual in population:
-        entry = (individual, None)
-        duplicates.append(entry)
+    for indi in population:
+        if indi["class"] not in seen:
+            duplicates.append([indi])
+            seen.append(indi["class"])
+    #print(duplicates)
     for index, entry in enumerate(duplicates):
         for individual in population:
-            if individual != entry[0] and individual["class"] == entry[0]["class"]:
-                duplicates[index] = (entry[0], individual)
-    print(duplicates)
-    beforeCrossover = []
-    # make crossover by cropping images with Image.crop
+            if individual not in entry and individual["class"] == entry[0]["class"]:
+                duplicates[index] = duplicates[index] + [individual]
+    duplicates = [entry for entry in duplicates if len(entry) > 1] 
+    #print(duplicates)
+    beforeCrossover = duplicates
     afterCrossover = []
-    img = population[0]["image"]
-    croppedImg = img.crop((0,0,32,64))
-    croppedImg.show()
+    # make crossover by concatenating images
+    for entry in duplicates:
+        images = [entry[0]["image"], entry[1]["image"]]
+        resultImage = Image.new('RGB', (64,64))
+        resultImage.paste(images[0], (0, 0))
+        resultImage.paste(images[1], (32, 0))
+        #resultImage.show()
+        afterCrossover.append({"image": resultImage, "confidence": 0, "colors": None, "class": ""})
+    # crossover by adding polygons
+    #for entry in duplicates:
+        
+    # crossover by colors average
     # for testing crossover method
-    return [beforeCrossover, afterCrossover]
+    return {"before": beforeCrossover, "after": afterCrossover}
 
       
 
