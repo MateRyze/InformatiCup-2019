@@ -26,7 +26,7 @@ class Test_EA(unittest.TestCase):
                          ea_combined.SELECTED_COUNT)
 
     def test_crossover(self):
-        ea_combined.initPopulation(ea_combined.INITIAL_POPULATION)
+        ea_combined.initPopulation(120)
         ea_combined.evalFitness(ea_combined.population)
         ea_combined.selection(ea_combined.SELECTED_COUNT)
         crossoverResults = ea_combined.crossover()

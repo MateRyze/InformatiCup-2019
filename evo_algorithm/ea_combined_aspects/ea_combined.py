@@ -5,6 +5,7 @@ import random
 import json
 import webbrowser
 import time
+import sys
 from PIL import Image, ImageDraw
 
 global population
@@ -106,7 +107,8 @@ def evalFitness(population):
                     # print("Decoding JSON failed -> hit API rate :(")
                     # stop = True
                 except:
-                    print("Unexpected error, retrying!")
+                    print("Unexpected error:", sys.exc_info()[0])
+                    print("Retrying...")
                     time.sleep(1)
     return population
                     
@@ -158,13 +160,23 @@ def crossover():
     # make crossover by concatenating images
     for entry in duplicates:
         images = [entry[0]["image"], entry[1]["image"]]
-        resultImage = Image.new('RGB', (64,64))
-        resultImage.paste(images[0], (0, 0))
-        resultImage.paste(images[1], (32, 0))
-        #resultImage.show()
-        afterCrossover.append({"image": resultImage, "confidence": 0, "colors": None, "class": ""})
+        image = Image.new('RGB', (64,64))
+        image.paste(images[0], (0, 0))
+        image.paste(images[1], (32, 0))
+        #image.show()
+        afterCrossover.append({"image": image, "confidence": 0, "colors": None, "class": ""})
     # crossover by adding polygons
-    #for entry in duplicates:
+    """     for entry in duplicates:
+        # add polygons
+        shape = entry[0]["shape"] + entry[1]["shape"]
+        # remove every other point
+        shape = shape[1::2] 
+        image = Image.new('RGB', (64, 64))
+        draw = ImageDraw.Draw(image)
+        drawShapes(draw, entry[0]["colors"], shape)
+        image.show()
+        afterCrossover.append(
+            {"image": image, "confidence": 0, "colors": None, "class": ""}) """
         
     # crossover by colors average
     # for testing crossover method
