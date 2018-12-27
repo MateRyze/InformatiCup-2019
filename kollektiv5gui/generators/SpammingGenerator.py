@@ -14,7 +14,7 @@ import copy
 import json
 import io
 from PIL import Image, ImageDraw
-from kollektiv5gui.util import api
+from kollektiv5gui.util import api, logging
 from kollektiv5gui.generators.AbstractGenerator import AbstractGenerator
 
 class SpammingGenerator(AbstractGenerator):
@@ -87,7 +87,7 @@ class SpammingGenerator(AbstractGenerator):
         self._countApiCall()
         classId = classification[0]['class']
         confidence = classification[0]['confidence']
-        print(confidence)
+        logging.log(confidence)
         if confidence > 0.9:
             self.finish()
         self.onStep([(classId, confidence)])

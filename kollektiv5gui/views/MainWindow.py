@@ -1,9 +1,10 @@
 import os
 import time
 import webbrowser
-from PyQt5.QtCore import QUrl, Qt, QSize
+from PyQt5.QtCore import QUrl, Qt, QSize, pyqtSignal
 from PyQt5.QtGui import QCursor
 from PyQt5.QtWidgets import QMainWindow, QWidget, QAction, QDialog, QVBoxLayout, QTextEdit, QMenu, QSplitter
+from kollektiv5gui.util import logging
 from kollektiv5gui.util.paths import getResourcePath
 from kollektiv5gui.views.DatasetTableWidget import DatasetTableWidget
 from kollektiv5gui.views.GeneratingWindow import GeneratingWindow
@@ -16,6 +17,8 @@ class MainWindow(QMainWindow):
     classes in the dataset, a menu at the top, and a read-only textbox below the table.
     """
 
+    sig = pyqtSignal(str)
+
     def __init__(self):
         super().__init__()
         self.__initDataset()
@@ -27,6 +30,9 @@ class MainWindow(QMainWindow):
         # This is slightly ugly, but the best way to solve this (I think).
         self.mainWidget.setSizes([512, 128])
         self.show()
+
+        logging.setLoggingFunction(lambda x: self.sig.emit(x))
+        self.sig.connect(self.log)
 
     def __initWindow(self):
         """
@@ -117,7 +123,9 @@ class MainWindow(QMainWindow):
         Print a text to the read-only textbox at the bottom of the window.
         """
         date = time.strftime('%H:%M:%S')
-        self.console.setText('%s\n%s: %s'%(self.console.toPlainText(), date, text))
+        text = '%s: %s'%(date, text)
+        print(text)
+        self.console.setText('%s\n%s'%(self.console.toPlainText(), text))
         self.console.verticalScrollBar().setValue(self.console.verticalScrollBar().maximum())
         self.statusBar().showMessage(text)
 
