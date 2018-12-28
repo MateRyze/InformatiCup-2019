@@ -32,3 +32,11 @@ $ apt install python3 python3-requests python3-pyqt5 python3-pil
 ## Ausführen
 
 TODO
+
+
+## GUI mit Qt Designer bauen
+### Konvertierung von .ui zu .py
+Beispiel:
+```sh
+$ py -m PyQt5.uic.pyuic -x .\kollektiv5gui\ea_options_widget.ui -o ea_options_widget.py
+```

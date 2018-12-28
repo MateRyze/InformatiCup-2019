@@ -7,3 +7,9 @@ __pycache__/
 debian/kollektiv5/usr/bin
 debian/kollektiv5/usr/lib
 debian/kollektiv5/*.deb
+*.png
+.pytest_cache/v/cache/stepwise
+.pytest_cache/v/cache/nodeids
+.vscode/launch.json
+.vscode/settings.json
+.vscode/.ropeproject/config.py
