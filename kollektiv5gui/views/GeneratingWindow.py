@@ -4,9 +4,10 @@ import webbrowser
 from collections import namedtuple
 from PyQt5.QtCore import QUrl, Qt, QSize
 from PyQt5.QtGui import QCursor, QPixmap, QImage
-from PyQt5.QtWidgets import QWidget, QDialog, QLabel, QGroupBox, QPushButton, QSizePolicy, QFileDialog, QComboBox, QGridLayout, QHBoxLayout, QVBoxLayout
+from PyQt5.QtWidgets import QColorDialog, QLineEdit, QWidget, QDialog, QLabel, QGroupBox, QPushButton, QSizePolicy, QFileDialog, QComboBox, QGridLayout, QHBoxLayout, QVBoxLayout
 from kollektiv5gui.generators.SpammingGenerator import SpammingGenerator
 from kollektiv5gui.generators.EAGenerator import EAGenerator
+from kollektiv5gui.views.EaOptionsWidget import Ui_Form
 
 class GeneratingWindow(QDialog):
     """
@@ -188,5 +189,43 @@ class GeneratingWindow(QDialog):
 
     def __selectGenerator(self, generatorId):
         self.selectedGeneratorId = generatorId
+        self.__initOptions()
         self.__clearPreviews()
         self.__initPreviews()
+
+    def __initOptions(self):
+        """ self.optionsLabel = QLabel()
+        self.optionsLabel.setWordWrap(True)
+        self.optionsLabel.setText('')
+        self.optionsLabel.setText("OPTIONS")
+        self.layout.addWidget(self.optionsLabel)
+
+        
+        self.colorsLabel = QLabel()
+        self.colorsLabel.setText("colors")
+        self.optionsContainer.addWidget(self.colorsLabel)
+        self.colorDialogButton = QPushButton('foreground')
+        self.colorDialogButton.
+        self.colorDialogButton.clicked.connect(self.on_click)
+        self.optionsContainer.addWidget(self.colorDialogButton)
+        self.contrastLabel = QLabel()
+        self.contrastLabel.setText("contrast")
+        self.optionsContainer.addWidget(self.contrastLabel)
+        self.polygonsLabel = QLabel()
+        self.polygonsLabel.setText("polygons")
+        self.optionsContainer.addWidget(self.polygonsLabel)
+        self.layout.addLayout(self.optionsContainer) """
+        self.optionsWidget = QWidget()
+        self.ui = Ui_Form()
+        self.ui.setupUi(self.optionsWidget)
+        self.optionsWidget.show()
+    
+
+
+    def on_click(self):
+        self.openColorDialog()
+
+    def openColorDialog(self):
+        color = QColorDialog.getColor()
+        print(color)
+
