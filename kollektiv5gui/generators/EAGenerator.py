@@ -40,6 +40,7 @@ class EAGenerator(AbstractGenerator):
         self.optionsWidget.show()
         self.ui.newPresetButton.clicked.connect(self.__openSavePresetDialog)
         self.ui.setOptionsButton.clicked.connect(self.__setOptions)
+        self.ui.presetComboBox.currentIndexChanged.connect(self.__selectPreset)
 
     def __openSavePresetDialog(self):
         alert = QDialog()
@@ -59,6 +60,10 @@ class EAGenerator(AbstractGenerator):
     def __savePreset(self):
         # TODO save preset
         print("TODO: save")
+
+    def __selectPreset(self):
+        # TODO: load preset
+        print(self.ui.presetComboBox.currentText())
 
     def __setOptions(self):
         self.colorMutationRate = self.ui.colorMutationRateSpinBox.value()
