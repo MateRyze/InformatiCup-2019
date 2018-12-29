@@ -1,6 +1,6 @@
 import json
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPixmap, QCursor
+from PyQt5.QtGui import QPixmap, QCursor, QColor
 from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem, QMenu
 from kollektiv5gui.util import api
 from kollektiv5gui.models.Dataset import Dataset
@@ -72,6 +72,7 @@ class DatasetTableWidget(QTableWidget):
         """
         self.setRowCount(self.__dataset.getClassesCount())
         i = 0
+        unknownClassBackground = QColor(250, 120, 100)
         for c in self.__dataset.getClasses():
             classId = QTableWidgetItem(str(c.id))
             # disable editing of the class id
@@ -86,6 +87,11 @@ class DatasetTableWidget(QTableWidget):
 
             name = QTableWidgetItem(c.name)
             name.setFlags(name.flags() ^ Qt.ItemIsEditable)
+
+            if not c.known:
+                classId.setBackground(unknownClassBackground)
+                preview.setBackground(unknownClassBackground)
+                name.setBackground(unknownClassBackground)
 
             self.setItem(i, 0, classId)
             self.setItem(i, 1, preview)
