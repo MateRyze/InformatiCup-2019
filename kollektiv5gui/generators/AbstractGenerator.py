@@ -65,3 +65,7 @@ class AbstractGenerator(Thread):
 
     def step(self):
         pass
+
+    def openOptionsDialog(self):
+        pass
+

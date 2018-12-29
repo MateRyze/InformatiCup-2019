@@ -4,10 +4,10 @@ import webbrowser
 from collections import namedtuple
 from PyQt5.QtCore import QUrl, Qt, QSize
 from PyQt5.QtGui import QCursor, QPixmap, QImage
-from PyQt5.QtWidgets import QColorDialog, QLineEdit, QWidget, QDialog, QLabel, QGroupBox, QPushButton, QSizePolicy, QFileDialog, QComboBox, QGridLayout, QHBoxLayout, QVBoxLayout
+from PyQt5.QtWidgets import QMessageBox, QColorDialog, QLineEdit, QWidget, QDialog, QLabel, QGroupBox, QPushButton, QSizePolicy, QFileDialog, QComboBox, QGridLayout, QHBoxLayout, QVBoxLayout
 from kollektiv5gui.generators.SpammingGenerator import SpammingGenerator
 from kollektiv5gui.generators.EAGenerator import EAGenerator
-from kollektiv5gui.views.EaOptionsWidget import Ui_Form
+from kollektiv5gui.views.EaOptionsWidget import Ui_Options
 
 class GeneratingWindow(QDialog):
     """
@@ -33,8 +33,9 @@ class GeneratingWindow(QDialog):
 
         self.__initWindow()
         self.__initLayout()
-        self.__selectGenerator(self.selectedGeneratorId)
         self.show()
+        self.__selectGenerator(self.selectedGeneratorId)
+        
 
     def closeEvent(self, event):
         if not self.generator is None and self.generator.isAlive():
@@ -65,6 +66,11 @@ class GeneratingWindow(QDialog):
         self.generatorSelection.setCurrentIndex(self.selectedGeneratorId)
         self.buttonsContainer.addWidget(self.generatorSelection)
 
+        self.optionsButton = QPushButton('Open Options Menu')
+        self.optionsButton.setGeometry(264, 32, 200, 32)
+        self.optionsButton.setVisible(False)
+        self.buttonsContainer.addWidget(self.optionsButton)
+
         self.generateButton = QPushButton('Generate Image')
         self.generateButton.setGeometry(264, 32, 200, 32)
         self.generateButton.clicked.connect(self.__generate)
@@ -81,6 +87,8 @@ class GeneratingWindow(QDialog):
     def __initPreviews(self):
         self.previews = []
         self.previewsContainer = QGridLayout()
+        self.generator = self.GENERATORS[self.selectedGeneratorId][1]()
+        self.optionsButton.clicked.connect(self.generator.openOptionsDialog)
         for i in range(self.GENERATORS[self.selectedGeneratorId][1].IMAGE_COUNT):
             boxLeft = QGroupBox()
             boxLeftLayout = QVBoxLayout()
@@ -179,7 +187,6 @@ class GeneratingWindow(QDialog):
         stepCallback = lambda *args, **kwargs: self.__onStepCallback(*args, **kwargs)
         finishedCallback = lambda *args, **kwargs: self.__onFinishedCallback(*args, **kwargs)
         failureCallback = lambda *args, **kwargs: self.__onFailureCallback(*args, **kwargs)
-        self.generator = self.GENERATORS[self.selectedGeneratorId][1]()
         self.generator.setCallbacks(stepCallback, finishedCallback, failureCallback)
         self.generator.start()
 
@@ -189,43 +196,13 @@ class GeneratingWindow(QDialog):
 
     def __selectGenerator(self, generatorId):
         self.selectedGeneratorId = generatorId
-        self.__initOptions()
         self.__clearPreviews()
         self.__initPreviews()
-
-    def __initOptions(self):
-        """ self.optionsLabel = QLabel()
-        self.optionsLabel.setWordWrap(True)
-        self.optionsLabel.setText('')
-        self.optionsLabel.setText("OPTIONS")
-        self.layout.addWidget(self.optionsLabel)
-
-        
-        self.colorsLabel = QLabel()
-        self.colorsLabel.setText("colors")
-        self.optionsContainer.addWidget(self.colorsLabel)
-        self.colorDialogButton = QPushButton('foreground')
-        self.colorDialogButton.
-        self.colorDialogButton.clicked.connect(self.on_click)
-        self.optionsContainer.addWidget(self.colorDialogButton)
-        self.contrastLabel = QLabel()
-        self.contrastLabel.setText("contrast")
-        self.optionsContainer.addWidget(self.contrastLabel)
-        self.polygonsLabel = QLabel()
-        self.polygonsLabel.setText("polygons")
-        self.optionsContainer.addWidget(self.polygonsLabel)
-        self.layout.addLayout(self.optionsContainer) """
-        self.optionsWidget = QWidget()
-        self.ui = Ui_Form()
-        self.ui.setupUi(self.optionsWidget)
-        self.optionsWidget.show()
-    
+        if self.selectedGeneratorId == 0:
+            self.optionsButton.setVisible(True)
+        else:
+            self.optionsButton.setVisible(False)
 
 
-    def on_click(self):
-        self.openColorDialog()
 
-    def openColorDialog(self):
-        color = QColorDialog.getColor()
-        print(color)
 

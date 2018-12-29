@@ -8,23 +8,12 @@ import time
 from PIL import Image, ImageDraw
 from kollektiv5gui.util import api
 from kollektiv5gui.generators.AbstractGenerator import AbstractGenerator
+from PyQt5.QtWidgets import QMessageBox, QColorDialog, QLineEdit, QWidget, QDialog, QLabel, QGroupBox, QPushButton, QSizePolicy, QFileDialog, QComboBox, QGridLayout, QHBoxLayout, QVBoxLayout
+from kollektiv5gui.views.EaOptionsWidget import Ui_Options
 
 class EAGenerator(AbstractGenerator):
 
     IMAGE_COUNT = 5
-
-    # defined constraints/aspects for the generation
-    MUTATION_RATE = 10
-    SHAPE_MUTATION_RATE = 4
-    COLORS_RANGE = ((0,150), (0,150), (0, 150))
-    CONTRAST_RANGE = (25, 400)
-    SHAPES = [[(16, 16), (48, 16), (48, 48), (16, 48)],
-              [(16, 16), (48, 16), (16, 48), (48, 48)]]
-
-    # init parameters
-    INITIAL_POPULATION = 5 # EXPERIMENT
-    SELECTED_COUNT = 5  # specification
-    DESIRED_CONFIDENCE = 0.9 # specification
 
     def __init__(self):
         super().__init__()
@@ -33,6 +22,58 @@ class EAGenerator(AbstractGenerator):
         self.initialized = False
         self.__currentGeneration = 0
         self.__totalMutationCount = 0
+        # defined constraints/aspects for the generation
+        self.colorMutationRate = 10
+        self.shapeMutationRate = 4
+        self.colors_range = ((0, 150), (0, 150), (0, 150))
+        self.contrast_range = (25, 400)
+
+        # init parameters
+        self.initialPopulationSize = 5  # EXPERIMENT
+        self.targetPopulationSize = 5  # specification
+        self.targetConfidence = 0.9  # specification
+    
+    def openOptionsDialog(self):
+        self.optionsWidget = QWidget()
+        self.ui = Ui_Options()
+        self.ui.setupUi(self.optionsWidget)
+        self.optionsWidget.show()
+        self.ui.newPresetButton.clicked.connect(self.__openSavePresetDialog)
+        self.ui.setOptionsButton.clicked.connect(self.__setOptions)
+
+    def __openSavePresetDialog(self):
+        alert = QDialog()
+        alert.setWindowTitle("Save Preset")
+        nameField = QLineEdit()
+        nameField.setFixedSize(150, 25)
+        nameField.setPlaceholderText("Enter preset name")
+        button = QPushButton()
+        button.setText("Save")
+        button.clicked.connect(self.__savePreset)
+        layout = QGridLayout()
+        layout.addWidget(nameField, 0,0)
+        layout.addWidget(button)
+        alert.setLayout(layout)
+        alert.exec_()
+    
+    def __savePreset(self):
+        # TODO save preset
+        print("TODO: save")
+
+    def __setOptions(self):
+        self.colorMutationRate = self.ui.colorMutationRateSpinBox.value()
+        self.colorsRange = (
+            (self.ui.colorsFromRSpinBox.value(), self.ui.colorsToRSpinBox.value()),
+            (self.ui.colorsFromGSpinBox.value(), self.ui.colorsToGSpinBox.value()),
+            (self.ui.colorsFromBSpinBox.value(), self.ui.colorsToBSpinBox.value()),
+        )
+        self.contrastRange = (self.ui.contrastFromSpinBox.value(), self.ui.contrastToSpinBox.value())
+        self.shapeMutationRate = self.ui.shapeMutationRateSpinBox.value()
+        self.shapePolygonCount = self.ui.colorMutationRateSpinBox.value()
+        self.shapePolygonPointCount = self.ui.colorMutationRateSpinBox.value()
+        self.initialPopulationSize = self.ui.initialPopulationSizeSpinBox.value()
+        self.targetConfidence = self.ui.targetConfidenceSpinBox.value()
+        self.targetPopulationSize = self.ui.targetPopulationSizeSpinBox.value()
 
     def randomCoord(self):
         return (random.randrange(0, 64),random.randrange(0, 64))
@@ -63,16 +104,16 @@ class EAGenerator(AbstractGenerator):
         self.colors = []
         for i in range(count):
             color = (
-                random.randint(self.COLORS_RANGE[0][0], self.COLORS_RANGE[0][1]),
-                random.randint(self.COLORS_RANGE[1][0], self.COLORS_RANGE[1][1]),
-                random.randint(self.COLORS_RANGE[2][0], self.COLORS_RANGE[2][1]))
+                random.randint(self.colors_range[0][0], self.colors_range[0][1]),
+                random.randint(self.colors_range[1][0], self.colors_range[1][1]),
+                random.randint(self.colors_range[2][0], self.colors_range[2][1]))
             if(i > 0):
                 # distribute the contrast between the colors 
-                while(self.contrast(color, self.colors[i-1]) < self.CONTRAST_RANGE[0]/(count-1) or self.contrast(color, self.colors[i-1]) > self.CONTRAST_RANGE[1]/(count-1)):
+                while(self.contrast(color, self.colors[i-1]) < self.contrast_range[0]/(count-1) or self.contrast(color, self.colors[i-1]) > self.contrast_range[1]/(count-1)):
                     color = (
-                        random.randint(self.COLORS_RANGE[0][0], self.COLORS_RANGE[0][1]),
-                        random.randint(self.COLORS_RANGE[1][0], self.COLORS_RANGE[1][1]),
-                        random.randint(self.COLORS_RANGE[2][0], self.COLORS_RANGE[2][1]))
+                        random.randint(self.colors_range[0][0], self.colors_range[0][1]),
+                        random.randint(self.colors_range[1][0], self.colors_range[1][1]),
+                        random.randint(self.colors_range[2][0], self.colors_range[2][1]))
             self.colors.append(color)
 
     # eval fitness for each individual
@@ -109,7 +150,7 @@ class EAGenerator(AbstractGenerator):
         del self.population[bestCount*2:]
 
     def mutateCoord(self, oldCoord):
-        return min(63, max(1, oldCoord + random.randint(-self.SHAPE_MUTATION_RATE, self.SHAPE_MUTATION_RATE)))
+        return min(63, max(1, oldCoord + random.randint(-self.shapeMutationRate, self.shapeMutationRate)))
 
     # mutate each individual in the population and delete old population
     def mutate(self, confidence):
@@ -124,9 +165,9 @@ class EAGenerator(AbstractGenerator):
                 colors = list(
                     map(
                         lambda color: (
-                            color[0] + random.randint(-self.MUTATION_RATE, self.MUTATION_RATE),
-                            color[1] + random.randint(-self.MUTATION_RATE, self.MUTATION_RATE),
-                            color[2] + random.randint(-self.MUTATION_RATE, self.MUTATION_RATE),
+                            color[0] + random.randint(-self.colorMutationRate, self.colorMutationRate),
+                            color[1] + random.randint(-self.colorMutationRate, self.colorMutationRate),
+                            color[2] + random.randint(-self.colorMutationRate, self.colorMutationRate),
                         ),
                     colors)
                 )
@@ -176,21 +217,21 @@ class EAGenerator(AbstractGenerator):
 
     def step(self):
         if not self.initialized:
-            self.initPopulation(self.INITIAL_POPULATION)
+            self.initPopulation(self.initialPopulationSize)
             self.evalFitness()
-            self.selection(self.SELECTED_COUNT)
-            self.matchCount = self.getCountThatMatch(self.DESIRED_CONFIDENCE)
+            self.selection(self.targetPopulationSize)
+            self.matchCount = self.getCountThatMatch(self.targetConfidence)
             self.initialized = True
 
-        self.mutate(self.DESIRED_CONFIDENCE)
+        self.mutate(self.targetConfidence)
         self.evalFitness()
-        self.selection(self.SELECTED_COUNT)
         self.__currentGeneration += 1
+        self.selection(self.targetPopulationSize)
 
-        newMatchCount = self.getCountThatMatch(self.DESIRED_CONFIDENCE)
+        newMatchCount = self.getCountThatMatch(self.targetConfidence)
         if newMatchCount == self.matchCount:
             self.addRandomImage()
         self.matchCount = newMatchCount
 
-        if self.matchCount > self.SELECTED_COUNT:
+        if self.matchCount > self.targetPopulationSize:
             self.finish()
