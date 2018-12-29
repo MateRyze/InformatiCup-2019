@@ -137,9 +137,13 @@ class GeneratingWindow(QDialog):
 
         self.layout.addLayout(self.previewsContainer)
 
-    def printStatistics(self, apiCalls, startTime):
-        stats = ('API Calls: %d\n'%(apiCalls) +
-            'Runtime: %.0fs\n'%(time.time() - startTime))
+    def printStatistics(self, apiCalls, startTime, additionalStatistics):
+        stats = '\n'.join([
+            'API Calls: %d'%apiCalls,
+            'Runtime: %.0fs'%(time.time() - startTime),
+        ])
+        if len(additionalStatistics) > 0:
+            stats += '\n' + additionalStatistics
         self.outputLabel.setText(stats)
 
     def __onStepCallback(self, classes):
@@ -158,7 +162,7 @@ class GeneratingWindow(QDialog):
             c = self.mainWindow.getDataset().getClassByName(classname)
             self.previews[i].detectedImageLabel.setPixmap(QPixmap(c.thumbnailPath))
 
-        self.printStatistics(self.generator.getApiCalls(), self.generator.getStartTime())
+        self.printStatistics(self.generator.getApiCalls(), self.generator.getStartTime(), self.generator.getAdditionalStatistics())
 
     def __onFailureCallback(self):
         pass
