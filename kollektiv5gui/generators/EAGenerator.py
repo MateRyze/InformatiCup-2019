@@ -31,6 +31,8 @@ class EAGenerator(AbstractGenerator):
         self.population = []
         self.colors = []
         self.initialized = False
+        self.__currentGeneration = 0
+        self.__totalMutationCount = 0
 
     def randomCoord(self):
         return (random.randrange(0, 64),random.randrange(0, 64))
@@ -141,6 +143,7 @@ class EAGenerator(AbstractGenerator):
                 self.drawShapes(draw, colors, shape)
                 self.population.append({"image": img, "confidence": 0,
                                 "colors": colors, "class": "", "shape": shape})
+                self.__totalMutationCount += 1
 
     # get the count of images that match the confidence
     def getCountThatMatch(self, confidence):
@@ -155,6 +158,13 @@ class EAGenerator(AbstractGenerator):
 
     def getBestIndividials(self, amount):
         return list(reversed(sorted(self.population, key=lambda individual: individual["confidence"])))[:amount]
+
+    def getAdditionalStatistics(self):
+        return '\n'.join([
+            'Individuals: %d'%len(self.population),
+            'Generations: %d'%self.__currentGeneration,
+            'Mutations: %d'%self.__totalMutationCount,
+        ])
 
     def getImage(self, i):
         best = self.getBestIndividials(self.IMAGE_COUNT)
@@ -175,6 +185,7 @@ class EAGenerator(AbstractGenerator):
         self.mutate(self.DESIRED_CONFIDENCE)
         self.evalFitness()
         self.selection(self.SELECTED_COUNT)
+        self.__currentGeneration += 1
 
         newMatchCount = self.getCountThatMatch(self.DESIRED_CONFIDENCE)
         if newMatchCount == self.matchCount:

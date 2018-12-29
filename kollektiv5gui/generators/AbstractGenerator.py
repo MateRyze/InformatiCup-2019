@@ -55,6 +55,9 @@ class AbstractGenerator(Thread):
     def getApiCalls(self):
         return self.__apiCalls
 
+    def getAdditionalStatistics(self):
+        return ''
+
     def run(self):
         self.__stopped = False
         while not self.__stopped and not self.__finished:
