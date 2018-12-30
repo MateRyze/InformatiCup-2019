@@ -19,11 +19,15 @@ class AbstractGenerator(Thread):
         self.__startTime = 0
         self.__endTime = 0
         self.__apiCalls = 0
+        self._targetClasses = []
 
     def setCallbacks(self, onStep, onFinished, onFailure):
         self.onStep = onStep
         self.onFinished = onFinished
         self.onFailure = onFailure
+
+    def setTargetClasses(self, targetClasses):
+        self._targetClasses = targetClasses
 
     def start(self):
         super().start()

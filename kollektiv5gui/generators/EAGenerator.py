@@ -219,8 +219,6 @@ class EAGenerator(AbstractGenerator):
         self.targetPopulationSize = self.ui.targetPopulationSizeSpinBox.value()
         self.optionsWidget.close()
 
-        self.targetClasses = ["Baustelle", "Stoppschild"]
-
     def randomCoord(self):
         return (random.randrange(0, 64), random.randrange(0, 64))
 
@@ -285,20 +283,20 @@ class EAGenerator(AbstractGenerator):
                 r = api.classifyPILImage(image)
                 self._countApiCall()
                 confidence = 0
-                if len(self.targetClasses) == 0:
+                if len(self._targetClasses) == 0:
                     # no specific target class is specified
                     # use the one with the highest confidence (already sorted by API)
                     individual["class"] = str(r[0]["class"])
                     confidence = r[0]["confidence"]
                 else:
                     for c in r:
-                        if c["class"] in self.targetClasses:
+                        if c["class"] in self._targetClasses:
                             individual["class"] = c["class"]
                             confidence = c["confidence"]
                             break
                             # break as soon as a matching class is found
                             # confidences are sorted by the api, so we've selected the highest possible confidence here
-                    individual["class"] = self.targetClasses[ random.randrange(0, len(self.targetClasses)) ]
+                    individual["class"] = self._targetClasses[ random.randrange(0, len(self._targetClasses)) ]
                 individual["confidence"] = confidence
         self.callOnStepCallback()
 
@@ -315,7 +313,7 @@ class EAGenerator(AbstractGenerator):
         # take best individuals from same classes
         # only if we'd have more targeted classes than output images
         # otherwise we'd throw away to much information
-        if len(self.targetClasses) > self.IMAGE_COUNT:
+        if len(self._targetClasses) > self.IMAGE_COUNT:
             classesContained = []
             selectedPopulation = []
             for individual in self.population:

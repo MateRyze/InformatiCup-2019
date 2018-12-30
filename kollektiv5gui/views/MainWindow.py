@@ -3,7 +3,7 @@ import time
 import webbrowser
 from PyQt5.QtCore import QUrl, Qt, QSize, pyqtSignal
 from PyQt5.QtGui import QCursor
-from PyQt5.QtWidgets import QMainWindow, QWidget, QAction, QDialog
+from PyQt5.QtWidgets import QMainWindow, QWidget, QAction, QDialog, QMessageBox
 from PyQt5.QtWidgets import QVBoxLayout, QTextEdit, QMenu, QSplitter
 from kollektiv5gui.util import logging
 from kollektiv5gui.util.paths import getResourcePath
@@ -63,7 +63,7 @@ class MainWindow(QMainWindow):
         actionQuit.triggered.connect(self.close)
 
         actionOpenGeneratorWindow = QAction('Generate Fooling Image', self)
-        actionOpenGeneratorWindow.triggered.connect(self.openGeneratingWindow)
+        actionOpenGeneratorWindow.triggered.connect(self.openGeneratingWindowNoTarget)
 
         actionViewHelp = QAction('View Documentation', self)
         actionViewHelp.triggered.connect(self.help)
@@ -119,8 +119,35 @@ class MainWindow(QMainWindow):
     def getDataset(self):
         return self.__dataset
 
+    def openGeneratingWindowNoTarget(self):
+        """
+        Open the generating window without any target classes specified.
+        """
+        self.generatingWindow = GeneratingWindow(self, [])
+
     def openGeneratingWindow(self):
-        self.generatingWindow = GeneratingWindow(self)
+        """
+        Open the generating window with a set of target classes specified.
+        """
+        selectedClasses = self.table.getSelectedClasses()
+        selectedClassesNames = [c.name for c in selectedClasses]
+        unknownClasses = list(filter(lambda x: not x.known, selectedClasses))
+
+        if len(unknownClasses) > 0:
+            # display a warning if classes may be unknown in the API
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+
+            msg.setText('At least one of the classes you are trying to generate may not be recognized by the API!')
+            msg.setWindowTitle('Warning!')
+            msg.setDetailedText('\n'.join([c.name for c in unknownClasses]))
+            msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+	
+            retval = msg.exec_()
+            if retval & QMessageBox.Ok == 0:
+                return
+
+        self.generatingWindow = GeneratingWindow(self, selectedClassesNames)
 
     def openApiSettings(self):
         self.configureApiWindow = ConfigureApiWindow(self)

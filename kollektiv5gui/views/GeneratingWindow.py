@@ -33,9 +33,11 @@ class GeneratingWindow(QDialog):
         'saveButton']
     )
 
-    def __init__(self, mainWindow):
+    def __init__(self, mainWindow, targetClasses):
         super().__init__(mainWindow)
         self.mainWindow = mainWindow
+        self.targetClasses = targetClasses
+
         self.selectedGeneratorId = 0
         self.previews = []
         self.previewsContainer = None
@@ -230,6 +232,7 @@ class GeneratingWindow(QDialog):
             finishedCallback,
             failureCallback
         )
+        self.generator.setTargetClasses(self.targetClasses)
         self.generator.start()
 
     def __saveGenerated(self, i):
