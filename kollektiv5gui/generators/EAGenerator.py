@@ -10,6 +10,7 @@ from kollektiv5gui.util import api
 from kollektiv5gui.generators.AbstractGenerator import AbstractGenerator
 from PyQt5.QtWidgets import QMessageBox, QColorDialog, QLineEdit, QWidget, QDialog, QLabel, QGroupBox, QPushButton, QSizePolicy, QFileDialog, QComboBox, QGridLayout, QHBoxLayout, QVBoxLayout
 from kollektiv5gui.views.EaOptionsWidget import Ui_Options
+from kollektiv5gui.util import config
 
 class EAGenerator(AbstractGenerator):
 
@@ -39,31 +40,105 @@ class EAGenerator(AbstractGenerator):
         self.ui.setupUi(self.optionsWidget)
         self.optionsWidget.show()
         self.ui.newPresetButton.clicked.connect(self.__openSavePresetDialog)
+        self.ui.removePresetButton.clicked.connect(self.__removePreset)
         self.ui.setOptionsButton.clicked.connect(self.__setOptions)
         self.ui.presetComboBox.currentIndexChanged.connect(self.__selectPreset)
+        presets = [name.strip() for name in config.get("EAGenerator", "presets").split(",")]
+        selectedPreset = config.get("EAGenerator", "preset")
+        for preset in zip(presets, range(len(presets))):
+            self.ui.presetComboBox.addItem(preset[0])
+            if preset[0] == selectedPreset:
+                self.ui.presetComboBox.setCurrentIndex(preset[1])
 
     def __openSavePresetDialog(self):
-        alert = QDialog()
+        alert = QDialog(self.optionsWidget)
         alert.setWindowTitle("Save Preset")
         nameField = QLineEdit()
         nameField.setFixedSize(150, 25)
         nameField.setPlaceholderText("Enter preset name")
         button = QPushButton()
         button.setText("Save")
-        button.clicked.connect(self.__savePreset)
+        button.clicked.connect(lambda: self.__savePreset(alert, nameField))
         layout = QGridLayout()
         layout.addWidget(nameField, 0,0)
         layout.addWidget(button)
         alert.setLayout(layout)
         alert.exec_()
     
-    def __savePreset(self):
+    def __savePreset(self, alert, nameField):
         # TODO save preset
-        print("TODO: save")
+        preset = nameField.text()
+        presetsList = config.get("EAGenerator", "presets")
+        presets = [name.strip() for name in presetsList.split(",")]
+        if not preset in presets:
+            presetsList += "," + preset
+            config.set("EAGenerator", "presets", presetsList)
+            config.flush()
+        self.__savePresetFromUi(preset)
+        alert.close()
+
+    def __removePreset(self):
+        preset = self.ui.presetComboBox.currentText()
+        presets = [name.strip() for name in config.get("EAGenerator", "presets").split(",")]
+        if preset in presets and len(presets) > 1:
+            delIndex = presets.index(preset)
+            del presets[delIndex]
+            config.set("EAGenerator", "presets", ",".join(presets))
+            config.set("EAGenerator", "preset", presets[ max(0, delIndex - 1) ])
 
     def __selectPreset(self):
         # TODO: load preset
-        print(self.ui.presetComboBox.currentText())
+        preset = self.ui.presetComboBox.currentText()
+        self.__loadPresetIntoUi(preset)
+        self.__setOptions()
+        config.set("EAGenerator", "preset", preset)
+        config.flush()
+
+    def __savePresetFromUi(self, preset):
+        section = "EAGenerator_Preset:" + preset
+    
+        config.set(section, "colorMutationRate", self.ui.colorMutationRateSpinBox.value())
+
+        config.set(section, "colorsRangeFromR", self.ui.colorsFromRSpinBox.value())
+        config.set(section, "colorsRangeToR", self.ui.colorsToRSpinBox.value())
+        config.set(section, "colorsRangeFromG", self.ui.colorsFromGSpinBox.value())
+        config.set(section, "colorsRangeToG", self.ui.colorsToGSpinBox.value())
+        config.set(section, "colorsRangeFromB", self.ui.colorsFromBSpinBox.value())
+        config.set(section, "colorsRangeToB", self.ui.colorsToBSpinBox.value())
+
+        config.set(section, "contrastRangeFrom", self.ui.contrastFromSpinBox.value())
+        config.set(section, "contrastRangeTo", self.ui.contrastToSpinBox.value())
+
+        config.set(section, "shapeMutationRate", self.ui.shapeMutationRateSpinBox.value())
+        config.set(section, "shapePolygonCount", self.ui.shapePolygonCountSpinBox.value())
+        config.set(section, "shapePolygonPointCount", self.ui.shapePolygonPointCountSpinBox.value())
+        config.set(section, "initialPopulationSize", self.ui.initialPopulationSizeSpinBox.value())
+        config.set(section, "targetConfidence", self.ui.targetConfidenceSpinBox.value())
+        config.set(section, "targetPopulationSize", self.ui.targetPopulationSizeSpinBox.value())
+
+        config.flush()
+
+    def __loadPresetIntoUi(self, preset):
+        section = "EAGenerator_Preset:" + preset
+
+        self.ui.colorMutationRateSpinBox.setValue(config.get(section, "colorMutationRate", int))
+
+        self.ui.colorsFromRSpinBox.setValue(config.get(section, "colorsRangeFromR", int))
+        self.ui.colorsToRSpinBox.setValue(config.get(section, "colorsRangeToR", int))
+        self.ui.colorsFromGSpinBox.setValue(config.get(section, "colorsRangeFromG", int))
+        self.ui.colorsToGSpinBox.setValue(config.get(section, "colorsRangeToG", int))
+        self.ui.colorsFromBSpinBox.setValue(config.get(section, "colorsRangeFromB", int))
+        self.ui.colorsToBSpinBox.setValue(config.get(section, "colorsRangeToB", int))
+
+        self.ui.contrastFromSpinBox.setValue(config.get(section, "contrastRangeFrom", int))
+        self.ui.contrastToSpinBox.setValue(config.get(section, "contrastRangeTo", int))
+
+        self.ui.shapeMutationRateSpinBox.setValue(config.get(section, "shapeMutationRate", int))
+        self.ui.shapePolygonCountSpinBox.setValue(config.get(section, "shapePolygonCount", int))
+        self.ui.shapePolygonPointCountSpinBox.setValue(config.get(section, "shapePolygonPointCount", int))
+        self.ui.initialPopulationSizeSpinBox.setValue(config.get(section, "initialPopulationSize", int))
+        self.ui.targetConfidenceSpinBox.setValue(config.get(section, "targetConfidence", int))
+        self.ui.targetPopulationSizeSpinBox.setValue(config.get(section, "targetPopulationSize", int))
 
     def __setOptions(self):
         self.colorMutationRate = self.ui.colorMutationRateSpinBox.value()
@@ -74,8 +149,8 @@ class EAGenerator(AbstractGenerator):
         )
         self.contrastRange = (self.ui.contrastFromSpinBox.value(), self.ui.contrastToSpinBox.value())
         self.shapeMutationRate = self.ui.shapeMutationRateSpinBox.value()
-        self.shapePolygonCount = self.ui.colorMutationRateSpinBox.value()
-        self.shapePolygonPointCount = self.ui.colorMutationRateSpinBox.value()
+        self.shapePolygonCount = self.ui.shapePolygonCountSpinBox.value()
+        self.shapePolygonPointCount = self.ui.shapePolygonPointCountSpinBox.value()
         self.initialPopulationSize = self.ui.initialPopulationSizeSpinBox.value()
         self.targetConfidence = self.ui.targetConfidenceSpinBox.value()
         self.targetPopulationSize = self.ui.targetPopulationSizeSpinBox.value()

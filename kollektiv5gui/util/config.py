@@ -18,19 +18,21 @@ def __loadConfig():
     __CONFIG = configparser.ConfigParser()
     __CONFIG.read(__USER_CONFIG_FILENAME)
 
-def get(section, option):
+def get(section, option, type = str):
     """
     Get a value from the config file. If no config was loaded before, __DEFAULT_FILENAME is read and stored before the
     value is extracted from it.
     """
     if __CONFIG is None:
         __loadConfig()
-    return __CONFIG.get(section, option)
+    return type(__CONFIG.get(section, option))
 
 def set(section, option, value):
     if __CONFIG is None:
         __loadConfig()
-    __CONFIG.set(section, option, value)
+    if not __CONFIG.has_section(section):
+        __CONFIG.add_section(section)
+    __CONFIG.set(section, option, str(value))
 
 def flush():
     global __CONFIG

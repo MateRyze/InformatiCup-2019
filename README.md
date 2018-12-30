@@ -38,5 +38,5 @@ TODO
 ### Konvertierung von .ui zu .py
 Beispiel:
 ```sh
-$ py -m PyQt5.uic.pyuic -x .\kollektiv5gui\ea_options_widget.ui -o ea_options_widget.py
+$ python -m PyQt5.uic.pyuic -x ./kollektiv5gui/views/ea_options_widget.ui -o ./kollektiv5gui/views/EaOptionsWidget.py
 ```
