@@ -176,7 +176,8 @@ class EAGenerator(AbstractGenerator):
         self.shapePolygonCount = self.ui.shapePolygonCountSpinBox.value()
         self.shapePolygonPointCount = self.ui.shapePolygonPointCountSpinBox.value()
         self.initialPopulationSize = self.ui.initialPopulationSizeSpinBox.value()
-        self.targetConfidence = self.ui.targetConfidenceSpinBox.value()
+        # division by 100, because the target confidence is given in percent in the gui
+        self.targetConfidence = self.ui.targetConfidenceSpinBox.value() / 100
         self.targetPopulationSize = self.ui.targetPopulationSizeSpinBox.value()
         self.optionsWidget.close()
 
