@@ -33,12 +33,17 @@ class EAGenerator(AbstractGenerator):
         self.initialPopulationSize = 5  # EXPERIMENT
         self.targetPopulationSize = 5  # specification
         self.targetConfidence = 0.9  # specification
+
+        # init options dialog
+        # this loads the pre-defined values into the ui
+        self.initOptionsDialog()
+        # __setOptions() applies the values from the (invisible) ui
+        self.__setOptions()
     
-    def openOptionsDialog(self):
+    def initOptionsDialog(self):
         self.optionsWidget = QWidget()
         self.ui = Ui_Options()
         self.ui.setupUi(self.optionsWidget)
-        self.optionsWidget.show()
         self.ui.newPresetButton.clicked.connect(self.__openSavePresetDialog)
         self.ui.removePresetButton.clicked.connect(self.__removePreset)
         self.ui.setOptionsButton.clicked.connect(self.__setOptions)
@@ -49,6 +54,9 @@ class EAGenerator(AbstractGenerator):
             self.ui.presetComboBox.addItem(preset[0])
             if preset[0] == selectedPreset:
                 self.ui.presetComboBox.setCurrentIndex(preset[1])
+
+    def openOptionsDialog(self):
+        self.optionsWidget.show()
 
     def __openSavePresetDialog(self):
         alert = QDialog(self.optionsWidget)
@@ -66,31 +74,46 @@ class EAGenerator(AbstractGenerator):
         alert.exec_()
     
     def __savePreset(self, alert, nameField):
-        # TODO save preset
         preset = nameField.text()
         presetsList = config.get("EAGenerator", "presets")
         presets = [name.strip() for name in presetsList.split(",")]
         if not preset in presets:
+            # append preset's name to the comma separated list
             presetsList += "," + preset
             config.set("EAGenerator", "presets", presetsList)
             config.flush()
+            # reflect changes in ui
+            self.ui.presetComboBox.addItem(preset)
+            self.ui.presetComboBox.setCurrentIndex(self.ui.presetComboBox.count() - 1)
         self.__savePresetFromUi(preset)
         alert.close()
 
     def __removePreset(self):
         preset = self.ui.presetComboBox.currentText()
+        section = "EAGenerator_Preset:" + preset
         presets = [name.strip() for name in config.get("EAGenerator", "presets").split(",")]
         if preset in presets and len(presets) > 1:
             delIndex = presets.index(preset)
             del presets[delIndex]
             config.set("EAGenerator", "presets", ",".join(presets))
-            config.set("EAGenerator", "preset", presets[ max(0, delIndex - 1) ])
+            # either select previous preset or the first one
+            newIndex = max(0, delIndex - 1)
+            config.set("EAGenerator", "preset", presets[newIndex])
+            config.removeSection(section)
+            config.flush()
+            # reflect changes in ui
+            self.ui.presetComboBox.removeItem(self.ui.presetComboBox.currentIndex())
+            self.ui.presetComboBox.setCurrentIndex(newIndex)
 
     def __selectPreset(self):
         # TODO: load preset
         preset = self.ui.presetComboBox.currentText()
-        self.__loadPresetIntoUi(preset)
-        self.__setOptions()
+        try:
+            self.__loadPresetIntoUi(preset)
+        except Exception:
+            # fallback: if the currently selected preset has no values in the configuration file:
+            # store the default values from the gui
+            self.__savePresetFromUi(preset)
         config.set("EAGenerator", "preset", preset)
         config.flush()
 
@@ -140,6 +163,7 @@ class EAGenerator(AbstractGenerator):
         self.ui.targetConfidenceSpinBox.setValue(config.get(section, "targetConfidence", int))
         self.ui.targetPopulationSizeSpinBox.setValue(config.get(section, "targetPopulationSize", int))
 
+    # apply values from ui to the generator algorithm
     def __setOptions(self):
         self.colorMutationRate = self.ui.colorMutationRateSpinBox.value()
         self.colorsRange = (
@@ -154,6 +178,7 @@ class EAGenerator(AbstractGenerator):
         self.initialPopulationSize = self.ui.initialPopulationSizeSpinBox.value()
         self.targetConfidence = self.ui.targetConfidenceSpinBox.value()
         self.targetPopulationSize = self.ui.targetPopulationSizeSpinBox.value()
+        self.optionsWidget.close()
 
     def randomCoord(self):
         return (random.randrange(0, 64),random.randrange(0, 64))
