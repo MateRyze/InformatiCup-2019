@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'e:\Projekte\InformatiCup\informaticup-2019\kollektiv5gui\views\ea_options_widget.ui'
+# Form implementation generated from reading ui file './kollektiv5gui/views/ea_options_widget.ui'
 #
 # Created by: PyQt5 UI code generator 5.11.3
 #
@@ -12,6 +12,13 @@ class Ui_Options(object):
     def setupUi(self, Options):
         Options.setObjectName("Options")
         Options.resize(593, 449)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(Options.sizePolicy().hasHeightForWidth())
+        Options.setSizePolicy(sizePolicy)
+        Options.setMinimumSize(QtCore.QSize(593, 449))
+        Options.setMaximumSize(QtCore.QSize(593, 449))
         self.presetsLabel = QtWidgets.QLabel(Options)
         self.presetsLabel.setGeometry(QtCore.QRect(10, 10, 61, 21))
         font = QtGui.QFont()
@@ -210,16 +217,20 @@ class Ui_Options(object):
         self.presetComboBox = QtWidgets.QComboBox(Options)
         self.presetComboBox.setGeometry(QtCore.QRect(10, 30, 131, 22))
         self.presetComboBox.setEditable(False)
+        self.presetComboBox.setCurrentText("")
         self.presetComboBox.setObjectName("presetComboBox")
-        self.presetComboBox.addItem("")
-        self.presetComboBox.addItem("")
+        self.removePresetButton = QtWidgets.QPushButton(Options)
+        self.removePresetButton.setGeometry(QtCore.QRect(270, 30, 111, 23))
+        self.removePresetButton.setDefault(False)
+        self.removePresetButton.setFlat(False)
+        self.removePresetButton.setObjectName("removePresetButton")
 
         self.retranslateUi(Options)
         QtCore.QMetaObject.connectSlotsByName(Options)
 
     def retranslateUi(self, Options):
         _translate = QtCore.QCoreApplication.translate
-        Options.setWindowTitle(_translate("Options", "Form"))
+        Options.setWindowTitle(_translate("Options", "EA Settings"))
         self.presetsLabel.setText(_translate("Options", "Presets"))
         self.groupBox_4.setTitle(_translate("Options", "EA specific"))
         self.label_21.setText(_translate("Options", "initial population size"))
@@ -249,6 +260,15 @@ class Ui_Options(object):
         self.label_18.setText(_translate("Options", "polygon count"))
         self.label_20.setText(_translate("Options", "shape mutation rate"))
         self.newPresetButton.setText(_translate("Options", "Save as new preset"))
-        self.presetComboBox.setItemText(0, _translate("Options", "Simple polygon preset"))
-        self.presetComboBox.setItemText(1, _translate("Options", "Cool preset"))
+        self.removePresetButton.setText(_translate("Options", "Remove preset"))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Options = QtWidgets.QWidget()
+    ui = Ui_Options()
+    ui.setupUi(Options)
+    Options.show()
+    sys.exit(app.exec_())
 
