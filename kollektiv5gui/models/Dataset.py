@@ -24,7 +24,7 @@ class Dataset():
         """
         Open a json formatted dataset specification from a file and display the contained information.
         """
-        with open(filename, 'r') as fo:
+        with open(filename, 'r', encoding='utf-8') as fo:
             dataset = json.load(fo)
             # the amount of rows in the table needs to be set first, thus we use the length of the 'classes' array
             for classdef in dataset['classes']:
