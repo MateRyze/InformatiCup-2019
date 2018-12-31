@@ -105,8 +105,25 @@ class SpammingGenerator(AbstractGenerator):
         self.createRandomShape()
         classification = api.classifyPILImage(self.image)
         self._countApiCall()
-        classId = classification[0]['class']
-        confidence = classification[0]['confidence']
+
+        classId = ''
+        confidence = 0
+
+        if len(self._targetClasses) == 0:
+            # no specific target class is specified
+            # use the one with the highest confidence (already sorted by API)
+            classId = str(classification[0]["class"])
+            confidence = classification[0]["confidence"]
+        else:
+            for c in classification:
+                if c["class"] in self._targetClasses:
+                    classId = c["class"]
+                    confidence = c["confidence"]
+                    break
+                    # break as soon as a matching class is found
+                    # confidences are sorted by the api, so we've selected the highest possible confidence here
+            classId = self._targetClasses[ random.randrange(0, len(self._targetClasses)) ]
+
         logging.log(confidence)
         if confidence > 0.9:
             self.finish()
