@@ -29,6 +29,9 @@ def __sendToApi(data):
                 logging.log('Rate limiting detected!')
                 logging.log('Sleeping for %i seconds'%sleepTime)
                 time.sleep(sleepTime)
+            except:
+                logging.log('Unexpected Error, retrying.')
+                time.sleep(1)
     return resJson
 
 def classifyFile(path):
