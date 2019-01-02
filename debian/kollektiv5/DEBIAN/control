@@ -12,3 +12,4 @@ Description: Generate fooling images for neural networks.
  Saving the generated images is possible, in order to use them at a later date.
  .
  The software is written in Python, with the interface being based on PyQt5.
+
