@@ -17,14 +17,12 @@ api_calls = 0
 stop = False
 MUTATION_RATE = 10
 SHAPE_MUTATION_RATE = 4
-SHAPE_POINTS_COUNT = (5, 10)
+SHAPE_POINTS_COUNT = (10, 15)
 SHAPE_COUNT = 2
 
 # defined constraints/aspects for the generation
-COLORS_RANGE = ((0, 150), (0, 150), (0, 150))
-CONTRAST_RANGE = (100, 300)
-FRAME_SHAPE = [[(16, 16), (48, 16), (48, 48), (16, 48)],
-               [(16, 16), (48, 16), (16, 48), (48, 48)]]
+COLORS_RANGE = ((0, 255), (0, 255), (0, 255))
+CONTRAST_RANGE = (100, 765)
 
 
 def randomCoord():
@@ -154,8 +152,8 @@ def selection(bestCount, sameClassCount):
     population = selectedPopulation
     # reduce individuals -> reduce API calls
     if sameClassCount is 2:
-        del population[int(INITIAL_POPULATION/2):]
-        # print("no individuals deleted from selection")
+        # del population[int(INITIAL_POPULATION/2):]
+        print("no individuals deleted from selection")
     elif sameClassCount is 1:
         del population[bestCount:]
 
@@ -249,6 +247,7 @@ def mutate(confidence):
     population_size = len(population)
     newImagesAppended = 0
     for i in range(population_size):
+        # use only for confidence < 90% and crossovered individuals
         if(population[i]["confidence"] < 0.9 and population[i]["lastCrossover"] is True):
             img = Image.new('RGB', (64, 64), color='black')
             draw = ImageDraw.Draw(img)
@@ -321,7 +320,7 @@ def getCountThatMatch(confidence):
 
 
 # init parameters
-INITIAL_POPULATION = 60  # EXPERIMENT
+INITIAL_POPULATION = 20  # EXPERIMENT
 SELECTED_COUNT = 5  # specification
 DESIRED_CONFIDENCE = 0.9  # specification
 
