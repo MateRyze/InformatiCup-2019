@@ -95,11 +95,6 @@ def evalFitness(population):
             image = individual["image"]
             image.save(name)
             while(True):
-
-                # if(api_calls >= 60):
-                #     time.sleep(60)
-                #     api_calls = 0
-                # time.sleep(1)
                 try:
                     payload = {'key': 'Engeibei1uok4xaecahChug6eihos0wo'}
                     r = requests.post('https://phinau.de/trasi',
@@ -116,6 +111,7 @@ def evalFitness(population):
                     print("Unexpected error:", sys.exc_info()[0])
                     print("Retrying...")
                     time.sleep(1)
+    print("api calls: " + str(api_calls))
     return population
 
 
@@ -142,14 +138,17 @@ def selection(bestCount, sameClassCount):
     selectedPopulation = []
     for individual in population:
         if(classesContained.count(individual["class"]) < sameClassCount):
-            # TODO: fixif(individual["confidence"] < 0.9):
-            selectedPopulation.append(individual)
+            if(not any(
+                selectedIndividual["confidence"] >= 0.9 and
+                selectedIndividual["class"] == individual["class"] for selectedIndividual in selectedPopulation
+            )):
+                selectedPopulation.append(individual)
             classesContained.append(individual["class"])
     population = selectedPopulation
     # reduce individuals -> reduce API calls
     if sameClassCount is 2:
-        # del population[int(INITIAL_POPULATION/2):]
-        print("no individuals deleted from selection")
+        del population[int(INITIAL_POPULATION/2):]
+        # print("no individuals deleted from selection")
     elif sameClassCount is 1:
         del population[bestCount:]
 
@@ -168,21 +167,17 @@ def crossover():
     # print(duplicates)
     for index, entry in enumerate(duplicates):
         for individual in population:
-            if individual not in entry and individual["class"] == entry[0]["class"]:
+            if (
+                individual not in entry and
+                individual["class"] == entry[0]["class"]
+            ):
                 duplicates[index] = duplicates[index] + [individual]
-    duplicates = [entry for entry in duplicates if len(entry) > 1]
+    duplicates = [entry for entry in duplicates if len(
+        entry) > 1 and entry[0]["confidence"] < 0.90]
     # print(duplicates)
     beforeCrossover = duplicates
     afterCrossover = []
-    # make crossover by concatenating images
-    """     for entry in duplicates:
-        images = [entry[0]["image"], entry[1]["image"]]
-        image = Image.new('RGB', (64, 64))
-        image.paste(images[0], (0, 0))
-        image.paste(images[1], (32, 0))
-        # image.show()
-        afterCrossover.append({"image": image, "confidence": 0, "colors": None, "class": ""}) """
-
+    newImagesAppended = 0
     # crossover by adding polygons points
     for entry in duplicates:
         # add polygons
@@ -239,17 +234,8 @@ def crossover():
                 "shape2": entry[0]["shape"]
             }
         )
-    # crossover by colors average
-    # save results
-    """     directory = "duplicates"
-    if not os.path.exists(directory):
-        os.makedirs(directory)
-    for i in range(len(afterCrossover)):
-        image = afterCrossover[i]["image"]
-        name = str(directory) + "/" + "img" + \
-            str(i) + "_" + str(afterCrossover[i]["confidence"]
-                                ) + "_" + str(afterCrossover[i]["class"].encode('utf-8')) + ".png"
-        image.save(name) """
+        newImagesAppended += 2
+    print("crossover, appended images: " + str(newImagesAppended))
     # for testing crossover method
     return {"before": beforeCrossover, "after": afterCrossover}
 
@@ -269,6 +255,7 @@ def mutateCoord(oldCoord):
 def mutate(confidence):
     print("doing mutation")
     population_size = len(population)
+    newImagesAppended = 0
     for i in range(population_size):
         if(population[i]["confidence"] < 0.9):
             img = Image.new('RGB', (64, 64), color='black')
@@ -323,6 +310,7 @@ def mutate(confidence):
                     "class": "",
                     "shape": shape,
                 })
+            newImagesAppended += 1
             """ # distribute the contrast between the colors
             while(contrast(colors[0], colors[1]) < CONTRAST_RANGE[0] or contrast(colors[0], colors[1]) > CONTRAST_RANGE[1]):
                     colors = (
@@ -332,6 +320,7 @@ def mutate(confidence):
 
             # TODO: add fancy stuff for creativity
     # del population[:population_size]
+    print("mutate, appended images: " + str(newImagesAppended))
 
 
 def printResults():
@@ -352,8 +341,10 @@ def getBestResult():
 # get the count of images that match the confidence
 def getCountThatMatch(confidence):
     count = 0
+    seen = []
     for individual in population:
-        if(individual["confidence"] >= confidence):
+        if(individual["confidence"] >= confidence and individual["class"] not in seen):
+            seen.append(individual["class"])
             count += 1
     return count
 
@@ -366,6 +357,7 @@ DESIRED_CONFIDENCE = 0.9  # specification
 
 def addRandomImage():
     population.append(generateImage())
+    print("add one new random image (avoid local maxima)")
 
 # run evolutionary algorithm (init -> selection -> loop(crossover-> mutate -> selection) until confidence matches all images)
 
@@ -374,17 +366,21 @@ def runEvoAlgorithm():
     global population
     initPopulation(INITIAL_POPULATION)
     evalFitness(population)
+    # saveImages("init")
     selection(SELECTED_COUNT, 2)
+    # saveImages("selection")
     printResults()
-    crossover()
-    evalFitness(population)
-    selection(SELECTED_COUNT, 1)
-    printResults()
+    # evalFitness(population)
+    # saveImages("crossover")
+    # selection(SELECTED_COUNT, 1)
+    # printResults()
     matchCount = getCountThatMatch(DESIRED_CONFIDENCE)
     while matchCount < SELECTED_COUNT and stop is False:
+        crossover()
         mutate(DESIRED_CONFIDENCE)
         evalFitness(population)
-        selection(SELECTED_COUNT, 1)
+        # saveImages("mutate")
+        selection(SELECTED_COUNT, 2)
         if stop is False:
             printResults()
         # avoid local maxima by adding new random image
@@ -392,17 +388,19 @@ def runEvoAlgorithm():
         if newMatchCount == matchCount:
             addRandomImage()
         matchCount = newMatchCount
+    selection(SELECTED_COUNT, 1)  # for test function
 
 # save generated images with desired confidence
 
 
-def saveImages():
+def saveImages(type):
     directory = "generated_api_calls_" + str(api_calls)
+    # directory = "images_for_visualization"
     if not os.path.exists(directory):
         os.makedirs(directory)
     for i in range(len(population)):
         image = population[i]["image"]
-        name = str(directory) + "/" + "img" + \
+        name = str(directory) + "/" + type + \
             str(i) + "_" + str(population[i]["confidence"]
                                ) + "_" + str(population[i]["class"]) + ".png"
         image.save(name)
@@ -420,6 +418,6 @@ def evalInitialPopulation():
 
 if __name__ == '__main__':
     runEvoAlgorithm()
-    saveImages()
+    saveImages("final")
     # evalInitialPopulation()
     print("api calls: ", api_calls)
