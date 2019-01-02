@@ -26,8 +26,6 @@ CONTRAST_RANGE = (100, 300)
 FRAME_SHAPE = [[(16, 16), (48, 16), (48, 48), (16, 48)],
                [(16, 16), (48, 16), (16, 48), (48, 48)]]
 
-colors = []
-
 
 def randomCoord():
     return (random.randrange(0, 64), random.randrange(0, 64))
@@ -40,30 +38,37 @@ def generateImage():
     img = Image.new('RGB', (64, 64), color='black')
     draw = ImageDraw.Draw(img)
     # how many colors do we need?
-    generateColorsWithContrast(2)
+    colors = generateColorsWithContrast(2)
     # init shape
-    shape = []
+    shapes = []
     pointCount = random.randrange(SHAPE_POINTS_COUNT[0], SHAPE_POINTS_COUNT[1])
+    shape = []
     for i in range(pointCount):
         shape.insert(i, (randomCoord()))
-        shape = list(
-            map(lambda x: (mutateCoord(x[0]), mutateCoord(x[1])), shape))
-    drawShapes(draw, colors, shape)
+    shapes.append(shape)
+    drawShapes(draw, colors, shapes)
 
-    return {"image": img, "confidence": 0, "colors": colors, "class": "", "shape": shape}
+    return {
+        "image": img,
+        "confidence": 0,
+        "colors": colors,
+        "class": "",
+        "shapes": shapes,
+        "lastCrossover": False
+    }
 
 
-def drawShapes(draw, colors, shape):
+def drawShapes(draw, colors, shapes):
     background = colors[0]
     draw.rectangle(((0, 0), (64, 64)), background)
-    foreground = colors[1]
-    draw.polygon(shape, foreground)
+    # all other colors are for the shapes (polygons)
+    for color, shape in zip(colors[1:], shapes):
+        draw.polygon(shape, color)
 
 # generate colors with distributed contrast
 
 
 def generateColorsWithContrast(count):
-    global colors
     colors = []
     for i in range(count):
         color = (
@@ -78,6 +83,7 @@ def generateColorsWithContrast(count):
                     random.randint(COLORS_RANGE[1][0], COLORS_RANGE[1][1]),
                     random.randint(COLORS_RANGE[2][0], COLORS_RANGE[2][1]))
         colors.append(color)
+    return colors
 
 
 def contrast(color1, color2):
@@ -111,6 +117,7 @@ def evalFitness(population):
                     print("Unexpected error:", sys.exc_info()[0])
                     print("Retrying...")
                     time.sleep(1)
+            # TODO: check count that match and break if goal achieved
     print("api calls: " + str(api_calls))
     return population
 
@@ -180,62 +187,47 @@ def crossover():
     newImagesAppended = 0
     # crossover by adding polygons points
     for entry in duplicates:
-        # add polygons
-        shape = entry[0]["shape"] + entry[1]["shape"]
         # remove every other point
         # shape = shape[1::2]
         image = Image.new('RGB', (64, 64))
         draw = ImageDraw.Draw(image)
-        drawShapes(draw, entry[0]["colors"], entry[0]["shape"])
-        draw.polygon(entry[1]["shape"], entry[1]["colors"][1])
-        # image.show()
-        afterCrossover.append(
-            {
-                "image": image,
-                "confidence": 0,
-                "colors": entry[0]["colors"],
-                "class": "",
-                "shape": shape
-            }
-        )
-        population.append(
-            {
-                "image": image,
-                "confidence": 0,
-                "colors": entry[0]["colors"],
-                "colors2": entry[1]["colors"],
-                "class": "",
-                "shape": entry[0]["shape"],
-                "shape2": entry[1]["shape"]
-            }
-        )
+        shapes = entry[0]["shapes"] + entry[1]["shapes"]
+        colors = entry[0]["colors"] + entry[1]["colors"][1:]
+        drawShapes(draw, colors, shapes)
+        newIndividual = {
+            "image": image,
+            "confidence": 0,
+            "colors": colors,
+            "class": "",
+            "shapes": shapes,
+            "lastCrossover": True
+        }
+        afterCrossover.append(newIndividual)
+        population.append(newIndividual)
         # add second crossover child
         image = Image.new('RGB', (64, 64))
         draw = ImageDraw.Draw(image)
-        drawShapes(draw, entry[1]["colors"], entry[1]["shape"])
-        draw.polygon(entry[0]["shape"], entry[0]["colors"][1])
-        afterCrossover.append(
-            {
-                "image": image,
-                "confidence": 0,
-                "colors": entry[1]["colors"],
-                "class": "",
-                "shape": shape
-            }
-        )
-        population.append(
-            {
-                "image": image,
-                "confidence": 0,
-                "colors": entry[1]["colors"],
-                "colors2": entry[0]["colors"],
-                "class": "",
-                "shape": entry[1]["shape"],
-                "shape2": entry[0]["shape"]
-            }
-        )
+        shapes = entry[1]["shapes"] + entry[0]["shapes"]
+        colors = entry[1]["colors"] + entry[0]["colors"][1:]
+        drawShapes(draw, colors, shapes)
+        newIndividual = {
+            "image": image,
+            "confidence": 0,
+            "colors": colors,
+            "class": "",
+            "shapes": shapes,
+            "lastCrossover": True
+        }
+        afterCrossover.append(newIndividual)
+        population.append(newIndividual)
+
         newImagesAppended += 2
-    print("crossover, appended images: " + str(newImagesAppended))
+        # remove parents
+        # population.remove(entry[0])
+        # population.remove(entry[1])
+
+    print("crossover, appended and deleted images: " + str(newImagesAppended))
+
     # for testing crossover method
     return {"before": beforeCrossover, "after": afterCrossover}
 
@@ -257,59 +249,38 @@ def mutate(confidence):
     population_size = len(population)
     newImagesAppended = 0
     for i in range(population_size):
-        if(population[i]["confidence"] < 0.9):
+        if(population[i]["confidence"] < 0.9 and population[i]["lastCrossover"] is True):
             img = Image.new('RGB', (64, 64), color='black')
             draw = ImageDraw.Draw(img)
             # mutate colors
             colors = population[i]["colors"]
             colors = list(map(lambda color: (color[0] + random.randint(-MUTATION_RATE, MUTATION_RATE), color[1] + random.randint(
                 -MUTATION_RATE, MUTATION_RATE), color[2] + random.randint(-MUTATION_RATE, MUTATION_RATE)), colors))
-            # mutate shape
-            shape = population[i]["shape"]
-            if random.random() < 0.5:
-                idx = random.randrange(0, len(shape))
-                if len(shape) > SHAPE_POINTS_COUNT[1] and random.random() < 0.5:
-                    del shape[idx]
-                else:
-                    shape.insert(idx, randomCoord())
-            shape = list(
-                map(lambda x: (mutateCoord(x[0]), mutateCoord(x[1])), shape))
-
-            drawShapes(draw, colors, shape)
-            if("colors2" in population[i].keys()):
-                # mutate colors
-                colors2 = population[i]["colors2"]
-                colors2 = list(map(lambda color: (color[0] + random.randint(-MUTATION_RATE, MUTATION_RATE), color[1] + random.randint(
-                    -MUTATION_RATE, MUTATION_RATE), color[2] + random.randint(-MUTATION_RATE, MUTATION_RATE)), colors2))
-                # mutate shape
-                shape2 = population[i]["shape2"]
+            # mutate shapes
+            shapes = population[i]["shapes"]
+            newShapes = []
+            for shape in shapes:
+                # add or delete point
                 if random.random() < 0.5:
-                    idx = random.randrange(0, len(shape2))
-                    if len(shape2) > SHAPE_POINTS_COUNT[1] and random.random() < 0.5:
-                        del shape2[idx]
+                    idx = random.randrange(0, len(shape))
+                    if len(shape) > SHAPE_POINTS_COUNT[1] and random.random() < 0.5:
+                        del shape[idx]
                     else:
-                        shape2.insert(idx, randomCoord())
-                shape2 = list(
-                    map(lambda x: (mutateCoord(x[0]), mutateCoord(x[1])), shape2))
-
-                draw.polygon(shape2, colors2[1])
-                population.append({
-                    "image": img,
-                    "confidence": 0,
-                    "colors": colors,
-                    "colors2": colors2,
-                    "class": "",
-                    "shape": shape,
-                    "shape2": shape2
-                })
-            else:
-                population.append({
-                    "image": img,
-                    "confidence": 0,
-                    "colors": colors,
-                    "class": "",
-                    "shape": shape,
-                })
+                        shape.insert(idx, randomCoord())
+                # mutate point
+                shape = list(
+                    map(lambda x: (mutateCoord(x[0]), mutateCoord(x[1])), shape))
+                newShapes.append(shape)
+            drawShapes(draw, colors, newShapes)
+            population[i]["lastCrossover"] = False
+            population.append({
+                "image": img,
+                "confidence": 0,
+                "colors": colors,
+                "class": "",
+                "shapes": newShapes,
+                "lastCrossover": False
+            })
             newImagesAppended += 1
             """ # distribute the contrast between the colors
             while(contrast(colors[0], colors[1]) < CONTRAST_RANGE[0] or contrast(colors[0], colors[1]) > CONTRAST_RANGE[1]):
@@ -350,7 +321,7 @@ def getCountThatMatch(confidence):
 
 
 # init parameters
-INITIAL_POPULATION = 30  # EXPERIMENT
+INITIAL_POPULATION = 60  # EXPERIMENT
 SELECTED_COUNT = 5  # specification
 DESIRED_CONFIDENCE = 0.9  # specification
 
