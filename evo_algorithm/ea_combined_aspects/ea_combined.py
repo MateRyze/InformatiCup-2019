@@ -8,6 +8,7 @@ import time
 import sys
 from PIL import Image, ImageDraw
 
+
 global population
 global api_calls
 global stop
