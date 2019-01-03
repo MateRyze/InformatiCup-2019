@@ -1,6 +1,8 @@
-.vscode/
 CCR/test
 *.png
 *.pyc
 .pytest_cache/*
 
+.vscode/launch.json
+.vscode/.ropeproject/objectdb
+.vscode/.ropeproject/config.py

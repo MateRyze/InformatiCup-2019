@@ -163,13 +163,15 @@ def crossover():
     print("doing crossover")
     # use only for same classes from inital population
     # sort duplicates with same classes like [vorfahrt99%, vorfahrt97%, ...]
-    seen = []
+    seen = []  # helper list
     duplicates = []
-    for indi in population:
-        if indi["class"] not in seen:
-            duplicates.append([indi])
-            seen.append(indi["class"])
+    # append one individual from every class
+    for individual in population:
+        if individual["class"] not in seen:
+            duplicates.append([individual])
+            seen.append(individual["class"])
     # print(duplicates)
+    # append other individuals from same class
     for index, entry in enumerate(duplicates):
         for individual in population:
             if (
@@ -177,10 +179,14 @@ def crossover():
                 individual["class"] == entry[0]["class"]
             ):
                 duplicates[index] = duplicates[index] + [individual]
-    duplicates = [entry for entry in duplicates if len(
-        entry) > 1 and entry[0]["confidence"] < 0.90]
+    # filter duplicates for crossover by confidence and length
+    # crossover makes sense for at least two individuals and confidence < 90%
+    duplicates = [
+        entry for entry in duplicates
+        if len(entry) > 1 and entry[0]["confidence"] < 0.90
+    ]
     # print(duplicates)
-    beforeCrossover = duplicates
+    beforeCrossover = duplicates  # for testing function
     afterCrossover = []
     newImagesAppended = 0
     # crossover by adding polygons points
@@ -359,6 +365,7 @@ def runEvoAlgorithm():
             addRandomImage()
         matchCount = newMatchCount
     selection(SELECTED_COUNT, 1)  # for test function
+    printResults()
 
 # save generated images with desired confidence
 
