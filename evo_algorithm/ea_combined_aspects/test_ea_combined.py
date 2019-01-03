@@ -74,7 +74,11 @@ class Test_EA(unittest.TestCase):
     def test_run_ea(self):
         apiCallsList = []
         for i in range(10):
-            print("_____testing API calls, iteration: " + str(i+1) + "/10 _____")
+            print(
+                "_____testing API calls, iteration: " +
+                str(i+1) +
+                "/10 _____"
+            )
             ea_combined.runEvoAlgorithm()
             # check if confidence is at least 90 % for all images
             self.assertTrue(
@@ -82,8 +86,7 @@ class Test_EA(unittest.TestCase):
                     individual["confidence"] >= 0.9 
                     for individual in ea_combined.population
                 ),
-                "The confidence is 
-                not at least 90 percent!"
+                "The confidence is not at least 90 percent!"
             )
             # check for different classes
             self.assertTrue(
