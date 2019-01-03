@@ -72,7 +72,6 @@ class GeneratingWindow(QDialog):
         self.generatorSelection = QComboBox()
         for generator in self.GENERATORS:
             self.generatorSelection.addItem(generator[0])
-        self.generatorSelection.setGeometry(32, 32, 200, 32)
         self.generatorSelection.currentIndexChanged.connect(
             self.__selectGenerator
         )
@@ -80,14 +79,17 @@ class GeneratingWindow(QDialog):
         self.buttonsContainer.addWidget(self.generatorSelection)
 
         self.optionsButton = QPushButton('Open Options Menu')
-        self.optionsButton.setGeometry(264, 32, 200, 32)
         self.optionsButton.setVisible(False)
         self.buttonsContainer.addWidget(self.optionsButton)
 
         self.generateButton = QPushButton('Generate Image')
-        self.generateButton.setGeometry(264, 32, 200, 32)
         self.generateButton.clicked.connect(self.__generate)
         self.buttonsContainer.addWidget(self.generateButton)
+
+        self.stopButton = QPushButton('Stop Generation')
+        self.stopButton.clicked.connect(self.__stop)
+        self.stopButton.setEnabled(False)
+        self.buttonsContainer.addWidget(self.stopButton)
 
         self.layout.addLayout(self.buttonsContainer)
 
@@ -100,6 +102,7 @@ class GeneratingWindow(QDialog):
     def __initPreviews(self):
         self.previews = []
         self.previewsContainer = QGridLayout()
+        # kinda hacky, but init the generator here to access it's values
         self.generator = self.GENERATORS[self.selectedGeneratorId][1]()
         self.optionsButton.clicked.connect(self.generator.openOptionsDialog)
         for i in range(
@@ -209,6 +212,7 @@ class GeneratingWindow(QDialog):
 
     def __onFinishedCallback(self):
         self.generateButton.setEnabled(True)
+        self.stopButton.setEnabled(False)
         for preview in self.previews:
             preview.saveButton.setEnabled(True)
 
@@ -227,6 +231,7 @@ class GeneratingWindow(QDialog):
         def failureCallback(*args, **kwargs):
             self.__onFailureCallback(*args, **kwargs)
 
+        self.generator = self.GENERATORS[self.selectedGeneratorId][1]()
         self.generator.setCallbacks(
             stepCallback,
             finishedCallback,
@@ -234,6 +239,11 @@ class GeneratingWindow(QDialog):
         )
         self.generator.setTargetClasses(self.targetClasses)
         self.generator.start()
+        self.stopButton.setEnabled(True)
+
+    def __stop(self):
+        self.generator.stop()
+        self.generator.finish()
 
     def __saveGenerated(self, i):
         filename = QFileDialog.getSaveFileName(
