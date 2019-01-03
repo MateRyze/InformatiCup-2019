@@ -2,7 +2,6 @@ import ea_combined
 import unittest
 
 
-
 class Test_EA(unittest.TestCase):
 
     def setUp(self):
@@ -71,7 +70,7 @@ class Test_EA(unittest.TestCase):
     def test_run_ea(self):
         apiCallsList = []
         for i in range(10):
-            print("_____testing API calls, iteration: " + str(i) + "/10 _____") 
+            print("_____testing API calls, iteration: " + str(i) + "/10 _____")
             ea_combined.runEvoAlgorithm()
             # check if confidence is at least 90 % for all images (specification)
             self.assertTrue(all(individual["confidence"] >= 0.9 for individual in ea_combined.population),
@@ -82,6 +81,7 @@ class Test_EA(unittest.TestCase):
             apiCallsList.append(ea_combined.api_calls)
             # check for api call limit (FAST SOLUTION -> quality aspect)
             # self.assertGreater(61, ea_combined.api_calls, "To much API calls -> slow solution :(")
+            ea_combined.api_calls = 0
         print(apiCallsList)
         print("average: " + str(sum(apiCallsList)/len(apiCallsList)))
 
