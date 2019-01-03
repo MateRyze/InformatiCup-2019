@@ -121,8 +121,11 @@ class SpammingGenerator(AbstractGenerator):
                     confidence = c["confidence"]
                     break
                     # break as soon as a matching class is found
-                    # confidences are sorted by the api, so we've selected the highest possible confidence here
-            classId = self._targetClasses[ random.randrange(0, len(self._targetClasses)) ]
+                    # confidences are sorted by the api,
+                    # so we've selected the highest possible confidence here
+            classId = self._targetClasses[
+                random.randrange(0, len(self._targetClasses))
+            ]
 
         logging.log(confidence)
         if confidence > 0.9:

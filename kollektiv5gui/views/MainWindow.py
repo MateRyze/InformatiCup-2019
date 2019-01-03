@@ -63,7 +63,9 @@ class MainWindow(QMainWindow):
         actionQuit.triggered.connect(self.close)
 
         actionOpenGeneratorWindow = QAction('Generate Fooling Image', self)
-        actionOpenGeneratorWindow.triggered.connect(self.openGeneratingWindowNoTarget)
+        actionOpenGeneratorWindow.triggered.connect(
+            self.openGeneratingWindowNoTarget
+        )
 
         actionViewHelp = QAction('View Documentation', self)
         actionViewHelp.triggered.connect(self.help)
@@ -138,11 +140,14 @@ class MainWindow(QMainWindow):
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Warning)
 
-            msg.setText('At least one of the classes you are trying to generate may not be recognized by the API!')
+            msg.setText(
+                'At least one of the classes you are trying to'
+                'generate may not be recognized by the API!'
+            )
             msg.setWindowTitle('Warning!')
             msg.setDetailedText('\n'.join([c.name for c in unknownClasses]))
             msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
-	
+
             retval = msg.exec_()
             if retval & QMessageBox.Ok == 0:
                 return
