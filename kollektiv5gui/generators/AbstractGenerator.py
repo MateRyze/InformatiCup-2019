@@ -3,7 +3,7 @@ from multiprocessing import Process
 from threading import Thread
 from kollektiv5gui.util import api
 
-#class AbstractGenerator(Process):
+
 class AbstractGenerator(Thread):
 
     IMAGE_COUNT = 1
@@ -68,4 +68,3 @@ class AbstractGenerator(Thread):
 
     def openOptionsDialog(self):
         pass
-

@@ -2,7 +2,13 @@ import json
 import os
 from collections import namedtuple
 
-DatasetClass = namedtuple('DatasetClass', 'id name thumbnailPath known')
+DatasetClass = namedtuple('DatasetClass', [
+    'id',
+    'name',
+    'thumbnailPath',
+    'known'
+])
+
 
 class Dataset():
     def __init__(self):
@@ -22,16 +28,22 @@ class Dataset():
 
     def loadFromFile(self, filename):
         """
-        Open a json formatted dataset specification from a file and display the contained information.
+        Open a json formatted dataset specification from a file
+        and display the contained information.
         """
         with open(filename, 'r', encoding='utf-8') as fo:
             dataset = json.load(fo)
-            # the amount of rows in the table needs to be set first, thus we use the length of the 'classes' array
+            # the amount of rows in the table needs to be set first,
+            # thus we use the length of the 'classes' array
             for classdef in dataset['classes']:
                 self.__classes.append(DatasetClass(
                     id=classdef['classId'],
                     name=classdef['name'],
-                    # treat the thumbnail path as relative to the dataset definition's path
-                    thumbnailPath=os.path.join(os.path.dirname(filename), classdef['thumbnail']),
+                    # treat the thumbnail path as relative
+                    # to the dataset definition's path
+                    thumbnailPath=os.path.join(
+                        os.path.dirname(filename),
+                        classdef['thumbnail']
+                    ),
                     known=classdef['known']
                 ))

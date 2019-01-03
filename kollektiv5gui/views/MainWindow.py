@@ -3,7 +3,8 @@ import time
 import webbrowser
 from PyQt5.QtCore import QUrl, Qt, QSize, pyqtSignal
 from PyQt5.QtGui import QCursor
-from PyQt5.QtWidgets import QMainWindow, QWidget, QAction, QDialog, QVBoxLayout, QTextEdit, QMenu, QSplitter
+from PyQt5.QtWidgets import QMainWindow, QWidget, QAction, QDialog
+from PyQt5.QtWidgets import QVBoxLayout, QTextEdit, QMenu, QSplitter
 from kollektiv5gui.util import logging
 from kollektiv5gui.util.paths import getResourcePath
 from kollektiv5gui.views.DatasetTableWidget import DatasetTableWidget
@@ -11,10 +12,12 @@ from kollektiv5gui.views.GeneratingWindow import GeneratingWindow
 from kollektiv5gui.views.ConfigureApiWindow import ConfigureApiWindow
 from kollektiv5gui.models.Dataset import Dataset
 
+
 class MainWindow(QMainWindow):
     """
-    This class represents the main window of the kollektiv5gui. It contains a table, which displays an overview of all
-    classes in the dataset, a menu at the top, and a read-only textbox below the table.
+    This class represents the main window of the kollektiv5gui. It contains a
+    table, which displays an overview of all classes in the dataset, a menu
+    at the top, and a read-only textbox below the table.
     """
 
     sig = pyqtSignal(str)
@@ -26,8 +29,9 @@ class MainWindow(QMainWindow):
         self.__initMenuBar()
         self.__initTable()
         self.__initConsole()
-        # Sizes of the mainWidget (the vertical splitter) need to be set after all elements have been added to it
-        # This is slightly ugly, but the best way to solve this (I think).
+        # Sizes of the mainWidget (the vertical splitter) need to be set after
+        # all elements have been added to it. This is slightly ugly,
+        # but the best way to solve this (I think).
         self.mainWidget.setSizes([512, 128])
         self.show()
 
@@ -89,7 +93,8 @@ class MainWindow(QMainWindow):
 
     def __initTable(self):
         """
-        Create the dataset table and place it at the top of the vertical splitter.
+        Create the dataset table and place it at the top of the vertical
+        splitter.
         """
         self.table = DatasetTableWidget(self, self.mainWidget)
         self.layout.addWidget(self.table)
@@ -107,7 +112,9 @@ class MainWindow(QMainWindow):
 
     def __initDataset(self):
         self.__dataset = Dataset()
-        self.__dataset.loadFromFile(os.path.join(getResourcePath(), 'dataset.json'))
+        self.__dataset.loadFromFile(
+            os.path.join(getResourcePath(), 'dataset.json')
+        )
 
     def getDataset(self):
         return self.__dataset
@@ -123,10 +130,12 @@ class MainWindow(QMainWindow):
         Print a text to the read-only textbox at the bottom of the window.
         """
         date = time.strftime('%H:%M:%S')
-        text = '%s: %s'%(date, text)
+        text = '%s: %s' % (date, text)
         print(text)
-        self.console.setText('%s\n%s'%(self.console.toPlainText(), text))
-        self.console.verticalScrollBar().setValue(self.console.verticalScrollBar().maximum())
+        self.console.setText('%s\n%s' % (self.console.toPlainText(), text))
+        self.console.verticalScrollBar().setValue(
+            self.console.verticalScrollBar().maximum()
+        )
         self.statusBar().showMessage(text)
 
     def help(self):

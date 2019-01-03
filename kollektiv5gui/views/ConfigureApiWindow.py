@@ -1,5 +1,7 @@
-from PyQt5.QtWidgets import QAction, QDialog, QLabel, QLineEdit, QFormLayout, QHBoxLayout, QPushButton
+from PyQt5.QtWidgets import QAction, QDialog, QLabel, QLineEdit, QFormLayout
+from PyQt5.QtWidgets import QHBoxLayout, QPushButton
 from kollektiv5gui.util import config
+
 
 class ConfigureApiWindow(QDialog):
     def __init__(self, mainWindow):

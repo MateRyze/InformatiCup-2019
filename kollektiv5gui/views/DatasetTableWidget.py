@@ -5,10 +5,11 @@ from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem, QMenu
 from kollektiv5gui.util import api
 from kollektiv5gui.models.Dataset import Dataset
 
+
 class DatasetTableWidget(QTableWidget):
     """
-    This table displays contains all classes of a dataset. It displays a preview image, the class ids and a textual
-    description of the classes.
+    This table displays contains all classes of a dataset. It displays a
+    preview image, the class ids and a textual description of the classes.
     """
 
     def __init__(self, mainWindow, *args, **kwargs):
@@ -31,7 +32,8 @@ class DatasetTableWidget(QTableWidget):
     def contextMenuEvent(self, event):
         """
         Right click anywhere on the table.
-        We only care about the current row however, as this defines the used class id.
+        We only care about the current row however,
+        as this defines the used class id.
         """
         tableMenu = QMenu()
         generateAction = tableMenu.addAction('Generate Fooling Image')
@@ -59,7 +61,8 @@ class DatasetTableWidget(QTableWidget):
 
     def classifySelected(self):
         """
-        Sends the preview images of all selected classes to the API and prints the classification result.
+        Sends the preview images of all selected classes to the API and prints
+        the classification result.
         """
         classes = self.getSelectedClasses()
         for c in classes:
@@ -68,7 +71,8 @@ class DatasetTableWidget(QTableWidget):
 
     def renderDataset(self):
         """
-        Open a json formatted dataset specification from a file and display the contained information.
+        Open a json formatted dataset specification from a file and display
+        the contained information.
         """
         self.setRowCount(self.__dataset.getClassesCount())
         i = 0
@@ -80,8 +84,8 @@ class DatasetTableWidget(QTableWidget):
             classId.setFlags(classId.flags() ^ Qt.ItemIsEditable)
 
             preview = QTableWidgetItem()
-            # c.thumbnailPath contains a filename, passing this value to the constructor of QPixmap
-            # automatically loads an image
+            # c.thumbnailPath contains a filename, passing this value to the
+            # constructor of QPixmap automatically loads an image
             preview.setData(Qt.DecorationRole, QPixmap(c.thumbnailPath))
             preview.setFlags(preview.flags() ^ Qt.ItemIsEditable)
 
@@ -96,7 +100,8 @@ class DatasetTableWidget(QTableWidget):
             self.setItem(i, 0, classId)
             self.setItem(i, 1, preview)
             self.setItem(i, 2, name)
-            # make sure the row is as large as the image within (we just assume a height of 64 pixels)
+            # make sure the row is as large as the image within
+            # (we just assume a height of 64 pixels)
             self.setRowHeight(i, 64)
             i += 1
 
