@@ -141,7 +141,7 @@ class MainWindow(QMainWindow):
             msg.setIcon(QMessageBox.Warning)
 
             msg.setText(
-                'At least one of the classes you are trying to'
+                'At least one of the classes you are trying to '
                 'generate may not be recognized by the API!'
             )
             msg.setWindowTitle('Warning!')
