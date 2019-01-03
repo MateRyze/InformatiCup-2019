@@ -18,19 +18,22 @@ stop = False
 MUTATION_RATE = 10
 SHAPE_MUTATION_RATE = 4
 SHAPE_POINTS_COUNT = (10, 15)
-SHAPE_COUNT = 2
 
 # defined constraints/aspects for the generation
 COLORS_RANGE = ((0, 255), (0, 255), (0, 255))
 CONTRAST_RANGE = (100, 765)
 
+# init parameters
+INITIAL_POPULATION = 20  # EXPERIMENT
+SELECTED_COUNT = 5  # specification
+DESIRED_CONFIDENCE = 0.9  # specification
+
 
 def randomCoord():
     return (random.randrange(0, 64), random.randrange(0, 64))
 
+
 # initial random generation of an image
-
-
 def generateImage():
     # set image format
     img = Image.new('RGB', (64, 64), color='black')
@@ -63,9 +66,8 @@ def drawShapes(draw, colors, shapes):
     for color, shape in zip(colors[1:], shapes):
         draw.polygon(shape, color)
 
+
 # generate colors with distributed contrast
-
-
 def generateColorsWithContrast(count):
     colors = []
     for i in range(count):
@@ -75,7 +77,10 @@ def generateColorsWithContrast(count):
             random.randint(COLORS_RANGE[2][0], COLORS_RANGE[2][1]))
         if(i > 0):
             # distribute the contrast between the colors
-            while(contrast(color, colors[i-1]) < CONTRAST_RANGE[0]/(count-1) or contrast(color, colors[i-1]) > CONTRAST_RANGE[1]/(count-1)):
+            while(
+                contrast(color, colors[i-1]) < CONTRAST_RANGE[0]/(count-1) or
+                contrast(color, colors[i-1]) > CONTRAST_RANGE[1]/(count-1)
+            ):
                 color = (
                     random.randint(COLORS_RANGE[0][0], COLORS_RANGE[0][1]),
                     random.randint(COLORS_RANGE[1][0], COLORS_RANGE[1][1]),
@@ -85,7 +90,11 @@ def generateColorsWithContrast(count):
 
 
 def contrast(color1, color2):
-    return abs(color1[0] - color2[0]) + abs(color1[1] - color2[1]) + abs(color1[2] - color2[2])
+    return (
+        abs(color1[0] - color2[0]) +
+        abs(color1[1] - color2[1]) +
+        abs(color1[2] - color2[2])
+    )
 
 
 # eval fitness for each individual
@@ -101,8 +110,11 @@ def evalFitness(population):
             while(True):
                 try:
                     payload = {'key': 'Engeibei1uok4xaecahChug6eihos0wo'}
-                    r = requests.post('https://phinau.de/trasi',
-                                      data=payload, files={'image': open(name, 'rb')})
+                    r = requests.post(
+                        'https://phinau.de/trasi',
+                        data=payload,
+                        files={'image': open(name, 'rb')}
+                    )
                     api_calls += 1
                     individual["confidence"] = r.json()[0]["confidence"]
                     individual["class"] = str(r.json()[0]["class"])
@@ -138,14 +150,16 @@ def selection(bestCount, sameClassCount):
         key=lambda individual: individual["confidence"],
         reverse=True
     )
-    # take best individuals from same classes
     classesContained = []
     selectedPopulation = []
     for individual in population:
+        # limit count of individuals with same class
         if(classesContained.count(individual["class"]) < sameClassCount):
+            # do not take individuals with confidence > 90 %
             if(not any(
                 selectedIndividual["confidence"] >= 0.9 and
-                selectedIndividual["class"] == individual["class"] for selectedIndividual in selectedPopulation
+                selectedIndividual["class"] == individual["class"]
+                for selectedIndividual in selectedPopulation
             )):
                 selectedPopulation.append(individual)
             classesContained.append(individual["class"])
@@ -254,13 +268,21 @@ def mutate(confidence):
     newImagesAppended = 0
     for i in range(population_size):
         # use only for confidence < 90% and crossovered individuals
-        if(population[i]["confidence"] < 0.9 and population[i]["lastCrossover"] is True):
+        if(
+            population[i]["confidence"] < 0.9 and
+            population[i]["lastCrossover"] is True
+        ):
             img = Image.new('RGB', (64, 64), color='black')
             draw = ImageDraw.Draw(img)
             # mutate colors
             colors = population[i]["colors"]
-            colors = list(map(lambda color: (color[0] + random.randint(-MUTATION_RATE, MUTATION_RATE), color[1] + random.randint(
-                -MUTATION_RATE, MUTATION_RATE), color[2] + random.randint(-MUTATION_RATE, MUTATION_RATE)), colors))
+            colors = list(
+                map(lambda color: (
+                    color[0] + random.randint(-MUTATION_RATE, MUTATION_RATE),
+                    color[1] + random.randint(-MUTATION_RATE, MUTATION_RATE),
+                    color[2] + random.randint(-MUTATION_RATE, MUTATION_RATE)
+                ), colors)
+            )
             # mutate shapes
             shapes = population[i]["shapes"]
             newShapes = []
@@ -268,13 +290,19 @@ def mutate(confidence):
                 # add or delete point
                 if random.random() < 0.5:
                     idx = random.randrange(0, len(shape))
-                    if len(shape) > SHAPE_POINTS_COUNT[1] and random.random() < 0.5:
+                    if (
+                        len(shape) > SHAPE_POINTS_COUNT[1] and
+                        random.random() < 0.5
+                    ):
                         del shape[idx]
                     else:
                         shape.insert(idx, randomCoord())
                 # mutate point
                 shape = list(
-                    map(lambda x: (mutateCoord(x[0]), mutateCoord(x[1])), shape))
+                    map(
+                        lambda x: (mutateCoord(x[0]), mutateCoord(x[1])), shape
+                    )
+                )
                 newShapes.append(shape)
             drawShapes(draw, colors, newShapes)
             population[i]["lastCrossover"] = False
@@ -287,13 +315,6 @@ def mutate(confidence):
                 "lastCrossover": False
             })
             newImagesAppended += 1
-            """ # distribute the contrast between the colors
-            while(contrast(colors[0], colors[1]) < CONTRAST_RANGE[0] or contrast(colors[0], colors[1]) > CONTRAST_RANGE[1]):
-                    colors = (
-                        random.randint(COLORS_RANGE[0][0], COLORS_RANGE[0][1]),
-                        random.randint(COLORS_RANGE[1][0], COLORS_RANGE[1][1]),
-                        random.randint(COLORS_RANGE[2][0], COLORS_RANGE[2][1])) """
-
             # TODO: add fancy stuff for creativity
     # del population[:population_size]
     print("mutate, appended images: " + str(newImagesAppended))
@@ -319,25 +340,21 @@ def getCountThatMatch(confidence):
     count = 0
     seen = []
     for individual in population:
-        if(individual["confidence"] >= confidence and individual["class"] not in seen):
+        if(
+            individual["confidence"] >= confidence and
+            individual["class"] not in seen
+        ):
             seen.append(individual["class"])
             count += 1
     return count
-
-
-# init parameters
-INITIAL_POPULATION = 20  # EXPERIMENT
-SELECTED_COUNT = 5  # specification
-DESIRED_CONFIDENCE = 0.9  # specification
 
 
 def addRandomImage():
     population.append(generateImage())
     print("add one new random image (avoid local maxima)")
 
-# run evolutionary algorithm (init -> selection -> loop(crossover-> mutate -> selection) until confidence matches all images)
 
-
+# run evolutionary algorithm until confidence matches all images
 def runEvoAlgorithm():
     global population
     initPopulation(INITIAL_POPULATION)
@@ -367,9 +384,8 @@ def runEvoAlgorithm():
     selection(SELECTED_COUNT, 1)  # for test function
     printResults()
 
-# save generated images with desired confidence
 
-
+# save generated images
 def saveImages(type):
     directory = "generated_api_calls_" + str(api_calls)
     # directory = "images_for_visualization"
@@ -384,13 +400,14 @@ def saveImages(type):
         # webbrowser.open(name)
 
 
+# for testing init population
 def evalInitialPopulation():
     global population
     initPopulation(INITIAL_POPULATION)
     evalFitness(population)
-    selection(SELECTED_COUNT)
+    selection(SELECTED_COUNT, 1)
     printResults()
-    saveImages()
+    saveImages("init")
 
 
 if __name__ == '__main__':

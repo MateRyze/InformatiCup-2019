@@ -19,7 +19,8 @@ class Test_EA(unittest.TestCase):
         ea_combined.initPopulation(ea_combined.INITIAL_POPULATION)
         self.assertEqual(len(ea_combined.population),
                          ea_combined.INITIAL_POPULATION)
-        ea_combined.selection(ea_combined.SELECTED_COUNT)
+        # best count (5)
+        ea_combined.selection(ea_combined.SELECTED_COUNT, 1)
         self.assertEqual(len(ea_combined.population),
                          ea_combined.SELECTED_COUNT)
 
@@ -32,8 +33,11 @@ class Test_EA(unittest.TestCase):
             ea_combined.evalFitness(ea_combined.population)
             ea_combined.selection(ea_combined.SELECTED_COUNT, 2)
             crossoverResults = ea_combined.crossover()
-            self.assertGreater(len(crossoverResults["before"]), 0,
-                               "Crossover not possible, no images with same classes exist!")
+            self.assertGreater(
+                len(crossoverResults["before"]),
+                0,
+                "Crossover not possible, no images with same classes exist!"
+            )
             self.assertGreater(len(crossoverResults["after"]), 1,
                                "No crossover results created!")
             # crossover should improve confidence
@@ -70,17 +74,28 @@ class Test_EA(unittest.TestCase):
     def test_run_ea(self):
         apiCallsList = []
         for i in range(10):
-            print("_____testing API calls, iteration: " + str(i) + "/10 _____")
+            print("_____testing API calls, iteration: " + str(i+1) + "/10 _____")
             ea_combined.runEvoAlgorithm()
-            # check if confidence is at least 90 % for all images (specification)
-            self.assertTrue(all(individual["confidence"] >= 0.9 for individual in ea_combined.population),
-                            "The confidence is not at least 90 percent for 5 images!")
+            # check if confidence is at least 90 % for all images
+            self.assertTrue(
+                all(
+                    individual["confidence"] >= 0.9 
+                    for individual in ea_combined.population
+                ),
+                "The confidence is 
+                not at least 90 percent!"
+            )
             # check for different classes
-            self.assertTrue(len(set(individual["class"] for individual in ea_combined.population))
-                            == 5, "Generated images contain class duplicates!")
+            self.assertTrue(
+                len(
+                    set(
+                        individual["class"] 
+                        for individual in ea_combined.population
+                    )
+                ) == 5,
+                "Generated images contain class duplicates!"
+            )
             apiCallsList.append(ea_combined.api_calls)
-            # check for api call limit (FAST SOLUTION -> quality aspect)
-            # self.assertGreater(61, ea_combined.api_calls, "To much API calls -> slow solution :(")
             ea_combined.api_calls = 0
         print(apiCallsList)
         print("average: " + str(sum(apiCallsList)/len(apiCallsList)))
