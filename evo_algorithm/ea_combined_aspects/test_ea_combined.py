@@ -99,6 +99,7 @@ class Test_EA(unittest.TestCase):
                 "Generated images contain class duplicates!"
             )
             apiCallsList.append(ea_combined.api_calls)
+            ea_combined.saveImages("test_run")
             ea_combined.api_calls = 0
         print(apiCallsList)
         print("average: " + str(sum(apiCallsList)/len(apiCallsList)))

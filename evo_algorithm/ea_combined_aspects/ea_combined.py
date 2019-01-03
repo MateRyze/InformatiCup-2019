@@ -245,7 +245,7 @@ def crossover():
         # population.remove(entry[0])
         # population.remove(entry[1])
 
-    print("crossover, appended and deleted images: " + str(newImagesAppended))
+    print("crossover, appended images" + str(newImagesAppended))
 
     # for testing crossover method
     return {"before": beforeCrossover, "after": afterCrossover}
@@ -264,7 +264,7 @@ def mutateCoord(oldCoord):
 
 # mutate each individual in the population and delete old population
 def mutate(confidence):
-    print("doing mutation")
+    print("doing mutation of crossover images")
     population_size = len(population)
     newImagesAppended = 0
     for i in range(population_size):
@@ -306,19 +306,14 @@ def mutate(confidence):
                 )
                 newShapes.append(shape)
             drawShapes(draw, colors, newShapes)
-            population[i]["lastCrossover"] = False
-            population.append({
+            population[i] = {
                 "image": img,
                 "confidence": 0,
                 "colors": colors,
                 "class": "",
                 "shapes": newShapes,
                 "lastCrossover": False
-            })
-            newImagesAppended += 1
-            # TODO: add fancy stuff for creativity
-    # del population[:population_size]
-    print("mutate, appended images: " + str(newImagesAppended))
+            }
 
 
 def printResults():
