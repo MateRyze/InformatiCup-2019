@@ -136,8 +136,7 @@ def selection(bestCount, sameClassCount):
 
 # crossover between individuals in the population
 def crossover():
-    # IMPLEMENT HERE YOUR CROSSOVER FUNCTION
-    # EXAMPLE: cross rectangles, generate new images
+    # cross rectangles, generate new images
     for j in range(len(population)-1):
         colorsFirst = population[0 + j]["colors"]# + population[0 + j]["colors"] + population[0 + j]["colors"] + population[0 + j]["colors"]
         colorsSecond = population[1 + j]["colors"]# + population[1 + j]["colors"] + population[1 + j]["colors"] + population[1 + j]["colors"]
@@ -166,6 +165,7 @@ def crossover():
         for i in range(16):
             draw.rectangle(positions[i], fill=colors[i])
         population.append({"image": img, "confidence": 0, "colors": colors, "class": ""})
+    # TODO: implement crossover between same classes
 
 # mutate each individual in the population and delete old population
 def mutate(confidence):
