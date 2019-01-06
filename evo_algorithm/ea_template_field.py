@@ -17,7 +17,7 @@ global stop
 global MUTATION_RATE
 classList = []
 confidenceList = []
-confidenzList = []
+confidenzList = [] 
 population = []
 api_calls = 0
 stop = False
@@ -209,8 +209,6 @@ def generateFields(n):
             offset = 64/dimension
             position= [tuple([(point[0] + offset*i, point[1] + offset*j) for point in k]) for k in position_scaled]
             positions.append(position)
-    # keine Endlosschleife :D sondern die Konsolenausgabe war sehr gross
-    # print(positions)
     return positions
 
 def saveResults():
@@ -310,7 +308,7 @@ if __name__ == '__main__':
     runEvoAlgorithm()
     saveImages()
     print("api calls: ", api_calls)
-    generateFields(4)
+    # generateFields(4)
     saveResults()
     listToCSV()
     

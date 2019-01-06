@@ -2,3 +2,5 @@
 CCR/test
 *.png
 *.pyc
+.pytest_cache/v/cache/nodeids
+.pytest_cache/v/cache/stepwise
