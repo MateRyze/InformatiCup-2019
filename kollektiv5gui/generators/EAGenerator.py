@@ -16,6 +16,7 @@ from kollektiv5gui.util import config
 class EAGenerator(AbstractGenerator):
 
     IMAGE_COUNT = 5
+    PROVIDES_OPTIONS = True
 
     def __init__(self):
         super().__init__()
@@ -218,6 +219,9 @@ class EAGenerator(AbstractGenerator):
         self.targetConfidence = self.ui.targetConfidenceSpinBox.value() / 100
         self.targetPopulationSize = self.ui.targetPopulationSizeSpinBox.value()
         self.optionsWidget.close()
+        # save the current values into the configuration file
+        preset = self.ui.presetComboBox.currentText()
+        self.__savePresetFromUi(preset)
 
     def randomCoord(self):
         return (random.randrange(0, 64), random.randrange(0, 64))

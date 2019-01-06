@@ -41,7 +41,6 @@ class GeneratingWindow(QDialog):
         self.selectedGeneratorId = 0
         self.previews = []
         self.previewsContainer = None
-        self.generator = None
         self.generatedPixmap = None
 
         self.__initWindow()
@@ -72,7 +71,6 @@ class GeneratingWindow(QDialog):
         self.generatorSelection = QComboBox()
         for generator in self.GENERATORS:
             self.generatorSelection.addItem(generator[0])
-        self.generatorSelection.setGeometry(32, 32, 200, 32)
         self.generatorSelection.currentIndexChanged.connect(
             self.__selectGenerator
         )
@@ -80,14 +78,17 @@ class GeneratingWindow(QDialog):
         self.buttonsContainer.addWidget(self.generatorSelection)
 
         self.optionsButton = QPushButton('Open Options Menu')
-        self.optionsButton.setGeometry(264, 32, 200, 32)
         self.optionsButton.setVisible(False)
         self.buttonsContainer.addWidget(self.optionsButton)
 
         self.generateButton = QPushButton('Generate Image')
-        self.generateButton.setGeometry(264, 32, 200, 32)
         self.generateButton.clicked.connect(self.__generate)
         self.buttonsContainer.addWidget(self.generateButton)
+
+        self.stopButton = QPushButton('Stop Generation')
+        self.stopButton.clicked.connect(self.__stop)
+        self.stopButton.setEnabled(False)
+        self.buttonsContainer.addWidget(self.stopButton)
 
         self.layout.addLayout(self.buttonsContainer)
 
@@ -100,8 +101,6 @@ class GeneratingWindow(QDialog):
     def __initPreviews(self):
         self.previews = []
         self.previewsContainer = QGridLayout()
-        self.generator = self.GENERATORS[self.selectedGeneratorId][1]()
-        self.optionsButton.clicked.connect(self.generator.openOptionsDialog)
         for i in range(
                 self.GENERATORS[self.selectedGeneratorId][1].IMAGE_COUNT):
             boxLeft = QGroupBox()
@@ -170,6 +169,18 @@ class GeneratingWindow(QDialog):
 
         self.layout.addLayout(self.previewsContainer)
 
+    def __initGenerator(self):
+        self.generator = self.GENERATORS[self.selectedGeneratorId][1]()
+        # connect the options button to the newly created generator
+        try:
+            self.optionsButton.clicked.disconnect()
+        except Exception:
+            # clicked.disconnect() throws an exception of the button is not
+            # connected to anything. this is the case if the window is newly
+            # opened.
+            pass
+        self.optionsButton.clicked.connect(self.generator.openOptionsDialog)
+
     def printStatistics(self, apiCalls, startTime, additionalStatistics):
         stats = '\n'.join([
             'API Calls: %d' % apiCalls,
@@ -209,11 +220,16 @@ class GeneratingWindow(QDialog):
 
     def __onFinishedCallback(self):
         self.generateButton.setEnabled(True)
+        self.optionsButton.setEnabled(True)
+        self.stopButton.setEnabled(False)
         for preview in self.previews:
             preview.saveButton.setEnabled(True)
+        # instantiate a fresh generator
+        self.__initGenerator()
 
     def __generate(self):
         self.generateButton.setEnabled(False)
+        self.optionsButton.setEnabled(False)
         for preview in self.previews:
             preview.saveButton.setEnabled(False)
 
@@ -227,6 +243,7 @@ class GeneratingWindow(QDialog):
         def failureCallback(*args, **kwargs):
             self.__onFailureCallback(*args, **kwargs)
 
+        self.__initGenerator()
         self.generator.setCallbacks(
             stepCallback,
             finishedCallback,
@@ -234,6 +251,11 @@ class GeneratingWindow(QDialog):
         )
         self.generator.setTargetClasses(self.targetClasses)
         self.generator.start()
+        self.stopButton.setEnabled(True)
+
+    def __stop(self):
+        self.generator.stop()
+        self.generator.finish()
 
     def __saveGenerated(self, i):
         filename = QFileDialog.getSaveFileName(
@@ -244,9 +266,7 @@ class GeneratingWindow(QDialog):
 
     def __selectGenerator(self, generatorId):
         self.selectedGeneratorId = generatorId
+        self.__initGenerator()
         self.__clearPreviews()
         self.__initPreviews()
-        if self.selectedGeneratorId == 0:
-            self.optionsButton.setVisible(True)
-        else:
-            self.optionsButton.setVisible(False)
+        self.optionsButton.setVisible(self.generator.PROVIDES_OPTIONS)
