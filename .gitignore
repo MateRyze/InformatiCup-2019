@@ -1,7 +1,11 @@
-.vscode/
 CCR/test
 *.png
 *.pyc
+.pytest_cache/*
+
+.vscode/launch.json
+.vscode/.ropeproject/objectdb
+.vscode/.ropeproject/config.py
 .venv/
 __pycache__/
 debian/kollektiv5/usr/bin

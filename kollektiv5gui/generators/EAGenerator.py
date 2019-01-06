@@ -8,7 +8,7 @@ import time
 from PIL import Image, ImageDraw
 from kollektiv5gui.util import api
 from kollektiv5gui.generators.AbstractGenerator import AbstractGenerator
-from PyQt5.QtWidgets import QMessageBox, QColorDialog, QLineEdit, QWidget, QLabel, QGroupBox, QPushButton, QSizePolicy, QFileDialog, QComboBox, QGridLayout, QHBoxLayout, QVBoxLayout
+from PyQt5.QtWidgets import QMessageBox, QColorDialog, QLineEdit, QWidget, QDialog, QLabel, QGroupBox, QPushButton, QSizePolicy, QFileDialog, QComboBox, QGridLayout, QHBoxLayout, QVBoxLayout
 from kollektiv5gui.views.EaOptionsWidget import Ui_Options
 from kollektiv5gui.util import config
 
@@ -27,8 +27,8 @@ class EAGenerator(AbstractGenerator):
         # defined constraints/aspects for the generation
         self.colorMutationRate = 10
         self.shapeMutationRate = 4
-        self.colors_range = ((0, 150), (0, 150), (0, 150))
-        self.contrast_range = (25, 400)
+        self.colorsRange = ((0, 150), (0, 150), (0, 150))
+        self.contrastRange = (25, 400)
         # 5 is minimum, because shapes with 3 and 4 points looks like road signs
         self.MINIMUM_SHAPE_POINTS_COUNT = 5
         self.shapePolygonCount = 2
@@ -228,50 +228,63 @@ class EAGenerator(AbstractGenerator):
         img = Image.new('RGB', (64, 64), color='black')
         draw = ImageDraw.Draw(img)
         # how many colors do we need?
-        self.generateColorsWithContrast(2)
+        colors = self.generateColorsWithContrast(2)
         # init shape
+        shapes = []
+        pointCount = self.shapePolygonPointCount
         shape = []
-        # pointCount = random.randrange(MINIMUM_SHAPE_POINTS_COUNT, self.shapePolygonPointCount)
-        for i in range(self.shapePolygonPointCount):
-            #idx = random.randrange(0, len(shape))
+        for i in range(pointCount):
             shape.insert(i, (self.randomCoord()))
-            shape = list(
-                map(lambda x: (self.mutateCoord(x[0]), self.mutateCoord(x[1])), shape))
-        self.drawShapes(draw, self.colors, shape)
+        shapes.append(shape)
+        self.drawShapes(draw, colors, shapes)
 
-        return {"image": img, "confidence": 0, "colors": self.colors, "class": "", "shape": shape}
+        return {
+            "image": img,
+            "confidence": 0,
+            "colors": colors,
+            "class": "",
+            "shapes": shapes,
+            "lastCrossover": False
+        }
 
-    def drawShapes(self, draw, colors, shape):
+    def drawShapes(self, draw, colors, shapes):
         background = colors[0]
         draw.rectangle(((0, 0), (64, 64)), background)
-        foreground = colors[1]
-        draw.polygon(shape, foreground)
+        # all other colors are for the shapes (polygons)
+        for color, shape in zip(colors[1:], shapes):
+            draw.polygon(shape, color)
 
     def contrast(self, color1, color2):
-        return abs(color1[0] - color2[0])
-        + abs(color1[1] - color2[1])
-        + abs(color1[2] - color2[2])
+        return (
+            abs(color1[0] - color2[0]) +
+            abs(color1[1] - color2[1]) +
+            abs(color1[2] - color2[2])
+        )
 
     # generate colors with distributed contrast
+
     def generateColorsWithContrast(self, count):
-        self.colors = []
+        colors = []
         for i in range(count):
             color = (
-                random.randint(
-                    self.colors_range[0][0], self.colors_range[0][1]),
-                random.randint(
-                    self.colors_range[1][0], self.colors_range[1][1]),
-                random.randint(self.colors_range[2][0], self.colors_range[2][1]))
+                random.randint(self.colorsRange[0][0], self.colorsRange[0][1]),
+                random.randint(self.colorsRange[1][0], self.colorsRange[1][1]),
+                random.randint(self.colorsRange[2][0], self.colorsRange[2][1]))
             if(i > 0):
                 # distribute the contrast between the colors
-                while(self.contrast(color, self.colors[i-1]) < self.contrast_range[0]/(count-1) or self.contrast(color, self.colors[i-1]) > self.contrast_range[1]/(count-1)):
+                while(
+                    self.contrast(color, colors[i-1]) < self.contrastRange[0]/(count-1) or
+                    self.contrast(
+                        color, colors[i-1]) > self.contrastRange[1]/(count-1)
+                ):
                     color = (
                         random.randint(
-                            self.colors_range[0][0], self.colors_range[0][1]),
+                            self.colorsRange[0][0], self.colorsRange[0][1]),
                         random.randint(
-                            self.colors_range[1][0], self.colors_range[1][1]),
-                        random.randint(self.colors_range[2][0], self.colors_range[2][1]))
-            self.colors.append(color)
+                            self.colorsRange[1][0], self.colorsRange[1][1]),
+                        random.randint(self.colorsRange[2][0], self.colorsRange[2][1]))
+            colors.append(color)
+        return colors
 
     # eval fitness for each individual
     def evalFitness(self):
@@ -296,73 +309,182 @@ class EAGenerator(AbstractGenerator):
                             break
                             # break as soon as a matching class is found
                             # confidences are sorted by the api, so we've selected the highest possible confidence here
-                    individual["class"] = self._targetClasses[ random.randrange(0, len(self._targetClasses)) ]
+                    individual["class"] = self._targetClasses[random.randrange(
+                        0, len(self._targetClasses))]
                 individual["confidence"] = confidence
         self.callOnStepCallback()
 
     # create initial population
     def initPopulation(self, count):
+        self.population = []
         for i in range(count):
             self.population.append(self.generateImage())
 
     # select best individuals from population
-    def selection(self, bestCount):
+    def selection(self, bestCount, sameClassCount):
+        print("doing selection")
         # sort by confidence
         self.population.sort(
-            key=lambda individual: individual["confidence"], reverse=True)
-        # take best individuals from same classes
-        # only if we'd have more targeted classes than output images
-        # otherwise we'd throw away to much information
-        if len(self._targetClasses) > self.IMAGE_COUNT:
-            classesContained = []
-            selectedPopulation = []
-            for individual in self.population:
-                if(classesContained.count(individual["class"]) < 1):
+            key=lambda individual: individual["confidence"],
+            reverse=True
+        )
+        classesContained = []
+        selectedPopulation = []
+        for individual in self.population:
+            # limit count of individuals with same class
+            if(classesContained.count(individual["class"]) < sameClassCount):
+                # do not take individuals with confidence > 90 %
+                if(not any(
+                    selectedIndividual["confidence"] >= 0.9 and
+                    selectedIndividual["class"] == individual["class"]
+                    for selectedIndividual in selectedPopulation
+                )):
                     selectedPopulation.append(individual)
-                    classesContained.append(individual["class"])
-            self.population = selectedPopulation
+                classesContained.append(individual["class"])
+        self.population = selectedPopulation
         # reduce individuals -> reduce API calls
-        del self.population[bestCount*2:]
+        if sameClassCount is 2:
+            # del population[int(INITIAL_POPULATION/2):]
+            print("no individuals deleted from selection")
+        elif sameClassCount is 1:
+            del self.population[bestCount:]
 
     def mutateCoord(self, oldCoord):
         return min(63, max(1, oldCoord + random.randint(-self.shapeMutationRate, self.shapeMutationRate)))
 
     # mutate each individual in the population and delete old population
     def mutate(self, confidence):
-        # IMPLEMENT HERE YOUR MUTATION FUNCTION
+        print("doing mutation of crossover images")
         population_size = len(self.population)
         for i in range(population_size):
-            if(self.population[i]["confidence"] < 0.9):
+            # use only for confidence < 90% and crossovered individuals
+            if(
+                self.population[i]["confidence"] < 0.9 and
+                self.population[i]["lastCrossover"] is True
+            ):
                 img = Image.new('RGB', (64, 64), color='black')
                 draw = ImageDraw.Draw(img)
                 # mutate colors
                 colors = self.population[i]["colors"]
                 colors = list(
-                    map(
-                        lambda color: (
-                            color[0] + random.randint(-self.colorMutationRate,
-                                                      self.colorMutationRate),
-                            color[1] + random.randint(-self.colorMutationRate,
-                                                      self.colorMutationRate),
-                            color[2] + random.randint(-self.colorMutationRate,
-                                                      self.colorMutationRate),
-                        ), colors)
+                    map(lambda color: (
+                        color[0] + random.randint(-self.colorMutationRate,
+                                                  self.colorMutationRate),
+                        color[1] + random.randint(-self.colorMutationRate,
+                                                  self.colorMutationRate),
+                        color[2] + random.randint(-self.colorMutationRate,
+                                                  self.colorMutationRate)
+                    ), colors)
                 )
-                # mutate shape
-                shape = self.population[i]["shape"]
-                if random.random() < 0.5:
-                    idx = random.randrange(0, len(shape))
-                    if len(shape) > self.MINIMUM_SHAPE_POINTS_COUNT and random.random() < 0.5:
-                        del shape[idx]
-                    else:
-                        shape.insert(idx, self.randomCoord())
-                shape = list(
-                    map(lambda x: (self.mutateCoord(x[0]), self.mutateCoord(x[1])), shape))
-
-                self.drawShapes(draw, colors, shape)
-                self.population.append({"image": img, "confidence": 0,
-                                "colors": colors, "class": "", "shape": shape})
+                # mutate shapes
+                shapes = self.population[i]["shapes"]
+                newShapes = []
+                for shape in shapes:
+                    # add or delete point
+                    if random.random() < 0.5:
+                        idx = random.randrange(0, len(shape))
+                        if (
+                            len(shape) > self.shapePolygonPointCount and
+                            random.random() < 0.5
+                        ):
+                            del shape[idx]
+                        else:
+                            shape.insert(idx, self.randomCoord())
+                    # mutate point
+                    shape = list(
+                        map(
+                            lambda x: (self.mutateCoord(
+                                x[0]), self.mutateCoord(x[1])), shape
+                        )
+                    )
+                    newShapes.append(shape)
+                self.drawShapes(draw, colors, newShapes)
+                self.population[i] = {
+                    "image": img,
+                    "confidence": 0,
+                    "colors": colors,
+                    "class": "",
+                    "shapes": newShapes,
+                    "lastCrossover": False
+                }
                 self.__totalMutationCount += 1
+
+    # crossover between individuals in the population
+    def crossover(self):
+        print("doing crossover")
+        # use only for same classes from inital population
+        # sort duplicates with same classes like [vorfahrt99%, vorfahrt97%, ...]
+        seen = []  # helper list
+        duplicates = []
+        # append one individual from every class
+        for individual in self.population:
+            if individual["class"] not in seen:
+                duplicates.append([individual])
+                seen.append(individual["class"])
+        # print(duplicates)
+        # append other individuals from same class
+        for index, entry in enumerate(duplicates):
+            for individual in self.population:
+                if (
+                    individual not in entry and
+                    individual["class"] == entry[0]["class"]
+                ):
+                    duplicates[index] = duplicates[index] + [individual]
+        # filter duplicates for crossover by confidence and length
+        # crossover makes sense for at least two individuals and confidence < 90%
+        duplicates = [
+            entry for entry in duplicates
+            if len(entry) > 1 and entry[0]["confidence"] < 0.90
+        ]
+        # print(duplicates)
+        beforeCrossover = duplicates  # for testing function
+        afterCrossover = []
+        newImagesAppended = 0
+        # crossover by adding polygons points
+        for entry in duplicates:
+            # remove every other point
+            # shape = shape[1::2]
+            image = Image.new('RGB', (64, 64))
+            draw = ImageDraw.Draw(image)
+            shapes = entry[0]["shapes"] + entry[1]["shapes"]
+            colors = entry[0]["colors"] + entry[1]["colors"][1:]
+            self.drawShapes(draw, colors, shapes)
+            newIndividual = {
+                "image": image,
+                "confidence": 0,
+                "colors": colors,
+                "class": "",
+                "shapes": shapes,
+                "lastCrossover": True
+            }
+            afterCrossover.append(newIndividual)
+            self.population.append(newIndividual)
+            # add second crossover child
+            image = Image.new('RGB', (64, 64))
+            draw = ImageDraw.Draw(image)
+            shapes = entry[1]["shapes"] + entry[0]["shapes"]
+            colors = entry[1]["colors"] + entry[0]["colors"][1:]
+            self.drawShapes(draw, colors, shapes)
+            newIndividual = {
+                "image": image,
+                "confidence": 0,
+                "colors": colors,
+                "class": "",
+                "shapes": shapes,
+                "lastCrossover": True
+            }
+            afterCrossover.append(newIndividual)
+            self.population.append(newIndividual)
+
+            newImagesAppended += 2
+            # remove parents
+            # population.remove(entry[0])
+            # population.remove(entry[1])
+
+        print("crossover, appended images: " + str(newImagesAppended))
+
+        # for testing crossover method
+        return {"before": beforeCrossover, "after": afterCrossover}
 
     # get the count of images that match the confidence
     def getCountThatMatch(self, confidence):
@@ -380,9 +502,9 @@ class EAGenerator(AbstractGenerator):
 
     def getAdditionalStatistics(self):
         return '\n'.join([
-            'Individuals: %d'%len(self.population),
-            'Generations: %d'%self.__currentGeneration,
-            'Mutations: %d'%self.__totalMutationCount,
+            'Individuals: %d' % len(self.population),
+            'Generations: %d' % self.__currentGeneration,
+            'Mutations: %d' % self.__totalMutationCount,
         ])
 
     def getImage(self, i):
@@ -397,14 +519,15 @@ class EAGenerator(AbstractGenerator):
         if not self.initialized:
             self.initPopulation(self.initialPopulationSize)
             self.evalFitness()
-            self.selection(self.targetPopulationSize)
+            self.selection(self.targetPopulationSize, 2)
             self.matchCount = self.getCountThatMatch(self.targetConfidence)
             self.initialized = True
 
+        self.crossover()
         self.mutate(self.targetConfidence)
         self.evalFitness()
         self.__currentGeneration += 1
-        self.selection(self.targetPopulationSize)
+        self.selection(self.targetPopulationSize, 2)
 
         newMatchCount = self.getCountThatMatch(self.targetConfidence)
         if newMatchCount == self.matchCount:
