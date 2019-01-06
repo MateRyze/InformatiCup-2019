@@ -9,6 +9,7 @@ import time
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
+import sys
 from PIL import Image, ImageDraw
 
 global population
@@ -64,23 +65,37 @@ def evalFitness():
     global stop
     global classList
     global confidenceList
+    print("doing api calls (evaluation)")
     for individual in population:
-        #time.sleep(2)
-        name = 'toEval.png'
-        image = individual["image"]
-        image.save(name)
-        payload= {'key': 'Engeibei1uok4xaecahChug6eihos0wo'}
-        r = requests.post('https://phinau.de/trasi', data=payload, files={'image': open(name, 'rb')})
-        api_calls += 1
-        try:
-            individual["confidence"] = r.json()[0]["confidence"]
-            confidenceList.append(individual["confidence"])
-            individual["class"] = r.json()[0]["class"]
-            classList.append(individual["class"])
-        except ValueError:
-            print("Decoding JSON failed -> hit API rate :(")
-            stop = True
-            break
+        if(individual["class"] == ""):
+            name = 'toEval.png'
+            image = individual["image"]
+            image.save(name)
+            while(True):
+                try:
+                    payload = {'key': 'Engeibei1uok4xaecahChug6eihos0wo'}
+                    r = requests.post(
+                        'https://phinau.de/trasi',
+                        data=payload,
+                        files={'image': open(name, 'rb')}
+                    )
+                    api_calls += 1
+                    individual["confidence"] = r.json()[0]["confidence"]
+                    individual["class"] = str(r.json()[0]["class"])
+                    classList.append(individual["class"])
+                    confidenceList.append(individual["confidence"])
+                    break
+                except ValueError:
+                    time.sleep(1)
+                    # print("Decoding JSON failed -> hit API rate :(")
+                    # stop = True
+                except:
+                    print("Unexpected error:", sys.exc_info()[0])
+                    print("Retrying...")
+                    time.sleep(1)
+    print("api calls: " + str(api_calls))
+
+
         
         
 # create initial population
@@ -89,9 +104,35 @@ def initPopulation(count):
         population.append(generateImage())
 
 # select best individuals from population
-def selection(bestCount):
-    population.sort(key=lambda individual: individual["confidence"], reverse=True)
-    del population[bestCount:]
+def selection(bestCount, sameClassCount):
+    print("doing selection")
+    global population
+    # sort by confidence
+    population.sort(
+        key=lambda individual: individual["confidence"],
+        reverse=True
+    )
+    classesContained = []
+    selectedPopulation = []
+    for individual in population:
+        # limit count of individuals with same class
+        if(classesContained.count(individual["class"]) < sameClassCount):
+            # do not take individuals with confidence > 90 %
+            if(not any(
+                selectedIndividual["confidence"] >= 0.9 and
+                selectedIndividual["class"] == individual["class"]
+                for selectedIndividual in selectedPopulation
+            )):
+                selectedPopulation.append(individual)
+            classesContained.append(individual["class"])
+    population = selectedPopulation
+    # reduce individuals -> reduce API calls
+    if sameClassCount is 2:
+        # del population[int(INITIAL_POPULATION/2):]
+        print("no individuals deleted from selection")
+    elif sameClassCount is 1:
+        del population[bestCount:]
+
 
 # crossover between individuals in the population
 def crossover():
@@ -242,17 +283,25 @@ def getBestResult():
         if(individual["confidence"] > best):
             best = individual["confidence"]
     return best
+
+
 # get the count of images that match the confidence
 def getCountThatMatch(confidence):
     count = 0
+    seen = []
     for individual in population:
-        if(individual["confidence"] >= confidence):
+        if(
+            individual["confidence"] >= confidence and
+            individual["class"] not in seen
+        ):
+            seen.append(individual["class"])
             count += 1
     return count
 
 
+
 # init parameters
-INITIAL_POPULATION = 10 # EXPERIMENT
+INITIAL_POPULATION = 20 # EXPERIMENT
 SELECTED_COUNT = 5  # specification
 DESIRED_CONFIDENCE = 0.90 # specification
 
@@ -260,15 +309,18 @@ DESIRED_CONFIDENCE = 0.90 # specification
 def runEvoAlgorithm():
     initPopulation(INITIAL_POPULATION)
     evalFitness()
-    selection(SELECTED_COUNT)
+    selection(SELECTED_COUNT, 2)
     printResults()
     while getCountThatMatch(DESIRED_CONFIDENCE) < SELECTED_COUNT and stop == False:
         crossover()
         mutate(DESIRED_CONFIDENCE)
         evalFitness()
-        selection(SELECTED_COUNT)
+        selection(SELECTED_COUNT, 2)
         if (stop == False):
             printResults()
+    selection(SELECTED_COUNT, 1)
+    printResults()
+    print(api_calls)
 
 # save generated images with desired confidence
 def saveImages():
@@ -277,7 +329,7 @@ def saveImages():
             image = population[i]["image"]
             name = "img" + \
                 str(i) + "_" + str(population[i]["confidence"]
-                                    ) + "_" + str(population[i]["class"].encode('utf-8')) + ".png"
+                                    ) + "_" + str(population[i]["class"]) + ".png"
             image.save(name)
             webbrowser.open(name)
 def clearList(listy):
@@ -291,7 +343,6 @@ def clearList(listy):
     return data
 
 def listToCSV():
-    
     new_class = clearList(classList)
     data = zip(confidenceList, new_class)
     df = pd.DataFrame(data)
@@ -309,6 +360,6 @@ if __name__ == '__main__':
     saveImages()
     print("api calls: ", api_calls)
     # generateFields(4)
-    saveResults()
-    listToCSV()
+    # saveResults()
+    # listToCSV()
     
