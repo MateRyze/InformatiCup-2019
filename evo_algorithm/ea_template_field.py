@@ -136,23 +136,52 @@ def selection(bestCount, sameClassCount):
 
 # crossover between individuals in the population
 def crossover():
+    print("doing crossover")
+    # use only for same classes from inital population
+    # sort duplicates with same classes like [vorfahrt99%, vorfahrt97%, ...]
+    seen = []  # helper list
+    duplicates = []
+    # append one individual from every class
+    for individual in population:
+        if individual["class"] not in seen:
+            duplicates.append([individual])
+            seen.append(individual["class"])
+    # print(duplicates)
+    # append other individuals from same class
+    for index, entry in enumerate(duplicates):
+        for individual in population:
+            if (
+                individual not in entry and
+                individual["class"] == entry[0]["class"]
+            ):
+                duplicates[index] = duplicates[index] + [individual]
+    # filter duplicates for crossover by confidence and length
+    # crossover makes sense for at least two individuals and confidence < 90%
+    duplicates = [
+        entry for entry in duplicates
+        if len(entry) > 1 and entry[0]["confidence"] < 0.90
+    ]
     # cross rectangles, generate new images
-    for j in range(len(population)-1):
-        colorsFirst = population[0 + j]["colors"]# + population[0 + j]["colors"] + population[0 + j]["colors"] + population[0 + j]["colors"]
-        colorsSecond = population[1 + j]["colors"]# + population[1 + j]["colors"] + population[1 + j]["colors"] + population[1 + j]["colors"]
+    for duplicate in duplicates:
+        # duplicate contain two individuals with same class
+        #TODO for Moheb: combine the rectangles from two duplicates to one image 
+        """         # + population[0 + j]["colors"] + population[0 + j]["colors"] + population[0 + j]["colors"]
+        colorsFirst = population[0 + j]["colors"]
+        # + population[1 + j]["colors"] + population[1 + j]["colors"] + population[1 + j]["colors"]
+        colorsSecond = population[1 + j]["colors"]
         img = Image.new('RGB', (64, 64), color='black')
         draw = ImageDraw.Draw(img)
-        
+
         positions = [
-            ((0, 0), (16, 16)), 
-            ((16, 0), (32, 16)), 
-            ((0, 16), (16, 32)), 
+            ((0, 0), (16, 16)),
+            ((16, 0), (32, 16)),
+            ((0, 16), (16, 32)),
             ((16, 16), (32, 32)),
             ((0, 32), (16, 48)),
             ((16, 32), (32, 48)),
             ((0, 48), (16, 64)),
-            ((16, 48), (32, 64)), 
-            ((32,0), (48, 16)),
+            ((16, 48), (32, 64)),
+            ((32, 0), (48, 16)),
             ((48, 0), (64, 16)),
             ((32, 16), (48, 32)),
             ((48, 16), (64, 32)),
@@ -161,11 +190,13 @@ def crossover():
             ((32, 48), (48, 64)),
             ((48, 48), (64, 64)),
         ]
-        colors = colorsFirst[:8] + colorsSecond[:8]##[colorsFirst[0], colorsFirst[1], colorsSecond[2], colorsSecond[3]]
+        # [colorsFirst[0], colorsFirst[1], colorsSecond[2], colorsSecond[3]]
+        colors = colorsFirst[:8] + colorsSecond[:8]
         for i in range(16):
             draw.rectangle(positions[i], fill=colors[i])
-        population.append({"image": img, "confidence": 0, "colors": colors, "class": ""})
-    # TODO: implement crossover between same classes
+        population.append({"image": img, "confidence": 0,
+                           "colors": colors, "class": ""}) """
+
 
 # mutate each individual in the population and delete old population
 def mutate(confidence):
