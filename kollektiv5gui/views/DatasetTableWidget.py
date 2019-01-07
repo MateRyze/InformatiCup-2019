@@ -28,6 +28,7 @@ class DatasetTableWidget(QTableWidget):
         ])
         self.__dataset = mainWindow.getDataset()
         self.renderDataset()
+        self.itemSelectionChanged.connect(self.onItemSelectionChanged)
 
     def contextMenuEvent(self, event):
         """
@@ -36,13 +37,16 @@ class DatasetTableWidget(QTableWidget):
         as this defines the used class id.
         """
         tableMenu = QMenu()
-        generateAction = tableMenu.addAction('Generate Fooling Image')
-        generateAction.triggered.connect(self.mainWindow.openGeneratingWindow)
 
         sendSampleAction = tableMenu.addAction('Send Sample to API')
         sendSampleAction.triggered.connect(self.classifySelected)
 
         tableMenu.exec_(QCursor.pos())
+
+    def onItemSelectionChanged(self):
+        self.mainWindow.generateButtonSelected.setEnabled(
+            len(self.selectedItems()) > 0
+        )
 
     def getSelectedClasses(self):
         """
