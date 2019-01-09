@@ -5,6 +5,7 @@ from PyQt5.QtCore import QUrl, Qt, QSize, pyqtSignal
 from PyQt5.QtGui import QCursor
 from PyQt5.QtWidgets import QMainWindow, QWidget, QAction, QDialog, QMessageBox
 from PyQt5.QtWidgets import QVBoxLayout, QTextEdit, QMenu, QSplitter
+from PyQt5.QtWidgets import QHBoxLayout, QPushButton
 from kollektiv5gui.util import logging
 from kollektiv5gui.util.paths import getResourcePath
 from kollektiv5gui.views.DatasetTableWidget import DatasetTableWidget
@@ -26,13 +27,14 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.__initDataset()
         self.__initWindow()
+        self.__initTopBar()
         self.__initMenuBar()
         self.__initTable()
         self.__initConsole()
-        # Sizes of the mainWidget (the vertical splitter) need to be set after
+        # Sizes of the splitterWidget (the vertical splitter) need to be set after
         # all elements have been added to it. This is slightly ugly,
         # but the best way to solve this (I think).
-        self.mainWidget.setSizes([512, 128])
+        self.splitterWidget.setSizes([512, 128])
         self.show()
 
         logging.setLoggingFunction(lambda x: self.sig.emit(x))
@@ -45,11 +47,17 @@ class MainWindow(QMainWindow):
         self.setWindowTitle('Kollektiv 5 GUI')
         self.resize(1280, 720)
 
-        self.mainWidget = QSplitter()
-        self.mainWidget.setOrientation(Qt.Vertical)
-        self.layout = QVBoxLayout(self.mainWidget)
+        self.mainWidget = QWidget()
+        self.layout = QVBoxLayout()
+        self.layout.setDirection(QVBoxLayout.BottomToTop)
         self.mainWidget.setLayout(self.layout)
         self.setCentralWidget(self.mainWidget)
+
+        self.splitterWidget = QSplitter()
+        self.splitterWidget.setOrientation(Qt.Vertical)
+        self.splitterWidgetLayout = QVBoxLayout(self.splitterWidget)
+        self.splitterWidget.setLayout(self.splitterWidgetLayout)
+        self.layout.addWidget(self.splitterWidget)
 
     def __initMenuBar(self):
         """
@@ -62,11 +70,6 @@ class MainWindow(QMainWindow):
         actionQuit = QAction('Close', self)
         actionQuit.triggered.connect(self.close)
 
-        actionOpenGeneratorWindow = QAction('Generate Fooling Image', self)
-        actionOpenGeneratorWindow.triggered.connect(
-            self.openGeneratingWindowNoTarget
-        )
-
         actionViewHelp = QAction('View Documentation', self)
         actionViewHelp.triggered.connect(self.help)
 
@@ -75,7 +78,6 @@ class MainWindow(QMainWindow):
 
         # top-level menus
         menuFile = self.menu.addMenu('File')
-        menuTools = self.menu.addMenu('Tools')
         menuPrefs = self.menu.addMenu('Preferences')
         menuHelp = self.menu.addMenu('Help')
 
@@ -84,22 +86,37 @@ class MainWindow(QMainWindow):
         menuFile.addSeparator()
         menuFile.addAction(actionQuit)
 
-        # "Tools" menu
-        menuTools.addAction(actionOpenGeneratorWindow)
-
         # "Preferences" menu
         menuPrefs.addAction(actionApiPrefs)
 
         # "Help" menu
         menuHelp.addAction(actionViewHelp)
 
+    def __initTopBar(self):
+        self.topBar = QHBoxLayout()
+
+        self.generateButtonAny = QPushButton('Generate Any')
+        self.generateButtonAny.clicked.connect(
+            self.openGeneratingWindowNoTarget
+        )
+        self.topBar.addWidget(self.generateButtonAny)
+
+        self.generateButtonSelected = QPushButton('Generate Selected')
+        self.generateButtonSelected.setEnabled(False)
+        self.generateButtonSelected.clicked.connect(
+            self.openGeneratingWindow
+        )
+        self.topBar.addWidget(self.generateButtonSelected)
+
+        self.layout.addLayout(self.topBar)
+
     def __initTable(self):
         """
         Create the dataset table and place it at the top of the vertical
         splitter.
         """
-        self.table = DatasetTableWidget(self, self.mainWidget)
-        self.layout.addWidget(self.table)
+        self.table = DatasetTableWidget(self, self.splitterWidget)
+        self.splitterWidgetLayout.addWidget(self.table)
 
     def __initConsole(self):
         """
@@ -107,10 +124,10 @@ class MainWindow(QMainWindow):
         It is used to print text-based information.
         """
 
-        self.console = QTextEdit(self.mainWidget)
+        self.console = QTextEdit(self.splitterWidget)
         self.console.setReadOnly(True)
         self.log('Started...')
-        self.layout.addWidget(self.console)
+        self.splitterWidgetLayout.addWidget(self.console)
 
     def __initDataset(self):
         self.__dataset = Dataset()
@@ -171,4 +188,5 @@ class MainWindow(QMainWindow):
         self.statusBar().showMessage(text)
 
     def help(self):
-        webbrowser.open('https://lmgtfy.com/?s=d&q=Wie+schreibt+man+eine+gute+Dokumentation%3F')
+        webbrowser.open(
+            'https://lmgtfy.com/?s=d&q=Wie+schreibt+man+eine+gute+Dokumentation%3F')
