@@ -1,3 +1,4 @@
+# encoding=utf8
 import requests
 import os
 import skimage
@@ -109,7 +110,7 @@ def evalFitness():
                     break
                 except ValueError:
                     time.sleep(1)
-                    # print("Decoding JSON failed -> hit API rate :(")
+                    print("Decoding JSON failed -> hit API rate :(")
                     # stop = True
                 except requests.exceptions.ConnectionError:
                     time.sleep(1)
