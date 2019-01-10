@@ -39,11 +39,14 @@ Bei manueller Installation muss lediglich die Datei `kollektiv5.py` ausgeführt 
 
 ## Generation von Bildern
 
-TODO
+Je nach Art der Installation wird die Software entweder über den Startmenü Eintrag “Kollektiv 5” oder über die Datei “kollektiv5.py” gestartet.
+Es öffnet sich eine Übersicht aller Klassen des Datensatzes. Im oberen Menu gibt es unter dem Punkt “Preferences” die Möglichkeit einige Anpassungen vorzunehmen. So kann unter “API” eine andere URL oder ein alternativer Key hinterlegt werden.
+
+Um ein Bild zu erzeugen, werden die beiden Buttons oberhalb der Datensatz Tabelle genutzt. “Generate Any” schränkt hierbei die Generation lediglich auf die zu erreichende Konfidenz ein. “Generate Selected” sorgt dafür, dass nur Klassen, die in der Tabelle angewählt sind, generiert werden.
 
 ## Einstellungen
 
-TODO
+Die Arbeitsweise des evolutionären Algorithmuses kann konfiguriert werden. Dazu gehören Parameter wie die Mutationsrate für die Farbwerte oder auch die zufällig generierten Formen. Für die verwendeten Farbwerte und den Kontrast lässt sich ebenfalls ein Bereich auswählen, der die Werte für das generierte Bild begrenzt.
 
 ## GUI mit Qt Designer bauen
 ### Konvertierung von .ui zu .py
