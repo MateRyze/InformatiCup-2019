@@ -278,32 +278,36 @@ def mutate(confidence):
             draw = ImageDraw.Draw(img)
             # mutate colors
             colors = population[i]["colors"]
-            colors = list(
-                map(lambda color: (
-                    color[0] + random.randint(-MUTATION_RATE, MUTATION_RATE),
-                    color[1] + random.randint(-MUTATION_RATE, MUTATION_RATE),
-                    color[2] + random.randint(-MUTATION_RATE, MUTATION_RATE)
-                ), colors)
-            )
-            # mutate shapes
-            shapes = population[i]["shapes"]
-            newShapes = []
-            for shape in shapes:
-                # add or delete point
-                if random.random() < 0.5:
-                    idx = random.randrange(0, len(shape))
-                    if (
-                        len(shape) > SHAPE_POINTS_COUNT[1] and
-                        random.random() < 0.5
-                    ):
-                        del shape[idx]
-                    else:
-                        shape.insert(idx, randomCoord())
-                # mutate point
-                shape = list(
-                    map(
-                        lambda x: (mutateCoord(x[0]), mutateCoord(x[1])), shape
-                    )
+            colors = list(map(lambda color: (color[0] + random.randint(-MUTATION_RATE, MUTATION_RATE), color[1] + random.randint(-MUTATION_RATE, MUTATION_RATE), color[2] + random.randint(-MUTATION_RATE, MUTATION_RATE)), colors))
+            
+            #mutate shape
+            shape = population[i]["shape"]
+            if random.random() < 0.5:
+                idx = random.randrange(0, len(shape))
+                if len(shape) > 3 and random.random() < 0.5:
+                    del shape[idx]
+                else:
+                    shape.insert(idx,randomCoord())
+            shape = list(map(lambda x: (mutateCoord(x[0]), mutateCoord(x[1])), shape))
+            
+            drawShapes(draw, colors, shape)
+            # mutate texts
+            texts = population[i]["texts"]
+            for i in range(len(texts)):
+                text = texts[i]
+                textPosition = (
+                    text.position[0] + random.randint(-MUTATION_RATE, MUTATION_RATE),
+                    text.position[1] + random.randint(-MUTATION_RATE, MUTATION_RATE),
+                )
+                textColor = (
+                    text.color[0] + random.randint(-MUTATION_RATE, MUTATION_RATE),
+                    text.color[1] + random.randint(-MUTATION_RATE, MUTATION_RATE),
+                    text.color[2] + random.randint(-MUTATION_RATE, MUTATION_RATE),
+                )
+                texts[i] = TextObject(
+                    textPosition,
+                    text.string,
+                    textColor,
                 )
                 newShapes.append(shape)
             drawShapes(draw, colors, newShapes)
