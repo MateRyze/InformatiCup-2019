@@ -289,13 +289,6 @@ def mutate(confidence):
                 else:
                     shape.insert(idx,randomCoord())
             shape = list(map(lambda x: (mutateCoord(x[0]), mutateCoord(x[1])), shape))
-            """ # distribute the contrast between the colors
-            while(contrast(colors[0], colors[1]) < CONTRAST_RANGE[0] or contrast(colors[0], colors[1]) > CONTRAST_RANGE[1]):
-                    colors = (
-                        random.randint(COLORS_RANGE[0][0], COLORS_RANGE[0][1]),
-                        random.randint(COLORS_RANGE[1][0], COLORS_RANGE[1][1]),
-                        random.randint(COLORS_RANGE[2][0], COLORS_RANGE[2][1])) """
-
 
             drawShapes(draw, colors, shape)
             # mutate texts
@@ -316,17 +309,29 @@ def mutate(confidence):
                     text.string,
                     textColor,
                 )
-                newShapes.append(shape)
-            drawShapes(draw, colors, newShapes)
-            population[i] = {
-                "image": img,
-                "confidence": 0,
-                "colors": colors,
-                "class": "",
-                "shapes": newShapes,
-                "lastCrossover": False
-            }
+            textRand = random.random()
+            if textRand > 0.75:
+                texts.append(TextObject(
+                    (random.randint(-16, 64), random.randint(-16, 64)),
+                    TEXTS[random.randrange(0, len(TEXTS))],
+                    (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)),
+                ))
+            elif textRand < 0.25 and len(texts) > 0:
+                del texts[random.randrange(0, len(texts))]
+            drawTexts(draw, texts)
 
+            population.append({"image": img, "confidence": 0,
+                               "colors": colors, "class": "", "shape": shape, "texts": texts})
+
+            """ # distribute the contrast between the colors
+            while(contrast(colors[0], colors[1]) < CONTRAST_RANGE[0] or contrast(colors[0], colors[1]) > CONTRAST_RANGE[1]):
+                    colors = (
+                        random.randint(COLORS_RANGE[0][0], COLORS_RANGE[0][1]),
+                        random.randint(COLORS_RANGE[1][0], COLORS_RANGE[1][1]),
+                        random.randint(COLORS_RANGE[2][0], COLORS_RANGE[2][1])) """
+
+
+        
 
 def printResults():
     for individual in population:
