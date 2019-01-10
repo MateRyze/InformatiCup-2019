@@ -201,6 +201,7 @@ def mutate(confidence):
 
             population.append({"image": img, "confidence": 0,
                                "colors": colors, "class": "", "shape": shape, "texts": texts})
+
         
 
 def printResults():
@@ -278,3 +279,12 @@ if __name__ == '__main__':
     saveImages()
     #evalInitialPopulation()
     print("api calls: ", api_calls)
+
+
+            """ # distribute the contrast between the colors
+            while(contrast(colors[0], colors[1]) < CONTRAST_RANGE[0] or contrast(colors[0], colors[1]) > CONTRAST_RANGE[1]):
+                    colors = (
+                        random.randint(COLORS_RANGE[0][0], COLORS_RANGE[0][1]),
+                        random.randint(COLORS_RANGE[1][0], COLORS_RANGE[1][1]),
+                        random.randint(COLORS_RANGE[2][0], COLORS_RANGE[2][1])) """
+
