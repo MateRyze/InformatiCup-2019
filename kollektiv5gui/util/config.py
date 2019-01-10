@@ -19,13 +19,13 @@ def __loadConfig():
         # copy the default one to the expected location
         shutil.copy(__DEFAULT_CONFIG_FILENAME, __USER_CONFIG_FILENAME)
     __CONFIG = configparser.ConfigParser()
-    __CONFIG.read(__USER_CONFIG_FILENAME)
+    __CONFIG.read(__USER_CONFIG_FILENAME, encoding='utf8')
 
     # the default config is also always loaded to try
     # and fall back to its values
     # if sections or keys are missing from the user config
     __DEFAULT_CONFIG = configparser.ConfigParser()
-    __DEFAULT_CONFIG.read(__DEFAULT_CONFIG_FILENAME)
+    __DEFAULT_CONFIG.read(__DEFAULT_CONFIG_FILENAME, encoding='utf8')
 
 
 def get(section, option, type=str):
