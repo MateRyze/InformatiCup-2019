@@ -320,7 +320,9 @@ class EAGenerator(AbstractGenerator):
                         0, len(self._targetClasses))]
                 individual["confidence"] = confidence
             else:
+                self.callOnStepCallback()
                 self.finish()
+                return
         self.callOnStepCallback()
 
     # create initial population
