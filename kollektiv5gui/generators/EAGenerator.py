@@ -293,7 +293,7 @@ class EAGenerator(AbstractGenerator):
     # eval fitness for each individual
     def evalFitness(self):
         for individual in self.population:
-            if(individual["class"] == ""):
+            if individual["class"] == "":
                 name = 'toEval.png'
                 image = individual["image"]
                 image.save(name)
@@ -316,7 +316,13 @@ class EAGenerator(AbstractGenerator):
                     individual["class"] = self._targetClasses[random.randrange(
                         0, len(self._targetClasses))]
                 individual["confidence"] = confidence
+
+            if self.getCountThatMatch(self.targetConfidence) >= self.targetPopulationSize:
+                self.callOnStepCallback()
+                self.finish()
+                return True
         self.callOnStepCallback()
+        return False
 
     # create initial population
     def initPopulation(self, count):
@@ -493,8 +499,13 @@ class EAGenerator(AbstractGenerator):
     # get the count of images that match the confidence
     def getCountThatMatch(self, confidence):
         count = 0
+        seen = []
         for individual in self.population:
-            if(individual["confidence"] >= confidence):
+            if(
+                individual["confidence"] >= confidence and
+                individual["class"] not in seen
+            ):
+                seen.append(individual["class"])
                 count += 1
         return count
 
@@ -522,14 +533,14 @@ class EAGenerator(AbstractGenerator):
     def step(self):
         if not self.initialized:
             self.initPopulation(self.initialPopulationSize)
-            self.evalFitness()
+            if self.evalFitness(): return
             self.selection(self.targetPopulationSize, 2)
             self.matchCount = self.getCountThatMatch(self.targetConfidence)
             self.initialized = True
 
         self.crossover()
         self.mutate(self.targetConfidence)
-        self.evalFitness()
+        if self.evalFitness(): return
         self.__currentGeneration += 1
         self.selection(self.targetPopulationSize, 2)
 

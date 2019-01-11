@@ -19,6 +19,7 @@ def __sendToApi(data):
     url = config.get('API', 'url')
     success = False
     resJson = None
+    printedRateLimitingMessage = False
     with __lock:
         while not success:
             try:
@@ -30,10 +31,10 @@ def __sendToApi(data):
                 resJson = res.json()
                 success = True
             except json.decoder.JSONDecodeError:
-                sleepTime = random.randrange(10, 30)
-                logging.log('Rate limiting detected!')
-                logging.log('Sleeping for %i seconds' % sleepTime)
-                time.sleep(sleepTime)
+                if not printedRateLimitingMessage:
+                    logging.log('Rate limiting detected!')
+                    printedRateLimitingMessage = True
+                time.sleep(1)
             except Exception:
                 logging.log('Unexpected Error, retrying.')
                 time.sleep(1)
