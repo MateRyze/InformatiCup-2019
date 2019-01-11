@@ -65,8 +65,6 @@ class MainWindow(QMainWindow):
         """
         self.menu = self.menuBar()
 
-        actionLoadDataset = QAction('Open Dataset Specification', self)
-
         actionQuit = QAction('Close', self)
         actionQuit.triggered.connect(self.close)
 
@@ -82,8 +80,6 @@ class MainWindow(QMainWindow):
         menuHelp = self.menu.addMenu('Help')
 
         # "File" menu
-        menuFile.addAction(actionLoadDataset)
-        menuFile.addSeparator()
         menuFile.addAction(actionQuit)
 
         # "Preferences" menu
@@ -189,4 +185,4 @@ class MainWindow(QMainWindow):
 
     def help(self):
         webbrowser.open(
-            'https://lmgtfy.com/?s=d&q=Wie+schreibt+man+eine+gute+Dokumentation%3F')
+            'file://%s' % os.path.join(getResourcePath(), 'handbook.pdf'))
