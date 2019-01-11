@@ -1,0 +1,262 @@
+{
+    "classes": [
+        {
+            "classId": 0,
+            "name": "Zulässige Höchstgeschwindigkeit (20)",
+            "thumbnail": "class_images/00.png",
+            "known": true
+        },
+        {
+            "classId": 1,
+            "name": "Zulässige Höchstgeschwindigkeit (30)",
+            "thumbnail": "class_images/01.png",
+            "known": true
+        },
+        {
+            "classId": 2,
+            "name": "Zulässige Höchstgeschwindigkeit (50)",
+            "thumbnail": "class_images/02.png",
+            "known": true
+        },
+        {
+            "classId": 3,
+            "name": "Zulässige Höchstgeschwindigkeit (60)",
+            "thumbnail": "class_images/03.png",
+            "known": true
+        },
+        {
+            "classId": 4,
+            "name": "Zulässige Höchstgeschwindigkeit (70)",
+            "thumbnail": "class_images/04.png",
+            "known": true
+        },
+        {
+            "classId": 5,
+            "name": "Zulässige Höchstgeschwindigkeit (80)",
+            "thumbnail": "class_images/05.png",
+            "known": true
+        },
+        {
+            "classId": 6,
+            "name": "Ende der Geschwindigkeitsbegrenzung (80)",
+            "thumbnail": "class_images/06.png",
+            "known": true
+        },
+        {
+            "classId": 7,
+            "name": "Zulässige Höchstgeschwindigkeit (100)",
+            "thumbnail": "class_images/07.png",
+            "known": true
+        },
+        {
+            "classId": 8,
+            "name": "Zulässige Höchstgeschwindigkeit (120)",
+            "thumbnail": "class_images/08.png",
+            "known": true
+        },
+        {
+            "classId": 9,
+            "name": "Überholverbot für Kraftfahrzeuge aller Art",
+            "thumbnail": "class_images/09.png",
+            "known": true
+        },
+        {
+            "classId": 10,
+            "name": "Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",
+            "thumbnail": "class_images/10.png",
+            "known": true
+        },
+        {
+            "classId": 11,
+            "name": "Einmalige Vorfahrt",
+            "thumbnail": "class_images/11.png",
+            "known": true
+        },
+        {
+            "classId": 12,
+            "name": "Vorfahrt",
+            "thumbnail": "class_images/12.png",
+            "known": true
+        },
+        {
+            "classId": 13,
+            "name": "Vorfahrt gewähren",
+            "thumbnail": "class_images/13.png",
+            "known": true
+        },
+        {
+            "classId": 14,
+            "name": "Stoppschild",
+            "thumbnail": "class_images/14.png",
+            "known": true
+        },
+        {
+            "classId": 15,
+            "name": "Verbot für Fahrzeuge aller Art",
+            "thumbnail": "class_images/15.png",
+            "known": true
+        },
+        {
+            "classId": 16,
+            "name": "Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",
+            "thumbnail": "class_images/16.png",
+            "known": true
+        },
+        {
+            "classId": 17,
+            "name": "Verbot der Einfahrt",
+            "thumbnail": "class_images/17.png",
+            "known": true
+        },
+        {
+            "classId": 18,
+            "name": "Gefahrenstelle",
+            "thumbnail": "class_images/18.png",
+            "known": true
+        },
+        {
+            "classId": 19,
+            "name": "Kurve (links)",
+            "thumbnail": "class_images/19.png",
+            "known": true
+        },
+        {
+            "classId": 20,
+            "name": "Kurve (rechts)",
+            "thumbnail": "class_images/20.png",
+            "known": true
+        },
+        {
+            "classId": 21,
+            "name": "Doppelkurve (zunächst links)",
+            "thumbnail": "class_images/21.png",
+            "known": true
+        },
+        {
+            "classId": 22,
+            "name": "Unebene Fahrbahn",
+            "thumbnail": "class_images/22.png",
+            "known": true
+        },
+        {
+            "classId": 23,
+            "name": "Schleudergefahr bei Nässe oder Schmutz",
+            "thumbnail": "class_images/23.png",
+            "known": true
+        },
+        {
+            "classId": 24,
+            "name": "Verengung der Fahrbahn",
+            "thumbnail": "class_images/24.png",
+            "known": false
+        },
+        {
+            "classId": 25,
+            "name": "Baustelle",
+            "thumbnail": "class_images/25.png",
+            "known": true
+        },
+        {
+            "classId": 26,
+            "name": "Ampel",
+            "thumbnail": "class_images/26.png",
+            "known": false
+        },
+        {
+            "classId": 27,
+            "name": "Fußgänger",
+            "thumbnail": "class_images/27.png",
+            "known": true
+        },
+        {
+            "classId": 28,
+            "name": "Kinder",
+            "thumbnail": "class_images/28.png",
+            "known": false
+        },
+        {
+            "classId": 29,
+            "name": "Fahrradfahrer",
+            "thumbnail": "class_images/29.png",
+            "known": true
+        },
+        {
+            "classId": 30,
+            "name": "Schneefall",
+            "thumbnail": "class_images/30.png",
+            "known": false
+        },
+        {
+            "classId": 31,
+            "name": "Wildwechsel",
+            "thumbnail": "class_images/31.png",
+            "known": true
+        },
+        {
+            "classId": 32,
+            "name": "Ende aller Streckenverbote",
+            "thumbnail": "class_images/32.png",
+            "known": true
+        },
+        {
+            "classId": 33,
+            "name": "Ausschließlich rechts",
+            "thumbnail": "class_images/33.png",
+            "known": true
+        },
+        {
+            "classId": 34,
+            "name": "Ausschließlich links",
+            "thumbnail": "class_images/34.png",
+            "known": false
+        },
+        {
+            "classId": 35,
+            "name": "Ausschließlich geradeaus",
+            "thumbnail": "class_images/35.png",
+            "known": true
+        },
+        {
+            "classId": 36,
+            "name": "Geradeaus oder rechts",
+            "thumbnail": "class_images/36.png",
+            "known": false
+        },
+        {
+            "classId": 37,
+            "name": "Geradeaus oder links",
+            "thumbnail": "class_images/37.png",
+            "known": false
+        },
+        {
+            "classId": 38,
+            "name": "Rechts vorbei",
+            "thumbnail": "class_images/38.png",
+            "known": true
+        },
+        {
+            "classId": 39,
+            "name": "Links vorbei",
+            "thumbnail": "class_images/39.png",
+            "known": false
+        },
+        {
+            "classId": 40,
+            "name": "Kreisverkehr",
+            "thumbnail": "class_images/40.png",
+            "known": true
+        },
+        {
+            "classId": 41,
+            "name": "Ende des Überholverbotes für Kraftfahrzeuge aller Art",
+            "thumbnail": "class_images/41.png",
+            "known": true
+        },
+        {
+            "classId": 42,
+            "name": "Ende des Überholverbotes für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",
+            "thumbnail": "class_images/42.png",
+            "known": true
+        }
+    ]
+}

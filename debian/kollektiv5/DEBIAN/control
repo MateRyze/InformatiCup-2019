@@ -1,0 +1,15 @@
+Package: kollektiv5
+Version: 0.1-1
+Section: base
+Priority: optional
+Architecture: amd64
+Depends: python3 (>= 3.6.0), python3-requests, python3-pillow, python3-pyqt5
+Maintainer: Jan Wolff <janw@mailbox.org>
+Description: Generate fooling images for neural networks.
+ This tool implements an evolutionary algorithm to generate fooling images for a neural network.
+ The resulting images don't resemble the actual classes detected by the network, yet are classified
+ with a high confidence.
+ Saving the generated images is possible, in order to use them at a later date.
+ .
+ The software is written in Python, with the interface being based on PyQt5.
+

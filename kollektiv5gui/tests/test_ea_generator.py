@@ -1,38 +1,39 @@
-import ea_combined
+from kollektiv5gui.generators.EAGenerator import EAGenerator
 import unittest
 
 
 class Test_EA(unittest.TestCase):
 
     def setUp(self):
-        ea_combined.population.clear()
-        ea_combined.api_calls = 0
-        ea_combined.stop = False
+        self.generator = EAGenerator()
+        self.generator.population.clear()
+        self.generator.api_calls = 0
+        self.generator.stop = False
 
     def test_init_population(self):
-        self.assertEqual(len(ea_combined.population), 0)
-        ea_combined.initPopulation(ea_combined.INITIAL_POPULATION)
-        self.assertEqual(len(ea_combined.population),
-                         ea_combined.INITIAL_POPULATION)
+        self.assertEqual(len(self.generator.population), 0)
+        self.generator.initPopulation(self.generator.initialPopulationSize)
+        self.assertEqual(len(self.generator.population),
+                         self.generator.initialPopulationSize)
 
     def test_selection(self):
-        ea_combined.initPopulation(ea_combined.INITIAL_POPULATION)
-        self.assertEqual(len(ea_combined.population),
-                         ea_combined.INITIAL_POPULATION)
+        self.generator.initPopulation(self.generator.initialPopulationSize)
+        self.assertEqual(len(self.generator.population),
+                         self.generator.initialPopulationSize)
         # best count (5)
-        ea_combined.selection(ea_combined.SELECTED_COUNT, 1)
-        self.assertEqual(len(ea_combined.population),
-                         ea_combined.SELECTED_COUNT)
+        self.generator.selection(self.generator.targetPopulationSize, 1)
+        self.assertEqual(len(self.generator.population),
+                         self.generator.targetPopulationSize)
 
     def test_crossover(self):
         resultsPassed = 0
         crossoverCount = 0
         # loop for statistical results
         for i in range(10):
-            ea_combined.initPopulation(50)
-            ea_combined.evalFitness(ea_combined.population)
-            ea_combined.selection(ea_combined.SELECTED_COUNT, 2)
-            crossoverResults = ea_combined.crossover()
+            self.generator.initPopulation(50)
+            self.generator.evalFitness(self.generator.population)
+            self.generator.selection(self.generator.targetPopulationSize, 2)
+            crossoverResults = self.generator.crossover()
             self.assertGreater(
                 len(crossoverResults["before"]),
                 0,
@@ -41,7 +42,7 @@ class Test_EA(unittest.TestCase):
             self.assertGreater(len(crossoverResults["after"]), 1,
                                "No crossover results created!")
             # crossover should improve confidence
-            results = ea_combined.evalFitness(crossoverResults["after"])
+            results = self.generator.evalFitness(crossoverResults["after"])
             print("before: ", len(
                 crossoverResults["before"]),  crossoverResults["before"])
             print("after: ", len(results), results)
@@ -64,12 +65,12 @@ class Test_EA(unittest.TestCase):
                          str(resultsPassed/crossoverCount*100) + "%")
 
     def test_mutate(self):
-        ea_combined.initPopulation(ea_combined.INITIAL_POPULATION)
-        self.assertEqual(len(ea_combined.population),
-                         ea_combined.INITIAL_POPULATION)
-        ea_combined.mutate(ea_combined.DESIRED_CONFIDENCE)
-        self.assertEqual(len(ea_combined.population),
-                         ea_combined.INITIAL_POPULATION)
+        self.generator.initPopulation(self.generator.INITIAL_POPULATION)
+        self.assertEqual(len(self.generator.population),
+                         self.generator.INITIAL_POPULATION)
+        self.generator.mutate(self.generator.DESIRED_CONFIDENCE)
+        self.assertEqual(len(self.generator.population),
+                         self.generator.INITIAL_POPULATION)
 
     def test_run_ea(self):
         apiCallsList = []
@@ -79,12 +80,12 @@ class Test_EA(unittest.TestCase):
                 str(i+1) +
                 "/10 _____"
             )
-            ea_combined.runEvoAlgorithm()
+            self.generator.runEvoAlgorithm()
             # check if confidence is at least 90 % for all images
             self.assertTrue(
                 all(
                     individual["confidence"] >= 0.9 
-                    for individual in ea_combined.population
+                    for individual in self.generator.population
                 ),
                 "The confidence is not at least 90 percent!"
             )
@@ -93,14 +94,14 @@ class Test_EA(unittest.TestCase):
                 len(
                     set(
                         individual["class"] 
-                        for individual in ea_combined.population
+                        for individual in self.generator.population
                     )
                 ) == 5,
                 "Generated images contain class duplicates!"
             )
-            apiCallsList.append(ea_combined.api_calls)
-            ea_combined.saveImages("test_run")
-            ea_combined.api_calls = 0
+            apiCallsList.append(self.generator.api_calls)
+            self.generator.saveImages("test_run")
+            self.generator.api_calls = 0
         print(apiCallsList)
         print("average: " + str(sum(apiCallsList)/len(apiCallsList)))
 
