@@ -32,7 +32,6 @@ class EAGenerator(AbstractGenerator):
         self.contrastRange = (25, 400)
         # 5 is minimum, because shapes with 3 and 4 points looks like road signs
         self.MINIMUM_SHAPE_POINTS_COUNT = 5
-        self.shapePolygonCount = 2
         self.shapePolygonPointCount = 5
 
         # init parameters
@@ -151,8 +150,6 @@ class EAGenerator(AbstractGenerator):
 
         config.set(section, "shapeMutationRate",
                    self.ui.shapeMutationRateSpinBox.value())
-        config.set(section, "shapePolygonCount",
-                   self.ui.shapePolygonCountSpinBox.value())
         config.set(section, "shapePolygonPointCount",
                    self.ui.shapePolygonPointCountSpinBox.value())
         config.set(section, "initialPopulationSize",
@@ -212,7 +209,6 @@ class EAGenerator(AbstractGenerator):
         self.contrastRange = (
             self.ui.contrastFromSpinBox.value(), self.ui.contrastToSpinBox.value())
         self.shapeMutationRate = self.ui.shapeMutationRateSpinBox.value()
-        self.shapePolygonCount = self.ui.shapePolygonCountSpinBox.value()
         self.shapePolygonPointCount = self.ui.shapePolygonPointCountSpinBox.value()
         self.initialPopulationSize = self.ui.initialPopulationSizeSpinBox.value()
         # division by 100, because the target confidence is given in percent in the gui
