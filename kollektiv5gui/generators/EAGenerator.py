@@ -293,7 +293,10 @@ class EAGenerator(AbstractGenerator):
     # eval fitness for each individual
     def evalFitness(self):
         for individual in self.population:
-            if(individual["class"] == ""):
+            if(
+                individual["class"] == "" and
+                self.getCountThatMatch(self.targetConfidence) < self.targetPopulationSize
+            ):
                 name = 'toEval.png'
                 image = individual["image"]
                 image.save(name)
@@ -316,6 +319,8 @@ class EAGenerator(AbstractGenerator):
                     individual["class"] = self._targetClasses[random.randrange(
                         0, len(self._targetClasses))]
                 individual["confidence"] = confidence
+            else:
+                self.finish()
         self.callOnStepCallback()
 
     # create initial population
@@ -493,8 +498,13 @@ class EAGenerator(AbstractGenerator):
     # get the count of images that match the confidence
     def getCountThatMatch(self, confidence):
         count = 0
+        seen = []
         for individual in self.population:
-            if(individual["confidence"] >= confidence):
+            if(
+                individual["confidence"] >= confidence and
+                individual["class"] not in seen
+            ):
+                seen.append(individual["class"])
                 count += 1
         return count
 
