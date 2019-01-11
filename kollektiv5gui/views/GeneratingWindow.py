@@ -1,6 +1,7 @@
 import os
 import time
 import webbrowser
+import threading
 from collections import namedtuple
 from PyQt5.QtCore import QUrl, Qt, QSize
 from PyQt5.QtGui import QCursor, QPixmap, QImage
@@ -32,6 +33,8 @@ class GeneratingWindow(QDialog):
         'confidenceLabel',
         'saveButton']
     )
+
+    __lock = threading.Lock()
 
     def __init__(self, mainWindow, targetClasses):
         super().__init__(mainWindow)
@@ -191,6 +194,10 @@ class GeneratingWindow(QDialog):
         self.outputLabel.setText(stats)
 
     def __onStepCallback(self, classes):
+        with self.__lock:
+            previewPixmaps = [
+                self.generator.getImage(i) for i in range(len(classes))
+            ]
         for i in range(len(classes)):
             classname = classes[i][0]
             shortenedClassname = classname[:20] +\
@@ -199,8 +206,12 @@ class GeneratingWindow(QDialog):
             self.previews[i].classnameLabel.setText(shortenedClassname)
             self.previews[i].confidenceLabel.setText('%d%%' % (confidence*100))
 
-            previewPixmap = self.generator.getImage(i)
-            tempQImage = QImage(previewPixmap, 64, 64, QImage.Format_RGB888)
+            tempQImage = QImage(
+                previewPixmaps[i],
+                64,
+                64,
+                QImage.Format_RGB888
+            )
             generatedPixmap = QPixmap.fromImage(tempQImage)
             self.previews[i].generatedImageLabel.setPixmap(generatedPixmap)
 
@@ -224,8 +235,6 @@ class GeneratingWindow(QDialog):
         self.stopButton.setEnabled(False)
         for preview in self.previews:
             preview.saveButton.setEnabled(True)
-        # instantiate a fresh generator
-        self.__initGenerator()
 
     def __generate(self):
         self.generateButton.setEnabled(False)
@@ -243,7 +252,7 @@ class GeneratingWindow(QDialog):
         def failureCallback(*args, **kwargs):
             self.__onFailureCallback(*args, **kwargs)
 
-        self.__initGenerator()
+        self.__selectGenerator(self.selectedGeneratorId)
         self.generator.setCallbacks(
             stepCallback,
             finishedCallback,
