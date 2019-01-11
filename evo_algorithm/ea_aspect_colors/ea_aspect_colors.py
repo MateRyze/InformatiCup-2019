@@ -211,14 +211,19 @@ def getApiResultsForSingleColors():
 def scatterPlot():
     df = pd.read_csv("results_uni_color.csv")
     print(df)
+    df = df.groupby("class").filter(lambda x: len(x) > 10)
     colors = [make_tuple(row) for row in df["color"]]
     colors = [[elem/255 for elem in row] for row in colors]
     colorsSummed = [(row[0] + row[1] + row[2])*255 for row in colors]
-    print(colors)
-    plt.scatter(df["confidence"], colorsSummed, c=colors, s=2000, marker=[(1,3), (0,3), (0,0), (1,0)])
+    #print(colors)
+    plt.scatter(df["confidence"], df["class"], c=colors, s=1000, marker=[(1,3), (0,3), (0,0), (1,0)])
     plt.title('Einfarbige Bilder, 1000 Stück')
     plt.xlabel('Konfidenz')
-    plt.ylabel('Summe der Farbwerte (R + G + B)')
+    plt.ylabel('Klasse')
+    plt.xlim(0, 0.20)
+    plt.xlabel('Konfidenz', fontsize=18)
+    ax = plt.gca()
+    ax.tick_params(axis = 'x', which = 'major', labelsize = 18)
     plt.show()
 
 

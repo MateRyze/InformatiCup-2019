@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 # TODO
 def plot():
-    path = "ea_aspect_colors/results/results_uni_color.csv"
+    path = "./ea_aspect_colors/results/results_uni_color.csv"
     df = pd.read_csv(path)
     print(df)
     plt.title('Einfarbige Bilder')
