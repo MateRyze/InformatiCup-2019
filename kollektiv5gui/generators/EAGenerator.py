@@ -10,7 +10,7 @@ from kollektiv5gui.util import api
 from kollektiv5gui.generators.AbstractGenerator import AbstractGenerator
 from PyQt5.QtWidgets import QMessageBox, QColorDialog, QLineEdit, QWidget, QDialog, QLabel, QGroupBox, QPushButton, QSizePolicy, QFileDialog, QComboBox, QGridLayout, QHBoxLayout, QVBoxLayout
 from kollektiv5gui.views.EaOptionsWidget import Ui_Options
-from kollektiv5gui.util import config
+from kollektiv5gui.util import config, logging
 
 
 class EAGenerator(AbstractGenerator):
@@ -187,8 +187,6 @@ class EAGenerator(AbstractGenerator):
 
         self.ui.shapeMutationRateSpinBox.setValue(
             config.get(section, "shapeMutationRate", int))
-        self.ui.shapePolygonCountSpinBox.setValue(
-            config.get(section, "shapePolygonCount", int))
         self.ui.shapePolygonPointCountSpinBox.setValue(
             config.get(section, "shapePolygonPointCount", int))
         self.ui.initialPopulationSizeSpinBox.setValue(
@@ -273,9 +271,9 @@ class EAGenerator(AbstractGenerator):
             if(i > 0):
                 # distribute the contrast between the colors
                 while(
-                    self.contrast(color, colors[i-1]) < self.contrastRange[0]/(count-1) or
+                    self.contrast(color, colors[i-1]) < self.contrastRange[0] / (count - 1) or
                     self.contrast(
-                        color, colors[i-1]) > self.contrastRange[1]/(count-1)
+                        color, colors[i-1]) > self.contrastRange[1] / (count - 1)
                 ):
                     color = (
                         random.randint(
@@ -289,7 +287,7 @@ class EAGenerator(AbstractGenerator):
     # eval fitness for each individual
     def evalFitness(self):
         for individual in self.population:
-            if individual["class"] == "":
+            if individual["class"] == "" and self.hasFinished is not True:
                 name = 'toEval.png'
                 image = individual["image"]
                 image.save(name)
@@ -329,6 +327,7 @@ class EAGenerator(AbstractGenerator):
     # select best individuals from population
     def selection(self, bestCount, sameClassCount):
         print("doing selection")
+        logging.log("EA: selection")
         # sort by confidence
         self.population.sort(
             key=lambda individual: individual["confidence"],
@@ -361,6 +360,7 @@ class EAGenerator(AbstractGenerator):
     # mutate each individual in the population and delete old population
     def mutate(self, confidence):
         print("doing mutation of crossover images")
+        logging.log("EA: mutation")
         population_size = len(self.population)
         for i in range(population_size):
             # use only for confidence < 90% and crossovered individuals
@@ -488,6 +488,7 @@ class EAGenerator(AbstractGenerator):
             # population.remove(entry[1])
 
         print("crossover, appended images: " + str(newImagesAppended))
+        logging.log("EA: crossover, add " + str(newImagesAppended) + " individuals")
 
         # for testing crossover method
         return {"before": beforeCrossover, "after": afterCrossover}
@@ -529,20 +530,24 @@ class EAGenerator(AbstractGenerator):
     def step(self):
         if not self.initialized:
             self.initPopulation(self.initialPopulationSize)
-            if self.evalFitness(): return
+            if self.evalFitness():
+                return
             self.selection(self.targetPopulationSize, 2)
             self.matchCount = self.getCountThatMatch(self.targetConfidence)
             self.initialized = True
 
         self.crossover()
         self.mutate(self.targetConfidence)
-        if self.evalFitness(): return
+        if self.evalFitness():
+            return
         self.__currentGeneration += 1
         self.selection(self.targetPopulationSize, 2)
 
+        # avoid local maxima by adding new individuals when no improvement
         newMatchCount = self.getCountThatMatch(self.targetConfidence)
         if newMatchCount == self.matchCount:
             self.addRandomImage()
+            logging.log("EA: add new individual (avoid local maxima)")
         self.matchCount = newMatchCount
 
         if self.matchCount > self.targetPopulationSize:

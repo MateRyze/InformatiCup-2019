@@ -32,11 +32,11 @@ def __sendToApi(data):
                 success = True
             except json.decoder.JSONDecodeError:
                 if not printedRateLimitingMessage:
-                    logging.log('Rate limiting detected!')
+                    logging.log('API: Rate limiting detected, retrying...')
                     printedRateLimitingMessage = True
                 time.sleep(1)
             except Exception:
-                logging.log('Unexpected Error, retrying.')
+                logging.log('API: Unexpected Error, retrying...')
                 time.sleep(1)
     return resJson
 
