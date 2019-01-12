@@ -84,7 +84,7 @@ class GeneratingWindow(QDialog):
         self.optionsButton.setVisible(False)
         self.buttonsContainer.addWidget(self.optionsButton)
 
-        self.generateButton = QPushButton('Generate Image')
+        self.generateButton = QPushButton('Start Generation')
         self.generateButton.clicked.connect(self.__generate)
         self.buttonsContainer.addWidget(self.generateButton)
 

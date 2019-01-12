@@ -33,6 +33,7 @@ class AbstractGenerator(Thread):
     def start(self):
         super().start()
         self.__startTime = time.time()
+        logging.log("Started image generation")
 
     def stop(self):
         self.__endTime = time.time()
