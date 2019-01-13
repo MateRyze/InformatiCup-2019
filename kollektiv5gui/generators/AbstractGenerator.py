@@ -1,7 +1,7 @@
 import time
 from multiprocessing import Process
 from threading import Thread
-from kollektiv5gui.util import api
+from kollektiv5gui.util import api, logging
 
 
 class AbstractGenerator(Thread):
@@ -33,6 +33,7 @@ class AbstractGenerator(Thread):
     def start(self):
         super().start()
         self.__startTime = time.time()
+        logging.log("Started image generation")
 
     def stop(self):
         self.__endTime = time.time()
@@ -41,6 +42,7 @@ class AbstractGenerator(Thread):
     def finish(self):
         self.__finished = True
         self.onFinished()
+        logging.log("Finished image generation")
 
     def hasFinished(self):
         return self.__finished
