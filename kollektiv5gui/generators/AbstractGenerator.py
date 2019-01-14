@@ -5,8 +5,13 @@ from kollektiv5gui.util import api, logging
 
 
 class AbstractGenerator(Thread):
+    """
+    Base class for image generators
+    """
 
+    # How many images are created at once
     IMAGE_COUNT = 1
+    # Does this generator provide options?
     PROVIDES_OPTIONS = False
 
     def __init__(self):
@@ -23,6 +28,10 @@ class AbstractGenerator(Thread):
         self._targetClasses = []
 
     def setCallbacks(self, onStep, onFinished, onFailure):
+        """
+        Called by the generator window, sets the callbacks to
+        the correct values.
+        """
         self.onStep = onStep
         self.onFinished = onFinished
         self.onFailure = onFailure
@@ -74,4 +83,9 @@ class AbstractGenerator(Thread):
         pass
 
     def openOptionsDialog(self):
+        """
+        Handler function when the user clicks on the
+        "Configure Generator" button in the GUI. The visibility of
+        this button is determined by the value of PROVIDES_OPTIONS.
+        """
         pass

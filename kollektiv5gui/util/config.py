@@ -45,6 +45,13 @@ def get(section, option, type=str):
 
 
 def set(section, option, value):
+    """
+    Sets a value in the config file. If no config was loaded before,
+    __DEFAULT_FILENAME is read and stored before the
+    value is stored to it.
+    Changes are not written to disk immediately. Call flush() to do
+    this.
+    """
     if __CONFIG is None:
         __loadConfig()
     if not __CONFIG.has_section(section):
@@ -53,6 +60,11 @@ def set(section, option, value):
 
 
 def removeSection(section):
+    """
+    Removes a section from the config file.
+    Changes are not written to disk immediately. Call flush() to do
+    this.
+    """
     if __CONFIG is None:
         __loadConfig()
     if __CONFIG.has_section(section):
@@ -60,6 +72,9 @@ def removeSection(section):
 
 
 def flush():
+    """
+    Actually writes the changes to disk.
+    """
     global __CONFIG
     if __CONFIG is not None:
         with open(__USER_CONFIG_FILENAME, 'w') as configfile:

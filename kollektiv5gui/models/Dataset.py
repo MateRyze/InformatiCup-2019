@@ -2,15 +2,15 @@ import json
 import os
 from collections import namedtuple
 
-DatasetClass = namedtuple('DatasetClass', [
-    'id',
-    'name',
-    'thumbnailPath',
-    'known'
-])
-
 
 class Dataset():
+    DatasetClass = namedtuple('DatasetClass', [
+        'id',
+        'name',
+        'thumbnailPath',
+        'known'
+    ])
+
     def __init__(self):
         self.__classes = []
 
@@ -36,7 +36,7 @@ class Dataset():
             # the amount of rows in the table needs to be set first,
             # thus we use the length of the 'classes' array
             for classdef in dataset['classes']:
-                self.__classes.append(DatasetClass(
+                self.__classes.append(self.DatasetClass(
                     id=classdef['classId'],
                     name=classdef['name'],
                     # treat the thumbnail path as relative

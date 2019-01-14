@@ -46,6 +46,11 @@ class EAGenerator(AbstractGenerator):
 
     # create options dialog from widget
     def initOptionsDialog(self):
+        """
+        Instantiate (don't show yet) the options window.
+        The values from the window are loaded from the configuration
+        and used to set the values of the generator function.
+        """
         self.optionsWidget = QWidget()
         self.ui = Ui_Options()
         self.ui.setupUi(self.optionsWidget)
@@ -66,6 +71,10 @@ class EAGenerator(AbstractGenerator):
 
     # open dialog for setting preset name
     def __openSavePresetDialog(self):
+        """
+        Opens a dialog and saves the currently configured options to
+        a preset of that name.
+        """
         alert = QDialog(self.optionsWidget)
         alert.setWindowTitle("Save Preset")
         nameField = QLineEdit()
@@ -81,6 +90,9 @@ class EAGenerator(AbstractGenerator):
         alert.exec_()
 
     def __savePreset(self, alert, nameField):
+        """
+        Actually stores the preset's values.
+        """
         preset = nameField.text()
         presetsList = config.get("EAGenerator", "presets")
         presets = [name.strip() for name in presetsList.split(",")]
@@ -97,6 +109,9 @@ class EAGenerator(AbstractGenerator):
         alert.close()
 
     def __removePreset(self):
+        """
+        Removes the currently selected preset.
+        """
         preset = self.ui.presetComboBox.currentText()
         section = "EAGenerator_Preset:" + preset
         presets = [name.strip() for name in config.get(
@@ -116,6 +131,9 @@ class EAGenerator(AbstractGenerator):
             self.ui.presetComboBox.setCurrentIndex(newIndex)
 
     def __selectPreset(self):
+        """
+        Load the values of the currently selected preset.
+        """
         preset = self.ui.presetComboBox.currentText()
         try:
             self.__loadPresetIntoUi(preset)
@@ -127,6 +145,9 @@ class EAGenerator(AbstractGenerator):
         config.flush()
 
     def __savePresetFromUi(self, preset):
+        """
+        Stores the values in the UI to disk.
+        """
         section = "EAGenerator_Preset:" + preset
 
         config.set(section, "colorMutationRate",
@@ -161,6 +182,9 @@ class EAGenerator(AbstractGenerator):
         config.flush()
 
     def __loadPresetIntoUi(self, preset):
+        """
+        Load the values from disk into the UI.
+        """
         section = "EAGenerator_Preset:" + preset
 
         self.ui.colorMutationRateSpinBox.setValue(
@@ -197,6 +221,9 @@ class EAGenerator(AbstractGenerator):
 
     # apply values from ui to the generator algorithm
     def __setOptions(self):
+        """
+        Apply the values from the UI to the generator.
+        """
         self.colorMutationRate = self.ui.colorMutationRateSpinBox.value()
         self.colorsRange = (
             (self.ui.colorsFromRSpinBox.value(), self.ui.colorsToRSpinBox.value()),

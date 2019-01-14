@@ -21,6 +21,7 @@ class MainWindow(QMainWindow):
     at the top, and a read-only textbox below the table.
     """
 
+    # Signal used to append logging output, allows printing from another thread
     sig = pyqtSignal(str)
 
     def __init__(self):
@@ -89,6 +90,9 @@ class MainWindow(QMainWindow):
         menuHelp.addAction(actionViewHelp)
 
     def __initTopBar(self):
+        """
+        Initialize the two buttons atop the dataset table
+        """
         self.topBar = QHBoxLayout()
 
         self.generateButtonAny = QPushButton('Generate Any')
@@ -126,6 +130,9 @@ class MainWindow(QMainWindow):
         self.splitterWidgetLayout.addWidget(self.console)
 
     def __initDataset(self):
+        """
+        Load the dataset from the default path
+        """
         self.__dataset = Dataset()
         self.__dataset.loadFromFile(
             os.path.join(getResourcePath(), 'dataset.json')
@@ -168,6 +175,9 @@ class MainWindow(QMainWindow):
         self.generatingWindow = GeneratingWindow(self, selectedClassesNames)
 
     def openApiSettings(self):
+        """
+        Open the window to modify the API settings
+        """
         self.configureApiWindow = ConfigureApiWindow(self)
 
     def log(self, text):
@@ -184,5 +194,10 @@ class MainWindow(QMainWindow):
         self.statusBar().showMessage(text)
 
     def help(self):
+        """
+        Open the handbook in the system's PDF reader
+        """
+        # webbrowser.open does not necessarily open the file in a webbrowser
+        # it opens it in whatever program the user has set as their pdf reader
         webbrowser.open(
             'file://%s' % os.path.join(getResourcePath(), 'handbook.pdf'))
