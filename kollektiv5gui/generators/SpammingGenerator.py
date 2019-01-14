@@ -1,12 +1,3 @@
-"""
-This approach draws random shapes onto a black surface.
-After every drawing step, the picture is sent to the API and classified.
-Once the API returns a high enough confidence value,
-the image is saved under the prediced class's name.
-The method will pretty much always find an answer,
-though the amount of API calls required varies a lot.
-"""
-
 import requests
 import os
 import tempfile
@@ -22,6 +13,15 @@ from kollektiv5gui.generators.AbstractGenerator import AbstractGenerator
 
 
 class SpammingGenerator(AbstractGenerator):
+    """
+    This approach draws random shapes onto a black surface.
+    After every drawing step, the picture is sent to the API and classified.
+    Once the API returns a high enough confidence value,
+    the image is saved under the prediced class's name.
+    The method will pretty much always find an answer,
+    though the amount of API calls required varies a lot.
+    """
+
     # Some shapes may be based on masks as given by image files on disk.
     shapes = {
     }
@@ -102,6 +102,10 @@ class SpammingGenerator(AbstractGenerator):
         return self.image.tobytes('raw', 'RGB')
 
     def step(self):
+        """
+        Draw a random shape onto the image and evaluate the detected class.
+        """
+
         self.createRandomShape()
         classification = api.classifyPILImage(self.image)
         self._countApiCall()

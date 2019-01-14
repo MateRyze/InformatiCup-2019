@@ -4,6 +4,10 @@ from kollektiv5gui.util import config
 
 
 class ConfigureApiWindow(QDialog):
+    """
+    This window allows modifying the API URL and Key.
+    """
+
     def __init__(self, mainWindow):
         super().__init__(mainWindow)
         self.mainWindow = mainWindow
