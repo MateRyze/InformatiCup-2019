@@ -204,11 +204,13 @@ class EAGenerator(AbstractGenerator):
             (self.ui.colorsFromBSpinBox.value(), self.ui.colorsToBSpinBox.value()),
         )
         self.contrastRange = (
-            self.ui.contrastFromSpinBox.value(), self.ui.contrastToSpinBox.value())
+            self.ui.contrastFromSpinBox.value(),
+            self.ui.contrastToSpinBox.value())
         self.shapeMutationRate = self.ui.shapeMutationRateSpinBox.value()
         self.shapePolygonPointCount = self.ui.shapePolygonPointCountSpinBox.value()
         self.initialPopulationSize = self.ui.initialPopulationSizeSpinBox.value()
-        # division by 100, because the target confidence is given in percent in the gui
+        # division by 100, because the target confidence is given in percent in
+        # the gui
         self.targetConfidence = self.ui.targetConfidenceSpinBox.value() / 100
         self.targetPopulationSize = self.ui.targetPopulationSizeSpinBox.value()
         self.optionsWidget.close()
@@ -217,10 +219,16 @@ class EAGenerator(AbstractGenerator):
         self.__savePresetFromUi(preset)
 
     def randomCoord(self):
+        """
+        Return random coordinates in image range (64x64)
+        """
         return (random.randrange(0, 64), random.randrange(0, 64))
 
-    # initial random generation of an image
     def generateImage(self):
+        """
+        Generate image (individual) with a background and a shape in foreground.
+        Uses given generation parameters.
+        """
         # set image format
         img = Image.new('RGB', (64, 64), color='black')
         draw = ImageDraw.Draw(img)
@@ -245,6 +253,9 @@ class EAGenerator(AbstractGenerator):
         }
 
     def drawShapes(self, draw, colors, shapes):
+        """
+        Draw shapes from given coordinates and colors on a given background.
+        """
         background = colors[0]
         draw.rectangle(((0, 0), (64, 64)), background)
         # all other colors are for the shapes (polygons)
@@ -252,15 +263,19 @@ class EAGenerator(AbstractGenerator):
             draw.polygon(shape, color)
 
     def contrast(self, color1, color2):
+        """
+        Calculate the contrast from two colors by adding the absolute sum of the RGB values
+        """
         return (
             abs(color1[0] - color2[0]) +
             abs(color1[1] - color2[1]) +
             abs(color1[2] - color2[2])
         )
 
-    # generate colors with distributed contrast
-
     def generateColorsWithContrast(self, count):
+        """
+        Calculate colors with a contrast that is given by a contrast range.
+        """
         colors = []
         for i in range(count):
             color = (
@@ -270,21 +285,24 @@ class EAGenerator(AbstractGenerator):
             if(i > 0):
                 # distribute the contrast between the colors
                 while(
-                    self.contrast(color, colors[i-1]) < self.contrastRange[0] / (count - 1) or
+                    self.contrast(color, colors[i - 1]) < self.contrastRange[0] / (count - 1) or
                     self.contrast(
-                        color, colors[i-1]) > self.contrastRange[1] / (count - 1)
+                        color, colors[i - 1]) > self.contrastRange[1] / (count - 1)
                 ):
                     color = (
                         random.randint(
                             self.colorsRange[0][0], self.colorsRange[0][1]),
                         random.randint(
                             self.colorsRange[1][0], self.colorsRange[1][1]),
-                        random.randint(self.colorsRange[2][0], self.colorsRange[2][1]))
+                        random.randint(
+                            self.colorsRange[2][0], self.colorsRange[2][1]))
             colors.append(color)
         return colors
 
-    # eval fitness for each individual
     def evalFitness(self, forTest=False):
+        """
+        Evaluate the fitness for each individual
+        """
         for individual in self.population:
             if individual["class"] == "" and self.hasFinished is not True:
                 image = individual["image"]
@@ -293,7 +311,8 @@ class EAGenerator(AbstractGenerator):
                 confidence = 0
                 if len(self._targetClasses) == 0:
                     # no specific target class is specified
-                    # use the one with the highest confidence (already sorted by API)
+                    # use the one with the highest confidence (already sorted
+                    # by API)
                     individual["class"] = str(r[0]["class"])
                     confidence = r[0]["confidence"]
                 else:
@@ -303,12 +322,14 @@ class EAGenerator(AbstractGenerator):
                             confidence = c["confidence"]
                             break
                             # break as soon as a matching class is found
-                            # confidences are sorted by the api, so we've selected the highest possible confidence here
+                            # confidences are sorted by the api, so we've
+                            # selected the highest possible confidence here
                     individual["class"] = self._targetClasses[random.randrange(
                         0, len(self._targetClasses))]
                 individual["confidence"] = confidence
 
-            if self.getCountThatMatch(self.targetConfidence) >= self.targetPopulationSize:
+            if self.getCountThatMatch(
+                    self.targetConfidence) >= self.targetPopulationSize:
                 if forTest is False:
                     self.callOnStepCallback()
                 self.finish()
@@ -317,14 +338,18 @@ class EAGenerator(AbstractGenerator):
             self.callOnStepCallback()
         return False
 
-    # create initial population
     def initPopulation(self, count):
+        """
+        Create inital population
+        """
         self.population = []
         for i in range(count):
             self.population.append(self.generateImage())
 
-    # select best individuals from population
     def selection(self, bestCount, sameClassCount):
+        """
+        Select best individuals from population according to the same class count (used for crossover)
+        """
         print("doing selection")
         logging.log("EA: selection")
         # sort by confidence
@@ -354,10 +379,16 @@ class EAGenerator(AbstractGenerator):
             del self.population[bestCount:]
 
     def mutateCoord(self, oldCoord):
-        return min(63, max(1, oldCoord + random.randint(-self.shapeMutationRate, self.shapeMutationRate)))
+        """
+        Mutate coordinates of a shape in image area (64x64)
+        """
+        return min(63, max(
+            1, oldCoord + random.randint(-self.shapeMutationRate, self.shapeMutationRate)))
 
-    # mutate each individual in the population and delete old population
     def mutate(self, confidence):
+        """
+        Mutate each individual in the population by mutating random color and polygon points
+        """
         print("doing mutation of crossover images")
         logging.log("EA: mutation")
         population_size = len(self.population)
@@ -414,12 +445,13 @@ class EAGenerator(AbstractGenerator):
                 }
                 self.__totalMutationCount += 1
 
-    # crossover between individuals in the population
     def crossover(self):
+        """
+        Crossover between individuals with same classes from the population.
+        Sort duplicates with same classes like [vorfahrt52%, vorfahrt35%]
+        """
         print("doing crossover")
-        # use only for same classes from inital population
-        # sort duplicates with same classes like [vorfahrt99%, vorfahrt97%, ...]
-        seen = []  # helper list
+        seen = []  # helper list for found classes
         duplicates = []
         # append one individual from every class
         for individual in self.population:
@@ -436,12 +468,11 @@ class EAGenerator(AbstractGenerator):
                 ):
                     duplicates[index] = duplicates[index] + [individual]
         # filter duplicates for crossover by confidence and length
-        # crossover makes sense for at least two individuals and confidence < 90%
+        # crossover makes only sense for at least two individuals
         duplicates = [
             entry for entry in duplicates
             if len(entry) > 1 and entry[0]["confidence"] < 0.90
         ]
-        # print(duplicates)
         beforeCrossover = duplicates  # for testing function
         afterCrossover = []
         newImagesAppended = 0
@@ -480,11 +511,7 @@ class EAGenerator(AbstractGenerator):
             }
             afterCrossover.append(newIndividual)
             self.population.append(newIndividual)
-
             newImagesAppended += 2
-            # remove parents
-            # population.remove(entry[0])
-            # population.remove(entry[1])
 
         print("crossover, appended images: " + str(newImagesAppended))
         logging.log("EA: crossover, add " +
@@ -493,8 +520,10 @@ class EAGenerator(AbstractGenerator):
         # for testing crossover method
         return {"before": beforeCrossover, "after": afterCrossover}
 
-    # get the count of images that match the confidence
     def getCountThatMatch(self, confidence):
+        """
+        Get the count of images that match the confidence and have different class
+        """
         count = 0
         seen = []
         for individual in self.population:
@@ -507,12 +536,26 @@ class EAGenerator(AbstractGenerator):
         return count
 
     def addRandomImage(self):
+        """
+        Add random image by append new generated image to current population
+        """
         self.population.append(self.generateImage())
 
     def getBestIndividials(self, amount):
-        return list(reversed(sorted(self.population, key=lambda individual: individual["confidence"])))[:amount]
+        """
+        Get best individuals sorted by confidence
+        """
+        return list(
+            reversed(
+                sorted(
+                    self.population,
+                    key=lambda individual: individual["confidence"])))[
+            :amount]
 
     def getAdditionalStatistics(self):
+        """
+        Get statistics about the population, gneerations and mutations
+        """
         return '\n'.join([
             'Individuals: %d' % len(self.population),
             'Generations: %d' % self.__currentGeneration,
@@ -520,14 +563,23 @@ class EAGenerator(AbstractGenerator):
         ])
 
     def getImage(self, i):
+        """
+        Get imgae in raw format from population
+        """
         best = self.getBestIndividials(self.targetPopulationSize)
         return best[i]["image"].tobytes('raw', 'RGB')
 
     def callOnStepCallback(self):
+        """
+        Callback function for GUI purposes
+        """
         best = self.getBestIndividials(self.targetPopulationSize)
         self.onStep([(b['class'], b['confidence']) for b in best])
 
     def step(self, forTest=False):
+        """
+        Simulate a step of the evolutionary algorithm
+        """
         if not self.initialized:
             self.initPopulation(self.initialPopulationSize)
             if self.evalFitness(forTest):
