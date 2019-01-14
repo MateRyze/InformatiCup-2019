@@ -355,8 +355,8 @@ class EAGenerator(AbstractGenerator):
                         0, len(self._targetClasses))]
                 individual["confidence"] = confidence
 
-            if self.getCountThatMatch(
-                    self.targetConfidence) >= self.targetPopulationSize:
+            if(self.getCountThatMatch(self.targetConfidence) >=
+                    self.targetPopulationSize):
                 if forTest is False:
                     self.callOnStepCallback()
                 self.finish()
@@ -572,16 +572,16 @@ class EAGenerator(AbstractGenerator):
         """
         Get best individuals from same class, sorted by confidence
         """
-        classesContained = []
-        selectedPopulation = []
+        bestByClass = {}
         for individual in self.population:
-            if(classesContained.count(individual["class"]) < 1):
-                selectedPopulation.append(individual)
-                classesContained.append(individual["class"])
+            c = individual["class"]
+            if(c not in bestByClass or bestByClass[c]["confidence"] <
+                    individual["confidence"]):
+                bestByClass[c] = individual
         return list(
             reversed(
                 sorted(
-                    selectedPopulation,
+                    bestByClass.values(),
                     key=lambda individual: individual["confidence"])))[
             :amount]
 
