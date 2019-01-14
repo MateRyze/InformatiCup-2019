@@ -116,7 +116,7 @@ def mutate(confidence):
             ((0, 32), (32, 64)),
             ((32, 32), (64, 64))
         ]"""
-        #colors = population[j]["colors"]
+        # colors = population[j]["colors"]
         colors = population[j]["colors"] + population[j]["colors"] + population[j]["colors"] + population[j]["colors"]
         if(population[j]["confidence"] < confidence):
             # change the color of a random square

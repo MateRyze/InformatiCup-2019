@@ -6,6 +6,7 @@ import time
 import threading
 from PIL import Image
 from kollektiv5gui.util import config, logging
+from json.decoder import JSONDecodeError
 
 __lock = threading.Lock()
 
@@ -30,13 +31,19 @@ def __sendToApi(data):
                 )
                 resJson = res.json()
                 success = True
-            except json.decoder.JSONDecodeError:
+            except JSONDecodeError:
                 if not printedRateLimitingMessage:
                     logging.log('API: Rate limiting detected, retrying...')
                     printedRateLimitingMessage = True
                 time.sleep(1)
-            except Exception:
-                logging.log('API: Unexpected Error, retrying...')
+            except ValueError:
+                if not printedRateLimitingMessage:
+                    logging.log('API: Rate limiting detected, retrying...')
+                    printedRateLimitingMessage = True
+                time.sleep(1)
+            except Exception as e:
+                logging.log('API: Unexpected Error: ' +
+                            str(e) + ', retrying...')
                 time.sleep(1)
     return resJson
 
