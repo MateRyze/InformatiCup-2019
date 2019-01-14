@@ -1,0 +1,1201 @@
+,classname,confidence,edges,mutation
+0,Verbot für Fahrzeuge aller Art,0.93668675,3,0.0
+1,Verbot für Fahrzeuge aller Art,0.77643484,3,0.05
+2,Vorfahrt gewähren,0.71516323,3,0.1
+3,Vorfahrt gewähren,0.82799137,3,0.15
+4,Zulässige Höchstgeschwindigkeit (70),0.47474793,3,0.2
+5,Vorfahrt gewähren,0.99013841,3,0.25
+6,Verbot für Fahrzeuge aller Art,0.77856302,3,0.3
+7,Vorfahrt gewähren,0.64551634,3,0.35
+8,Zulässige Höchstgeschwindigkeit (70),0.99752122,3,0.4
+9,Vorfahrt gewähren,0.99999535,3,0.45
+10,Verbot für Fahrzeuge aller Art,0.99995375,3,0.5
+11,Vorfahrt gewähren,0.97419804,3,0.55
+12,Vorfahrt gewähren,0.66526508,3,0.6
+13,Zulässige Höchstgeschwindigkeit (70),0.73152852,3,0.65
+14,Verbot für Fahrzeuge aller Art,0.99812847,3,0.7
+15,Vorfahrt gewähren,0.6130147,3,0.75
+16,Zulässige Höchstgeschwindigkeit (70),0.95476073,3,0.8
+17,Zulässige Höchstgeschwindigkeit (60),0.86399066,3,0.85
+18,Verbot der Einfahrt,0.99999428,3,0.9
+19,Vorfahrt gewähren,0.99795806,3,0.95
+20,Vorfahrt gewähren,0.99984539,3,1.0
+21,Verbot für Fahrzeuge aller Art,0.77545089,3,1.05
+22,Vorfahrt gewähren,0.99461901,3,1.1
+23,Vorfahrt gewähren,0.99999201,3,1.15
+24,Verbot der Einfahrt,0.8046661,3,1.2
+25,Wildwechsel,0.7060203,3,1.25
+26,Ausschließlich geradeaus,0.99999821,3,1.3
+27,Stoppschild,0.35958633,3,1.35
+28,Zulässige Höchstgeschwindigkeit (60),0.99979919,3,1.4
+29,Kreisverkehr,0.88995594,3,1.45
+30,Baustelle,0.98930895,3,1.5
+31,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.99754804,3,1.55
+32,Gefahrenstelle,0.16872884,3,1.6
+33,Vorfahrt gewähren,0.9975642,3,1.65
+34,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.90589231,3,1.7
+35,Zulässige Höchstgeschwindigkeit (30),0.97627425,3,1.75
+36,Zulässige Höchstgeschwindigkeit (120),0.85704654,3,1.8
+37,Zulässige Höchstgeschwindigkeit (100),0.58648735,3,1.85
+38,Verbot für Fahrzeuge aller Art,0.97522926,3,1.9
+39,Vorfahrt gewähren,0.99999964,3,1.95
+40,Verbot für Fahrzeuge aller Art,0.99994326,4,0.0
+41,Verbot für Fahrzeuge aller Art,0.9995122,4,0.05
+42,Verbot für Fahrzeuge aller Art,0.99998915,4,0.1
+43,Verbot für Fahrzeuge aller Art,0.99935108,4,0.15
+44,Verbot für Fahrzeuge aller Art,0.99999452,4,0.2
+45,Verbot für Fahrzeuge aller Art,0.99993598,4,0.25
+46,Verbot für Fahrzeuge aller Art,0.98304623,4,0.3
+47,Verbot für Fahrzeuge aller Art,0.99999869,4,0.35
+48,Verbot für Fahrzeuge aller Art,0.96418822,4,0.4
+49,Verbot für Fahrzeuge aller Art,0.99992144,4,0.45
+50,Ende aller Streckenverbote,0.65680653,4,0.5
+51,Verbot für Fahrzeuge aller Art,0.9974432,4,0.55
+52,Vorfahrt gewähren,0.96783543,4,0.6
+53,Verbot für Fahrzeuge aller Art,0.99247688,4,0.65
+54,Verbot für Fahrzeuge aller Art,0.85714304,4,0.7
+55,Doppelkurve (zunächst links),0.2494486,4,0.75
+56,Verbot für Fahrzeuge aller Art,0.9996295,4,0.8
+57,Verbot für Fahrzeuge aller Art,0.99962711,4,0.85
+58,Unebene Fahrbahn,0.99043524,4,0.9
+59,Zulässige Höchstgeschwindigkeit (70),0.99999976,4,0.95
+60,Zulässige Höchstgeschwindigkeit (120),0.98780358,4,1.0
+61,Verbot für Fahrzeuge aller Art,0.84093815,4,1.05
+62,Vorfahrt gewähren,0.60600388,4,1.1
+63,Verbot für Fahrzeuge aller Art,0.85504556,4,1.15
+64,Vorfahrt gewähren,0.99894315,4,1.2
+65,Vorfahrt gewähren,0.98272562,4,1.25
+66,Verbot für Fahrzeuge aller Art,0.72093344,4,1.3
+67,Vorfahrt gewähren,0.99925381,4,1.35
+68,Verbot der Einfahrt,1.0,4,1.4
+69,Verbot der Einfahrt,1.0,4,1.45
+70,Vorfahrt,0.58241838,4,1.5
+71,Fahrradfahrer,0.62037945,4,1.55
+72,Kreisverkehr,0.81589842,4,1.6
+73,Gefahrenstelle,0.99756783,4,1.65
+74,Zulässige Höchstgeschwindigkeit (70),0.99780589,4,1.7
+75,Vorfahrt gewähren,0.99999726,4,1.75
+76,Gefahrenstelle,0.93581551,4,1.8
+77,Verbot für Fahrzeuge aller Art,0.99989414,4,1.85
+78,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.60022885,4,1.9
+79,Zulässige Höchstgeschwindigkeit (80),0.49253911,4,1.95
+80,Ende aller Streckenverbote,0.958269,5,0.0
+81,Ende aller Streckenverbote,0.97565639,5,0.05
+82,Ende aller Streckenverbote,0.82891399,5,0.1
+83,Ende aller Streckenverbote,0.95021993,5,0.15
+84,Ende aller Streckenverbote,0.912606,5,0.2
+85,Vorfahrt,0.50551903,5,0.25
+86,Ende aller Streckenverbote,0.91275191,5,0.3
+87,Ende aller Streckenverbote,0.61207736,5,0.35
+88,Verbot für Fahrzeuge aller Art,0.99904805,5,0.4
+89,Vorfahrt,0.87855011,5,0.45
+90,Ende aller Streckenverbote,0.98462176,5,0.5
+91,Verbot für Fahrzeuge aller Art,0.62713081,5,0.55
+92,Ende aller Streckenverbote,0.44133636,5,0.6
+93,Verbot für Fahrzeuge aller Art,0.82727921,5,0.65
+94,Vorfahrt,0.65546376,5,0.7
+95,Vorfahrt gewähren,0.97137964,5,0.75
+96,Verbot für Fahrzeuge aller Art,0.74667251,5,0.8
+97,Ende aller Streckenverbote,0.30137897,5,0.85
+98,Verbot für Fahrzeuge aller Art,0.99999762,5,0.9
+99,Verbot für Fahrzeuge aller Art,0.9142884,5,0.95
+100,Vorfahrt gewähren,0.99689996,5,1.0
+101,Ende aller Streckenverbote,0.64767826,5,1.05
+102,Verbot der Einfahrt,0.99995589,5,1.1
+103,Vorfahrt gewähren,0.99918085,5,1.15
+104,Verbot für Fahrzeuge aller Art,0.9072789,5,1.2
+105,Vorfahrt gewähren,0.54522228,5,1.25
+106,Verbot für Fahrzeuge aller Art,0.84402597,5,1.3
+107,Vorfahrt gewähren,0.30904153,5,1.35
+108,Vorfahrt,0.90459919,5,1.4
+109,Rechts vorbei,0.8506102,5,1.45
+110,Zulässige Höchstgeschwindigkeit (100),0.73155761,5,1.5
+111,Zulässige Höchstgeschwindigkeit (50),0.49160725,5,1.55
+112,Baustelle,0.72109133,5,1.6
+113,Zulässige Höchstgeschwindigkeit (70),0.98397624,5,1.65
+114,Überholverbot für Kraftfahrzeuge aller Art,0.65563691,5,1.7
+115,Vorfahrt,0.55330908,5,1.75
+116,Zulässige Höchstgeschwindigkeit (70),0.93841636,5,1.8
+117,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.64876139,5,1.85
+118,Vorfahrt gewähren,0.98206675,5,1.9
+119,Vorfahrt gewähren,0.80843079,5,1.95
+120,Ende aller Streckenverbote,0.99489981,6,0.0
+121,Ende aller Streckenverbote,0.99660081,6,0.05
+122,Ende aller Streckenverbote,0.98878014,6,0.1
+123,Ende aller Streckenverbote,0.98367405,6,0.15
+124,Ende aller Streckenverbote,0.98309648,6,0.2
+125,Ende aller Streckenverbote,0.61979949,6,0.25
+126,Ende aller Streckenverbote,0.96314317,6,0.3
+127,Ende aller Streckenverbote,0.54471701,6,0.35
+128,Vorfahrt,0.79485893,6,0.4
+129,Vorfahrt,0.49597034,6,0.45
+130,Vorfahrt gewähren,0.25045902,6,0.5
+131,Verbot für Fahrzeuge aller Art,0.99987674,6,0.55
+132,Verbot für Fahrzeuge aller Art,0.95689321,6,0.6
+133,Vorfahrt gewähren,0.95585388,6,0.65
+134,Verbot für Fahrzeuge aller Art,0.66343611,6,0.7
+135,Ende aller Streckenverbote,0.66152948,6,0.75
+136,Verbot für Fahrzeuge aller Art,0.5173558,6,0.8
+137,Verbot für Fahrzeuge aller Art,0.99949741,6,0.85
+138,Vorfahrt,0.9951728,6,0.9
+139,Vorfahrt,0.90895241,6,0.95
+140,Rechts vorbei,0.7566663,6,1.0
+141,Verbot der Einfahrt,0.99999821,6,1.05
+142,Verbot für Fahrzeuge aller Art,0.89631313,6,1.1
+143,Verbot für Fahrzeuge aller Art,0.9999398,6,1.15
+144,Vorfahrt gewähren,0.99969041,6,1.2
+145,Rechts vorbei,0.72132051,6,1.25
+146,Vorfahrt,0.78773993,6,1.3
+147,Unebene Fahrbahn,0.92795157,6,1.35
+148,Verbot für Fahrzeuge aller Art,0.37164909,6,1.4
+149,Vorfahrt gewähren,0.0357466,6,1.45
+150,Vorfahrt gewähren,1.0,6,1.5
+151,Zulässige Höchstgeschwindigkeit (30),0.52961427,6,1.55
+152,Rechts vorbei,0.87550342,6,1.6
+153,Wildwechsel,0.93802476,6,1.65
+154,Vorfahrt gewähren,0.53234136,6,1.7
+155,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.50817096,6,1.75
+156,Zulässige Höchstgeschwindigkeit (70),0.9600662,6,1.8
+157,Verbot der Einfahrt,0.95213282,6,1.85
+158,Kreisverkehr,0.65549856,6,1.9
+159,Verbot für Fahrzeuge aller Art,0.95544332,6,1.95
+160,Ende aller Streckenverbote,0.98388839,7,0.0
+161,Ende aller Streckenverbote,0.97514886,7,0.05
+162,Ende aller Streckenverbote,0.99173611,7,0.1
+163,Ende aller Streckenverbote,0.97222543,7,0.15
+164,Ende aller Streckenverbote,0.99219722,7,0.2
+165,Ende aller Streckenverbote,0.93870622,7,0.25
+166,Verbot für Fahrzeuge aller Art,0.82563722,7,0.3
+167,Ende aller Streckenverbote,0.64719939,7,0.35
+168,Vorfahrt,0.49783024,7,0.4
+169,Vorfahrt gewähren,0.72142166,7,0.45
+170,Ende aller Streckenverbote,0.66217142,7,0.5
+171,Verbot für Fahrzeuge aller Art,0.59535396,7,0.55
+172,Verbot für Fahrzeuge aller Art,0.69912225,7,0.6
+173,Vorfahrt,0.55217189,7,0.65
+174,Verbot für Fahrzeuge aller Art,0.91866457,7,0.7
+175,Verbot für Fahrzeuge aller Art,0.97293705,7,0.75
+176,Vorfahrt,0.98662114,7,0.8
+177,Verbot für Fahrzeuge aller Art,0.48393747,7,0.85
+178,Verbot für Fahrzeuge aller Art,0.64916426,7,0.9
+179,Verbot für Fahrzeuge aller Art,0.80302191,7,0.95
+180,Ende aller Streckenverbote,0.27734163,7,1.0
+181,Zulässige Höchstgeschwindigkeit (70),0.58073848,7,1.05
+182,Vorfahrt gewähren,0.60104245,7,1.1
+183,Vorfahrt gewähren,0.50997919,7,1.15
+184,Verbot für Fahrzeuge aller Art,0.80384004,7,1.2
+185,Verbot für Fahrzeuge aller Art,0.99961579,7,1.25
+186,Zulässige Höchstgeschwindigkeit (70),0.61512375,7,1.3
+187,Rechts vorbei,0.85511947,7,1.35
+188,Vorfahrt,0.89220548,7,1.4
+189,Baustelle,0.99491322,7,1.45
+190,Vorfahrt gewähren,0.99343514,7,1.5
+191,Verbot für Fahrzeuge aller Art,0.95708477,7,1.55
+192,Vorfahrt gewähren,0.999892,7,1.6
+193,Zulässige Höchstgeschwindigkeit (120),0.53166384,7,1.65
+194,Baustelle,0.99624664,7,1.7
+195,Rechts vorbei,0.94937831,7,1.75
+196,Vorfahrt gewähren,0.73354232,7,1.8
+197,Vorfahrt gewähren,0.99714178,7,1.85
+198,Unebene Fahrbahn,0.98624068,7,1.9
+199,Überholverbot für Kraftfahrzeuge aller Art,0.96043587,7,1.95
+200,Ende aller Streckenverbote,0.96158665,8,0.0
+201,Ende aller Streckenverbote,0.96241385,8,0.05
+202,Ende aller Streckenverbote,0.94693798,8,0.1
+203,Ende aller Streckenverbote,0.96233368,8,0.15
+204,Ende aller Streckenverbote,0.93422115,8,0.2
+205,Vorfahrt,0.70581889,8,0.25
+206,Ende aller Streckenverbote,0.98075163,8,0.3
+207,Ende aller Streckenverbote,0.38869739,8,0.35
+208,Vorfahrt,0.83769292,8,0.4
+209,Verbot für Fahrzeuge aller Art,0.99624974,8,0.45
+210,Vorfahrt,0.9765256,8,0.5
+211,Ende aller Streckenverbote,0.60340989,8,0.55
+212,Verbot für Fahrzeuge aller Art,0.88721538,8,0.6
+213,Ende aller Streckenverbote,0.97244012,8,0.65
+214,Ende aller Streckenverbote,0.61479914,8,0.7
+215,Vorfahrt gewähren,0.55678248,8,0.75
+216,Verbot für Fahrzeuge aller Art,0.52015144,8,0.8
+217,Verbot für Fahrzeuge aller Art,0.94643968,8,0.85
+218,Verbot für Fahrzeuge aller Art,0.99563617,8,0.9
+219,Zulässige Höchstgeschwindigkeit (70),0.44114208,8,0.95
+220,Verbot für Fahrzeuge aller Art,0.96934646,8,1.0
+221,Vorfahrt,0.96749294,8,1.05
+222,Vorfahrt gewähren,0.99248791,8,1.1
+223,Vorfahrt,0.64525241,8,1.15
+224,Zulässige Höchstgeschwindigkeit (70),0.98402864,8,1.2
+225,Ausschließlich rechts,0.76219332,8,1.25
+226,Verbot für Fahrzeuge aller Art,0.99981862,8,1.3
+227,Vorfahrt,0.96973723,8,1.35
+228,Rechts vorbei,0.99999583,8,1.4
+229,Vorfahrt gewähren,0.52179432,8,1.45
+230,Verbot für Fahrzeuge aller Art,0.72372931,8,1.5
+231,Zulässige Höchstgeschwindigkeit (70),0.99992728,8,1.55
+232,Zulässige Höchstgeschwindigkeit (70),0.82312042,8,1.6
+233,Unebene Fahrbahn,0.90456474,8,1.65
+234,Verbot für Fahrzeuge aller Art,0.96759564,8,1.7
+235,Zulässige Höchstgeschwindigkeit (100),0.75940019,8,1.75
+236,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.99586618,8,1.8
+237,Einmalige Vorfahrt,0.8230651,8,1.85
+238,Rechts vorbei,0.98962879,8,1.9
+239,Ausschließlich rechts,0.89441019,8,1.95
+240,Ende aller Streckenverbote,0.94781071,9,0.0
+241,Ende aller Streckenverbote,0.9599005,9,0.05
+242,Ende aller Streckenverbote,0.96084124,9,0.1
+243,Ende aller Streckenverbote,0.96772712,9,0.15
+244,Ende aller Streckenverbote,0.91532832,9,0.2
+245,Ende aller Streckenverbote,0.76964748,9,0.25
+246,Ende aller Streckenverbote,0.48691416,9,0.3
+247,Ende aller Streckenverbote,0.41119495,9,0.35
+248,Ende aller Streckenverbote,0.81143856,9,0.4
+249,Ende aller Streckenverbote,0.76237881,9,0.45
+250,Verbot für Fahrzeuge aller Art,0.66481966,9,0.5
+251,Vorfahrt,0.70539057,9,0.55
+252,Verbot für Fahrzeuge aller Art,0.40797561,9,0.6
+253,Verbot für Fahrzeuge aller Art,0.51389885,9,0.65
+254,Baustelle,0.81401974,9,0.7
+255,Verbot für Fahrzeuge aller Art,0.97125477,9,0.75
+256,Verbot für Fahrzeuge aller Art,0.60436141,9,0.8
+257,Doppelkurve (zunächst links),0.25063688,9,0.85
+258,Verbot für Fahrzeuge aller Art,0.99980634,9,0.9
+259,Vorfahrt,0.99727988,9,0.95
+260,Vorfahrt,0.97669625,9,1.0
+261,Ende aller Streckenverbote,0.44050699,9,1.05
+262,Verbot für Fahrzeuge aller Art,0.83885491,9,1.1
+263,Verbot für Fahrzeuge aller Art,0.03600894,9,1.15
+264,Ausschließlich geradeaus,0.5875296,9,1.2
+265,Verbot für Fahrzeuge aller Art,0.6552785,9,1.25
+266,Verbot für Fahrzeuge aller Art,0.78335136,9,1.3
+267,Rechts vorbei,0.41867259,9,1.35
+268,Unebene Fahrbahn,0.91644424,9,1.4
+269,Vorfahrt,0.93347931,9,1.45
+270,Vorfahrt gewähren,0.56766129,9,1.5
+271,Rechts vorbei,0.33503446,9,1.55
+272,Zulässige Höchstgeschwindigkeit (120),0.96975797,9,1.6
+273,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.87337476,9,1.65
+274,Fußgänger,0.10844838,9,1.7
+275,Zulässige Höchstgeschwindigkeit (70),0.45903593,9,1.75
+276,Gefahrenstelle,0.85158181,9,1.8
+277,Einmalige Vorfahrt,0.6323995,9,1.85
+278,Zulässige Höchstgeschwindigkeit (70),0.99955136,9,1.9
+279,Gefahrenstelle,0.96468019,9,1.95
+280,Ende aller Streckenverbote,0.99057662,10,0.0
+281,Ende aller Streckenverbote,0.98868269,10,0.05
+282,Ende aller Streckenverbote,0.96494842,10,0.1
+283,Ende aller Streckenverbote,0.9540838,10,0.15
+284,Ende aller Streckenverbote,0.74789071,10,0.2
+285,Ende aller Streckenverbote,0.98535603,10,0.25
+286,Vorfahrt,0.38707441,10,0.3
+287,Ende aller Streckenverbote,0.8714186,10,0.35
+288,Vorfahrt,0.53651369,10,0.4
+289,Verbot für Fahrzeuge aller Art,0.52501059,10,0.45
+290,Ende aller Streckenverbote,0.66375691,10,0.5
+291,Vorfahrt,0.95416975,10,0.55
+292,Rechts vorbei,0.57105941,10,0.6
+293,Vorfahrt,0.41832334,10,0.65
+294,Verbot für Fahrzeuge aller Art,0.5566408,10,0.7
+295,Ende aller Streckenverbote,0.33745709,10,0.75
+296,Rechts vorbei,0.79857987,10,0.8
+297,Vorfahrt,0.39292246,10,0.85
+298,Vorfahrt gewähren,0.996077,10,0.9
+299,Verbot für Fahrzeuge aller Art,0.44153994,10,0.95
+300,Zulässige Höchstgeschwindigkeit (50),0.75708944,10,1.0
+301,Verbot für Fahrzeuge aller Art,0.87877613,10,1.05
+302,Ausschließlich geradeaus,0.69763404,10,1.1
+303,Vorfahrt,0.84709549,10,1.15
+304,Baustelle,0.99462974,10,1.2
+305,Verbot für Fahrzeuge aller Art,0.93881786,10,1.25
+306,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.97903204,10,1.3
+307,Vorfahrt,0.82467985,10,1.35
+308,Vorfahrt gewähren,0.92207623,10,1.4
+309,Vorfahrt,0.81406772,10,1.45
+310,Zulässige Höchstgeschwindigkeit (70),0.54176044,10,1.5
+311,Zulässige Höchstgeschwindigkeit (70),0.98570412,10,1.55
+312,Vorfahrt,0.99708611,10,1.6
+313,Verbot für Fahrzeuge aller Art,0.99995053,10,1.65
+314,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.32443064,10,1.7
+315,Vorfahrt,0.95690924,10,1.75
+316,Zulässige Höchstgeschwindigkeit (70),0.80635434,10,1.8
+317,Einmalige Vorfahrt,0.89316362,10,1.85
+318,Rechts vorbei,0.40844464,10,1.9
+319,Vorfahrt gewähren,0.99318779,10,1.95
+320,Ende aller Streckenverbote,0.96938556,11,0.0
+321,Ende aller Streckenverbote,0.97719187,11,0.05
+322,Ende aller Streckenverbote,0.96082991,11,0.1
+323,Ende aller Streckenverbote,0.81619155,11,0.15
+324,Ende aller Streckenverbote,0.95002651,11,0.2
+325,Ende aller Streckenverbote,0.96672386,11,0.25
+326,Ende aller Streckenverbote,0.77336353,11,0.3
+327,Vorfahrt,0.24523699,11,0.35
+328,Vorfahrt,0.6995641,11,0.4
+329,Vorfahrt,0.8498472,11,0.45
+330,Ende aller Streckenverbote,0.82334632,11,0.5
+331,Baustelle,0.56681764,11,0.55
+332,Verbot für Fahrzeuge aller Art,0.69988108,11,0.6
+333,Ende aller Streckenverbote,0.37860182,11,0.65
+334,Vorfahrt gewähren,0.81775647,11,0.7
+335,Vorfahrt,0.97600335,11,0.75
+336,Verbot für Fahrzeuge aller Art,0.53486848,11,0.8
+337,Vorfahrt,0.67932826,11,0.85
+338,Verbot der Einfahrt,0.99987102,11,0.9
+339,Vorfahrt gewähren,0.99994111,11,0.95
+340,Verbot für Fahrzeuge aller Art,0.988644,11,1.0
+341,Vorfahrt gewähren,0.94749737,11,1.05
+342,Verbot für Fahrzeuge aller Art,0.87301904,11,1.1
+343,Verbot für Fahrzeuge aller Art,0.90343827,11,1.15
+344,Vorfahrt gewähren,0.81273991,11,1.2
+345,Gefahrenstelle,0.66824877,11,1.25
+346,Zulässige Höchstgeschwindigkeit (70),0.99999905,11,1.3
+347,Verbot für Fahrzeuge aller Art,0.85187894,11,1.35
+348,Ausschließlich rechts,0.99955112,11,1.4
+349,Baustelle,0.95602602,11,1.45
+350,Vorfahrt,0.69472796,11,1.5
+351,Vorfahrt gewähren,0.49474406,11,1.55
+352,Verbot für Fahrzeuge aller Art,0.88354766,11,1.6
+353,Verbot für Fahrzeuge aller Art,0.99374491,11,1.65
+354,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.9655267,11,1.7
+355,Doppelkurve (zunächst links),0.29958844,11,1.75
+356,Einmalige Vorfahrt,0.98265231,11,1.8
+357,Unebene Fahrbahn,0.77976918,11,1.85
+358,Rechts vorbei,0.90503299,11,1.9
+359,Ende aller Streckenverbote,0.50604558,11,1.95
+360,Ende aller Streckenverbote,0.94195729,12,0.0
+361,Ende aller Streckenverbote,0.92890996,12,0.05
+362,Ende aller Streckenverbote,0.98686802,12,0.1
+363,Ende aller Streckenverbote,0.97394401,12,0.15
+364,Ende aller Streckenverbote,0.97019786,12,0.2
+365,Ende aller Streckenverbote,0.64762813,12,0.25
+366,Ausschließlich rechts,0.84824401,12,0.3
+367,Vorfahrt,0.56778622,12,0.35
+368,Ende aller Streckenverbote,0.96276122,12,0.4
+369,Vorfahrt,0.79200381,12,0.45
+370,Ende aller Streckenverbote,0.46821675,12,0.5
+371,Vorfahrt,0.5536378,12,0.55
+372,Vorfahrt,0.99808997,12,0.6
+373,Vorfahrt gewähren,0.64113522,12,0.65
+374,Vorfahrt,0.96643943,12,0.7
+375,Vorfahrt gewähren,0.54521388,12,0.75
+376,Verbot für Fahrzeuge aller Art,0.99846232,12,0.8
+377,Verbot für Fahrzeuge aller Art,0.54687148,12,0.85
+378,Vorfahrt gewähren,0.99181682,12,0.9
+379,Verbot für Fahrzeuge aller Art,0.99999082,12,0.95
+380,Vorfahrt gewähren,0.99745935,12,1.0
+381,Vorfahrt,0.93752152,12,1.05
+382,Rechts vorbei,0.8143217,12,1.1
+383,Ausschließlich geradeaus,0.95456439,12,1.15
+384,Vorfahrt,0.64074069,12,1.2
+385,Rechts vorbei,0.99985719,12,1.25
+386,Verbot für Fahrzeuge aller Art,0.90674883,12,1.3
+387,Vorfahrt gewähren,0.99896598,12,1.35
+388,Verbot für Fahrzeuge aller Art,0.9997378,12,1.4
+389,Vorfahrt,0.78328806,12,1.45
+390,Zulässige Höchstgeschwindigkeit (80),0.446091,12,1.5
+391,Überholverbot für Kraftfahrzeuge aller Art,0.68525326,12,1.55
+392,Vorfahrt gewähren,0.30557281,12,1.6
+393,Rechts vorbei,0.74351364,12,1.65
+394,Zulässige Höchstgeschwindigkeit (70),0.99990773,12,1.7
+395,Verbot für Fahrzeuge aller Art,0.58123469,12,1.75
+396,Zulässige Höchstgeschwindigkeit (50),0.69778037,12,1.8
+397,Vorfahrt,0.59164429,12,1.85
+398,Verbot für Fahrzeuge aller Art,0.97586024,12,1.9
+399,Wildwechsel,0.9643811,12,1.95
+400,Ende aller Streckenverbote,0.96354806,13,0.0
+401,Ende aller Streckenverbote,0.96054745,13,0.05
+402,Ende aller Streckenverbote,0.82231718,13,0.1
+403,Ende aller Streckenverbote,0.95348281,13,0.15
+404,Ende aller Streckenverbote,0.91396767,13,0.2
+405,Vorfahrt,0.50979292,13,0.25
+406,Vorfahrt,0.52534294,13,0.3
+407,Ende aller Streckenverbote,0.67431897,13,0.35
+408,Ende aller Streckenverbote,0.82634264,13,0.4
+409,Vorfahrt,0.9510048,13,0.45
+410,Vorfahrt,0.63813525,13,0.5
+411,Ende aller Streckenverbote,0.87239361,13,0.55
+412,Vorfahrt,0.3907629,13,0.6
+413,Rechts vorbei,0.20625697,13,0.65
+414,Verbot für Fahrzeuge aller Art,0.88757783,13,0.7
+415,Vorfahrt,0.44525623,13,0.75
+416,Unebene Fahrbahn,0.97024685,13,0.8
+417,Vorfahrt,0.73226804,13,0.85
+418,Vorfahrt gewähren,0.99996543,13,0.9
+419,Vorfahrt gewähren,0.90463138,13,0.95
+420,Vorfahrt gewähren,0.9886778,13,1.0
+421,Verbot für Fahrzeuge aller Art,0.99919635,13,1.05
+422,Verbot für Fahrzeuge aller Art,0.99126422,13,1.1
+423,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.97594994,13,1.15
+424,Verbot für Fahrzeuge aller Art,0.91204149,13,1.2
+425,Vorfahrt gewähren,0.30609411,13,1.25
+426,Verbot für Fahrzeuge aller Art,0.99893612,13,1.3
+427,Rechts vorbei,0.90548855,13,1.35
+428,Vorfahrt,0.39222744,13,1.4
+429,Vorfahrt gewähren,0.91519862,13,1.45
+430,Ausschließlich geradeaus,0.61691505,13,1.5
+431,Verbot der Einfahrt,0.33438843,13,1.55
+432,Ausschließlich rechts,0.9456864,13,1.6
+433,Rechts vorbei,0.99572241,13,1.65
+434,Rechts vorbei,0.65986222,13,1.7
+435,Ende aller Streckenverbote,0.37173718,13,1.75
+436,Verbot für Fahrzeuge aller Art,0.99970311,13,1.8
+437,Vorfahrt gewähren,0.9999969,13,1.85
+438,Gefahrenstelle,0.27218312,13,1.9
+439,Zulässige Höchstgeschwindigkeit (50),0.99999774,13,1.95
+440,Ende aller Streckenverbote,0.96584141,14,0.0
+441,Ende aller Streckenverbote,0.91525471,14,0.05
+442,Ende aller Streckenverbote,0.98566741,14,0.1
+443,Ende aller Streckenverbote,0.96437871,14,0.15
+444,Ende aller Streckenverbote,0.76891375,14,0.2
+445,Ende aller Streckenverbote,0.88920867,14,0.25
+446,Ende aller Streckenverbote,0.84005719,14,0.3
+447,Ende aller Streckenverbote,0.46265629,14,0.35
+448,Verbot für Fahrzeuge aller Art,0.49677411,14,0.4
+449,Vorfahrt,0.43977034,14,0.45
+450,Vorfahrt gewähren,0.79295093,14,0.5
+451,Ende aller Streckenverbote,0.61318815,14,0.55
+452,Vorfahrt,0.87831002,14,0.6
+453,Vorfahrt,0.99882025,14,0.65
+454,Stoppschild,0.63357902,14,0.7
+455,Vorfahrt gewähren,0.46185669,14,0.75
+456,Vorfahrt,0.98946929,14,0.8
+457,Vorfahrt gewähren,0.46004051,14,0.85
+458,Verbot für Fahrzeuge aller Art,0.57636136,14,0.9
+459,Fahrradfahrer,0.55004317,14,0.95
+460,Ausschließlich rechts,0.72016662,14,1.0
+461,Rechts vorbei,0.99291718,14,1.05
+462,Verbot für Fahrzeuge aller Art,0.99206936,14,1.1
+463,Vorfahrt gewähren,0.66907549,14,1.15
+464,Vorfahrt gewähren,0.97929186,14,1.2
+465,Vorfahrt gewähren,0.99980026,14,1.25
+466,Ausschließlich rechts,0.99608886,14,1.3
+467,Verbot für Fahrzeuge aller Art,0.85321373,14,1.35
+468,Ausschließlich rechts,0.99968493,14,1.4
+469,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.92551672,14,1.45
+470,Verbot für Fahrzeuge aller Art,0.98079407,14,1.5
+471,Vorfahrt gewähren,0.90818405,14,1.55
+472,Rechts vorbei,0.70151228,14,1.6
+473,Baustelle,0.98932344,14,1.65
+474,Verbot der Einfahrt,0.32289287,14,1.7
+475,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.70775682,14,1.75
+476,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.99997389,14,1.8
+477,Ausschließlich rechts,0.98943186,14,1.85
+478,Verbot der Einfahrt,0.99980265,14,1.9
+479,Vorfahrt gewähren,0.93729508,14,1.95
+480,Ende aller Streckenverbote,0.92421031,15,0.0
+481,Ende aller Streckenverbote,0.94830209,15,0.05
+482,Ende aller Streckenverbote,0.93211126,15,0.1
+483,Ende aller Streckenverbote,0.61602485,15,0.15
+484,Ende aller Streckenverbote,0.93955779,15,0.2
+485,Ende aller Streckenverbote,0.83840954,15,0.25
+486,Ende aller Streckenverbote,0.98911077,15,0.3
+487,Ende aller Streckenverbote,0.3922509,15,0.35
+488,Ende aller Streckenverbote,0.69946283,15,0.4
+489,Vorfahrt,0.99748069,15,0.45
+490,Verbot für Fahrzeuge aller Art,0.35963047,15,0.5
+491,Vorfahrt,0.710334,15,0.55
+492,Verbot für Fahrzeuge aller Art,0.90879023,15,0.6
+493,Vorfahrt,0.55212325,15,0.65
+494,Verbot für Fahrzeuge aller Art,0.98946393,15,0.7
+495,Vorfahrt,0.99518085,15,0.75
+496,Kreisverkehr,0.85490811,15,0.8
+497,Verbot für Fahrzeuge aller Art,0.83449155,15,0.85
+498,Baustelle,0.99936563,15,0.9
+499,Ende aller Streckenverbote,0.42064548,15,0.95
+500,Verbot für Fahrzeuge aller Art,0.66238409,15,1.0
+501,Vorfahrt gewähren,0.71114731,15,1.05
+502,Vorfahrt,0.61339229,15,1.1
+503,Verbot für Fahrzeuge aller Art,0.96606266,15,1.15
+504,Vorfahrt gewähren,0.81019545,15,1.2
+505,Verbot für Fahrzeuge aller Art,0.4894082,15,1.25
+506,Vorfahrt gewähren,0.5504424,15,1.3
+507,Zulässige Höchstgeschwindigkeit (70),0.98101705,15,1.35
+508,Rechts vorbei,0.88386965,15,1.4
+509,Verbot der Einfahrt,0.967318,15,1.45
+510,Vorfahrt gewähren,0.99999392,15,1.5
+511,Einmalige Vorfahrt,0.99951911,15,1.55
+512,Verbot der Einfahrt,0.98895043,15,1.6
+513,Rechts vorbei,0.99982965,15,1.65
+514,Rechts vorbei,0.99996817,15,1.7
+515,Baustelle,0.57095301,15,1.75
+516,Zulässige Höchstgeschwindigkeit (100),0.48433721,15,1.8
+517,Überholverbot für Kraftfahrzeuge aller Art,0.82554352,15,1.85
+518,Zulässige Höchstgeschwindigkeit (70),0.99974495,15,1.9
+519,Zulässige Höchstgeschwindigkeit (80),0.99987173,15,1.95
+520,Ende aller Streckenverbote,0.91241622,16,0.0
+521,Ende aller Streckenverbote,0.90356177,16,0.05
+522,Ende aller Streckenverbote,0.98997772,16,0.1
+523,Ende aller Streckenverbote,0.92984551,16,0.15
+524,Ende aller Streckenverbote,0.93946648,16,0.2
+525,Ende aller Streckenverbote,0.96719879,16,0.25
+526,Ende aller Streckenverbote,0.98165846,16,0.3
+527,Ende aller Streckenverbote,0.82053649,16,0.35
+528,Verbot für Fahrzeuge aller Art,0.5633626,16,0.4
+529,Vorfahrt,0.28362775,16,0.45
+530,Rechts vorbei,0.91050035,16,0.5
+531,Ende aller Streckenverbote,0.48600322,16,0.55
+532,Verbot für Fahrzeuge aller Art,0.78327996,16,0.6
+533,Verbot für Fahrzeuge aller Art,0.98646939,16,0.65
+534,Verbot für Fahrzeuge aller Art,0.97308356,16,0.7
+535,Vorfahrt,0.90655077,16,0.75
+536,Vorfahrt gewähren,0.58854467,16,0.8
+537,Vorfahrt,0.45811176,16,0.85
+538,Vorfahrt gewähren,0.53392798,16,0.9
+539,Vorfahrt,0.84669811,16,0.95
+540,Vorfahrt,0.99582303,16,1.0
+541,Vorfahrt,0.25112811,16,1.05
+542,Zulässige Höchstgeschwindigkeit (50),0.9953689,16,1.1
+543,Ausschließlich rechts,0.93128031,16,1.15
+544,Verbot für Fahrzeuge aller Art,0.97173578,16,1.2
+545,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.97586262,16,1.25
+546,Vorfahrt,0.98287994,16,1.3
+547,Vorfahrt gewähren,0.8904537,16,1.35
+548,Vorfahrt gewähren,0.26449984,16,1.4
+549,Vorfahrt gewähren,0.99904186,16,1.45
+550,Fahrradfahrer,0.15210222,16,1.5
+551,Rechts vorbei,0.94688427,16,1.55
+552,Zulässige Höchstgeschwindigkeit (70),0.64727366,16,1.6
+553,Schleudergefahr bei Nässe oder Schmutz,0.99997306,16,1.65
+554,Verbot der Einfahrt,0.9085049,16,1.7
+555,Zulässige Höchstgeschwindigkeit (120),0.93265367,16,1.75
+556,Baustelle,0.99933499,16,1.8
+557,Vorfahrt gewähren,0.88345242,16,1.85
+558,Stoppschild,0.90089917,16,1.9
+559,Zulässige Höchstgeschwindigkeit (80),0.54036313,16,1.95
+560,Ende aller Streckenverbote,0.9339211,17,0.0
+561,Ende aller Streckenverbote,0.927571,17,0.05
+562,Ende aller Streckenverbote,0.69091779,17,0.1
+563,Ende aller Streckenverbote,0.55534041,17,0.15
+564,Ende aller Streckenverbote,0.92152733,17,0.2
+565,Vorfahrt,0.43464866,17,0.25
+566,Ende aller Streckenverbote,0.76049286,17,0.3
+567,Vorfahrt gewähren,0.48093766,17,0.35
+568,Ende aller Streckenverbote,0.89561015,17,0.4
+569,Verbot für Fahrzeuge aller Art,0.99119556,17,0.45
+570,Vorfahrt,0.83958167,17,0.5
+571,Ausschließlich rechts,0.98541254,17,0.55
+572,Baustelle,0.79331595,17,0.6
+573,Ende aller Streckenverbote,0.68905842,17,0.65
+574,Vorfahrt gewähren,0.98918062,17,0.7
+575,Vorfahrt,0.88539785,17,0.75
+576,Vorfahrt,0.98702174,17,0.8
+577,Verbot für Fahrzeuge aller Art,0.8783018,17,0.85
+578,Vorfahrt,0.22461078,17,0.9
+579,Vorfahrt gewähren,0.94774675,17,0.95
+580,Zulässige Höchstgeschwindigkeit (70),0.9985683,17,1.0
+581,Vorfahrt gewähren,0.99870133,17,1.05
+582,Vorfahrt gewähren,0.96784121,17,1.1
+583,Verbot für Fahrzeuge aller Art,0.6432811,17,1.15
+584,Zulässige Höchstgeschwindigkeit (30),0.48639587,17,1.2
+585,Verbot für Fahrzeuge aller Art,0.7524994,17,1.25
+586,Baustelle,0.99999988,17,1.3
+587,Vorfahrt gewähren,0.99363339,17,1.35
+588,Baustelle,0.61751556,17,1.4
+589,Vorfahrt,0.91636145,17,1.45
+590,Vorfahrt gewähren,0.93823749,17,1.5
+591,Verbot für Fahrzeuge aller Art,0.79075474,17,1.55
+592,Vorfahrt gewähren,0.02581493,17,1.6
+593,Zulässige Höchstgeschwindigkeit (80),0.99805945,17,1.65
+594,Verbot für Fahrzeuge aller Art,0.81754327,17,1.7
+595,Vorfahrt,0.99731845,17,1.75
+596,Verbot für Fahrzeuge aller Art,0.99877197,17,1.8
+597,Zulässige Höchstgeschwindigkeit (70),0.99863344,17,1.85
+598,Verbot der Einfahrt,0.75228781,17,1.9
+599,Doppelkurve (zunächst links),0.09295043,17,1.95
+600,Ende aller Streckenverbote,0.95664877,18,0.0
+601,Ende aller Streckenverbote,0.9513191,18,0.05
+602,Ende aller Streckenverbote,0.97030973,18,0.1
+603,Ende aller Streckenverbote,0.96339381,18,0.15
+604,Ende aller Streckenverbote,0.95136535,18,0.2
+605,Ende aller Streckenverbote,0.8131907,18,0.25
+606,Ende aller Streckenverbote,0.63896179,18,0.3
+607,Ende aller Streckenverbote,0.9711557,18,0.35
+608,Ende aller Streckenverbote,0.90768266,18,0.4
+609,Vorfahrt,0.45936406,18,0.45
+610,Ende aller Streckenverbote,0.36290926,18,0.5
+611,Vorfahrt,0.95649242,18,0.55
+612,Vorfahrt,0.82774794,18,0.6
+613,Zulässige Höchstgeschwindigkeit (50),0.43832529,18,0.65
+614,Vorfahrt,0.72633165,18,0.7
+615,Vorfahrt,0.61444718,18,0.75
+616,Baustelle,0.57842118,18,0.8
+617,Vorfahrt gewähren,0.51289833,18,0.85
+618,Zulässige Höchstgeschwindigkeit (70),0.9544872,18,0.9
+619,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.94023472,18,0.95
+620,Verbot für Fahrzeuge aller Art,0.99936146,18,1.0
+621,Gefahrenstelle,0.15160592,18,1.05
+622,Verbot für Fahrzeuge aller Art,0.78664196,18,1.1
+623,Baustelle,0.99144709,18,1.15
+624,Gefahrenstelle,0.52232891,18,1.2
+625,Zulässige Höchstgeschwindigkeit (50),0.96793336,18,1.25
+626,Zulässige Höchstgeschwindigkeit (70),0.78146124,18,1.3
+627,Vorfahrt gewähren,0.97278094,18,1.35
+628,Rechts vorbei,0.40492588,18,1.4
+629,Baustelle,0.92633122,18,1.45
+630,Zulässige Höchstgeschwindigkeit (50),0.86013228,18,1.5
+631,Doppelkurve (zunächst links),0.8940593,18,1.55
+632,Zulässige Höchstgeschwindigkeit (70),0.2532841,18,1.6
+633,Vorfahrt,0.71770012,18,1.65
+634,Zulässige Höchstgeschwindigkeit (70),0.11882255,18,1.7
+635,Vorfahrt gewähren,0.99999988,18,1.75
+636,Zulässige Höchstgeschwindigkeit (70),0.32758856,18,1.8
+637,Verbot für Fahrzeuge aller Art,0.94728172,18,1.85
+638,Vorfahrt,0.54448289,18,1.9
+639,Ausschließlich rechts,0.64922279,18,1.95
+640,Ende aller Streckenverbote,0.94418067,19,0.0
+641,Ende aller Streckenverbote,0.9488911,19,0.05
+642,Ende aller Streckenverbote,0.95659912,19,0.1
+643,Ende aller Streckenverbote,0.87355125,19,0.15
+644,Ausschließlich rechts,0.57176536,19,0.2
+645,Ende aller Streckenverbote,0.59991944,19,0.25
+646,Ende aller Streckenverbote,0.37333313,19,0.3
+647,Ende aller Streckenverbote,0.65530652,19,0.35
+648,Ende aller Streckenverbote,0.38173878,19,0.4
+649,Ende aller Streckenverbote,0.83771557,19,0.45
+650,Verbot für Fahrzeuge aller Art,0.60692644,19,0.5
+651,Verbot für Fahrzeuge aller Art,0.4553456,19,0.55
+652,Vorfahrt,0.38961834,19,0.6
+653,Ende aller Streckenverbote,0.27819058,19,0.65
+654,Vorfahrt,0.92328161,19,0.7
+655,Vorfahrt,0.51329738,19,0.75
+656,Rechts vorbei,0.57481307,19,0.8
+657,Verbot für Fahrzeuge aller Art,0.98458225,19,0.85
+658,Rechts vorbei,0.74992889,19,0.9
+659,Vorfahrt,0.75910705,19,0.95
+660,Verbot für Fahrzeuge aller Art,0.50411987,19,1.0
+661,Zulässige Höchstgeschwindigkeit (30),0.9067049,19,1.05
+662,Verbot für Fahrzeuge aller Art,0.99982685,19,1.1
+663,Zulässige Höchstgeschwindigkeit (50),0.65324962,19,1.15
+664,Vorfahrt gewähren,0.96572244,19,1.2
+665,Verbot für Fahrzeuge aller Art,0.98645651,19,1.25
+666,Verbot für Fahrzeuge aller Art,0.98626387,19,1.3
+667,Vorfahrt gewähren,0.88503903,19,1.35
+668,Verbot für Fahrzeuge aller Art,0.4164775,19,1.4
+669,Baustelle,0.99012977,19,1.45
+670,Vorfahrt gewähren,0.09334546,19,1.5
+671,Überholverbot für Kraftfahrzeuge aller Art,0.74462104,19,1.55
+672,Zulässige Höchstgeschwindigkeit (70),0.929959,19,1.6
+673,Vorfahrt,0.89863223,19,1.65
+674,Rechts vorbei,0.99999034,19,1.7
+675,Einmalige Vorfahrt,0.98705602,19,1.75
+676,Überholverbot für Kraftfahrzeuge aller Art,0.93587291,19,1.8
+677,Zulässige Höchstgeschwindigkeit (120),0.10313607,19,1.85
+678,Baustelle,0.99999416,19,1.9
+679,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.85569495,19,1.95
+680,Ende aller Streckenverbote,0.96041936,20,0.0
+681,Ende aller Streckenverbote,0.87326509,20,0.05
+682,Ende aller Streckenverbote,0.82903641,20,0.1
+683,Ende aller Streckenverbote,0.93775451,20,0.15
+684,Ende aller Streckenverbote,0.83573139,20,0.2
+685,Ausschließlich rechts,0.52409494,20,0.25
+686,Ende aller Streckenverbote,0.94996309,20,0.3
+687,Vorfahrt gewähren,0.31224269,20,0.35
+688,Vorfahrt,0.48483515,20,0.4
+689,Ende aller Streckenverbote,0.93467414,20,0.45
+690,Verbot für Fahrzeuge aller Art,0.52259386,20,0.5
+691,Vorfahrt,0.37837791,20,0.55
+692,Vorfahrt gewähren,0.24943824,20,0.6
+693,Ende aller Streckenverbote,0.97596276,20,0.65
+694,Verbot für Fahrzeuge aller Art,0.35178724,20,0.7
+695,Vorfahrt gewähren,0.90681243,20,0.75
+696,Vorfahrt,0.97478878,20,0.8
+697,Verbot für Fahrzeuge aller Art,0.99799675,20,0.85
+698,Vorfahrt gewähren,0.99956101,20,0.9
+699,Rechts vorbei,0.95322847,20,0.95
+700,Vorfahrt gewähren,0.9896366,20,1.0
+701,Vorfahrt,0.40305993,20,1.05
+702,Fahrradfahrer,0.99513334,20,1.1
+703,Vorfahrt,0.99897873,20,1.15
+704,Zulässige Höchstgeschwindigkeit (70),0.97246909,20,1.2
+705,Vorfahrt,0.95781851,20,1.25
+706,Verbot für Fahrzeuge aller Art,0.79221892,20,1.3
+707,Vorfahrt gewähren,0.89461052,20,1.35
+708,Zulässige Höchstgeschwindigkeit (30),0.96926171,20,1.4
+709,Vorfahrt gewähren,0.83344144,20,1.45
+710,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.99645919,20,1.5
+711,Baustelle,0.99997568,20,1.55
+712,Vorfahrt,0.65207028,20,1.6
+713,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.98742306,20,1.65
+714,"Ende des Überholverbotes für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.02272727,20,1.7
+715,Zulässige Höchstgeschwindigkeit (120),0.81936485,20,1.75
+716,Vorfahrt gewähren,0.99935442,20,1.8
+717,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.02329642,20,1.85
+718,Kreisverkehr,0.36005393,20,1.9
+719,Stoppschild,0.73260528,20,1.95
+720,Ende aller Streckenverbote,0.93829441,21,0.0
+721,Ende aller Streckenverbote,0.92355889,21,0.05
+722,Ende aller Streckenverbote,0.92203426,21,0.1
+723,Ende aller Streckenverbote,0.55717415,21,0.15
+724,Ende aller Streckenverbote,0.79885525,21,0.2
+725,Ende aller Streckenverbote,0.95206916,21,0.25
+726,Ende aller Streckenverbote,0.93208259,21,0.3
+727,Ende aller Streckenverbote,0.93884194,21,0.35
+728,Vorfahrt,0.60841447,21,0.4
+729,Vorfahrt,0.71394944,21,0.45
+730,Vorfahrt,0.69980985,21,0.5
+731,Verbot für Fahrzeuge aller Art,0.73174894,21,0.55
+732,Vorfahrt,0.6806016,21,0.6
+733,Vorfahrt,0.92416084,21,0.65
+734,Vorfahrt,0.96777958,21,0.7
+735,Vorfahrt,0.84808588,21,0.75
+736,Doppelkurve (zunächst links),0.44657406,21,0.8
+737,Verbot für Fahrzeuge aller Art,0.56809467,21,0.85
+738,Verbot für Fahrzeuge aller Art,0.9886952,21,0.9
+739,Rechts vorbei,0.97264683,21,0.95
+740,Ausschließlich rechts,0.95417863,21,1.0
+741,Vorfahrt,0.83845443,21,1.05
+742,Rechts vorbei,0.79527634,21,1.1
+743,Schleudergefahr bei Nässe oder Schmutz,0.69986254,21,1.15
+744,Doppelkurve (zunächst links),0.03419111,21,1.2
+745,Vorfahrt,0.99922836,21,1.25
+746,Vorfahrt,0.78862542,21,1.3
+747,Zulässige Höchstgeschwindigkeit (50),0.62906086,21,1.35
+748,Baustelle,0.99657756,21,1.4
+749,Zulässige Höchstgeschwindigkeit (70),0.99999952,21,1.45
+750,Ausschließlich rechts,0.93655896,21,1.5
+751,Baustelle,0.87733924,21,1.55
+752,Baustelle,0.5048638,21,1.6
+753,Zulässige Höchstgeschwindigkeit (20),0.83817106,21,1.65
+754,Verbot für Fahrzeuge aller Art,0.25979149,21,1.7
+755,Zulässige Höchstgeschwindigkeit (30),0.97844487,21,1.75
+756,Zulässige Höchstgeschwindigkeit (70),1.0,21,1.8
+757,Zulässige Höchstgeschwindigkeit (50),0.98319107,21,1.85
+758,Zulässige Höchstgeschwindigkeit (60),0.62738353,21,1.9
+759,Zulässige Höchstgeschwindigkeit (60),0.99992692,21,1.95
+760,Ende aller Streckenverbote,0.89247197,22,0.0
+761,Ende aller Streckenverbote,0.96758503,22,0.05
+762,Ende aller Streckenverbote,0.83415592,22,0.1
+763,Ende aller Streckenverbote,0.9119336,22,0.15
+764,Ende aller Streckenverbote,0.96857595,22,0.2
+765,Ende aller Streckenverbote,0.94189066,22,0.25
+766,Ende aller Streckenverbote,0.97335488,22,0.3
+767,Ende aller Streckenverbote,0.70026755,22,0.35
+768,Ausschließlich rechts,0.50737643,22,0.4
+769,Vorfahrt,0.87119347,22,0.45
+770,Vorfahrt,0.98015732,22,0.5
+771,Ende aller Streckenverbote,0.66294491,22,0.55
+772,Vorfahrt gewähren,0.93379581,22,0.6
+773,Baustelle,0.51325041,22,0.65
+774,Vorfahrt,0.90702313,22,0.7
+775,Vorfahrt gewähren,0.73615515,22,0.75
+776,Vorfahrt gewähren,0.29145771,22,0.8
+777,Baustelle,0.5448572,22,0.85
+778,Vorfahrt,0.69261175,22,0.9
+779,Vorfahrt gewähren,0.98314923,22,0.95
+780,Vorfahrt,0.99831736,22,1.0
+781,Vorfahrt gewähren,0.99331701,22,1.05
+782,Verbot für Fahrzeuge aller Art,0.89129251,22,1.1
+783,Verbot für Fahrzeuge aller Art,0.6625663,22,1.15
+784,Rechts vorbei,0.60488319,22,1.2
+785,Rechts vorbei,0.55202854,22,1.25
+786,Ausschließlich rechts,0.9910149,22,1.3
+787,Vorfahrt,0.49618796,22,1.35
+788,Verbot für Fahrzeuge aller Art,0.99996102,22,1.4
+789,Vorfahrt,0.27137983,22,1.45
+790,Ausschließlich rechts,0.78422779,22,1.5
+791,Vorfahrt gewähren,0.90479004,22,1.55
+792,Baustelle,0.99665654,22,1.6
+793,Ausschließlich geradeaus,0.80634367,22,1.65
+794,Überholverbot für Kraftfahrzeuge aller Art,0.97445244,22,1.7
+795,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.9924078,22,1.75
+796,Zulässige Höchstgeschwindigkeit (30),0.9922381,22,1.8
+797,Zulässige Höchstgeschwindigkeit (20),0.48984754,22,1.85
+798,Zulässige Höchstgeschwindigkeit (70),0.99519581,22,1.9
+799,Vorfahrt,0.94216794,22,1.95
+800,Ende aller Streckenverbote,0.88681149,23,0.0
+801,Ende aller Streckenverbote,0.81901705,23,0.05
+802,Ende aller Streckenverbote,0.9652282,23,0.1
+803,Ende aller Streckenverbote,0.88522124,23,0.15
+804,Vorfahrt,0.57381618,23,0.2
+805,Ende aller Streckenverbote,0.94821835,23,0.25
+806,Ausschließlich rechts,0.27036676,23,0.3
+807,Vorfahrt,0.52413648,23,0.35
+808,Ende aller Streckenverbote,0.91798633,23,0.4
+809,Ende aller Streckenverbote,0.84563142,23,0.45
+810,Vorfahrt gewähren,0.33132613,23,0.5
+811,Vorfahrt,0.50661361,23,0.55
+812,Vorfahrt,0.96780807,23,0.6
+813,Vorfahrt,0.99660921,23,0.65
+814,Rechts vorbei,0.61992502,23,0.7
+815,Vorfahrt,0.82315761,23,0.75
+816,Vorfahrt,0.6607796,23,0.8
+817,Verbot für Fahrzeuge aller Art,0.72465467,23,0.85
+818,Vorfahrt,0.91934568,23,0.9
+819,Vorfahrt gewähren,0.76931411,23,0.95
+820,Überholverbot für Kraftfahrzeuge aller Art,0.17334799,23,1.0
+821,Verbot für Fahrzeuge aller Art,0.87219369,23,1.05
+822,Baustelle,0.32160646,23,1.1
+823,"Ende des Überholverbotes für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.02272727,23,1.15
+824,Baustelle,0.83791202,23,1.2
+825,Doppelkurve (zunächst links),0.11905844,23,1.25
+826,Zulässige Höchstgeschwindigkeit (50),0.49109226,23,1.3
+827,Zulässige Höchstgeschwindigkeit (50),0.98617095,23,1.35
+828,Vorfahrt gewähren,0.99727041,23,1.4
+829,Vorfahrt gewähren,0.33915418,23,1.45
+830,Ausschließlich geradeaus,0.98572528,23,1.5
+831,Zulässige Höchstgeschwindigkeit (120),0.99999857,23,1.55
+832,Ausschließlich rechts,0.99104905,23,1.6
+833,Zulässige Höchstgeschwindigkeit (70),0.93768871,23,1.65
+834,Vorfahrt gewähren,0.99999928,23,1.7
+835,Verbot für Fahrzeuge aller Art,0.83289665,23,1.75
+836,Gefahrenstelle,0.13568829,23,1.8
+837,Baustelle,0.98651612,23,1.85
+838,Vorfahrt,0.95725286,23,1.9
+839,Baustelle,0.47540501,23,1.95
+840,Ende aller Streckenverbote,0.86938226,24,0.0
+841,Ende aller Streckenverbote,0.89244515,24,0.05
+842,Ende aller Streckenverbote,0.95066023,24,0.1
+843,Ende aller Streckenverbote,0.87663317,24,0.15
+844,Ende aller Streckenverbote,0.96145099,24,0.2
+845,Ende aller Streckenverbote,0.87491816,24,0.25
+846,Ende aller Streckenverbote,0.88948691,24,0.3
+847,Ende aller Streckenverbote,0.94639063,24,0.35
+848,Vorfahrt,0.8973273,24,0.4
+849,Vorfahrt,0.89621949,24,0.45
+850,Vorfahrt,0.98234516,24,0.5
+851,Vorfahrt,0.83651882,24,0.55
+852,Ende aller Streckenverbote,0.49010554,24,0.6
+853,Vorfahrt gewähren,0.56299996,24,0.65
+854,Vorfahrt,0.69172621,24,0.7
+855,Verbot für Fahrzeuge aller Art,0.66065574,24,0.75
+856,Vorfahrt,0.92254138,24,0.8
+857,Vorfahrt,0.51221561,24,0.85
+858,Kreisverkehr,0.08883486,24,0.9
+859,Baustelle,0.98285162,24,0.95
+860,Zulässige Höchstgeschwindigkeit (70),0.99999964,24,1.0
+861,Überholverbot für Kraftfahrzeuge aller Art,0.99949563,24,1.05
+862,Vorfahrt gewähren,0.76149076,24,1.1
+863,Baustelle,0.97923458,24,1.15
+864,Stoppschild,0.95777279,24,1.2
+865,Zulässige Höchstgeschwindigkeit (120),0.59550065,24,1.25
+866,Verbot für Fahrzeuge aller Art,0.91672462,24,1.3
+867,Rechts vorbei,0.81670737,24,1.35
+868,Vorfahrt gewähren,0.29811892,24,1.4
+869,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.50409049,24,1.45
+870,Zulässige Höchstgeschwindigkeit (50),0.99849427,24,1.5
+871,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.4640308,24,1.55
+872,Baustelle,0.99991238,24,1.6
+873,Unebene Fahrbahn,0.80992532,24,1.65
+874,Ausschließlich geradeaus,0.56417525,24,1.7
+875,Baustelle,0.55040669,24,1.75
+876,Zulässige Höchstgeschwindigkeit (70),0.6876877,24,1.8
+877,Rechts vorbei,0.2812272,24,1.85
+878,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.24712954,24,1.9
+879,Kreisverkehr,0.4811593,24,1.95
+880,Ende aller Streckenverbote,0.93001926,25,0.0
+881,Ende aller Streckenverbote,0.94588566,25,0.05
+882,Ende aller Streckenverbote,0.55559522,25,0.1
+883,Ende aller Streckenverbote,0.80510843,25,0.15
+884,Ende aller Streckenverbote,0.86526811,25,0.2
+885,Ende aller Streckenverbote,0.63144678,25,0.25
+886,Vorfahrt gewähren,0.71086109,25,0.3
+887,Ende aller Streckenverbote,0.55199057,25,0.35
+888,Ende aller Streckenverbote,0.5023123,25,0.4
+889,Ende aller Streckenverbote,0.45125338,25,0.45
+890,Vorfahrt,0.89459819,25,0.5
+891,Vorfahrt,0.83197457,25,0.55
+892,Ende aller Streckenverbote,0.43325818,25,0.6
+893,Ende aller Streckenverbote,0.5799306,25,0.65
+894,Vorfahrt,0.95032507,25,0.7
+895,Vorfahrt gewähren,0.97051215,25,0.75
+896,Baustelle,0.93017691,25,0.8
+897,Ende aller Streckenverbote,0.45252368,25,0.85
+898,Verbot für Fahrzeuge aller Art,0.99872059,25,0.9
+899,Vorfahrt gewähren,0.92089385,25,0.95
+900,Verbot für Fahrzeuge aller Art,0.97888911,25,1.0
+901,Vorfahrt gewähren,0.65172589,25,1.05
+902,Rechts vorbei,0.65659004,25,1.1
+903,Vorfahrt gewähren,0.9959622,25,1.15
+904,Kreisverkehr,0.96686089,25,1.2
+905,Vorfahrt,0.79103082,25,1.25
+906,Verbot für Fahrzeuge aller Art,0.35649738,25,1.3
+907,"Ende des Überholverbotes für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.02272727,25,1.35
+908,Rechts vorbei,0.99995184,25,1.4
+909,Verbot für Fahrzeuge aller Art,0.88074386,25,1.45
+910,Gefahrenstelle,0.73672241,25,1.5
+911,Wildwechsel,0.5054456,25,1.55
+912,Vorfahrt gewähren,0.08945768,25,1.6
+913,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.02293037,25,1.65
+914,Zulässige Höchstgeschwindigkeit (70),0.64936769,25,1.7
+915,Zulässige Höchstgeschwindigkeit (70),0.943977,25,1.75
+916,Zulässige Höchstgeschwindigkeit (50),0.36016592,25,1.8
+917,Verbot für Fahrzeuge aller Art,0.98842233,25,1.85
+918,Ausschließlich geradeaus,0.99978584,25,1.9
+919,Gefahrenstelle,0.1701639,25,1.95
+920,Ende aller Streckenverbote,0.93075609,26,0.0
+921,Ende aller Streckenverbote,0.85872805,26,0.05
+922,Ende aller Streckenverbote,0.72201228,26,0.1
+923,Ende aller Streckenverbote,0.8712942,26,0.15
+924,Ende aller Streckenverbote,0.50886315,26,0.2
+925,Ende aller Streckenverbote,0.97623491,26,0.25
+926,Ende aller Streckenverbote,0.28522956,26,0.3
+927,Vorfahrt,0.79595613,26,0.35
+928,Ende aller Streckenverbote,0.51731771,26,0.4
+929,Vorfahrt,0.7027564,26,0.45
+930,Vorfahrt,0.98271471,26,0.5
+931,Vorfahrt,0.98540515,26,0.55
+932,Ende aller Streckenverbote,0.29054779,26,0.6
+933,Vorfahrt,0.62516546,26,0.65
+934,Vorfahrt gewähren,0.67294264,26,0.7
+935,Verbot für Fahrzeuge aller Art,0.99569762,26,0.75
+936,Vorfahrt,0.63149655,26,0.8
+937,Rechts vorbei,0.92126298,26,0.85
+938,Vorfahrt gewähren,0.24077103,26,0.9
+939,Rechts vorbei,0.98384523,26,0.95
+940,Vorfahrt gewähren,0.59590131,26,1.0
+941,Doppelkurve (zunächst links),0.94081759,26,1.05
+942,Unebene Fahrbahn,0.93276042,26,1.1
+943,Verbot für Fahrzeuge aller Art,0.55948871,26,1.15
+944,Verbot für Fahrzeuge aller Art,0.99903727,26,1.2
+945,Vorfahrt gewähren,0.99630934,26,1.25
+946,Zulässige Höchstgeschwindigkeit (20),0.12239303,26,1.3
+947,Schleudergefahr bei Nässe oder Schmutz,0.02423992,26,1.35
+948,Zulässige Höchstgeschwindigkeit (30),0.73627561,26,1.4
+949,Baustelle,1.0,26,1.45
+950,Verbot für Fahrzeuge aller Art,0.99979085,26,1.5
+951,Vorfahrt,0.99911851,26,1.55
+952,Vorfahrt gewähren,0.94398975,26,1.6
+953,Baustelle,0.99991214,26,1.65
+954,Zulässige Höchstgeschwindigkeit (30),0.9982115,26,1.7
+955,Einmalige Vorfahrt,0.9984628,26,1.75
+956,Ende der Geschwindigkeitsbegrenzung (80),0.57314008,26,1.8
+957,Vorfahrt gewähren,0.99934703,26,1.85
+958,Einmalige Vorfahrt,0.04519607,26,1.9
+959,Einmalige Vorfahrt,0.94702613,26,1.95
+960,Ende aller Streckenverbote,0.91972482,27,0.0
+961,Ende aller Streckenverbote,0.86371028,27,0.05
+962,Ende aller Streckenverbote,0.80671364,27,0.1
+963,Ende aller Streckenverbote,0.84215522,27,0.15
+964,Ende aller Streckenverbote,0.72151929,27,0.2
+965,Ende aller Streckenverbote,0.7776143,27,0.25
+966,Ende aller Streckenverbote,0.51740795,27,0.3
+967,Vorfahrt,0.974361,27,0.35
+968,Vorfahrt,0.88393605,27,0.4
+969,Ende aller Streckenverbote,0.45209381,27,0.45
+970,Vorfahrt gewähren,0.33411238,27,0.5
+971,Vorfahrt,0.51973456,27,0.55
+972,Vorfahrt,0.82743645,27,0.6
+973,Vorfahrt,0.09634369,27,0.65
+974,Vorfahrt,0.59713107,27,0.7
+975,Vorfahrt,0.74670261,27,0.75
+976,Verbot für Fahrzeuge aller Art,0.97878176,27,0.8
+977,Vorfahrt,0.99869436,27,0.85
+978,Unebene Fahrbahn,0.38279206,27,0.9
+979,Vorfahrt,0.55920696,27,0.95
+980,Zulässige Höchstgeschwindigkeit (70),0.52748418,27,1.0
+981,Zulässige Höchstgeschwindigkeit (70),0.99999857,27,1.05
+982,Unebene Fahrbahn,0.99610597,27,1.1
+983,Vorfahrt,0.5940643,27,1.15
+984,Vorfahrt gewähren,0.66593212,27,1.2
+985,Vorfahrt gewähren,0.99417865,27,1.25
+986,Unebene Fahrbahn,0.98277652,27,1.3
+987,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.93811435,27,1.35
+988,Verbot für Fahrzeuge aller Art,0.99996352,27,1.4
+989,Vorfahrt gewähren,0.88406163,27,1.45
+990,Baustelle,0.99910873,27,1.5
+991,Zulässige Höchstgeschwindigkeit (30),0.13564573,27,1.55
+992,Ausschließlich rechts,0.62730658,27,1.6
+993,Baustelle,0.99960488,27,1.65
+994,Zulässige Höchstgeschwindigkeit (70),0.74619907,27,1.7
+995,Zulässige Höchstgeschwindigkeit (60),0.97761005,27,1.75
+996,Einmalige Vorfahrt,0.92408752,27,1.8
+997,Verbot für Fahrzeuge aller Art,0.664563,27,1.85
+998,Verbot für Fahrzeuge aller Art,0.9953649,27,1.9
+999,Rechts vorbei,0.91324031,27,1.95
+1000,Ende aller Streckenverbote,0.94900841,28,0.0
+1001,Ende aller Streckenverbote,0.88431543,28,0.05
+1002,Ende aller Streckenverbote,0.88793522,28,0.1
+1003,Ende aller Streckenverbote,0.97305501,28,0.15
+1004,Ende aller Streckenverbote,0.74926198,28,0.2
+1005,Ende aller Streckenverbote,0.98129499,28,0.25
+1006,Ende aller Streckenverbote,0.71757412,28,0.3
+1007,Ende aller Streckenverbote,0.65142745,28,0.35
+1008,Rechts vorbei,0.48219728,28,0.4
+1009,Verbot für Fahrzeuge aller Art,0.45268467,28,0.45
+1010,Ende aller Streckenverbote,0.5511896,28,0.5
+1011,Rechts vorbei,0.55630529,28,0.55
+1012,Vorfahrt,0.72222692,28,0.6
+1013,Vorfahrt gewähren,0.90558952,28,0.65
+1014,Vorfahrt,0.57222551,28,0.7
+1015,Ende aller Streckenverbote,0.39938533,28,0.75
+1016,Verbot für Fahrzeuge aller Art,0.54121751,28,0.8
+1017,Verbot für Fahrzeuge aller Art,0.66645259,28,0.85
+1018,Ausschließlich rechts,0.58087254,28,0.9
+1019,Verbot für Fahrzeuge aller Art,0.68511999,28,0.95
+1020,Vorfahrt,0.96730119,28,1.0
+1021,Zulässige Höchstgeschwindigkeit (70),0.8894394,28,1.05
+1022,Vorfahrt gewähren,0.8994388,28,1.1
+1023,Rechts vorbei,0.87557048,28,1.15
+1024,Vorfahrt gewähren,0.99820244,28,1.2
+1025,Vorfahrt gewähren,0.9996013,28,1.25
+1026,Vorfahrt gewähren,0.99999976,28,1.3
+1027,Baustelle,0.99341959,28,1.35
+1028,Ausschließlich rechts,0.33658734,28,1.4
+1029,Vorfahrt gewähren,0.83863354,28,1.45
+1030,Vorfahrt gewähren,0.99964118,28,1.5
+1031,Zulässige Höchstgeschwindigkeit (50),0.17699359,28,1.55
+1032,Verbot für Fahrzeuge aller Art,0.95215076,28,1.6
+1033,Baustelle,0.75459361,28,1.65
+1034,Verbot für Fahrzeuge aller Art,0.98207241,28,1.7
+1035,Verbot der Einfahrt,0.99999988,28,1.75
+1036,Vorfahrt gewähren,0.79871023,28,1.8
+1037,Zulässige Höchstgeschwindigkeit (30),0.98749232,28,1.85
+1038,Vorfahrt gewähren,0.20943698,28,1.9
+1039,Baustelle,0.99993074,28,1.95
+1040,Ende aller Streckenverbote,0.89314908,29,0.0
+1041,Ende aller Streckenverbote,0.92550552,29,0.05
+1042,Ende aller Streckenverbote,0.85141999,29,0.1
+1043,Ende aller Streckenverbote,0.77863878,29,0.15
+1044,Ende aller Streckenverbote,0.24559702,29,0.2
+1045,Ende aller Streckenverbote,0.93673468,29,0.25
+1046,Vorfahrt,0.88504148,29,0.3
+1047,Vorfahrt,0.47045201,29,0.35
+1048,Vorfahrt gewähren,0.6243757,29,0.4
+1049,Ende aller Streckenverbote,0.80622113,29,0.45
+1050,Ausschließlich rechts,0.78689831,29,0.5
+1051,Vorfahrt gewähren,0.3162815,29,0.55
+1052,Ende aller Streckenverbote,0.93449247,29,0.6
+1053,Vorfahrt,0.89528018,29,0.65
+1054,Rechts vorbei,0.65971571,29,0.7
+1055,Verbot für Fahrzeuge aller Art,0.51123035,29,0.75
+1056,Vorfahrt gewähren,0.83182234,29,0.8
+1057,Vorfahrt,0.68795007,29,0.85
+1058,Baustelle,0.94708323,29,0.9
+1059,Verbot für Fahrzeuge aller Art,0.71148854,29,0.95
+1060,Verbot für Fahrzeuge aller Art,0.86130327,29,1.0
+1061,Vorfahrt gewähren,0.47077346,29,1.05
+1062,Ausschließlich rechts,0.76617736,29,1.1
+1063,Verbot für Fahrzeuge aller Art,0.97385693,29,1.15
+1064,Vorfahrt gewähren,0.883035,29,1.2
+1065,Vorfahrt gewähren,0.97842652,29,1.25
+1066,Zulässige Höchstgeschwindigkeit (70),0.71066546,29,1.3
+1067,Rechts vorbei,0.8821646,29,1.35
+1068,Vorfahrt gewähren,0.64699894,29,1.4
+1069,Vorfahrt gewähren,0.8344664,29,1.45
+1070,Rechts vorbei,0.18858127,29,1.5
+1071,Unebene Fahrbahn,0.4069109,29,1.55
+1072,Rechts vorbei,0.31107274,29,1.6
+1073,Doppelkurve (zunächst links),0.15586719,29,1.65
+1074,Zulässige Höchstgeschwindigkeit (70),0.94282585,29,1.7
+1075,Vorfahrt gewähren,0.7833373,29,1.75
+1076,Ausschließlich rechts,0.99917644,29,1.8
+1077,Zulässige Höchstgeschwindigkeit (70),0.57660615,29,1.85
+1078,Zulässige Höchstgeschwindigkeit (30),0.77417862,29,1.9
+1079,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.43363479,29,1.95
+1080,Ende aller Streckenverbote,0.87425357,30,0.0
+1081,Ende aller Streckenverbote,0.86225349,30,0.05
+1082,Ende aller Streckenverbote,0.8206259,30,0.1
+1083,Ende aller Streckenverbote,0.923343,30,0.15
+1084,Ende aller Streckenverbote,0.97270602,30,0.2
+1085,Ende aller Streckenverbote,0.90500385,30,0.25
+1086,Ende aller Streckenverbote,0.76331276,30,0.3
+1087,Vorfahrt,0.85386723,30,0.35
+1088,Ende aller Streckenverbote,0.54680067,30,0.4
+1089,Vorfahrt,0.65897065,30,0.45
+1090,Vorfahrt,0.93373156,30,0.5
+1091,Vorfahrt,0.97540492,30,0.55
+1092,Vorfahrt,0.98363346,30,0.6
+1093,Baustelle,0.58489639,30,0.65
+1094,Vorfahrt,0.66150773,30,0.7
+1095,Vorfahrt,0.86761022,30,0.75
+1096,Vorfahrt,0.8856135,30,0.8
+1097,Vorfahrt gewähren,0.82351172,30,0.85
+1098,Baustelle,0.9995172,30,0.9
+1099,Verbot für Fahrzeuge aller Art,0.63177681,30,0.95
+1100,Vorfahrt,0.98020154,30,1.0
+1101,Ausschließlich rechts,0.71349585,30,1.05
+1102,Zulässige Höchstgeschwindigkeit (30),0.51357722,30,1.1
+1103,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.79792213,30,1.15
+1104,Fahrradfahrer,0.86582106,30,1.2
+1105,Zulässige Höchstgeschwindigkeit (70),0.99827576,30,1.25
+1106,Baustelle,0.49577576,30,1.3
+1107,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.68146276,30,1.35
+1108,"Ende des Überholverbotes für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.02272727,30,1.4
+1109,Ende aller Streckenverbote,0.28676426,30,1.45
+1110,Baustelle,0.092164,30,1.5
+1111,Zulässige Höchstgeschwindigkeit (30),0.99986923,30,1.55
+1112,Baustelle,0.99990928,30,1.6
+1113,Rechts vorbei,0.99844486,30,1.65
+1114,Vorfahrt gewähren,0.99817204,30,1.7
+1115,Einmalige Vorfahrt,0.95837426,30,1.75
+1116,Einmalige Vorfahrt,0.79873139,30,1.8
+1117,Vorfahrt gewähren,0.57485074,30,1.85
+1118,"Ende des Überholverbotes für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.02272727,30,1.9
+1119,Verbot für Fahrzeuge aller Art,0.24571636,30,1.95
+1120,Ende aller Streckenverbote,0.93206412,31,0.0
+1121,Ende aller Streckenverbote,0.94382203,31,0.05
+1122,Ende aller Streckenverbote,0.84106338,31,0.1
+1123,Ende aller Streckenverbote,0.6613453,31,0.15
+1124,Ende aller Streckenverbote,0.9159233,31,0.2
+1125,Ende aller Streckenverbote,0.88877285,31,0.25
+1126,Ende aller Streckenverbote,0.74595779,31,0.3
+1127,Vorfahrt,0.90047461,31,0.35
+1128,Ende aller Streckenverbote,0.46091095,31,0.4
+1129,Vorfahrt,0.99659216,31,0.45
+1130,Vorfahrt,0.54369199,31,0.5
+1131,Verbot für Fahrzeuge aller Art,0.98176318,31,0.55
+1132,Vorfahrt,0.45641106,31,0.6
+1133,Vorfahrt,0.63382423,31,0.65
+1134,Verbot für Fahrzeuge aller Art,0.50714791,31,0.7
+1135,Vorfahrt,0.99959165,31,0.75
+1136,Verbot für Fahrzeuge aller Art,0.99498534,31,0.8
+1137,Verbot für Fahrzeuge aller Art,0.98275071,31,0.85
+1138,Vorfahrt,0.98513931,31,0.9
+1139,Vorfahrt,0.55585873,31,0.95
+1140,Vorfahrt gewähren,0.98651159,31,1.0
+1141,Zulässige Höchstgeschwindigkeit (50),0.99995339,31,1.05
+1142,Zulässige Höchstgeschwindigkeit (70),0.44570214,31,1.1
+1143,Vorfahrt gewähren,0.61561447,31,1.15
+1144,Vorfahrt gewähren,0.7517485,31,1.2
+1145,Einmalige Vorfahrt,0.99129105,31,1.25
+1146,Baustelle,0.82336932,31,1.3
+1147,Verbot der Einfahrt,0.97804981,31,1.35
+1148,Vorfahrt,0.80780125,31,1.4
+1149,Zulässige Höchstgeschwindigkeit (70),0.98885322,31,1.45
+1150,Verbot für Fahrzeuge aller Art,0.19290143,31,1.5
+1151,Ausschließlich geradeaus,0.60225731,31,1.55
+1152,"Ende des Überholverbotes für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.02272727,31,1.6
+1153,Vorfahrt gewähren,0.99998915,31,1.65
+1154,Einmalige Vorfahrt,0.99997795,31,1.7
+1155,Zulässige Höchstgeschwindigkeit (30),0.59713769,31,1.75
+1156,Vorfahrt gewähren,0.34796676,31,1.8
+1157,Einmalige Vorfahrt,0.33156362,31,1.85
+1158,Verbot der Einfahrt,0.9999032,31,1.9
+1159,"Ende des Überholverbotes für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.02272727,31,1.95
+1160,Ende aller Streckenverbote,0.90476245,32,0.0
+1161,Ende aller Streckenverbote,0.75796849,32,0.05
+1162,Ende aller Streckenverbote,0.89378774,32,0.1
+1163,Ende aller Streckenverbote,0.72825134,32,0.15
+1164,Ende aller Streckenverbote,0.95015979,32,0.2
+1165,Ende aller Streckenverbote,0.99008268,32,0.25
+1166,Ende aller Streckenverbote,0.69282556,32,0.3
+1167,Vorfahrt,0.51321954,32,0.35
+1168,Ende aller Streckenverbote,0.50037503,32,0.4
+1169,Ende aller Streckenverbote,0.59422976,32,0.45
+1170,Vorfahrt,0.33384302,32,0.5
+1171,Fahrradfahrer,0.34264427,32,0.55
+1172,Vorfahrt,0.64058739,32,0.6
+1173,Rechts vorbei,0.98179525,32,0.65
+1174,Vorfahrt gewähren,0.76895356,32,0.7
+1175,Vorfahrt gewähren,0.91012782,32,0.75
+1176,Vorfahrt,0.70037615,32,0.8
+1177,Verbot für Fahrzeuge aller Art,0.48247957,32,0.85
+1178,Verbot für Fahrzeuge aller Art,0.99721897,32,0.9
+1179,Wildwechsel,0.92028022,32,0.95
+1180,Vorfahrt,0.97033072,32,1.0
+1181,Vorfahrt,0.98190022,32,1.05
+1182,Vorfahrt,0.99235475,32,1.1
+1183,Vorfahrt,0.80094403,32,1.15
+1184,Baustelle,0.92784822,32,1.2
+1185,Unebene Fahrbahn,0.99685127,32,1.25
+1186,Vorfahrt gewähren,0.99081099,32,1.3
+1187,Vorfahrt,0.98394752,32,1.35
+1188,Baustelle,0.97412103,32,1.4
+1189,Zulässige Höchstgeschwindigkeit (50),0.62951303,32,1.45
+1190,Gefahrenstelle,0.88876474,32,1.5
+1191,Verbot für Fahrzeuge aller Art,0.35806304,32,1.55
+1192,Baustelle,0.12478749,32,1.6
+1193,Zulässige Höchstgeschwindigkeit (70),0.99999678,32,1.65
+1194,Vorfahrt gewähren,0.99773103,32,1.7
+1195,Baustelle,0.82457066,32,1.75
+1196,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.89452076,32,1.8
+1197,Rechts vorbei,0.89464808,32,1.85
+1198,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.13368413,32,1.9
+1199,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.20153601,32,1.95
