@@ -18,7 +18,7 @@ class EAGenerator(AbstractGenerator):
     IMAGE_COUNT = 5
     PROVIDES_OPTIONS = True
 
-    def __init__(self):
+    def __init__(self, forTest=False):
         super().__init__()
         self.population = []
         self.colors = []
@@ -28,22 +28,21 @@ class EAGenerator(AbstractGenerator):
         # defined constraints/aspects for the generation
         self.colorMutationRate = 10
         self.shapeMutationRate = 4
-        self.colorsRange = ((0, 150), (0, 150), (0, 150))
-        self.contrastRange = (25, 400)
-        # 5 is minimum, because shapes with 3 and 4 points looks like road signs
-        self.MINIMUM_SHAPE_POINTS_COUNT = 5
+        self.colorsRange = ((0, 255), (0, 255), (0, 255))
+        self.contrastRange = (380, 765)
         self.shapePolygonPointCount = 5
 
         # init parameters
-        self.initialPopulationSize = 10  # EXPERIMENT
+        self.initialPopulationSize = 60  # EXPERIMENT
         self.targetPopulationSize = 5  # specification
         self.targetConfidence = 0.9  # specification
 
-        # init options dialog
-        # this loads the pre-defined values into the ui
-        self.initOptionsDialog()
-        # __setOptions() applies the values from the (invisible) ui
-        self.__setOptions()
+        if forTest is False:
+            # init options dialog
+            # this loads the pre-defined values into the ui
+            self.initOptionsDialog()
+            # __setOptions() applies the values from the (invisible) ui
+            self.__setOptions()
 
     # create options dialog from widget
     def initOptionsDialog(self):
@@ -285,7 +284,7 @@ class EAGenerator(AbstractGenerator):
         return colors
 
     # eval fitness for each individual
-    def evalFitness(self):
+    def evalFitness(self, forTest=False):
         for individual in self.population:
             if individual["class"] == "" and self.hasFinished is not True:
                 image = individual["image"]
@@ -310,10 +309,12 @@ class EAGenerator(AbstractGenerator):
                 individual["confidence"] = confidence
 
             if self.getCountThatMatch(self.targetConfidence) >= self.targetPopulationSize:
-                self.callOnStepCallback()
+                if forTest is False:
+                    self.callOnStepCallback()
                 self.finish()
                 return True
-        self.callOnStepCallback()
+        if forTest is False:
+            self.callOnStepCallback()
         return False
 
     # create initial population
@@ -338,7 +339,7 @@ class EAGenerator(AbstractGenerator):
             if(classesContained.count(individual["class"]) < sameClassCount):
                 # do not take individuals with confidence > 90 %
                 if(not any(
-                    selectedIndividual["confidence"] >= 0.9 and
+                    selectedIndividual["confidence"] >= self.targetConfidence and
                     selectedIndividual["class"] == individual["class"]
                     for selectedIndividual in selectedPopulation
                 )):
@@ -363,7 +364,7 @@ class EAGenerator(AbstractGenerator):
         for i in range(population_size):
             # use only for confidence < 90% and crossovered individuals
             if(
-                self.population[i]["confidence"] < 0.9 and
+                self.population[i]["confidence"] < self.targetConfidence and
                 self.population[i]["lastCrossover"] is True
             ):
                 img = Image.new('RGB', (64, 64), color='black')
@@ -486,7 +487,8 @@ class EAGenerator(AbstractGenerator):
             # population.remove(entry[1])
 
         print("crossover, appended images: " + str(newImagesAppended))
-        logging.log("EA: crossover, add " + str(newImagesAppended) + " individuals")
+        logging.log("EA: crossover, add " +
+                    str(newImagesAppended) + " individuals")
 
         # for testing crossover method
         return {"before": beforeCrossover, "after": afterCrossover}
@@ -525,10 +527,10 @@ class EAGenerator(AbstractGenerator):
         best = self.getBestIndividials(self.targetPopulationSize)
         self.onStep([(b['class'], b['confidence']) for b in best])
 
-    def step(self):
+    def step(self, forTest=False):
         if not self.initialized:
             self.initPopulation(self.initialPopulationSize)
-            if self.evalFitness():
+            if self.evalFitness(forTest):
                 return
             self.selection(self.targetPopulationSize, 2)
             self.matchCount = self.getCountThatMatch(self.targetConfidence)
@@ -536,7 +538,7 @@ class EAGenerator(AbstractGenerator):
 
         self.crossover()
         self.mutate(self.targetConfidence)
-        if self.evalFitness():
+        if self.evalFitness(forTest):
             return
         self.__currentGeneration += 1
         self.selection(self.targetPopulationSize, 2)

@@ -54,3 +54,7 @@ Beispiel:
 ```sh
 $ python -m PyQt5.uic.pyuic -x ./kollektiv5gui/views/ea_options_widget.ui -o ./kollektiv5gui/views/EaOptionsWidget.py
 ```
+
+## Testen
+Unittests für den EA-Bildgenerator für Polygone können mit `python3 -m unittest -v kollektiv5gui/tests/test_ea_generator.py` ausgeführt werden.
+

@@ -68,6 +68,7 @@ class Test_EA(unittest.TestCase):
         self.assertEqual(len(ea_combined.population),
                          ea_combined.INITIAL_POPULATION)
         ea_combined.mutate(ea_combined.DESIRED_CONFIDENCE)
+        # mutation shouldn't change the population size
         self.assertEqual(len(ea_combined.population),
                          ea_combined.INITIAL_POPULATION)
 
@@ -83,7 +84,7 @@ class Test_EA(unittest.TestCase):
             # check if confidence is at least 90 % for all images
             self.assertTrue(
                 all(
-                    individual["confidence"] >= 0.9 
+                    individual["confidence"] >= 0.9
                     for individual in ea_combined.population
                 ),
                 "The confidence is not at least 90 percent!"
@@ -92,7 +93,7 @@ class Test_EA(unittest.TestCase):
             self.assertTrue(
                 len(
                     set(
-                        individual["class"] 
+                        individual["class"]
                         for individual in ea_combined.population
                     )
                 ) == 5,
