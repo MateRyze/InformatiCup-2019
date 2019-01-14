@@ -1,8 +1,6 @@
 import ea_template
 import unittest
 
-# TODO: add more test functions
-
 
 class TestEA(unittest.TestCase):
 
@@ -40,13 +38,13 @@ class TestEA(unittest.TestCase):
         ea_template.mutate(ea_template.DESIRED_CONFIDENCE)
         self.assertEqual(len(ea_template.population),
                          ea_template.INITIAL_POPULATION)
-    
+
     def test_run_ea(self):
         ea_template.runEvoAlgorithm()
         # check if confidence is at least 90 % for all images (specification)
-        self.assertTrue(all(individual["confidence"] >= 0.9 for individual in ea_template.population), "The confidence is not at least 90 percent for 5 images!")
-        # check for api call limit (FAST SOLUTION -> quality aspect)
-        self.assertGreater(61, ea_template.api_calls, "To much API calls -> slow solution :(")
+        self.assertTrue(all(individual["confidence"] >= 0.9 for individual in ea_template.population),
+                        "The confidence is not at least 90 percent for 5 images!")
+
 
 if __name__ == '__main__':
     unittest.main()
