@@ -13,7 +13,7 @@ from kollektiv5gui.views.EaOptionsWidget import Ui_Options
 from kollektiv5gui.util import config, logging
 
 
-class EAGenerator(AbstractGenerator):
+class EAGeneratorPolygons(AbstractGenerator):
 
     IMAGE_COUNT = 5
     PROVIDES_OPTIONS = True

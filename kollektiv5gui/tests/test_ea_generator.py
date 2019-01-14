@@ -1,11 +1,11 @@
-from kollektiv5gui.generators.EAGenerator import EAGenerator
+from kollektiv5gui.generators.EAGeneratorPolygons import EAGeneratorPolygons
 import unittest
 
 
 class Test_EA(unittest.TestCase):
 
     def setUp(self):
-        self.generator = EAGenerator(True)
+        self.generator = EAGeneratorPolygons(True)
         self.generator.population.clear()
         self.generator.api_calls = 0
 
