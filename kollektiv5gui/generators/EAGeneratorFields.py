@@ -360,8 +360,7 @@ class EAGeneratorFields(AbstractGenerator):
                 ((0, 32), (32, 64)),
                 ((32, 32), (64, 64)),
             ]
-            colors = self.population[j]["colors"] + self.population[j]["colors"] + \
-                self.population[j]["colors"] + self.population[j]["colors"]
+            colors = self.population[j]["colors"]
             if(self.population[j]["confidence"] < confidence):
                 # change the color of a random square
                 rect = random.randint(0, 3)
