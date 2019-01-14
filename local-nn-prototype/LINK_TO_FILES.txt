@@ -1,0 +1,9 @@
+Netze:
+Archiv mit exportieren Kantengewichten: https://jancc.de/pub/trained_nets.tar.gz
+Die Skripte erwarten die Kantengewichte standartmäßig im Ordner "trained/"
+
+Datensatz:
+Trainings Datensatz: http://benchmark.ini.rub.de/Dataset/GTSRB_Final_Training_Images.zip
+Test Datensatz: http://benchmark.ini.rub.de/Dataset/GTSRB_Final_Test_Images.zip
+Die Skripte erwarten jeweils einen Pfad zu dem "Image" Ordner, der in jedem der beiden
+Archive vorhanden ist.
