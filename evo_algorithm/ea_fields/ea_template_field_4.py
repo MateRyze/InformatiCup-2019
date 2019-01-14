@@ -1,10 +1,10 @@
-# -*- coding: utf-8 -*-
 import requests
 import os
 import skimage
 import random
 import json
 import webbrowser
+import time
 from PIL import Image, ImageDraw
 
 global population
@@ -42,6 +42,7 @@ def evalFitness():
     global api_calls
     global stop
     for individual in population:
+        time.sleep(1)
         name = 'toEval.png'
         image = individual["image"]
         image.save(name)
@@ -101,7 +102,22 @@ def mutate(confidence):
             ((0, 32), (32, 64)),
             ((32, 32), (64, 64)),
         ]
-        colors = population[j]["colors"]
+        """positions = [
+            ((0, 0), (16, 16)),
+            ((16, 0), (32, 16)),
+            ((0, 16), (16, 32)),
+            ((16, 16), (32, 32)),
+            ((16, 32), (32, 64)),
+            ((32, 16), (64, 32)),
+            ((16, 32), (32, 64)),
+            ((32, 32), (64, 64)),
+            ((0, 0), (32, 32)),
+            ((32, 0), (64, 32)),
+            ((0, 32), (32, 64)),
+            ((32, 32), (64, 64))
+        ]"""
+        # colors = population[j]["colors"]
+        colors = population[j]["colors"] + population[j]["colors"] + population[j]["colors"] + population[j]["colors"]
         if(population[j]["confidence"] < confidence):
             # change the color of a random square
             rect = random.randint(0, 3)
@@ -112,6 +128,7 @@ def mutate(confidence):
 
         for i in range(4):
             draw.rectangle(positions[i], fill=colors[i])
+
         population.append({"image": img, "confidence": 0, "colors": colors, "class": ""})
     # delete old
     del population[:population_size]
@@ -164,12 +181,9 @@ def saveImages():
                 str(i) + "_" + str(population[i]["confidence"]
                                     ) + "_" + str(population[i]["class"]) + ".png"
             image.save(name)
-            webbrowser.open(name)
+            #webbrowser.open(name)
 
 if __name__ == '__main__':
     runEvoAlgorithm()
     saveImages()
     print("api calls: ", api_calls)
-
-
-

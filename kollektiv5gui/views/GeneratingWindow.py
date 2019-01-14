@@ -11,6 +11,7 @@ from PyQt5.QtWidgets import QSizePolicy, QFileDialog, QComboBox, QGridLayout
 from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout
 from kollektiv5gui.generators.SpammingGenerator import SpammingGenerator
 from kollektiv5gui.generators.EAGenerator import EAGenerator
+from kollektiv5gui.generators.EAGeneratorFields import EAGeneratorFields
 from kollektiv5gui.views.EaOptionsWidget import Ui_Options
 
 
@@ -22,7 +23,8 @@ class GeneratingWindow(QDialog):
     """
 
     GENERATORS = [
-        ('Evolutionary Algorithm', EAGenerator),
+        ('Evolutionary Algorithm: Polygons', EAGenerator),
+        ('Evolutionary Algorithm: Fields', EAGeneratorFields),
         ('Spamming', SpammingGenerator),
     ]
 
