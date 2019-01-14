@@ -107,5 +107,3 @@ class Test_EA(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
-    

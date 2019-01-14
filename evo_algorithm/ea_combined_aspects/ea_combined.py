@@ -1,4 +1,3 @@
-# encoding=utf8
 import requests
 import os
 import skimage
@@ -123,7 +122,7 @@ def evalFitness(population):
                     break
                 except ValueError:
                     time.sleep(1)
-                    print("Decoding JSON failed -> hit API rate :(")
+                    # print("Decoding JSON failed -> hit API rate :(")
                     # stop = True
                 except:
                     print("Unexpected error:", sys.exc_info()[0])
@@ -278,52 +277,44 @@ def mutate(confidence):
             draw = ImageDraw.Draw(img)
             # mutate colors
             colors = population[i]["colors"]
-            colors = list(map(lambda color: (color[0] + random.randint(-MUTATION_RATE, MUTATION_RATE), color[1] + random.randint(-MUTATION_RATE, MUTATION_RATE), color[2] + random.randint(-MUTATION_RATE, MUTATION_RATE)), colors))
-            
-            #mutate shape
-            shape = population[i]["shape"]
-            if random.random() < 0.5:
-                idx = random.randrange(0, len(shape))
-                if len(shape) > 3 and random.random() < 0.5:
-                    del shape[idx]
-                else:
-                    shape.insert(idx,randomCoord())
-            shape = list(map(lambda x: (mutateCoord(x[0]), mutateCoord(x[1])), shape))
-
-            drawShapes(draw, colors, shape)
-            # mutate texts
-            texts = population[i]["texts"]
-            for i in range(len(texts)):
-                text = texts[i]
-                textPosition = (
-                    text.position[0] + random.randint(-MUTATION_RATE, MUTATION_RATE),
-                    text.position[1] + random.randint(-MUTATION_RATE, MUTATION_RATE),
+            colors = list(
+                map(lambda color: (
+                    color[0] + random.randint(-MUTATION_RATE, MUTATION_RATE),
+                    color[1] + random.randint(-MUTATION_RATE, MUTATION_RATE),
+                    color[2] + random.randint(-MUTATION_RATE, MUTATION_RATE)
+                ), colors)
+            )
+            # mutate shapes
+            shapes = population[i]["shapes"]
+            newShapes = []
+            for shape in shapes:
+                # add or delete point
+                if random.random() < 0.5:
+                    idx = random.randrange(0, len(shape))
+                    if (
+                        len(shape) > SHAPE_POINTS_COUNT[1] and
+                        random.random() < 0.5
+                    ):
+                        del shape[idx]
+                    else:
+                        shape.insert(idx, randomCoord())
+                # mutate point
+                shape = list(
+                    map(
+                        lambda x: (mutateCoord(x[0]), mutateCoord(x[1])), shape
+                    )
                 )
-                textColor = (
-                    text.color[0] + random.randint(-MUTATION_RATE, MUTATION_RATE),
-                    text.color[1] + random.randint(-MUTATION_RATE, MUTATION_RATE),
-                    text.color[2] + random.randint(-MUTATION_RATE, MUTATION_RATE),
-                )
-                texts[i] = TextObject(
-                    textPosition,
-                    text.string,
-                    textColor,
-                )
-            textRand = random.random()
-            if textRand > 0.75:
-                texts.append(TextObject(
-                    (random.randint(-16, 64), random.randint(-16, 64)),
-                    TEXTS[random.randrange(0, len(TEXTS))],
-                    (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)),
-                ))
-            elif textRand < 0.25 and len(texts) > 0:
-                del texts[random.randrange(0, len(texts))]
-            drawTexts(draw, texts)
+                newShapes.append(shape)
+            drawShapes(draw, colors, newShapes)
+            population[i] = {
+                "image": img,
+                "confidence": 0,
+                "colors": colors,
+                "class": "",
+                "shapes": newShapes,
+                "lastCrossover": False
+            }
 
-            population.append({"image": img, "confidence": 0,
-                               "colors": colors, "class": "", "shape": shape, "texts": texts})
-
-        
 
 def printResults():
     for individual in population:
@@ -420,5 +411,3 @@ if __name__ == '__main__':
     saveImages("final")
     # evalInitialPopulation()
     print("api calls: ", api_calls)
-
-
