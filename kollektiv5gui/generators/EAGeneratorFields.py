@@ -278,9 +278,7 @@ class EAGeneratorFields(AbstractGenerator):
     def evalFitness(self):
         for individual in self.population:
             if individual["class"] == "" and self.hasFinished is not True:
-                name = 'toEval.png'
                 image = individual["image"]
-                image.save(name)
                 r = api.classifyPILImage(image)
                 self._countApiCall()
                 confidence = 0
