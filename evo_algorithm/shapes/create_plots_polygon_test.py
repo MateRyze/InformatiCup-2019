@@ -5,7 +5,7 @@ import pandas
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-fname = "./stats/fuckup-1-meta.csv"
+fname = "./stats/mutated-1-meta.csv"
 record = pandas.read_csv(fname)
 
 def plotConfidenceAgainstMutation():

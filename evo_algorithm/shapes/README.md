@@ -19,8 +19,6 @@ Um Packages für Python 3 zu installieren benutze: `pip3`
 
 ## Starten
 `py .\ea_template.py`
-oder 
-`python3 .\ea_template.py`
 
 ## Testen
 `py -m unittest`
