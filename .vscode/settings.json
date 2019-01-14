@@ -9,8 +9,9 @@
     "python.unitTest.unittestArgs": [
         "-v",
         "-s",
-        "./evo_algorithm/ea_combined_aspects",
+        "./kollektiv5gui/tests",
         "-p",
         "test_*.py"
     ],
+    "python.pythonPath": "/usr/bin/python3",
 }
