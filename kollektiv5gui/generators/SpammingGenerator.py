@@ -102,8 +102,10 @@ class SpammingGenerator(AbstractGenerator):
         return self.image.tobytes('raw', 'RGB')
 
     def step(self):
-        # create some initial shape
-        # (a black window would always yield the same result)
+        """
+        Draw a random shape onto the image and evaluate the detected class.
+        """
+
         self.createRandomShape()
         classification = api.classifyPILImage(self.image)
         self._countApiCall()

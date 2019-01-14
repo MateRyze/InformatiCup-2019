@@ -32,8 +32,8 @@ class MainWindow(QMainWindow):
         self.__initMenuBar()
         self.__initTable()
         self.__initConsole()
-        # Sizes of the splitterWidget (the vertical splitter) need to be set after
-        # all elements have been added to it. This is slightly ugly,
+        # Sizes of the splitterWidget (the vertical splitter) need to be set
+        # after all elements have been added to it. This is slightly ugly,
         # but the best way to solve this (I think).
         self.splitterWidget.setSizes([512, 128])
         self.show()

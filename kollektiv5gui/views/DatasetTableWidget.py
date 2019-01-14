@@ -44,6 +44,10 @@ class DatasetTableWidget(QTableWidget):
         tableMenu.exec_(QCursor.pos())
 
     def onItemSelectionChanged(self):
+        """
+        Handler function called by Qt whenever the user changes the selected
+        items
+        """
         self.mainWindow.generateButtonSelected.setEnabled(
             len(self.selectedItems()) > 0
         )
@@ -110,4 +114,11 @@ class DatasetTableWidget(QTableWidget):
             i += 1
 
     def tableClick(self, x, y):
+        """
+        Handler function called by Qt whenever the user clicks on an entry in
+        the table.
+        Normally it should highlight the complete row, not just the clicked
+        cell.
+        This does not seem to work reliably however...
+        """
         self.selectRow(x)

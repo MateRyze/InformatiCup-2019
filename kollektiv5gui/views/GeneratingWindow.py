@@ -330,7 +330,7 @@ class GeneratingWindow(QDialog):
     def __saveGenerated(self, i):
         """
         Saves one of the preview images (as given by the index i).
-        The filename is determined by a QFileDialog 
+        The filename is determined by a QFileDialog
         """
         filename = QFileDialog.getSaveFileName(
             self,
