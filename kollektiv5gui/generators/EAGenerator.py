@@ -541,14 +541,20 @@ class EAGenerator(AbstractGenerator):
         """
         self.population.append(self.generateImage())
 
-    def getBestIndividials(self, amount):
+    def getBestIndividuals(self, amount):
         """
-        Get best individuals sorted by confidence
+        Get best individuals from same class, sorted by confidence
         """
+        classesContained = []
+        selectedPopulation = []
+        for individual in self.population:
+            if(classesContained.count(individual["class"]) < 1):
+                selectedPopulation.append(individual)
+                classesContained.append(individual["class"])
         return list(
             reversed(
                 sorted(
-                    self.population,
+                    selectedPopulation,
                     key=lambda individual: individual["confidence"])))[
             :amount]
 
@@ -566,14 +572,15 @@ class EAGenerator(AbstractGenerator):
         """
         Get imgae in raw format from population
         """
-        best = self.getBestIndividials(self.targetPopulationSize)
+
+        best = self.getBestIndividuals(self.targetPopulationSize)
         return best[i]["image"].tobytes('raw', 'RGB')
 
     def callOnStepCallback(self):
         """
         Callback function for GUI purposes
         """
-        best = self.getBestIndividials(self.targetPopulationSize)
+        best = self.getBestIndividuals(self.targetPopulationSize)
         self.onStep([(b['class'], b['confidence']) for b in best])
 
     def step(self, forTest=False):
