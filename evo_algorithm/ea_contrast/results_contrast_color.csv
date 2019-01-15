@@ -1,0 +1,1001 @@
+,class,confidence,background,foreground,contrast
+0,Verbot der Einfahrt,0.89597815,"(255, 255, 255)","(0, 0, 0)",765
+1,Zulässige Höchstgeschwindigkeit (30),0.94934016,"(255, 255, 227)","(0, 0, 28)",709
+2,Zulässige Höchstgeschwindigkeit (30),0.99922478,"(255, 255, 199)","(0, 0, 56)",653
+3,Zulässige Höchstgeschwindigkeit (30),0.99972981,"(255, 255, 171)","(0, 0, 84)",597
+4,Zulässige Höchstgeschwindigkeit (30),0.99931502,"(255, 255, 143)","(0, 0, 112)",541
+5,Zulässige Höchstgeschwindigkeit (30),0.99701512,"(255, 255, 115)","(0, 0, 140)",535
+6,Zulässige Höchstgeschwindigkeit (30),0.9848305,"(255, 255, 87)","(0, 0, 168)",591
+7,Zulässige Höchstgeschwindigkeit (30),0.92113674,"(255, 255, 59)","(0, 0, 196)",647
+8,Zulässige Höchstgeschwindigkeit (30),0.66153079,"(255, 255, 31)","(0, 0, 224)",703
+9,Rechts vorbei,0.6822626,"(255, 255, 3)","(0, 0, 252)",759
+10,Zulässige Höchstgeschwindigkeit (30),0.5178709,"(255, 227, 255)","(0, 28, 0)",709
+11,Zulässige Höchstgeschwindigkeit (30),0.99433208,"(255, 227, 227)","(0, 28, 28)",653
+12,Zulässige Höchstgeschwindigkeit (30),0.99969566,"(255, 227, 199)","(0, 28, 56)",597
+13,Zulässige Höchstgeschwindigkeit (30),0.9995504,"(255, 227, 171)","(0, 28, 84)",541
+14,Zulässige Höchstgeschwindigkeit (30),0.99844933,"(255, 227, 143)","(0, 28, 112)",485
+15,Zulässige Höchstgeschwindigkeit (30),0.99174964,"(255, 227, 115)","(0, 28, 140)",479
+16,Zulässige Höchstgeschwindigkeit (30),0.95771289,"(255, 227, 87)","(0, 28, 168)",535
+17,Zulässige Höchstgeschwindigkeit (30),0.78417319,"(255, 227, 59)","(0, 28, 196)",591
+18,Rechts vorbei,0.55864292,"(255, 227, 31)","(0, 28, 224)",647
+19,Rechts vorbei,0.71455938,"(255, 227, 3)","(0, 28, 252)",703
+20,Zulässige Höchstgeschwindigkeit (30),0.89099479,"(255, 199, 255)","(0, 56, 0)",653
+21,Zulässige Höchstgeschwindigkeit (30),0.99906927,"(255, 199, 227)","(0, 56, 28)",597
+22,Zulässige Höchstgeschwindigkeit (30),0.99960953,"(255, 199, 199)","(0, 56, 56)",541
+23,Zulässige Höchstgeschwindigkeit (30),0.99893123,"(255, 199, 171)","(0, 56, 84)",485
+24,Zulässige Höchstgeschwindigkeit (30),0.99486971,"(255, 199, 143)","(0, 56, 112)",429
+25,Zulässige Höchstgeschwindigkeit (30),0.97116625,"(255, 199, 115)","(0, 56, 140)",423
+26,Zulässige Höchstgeschwindigkeit (30),0.8515799,"(255, 199, 87)","(0, 56, 168)",479
+27,Zulässige Höchstgeschwindigkeit (30),0.47574371,"(255, 199, 59)","(0, 56, 196)",535
+28,Rechts vorbei,0.71258605,"(255, 199, 31)","(0, 56, 224)",591
+29,Rechts vorbei,0.50421149,"(255, 199, 3)","(0, 56, 252)",647
+30,Zulässige Höchstgeschwindigkeit (30),0.9828335,"(255, 171, 255)","(0, 84, 0)",597
+31,Zulässige Höchstgeschwindigkeit (30),0.99946576,"(255, 171, 227)","(0, 84, 28)",541
+32,Zulässige Höchstgeschwindigkeit (30),0.99911016,"(255, 171, 199)","(0, 84, 56)",485
+33,Zulässige Höchstgeschwindigkeit (30),0.99647838,"(255, 171, 171)","(0, 84, 84)",429
+34,Zulässige Höchstgeschwindigkeit (30),0.97876018,"(255, 171, 143)","(0, 84, 112)",373
+35,Zulässige Höchstgeschwindigkeit (30),0.89181715,"(255, 171, 115)","(0, 84, 140)",367
+36,Zulässige Höchstgeschwindigkeit (30),0.57559335,"(255, 171, 87)","(0, 84, 168)",423
+37,Rechts vorbei,0.68788683,"(255, 171, 59)","(0, 84, 196)",479
+38,Rechts vorbei,0.60285902,"(255, 171, 31)","(0, 84, 224)",535
+39,Rechts vorbei,0.2651993,"(255, 171, 3)","(0, 84, 252)",591
+40,Zulässige Höchstgeschwindigkeit (30),0.99716055,"(255, 143, 255)","(0, 112, 0)",541
+41,Zulässige Höchstgeschwindigkeit (30),0.99915791,"(255, 143, 227)","(0, 112, 28)",485
+42,Zulässige Höchstgeschwindigkeit (30),0.99732262,"(255, 143, 199)","(0, 112, 56)",429
+43,Zulässige Höchstgeschwindigkeit (30),0.98574543,"(255, 143, 171)","(0, 112, 84)",373
+44,Zulässige Höchstgeschwindigkeit (30),0.92246217,"(255, 143, 143)","(0, 112, 112)",317
+45,Zulässige Höchstgeschwindigkeit (30),0.66028076,"(255, 143, 115)","(0, 112, 140)",311
+46,Rechts vorbei,0.62494463,"(255, 143, 87)","(0, 112, 168)",367
+47,Rechts vorbei,0.66037244,"(255, 143, 59)","(0, 112, 196)",423
+48,Rechts vorbei,0.35495108,"(255, 143, 31)","(0, 112, 224)",479
+49,Kreisverkehr,0.30644113,"(255, 143, 3)","(0, 112, 252)",535
+50,Zulässige Höchstgeschwindigkeit (30),0.99886227,"(255, 115, 255)","(0, 140, 0)",535
+51,Zulässige Höchstgeschwindigkeit (30),0.99775094,"(255, 115, 227)","(0, 140, 28)",479
+52,Zulässige Höchstgeschwindigkeit (30),0.99019146,"(255, 115, 199)","(0, 140, 56)",423
+53,Zulässige Höchstgeschwindigkeit (30),0.94234359,"(255, 115, 171)","(0, 140, 84)",367
+54,Zulässige Höchstgeschwindigkeit (30),0.73778844,"(255, 115, 143)","(0, 140, 112)",311
+55,Rechts vorbei,0.54185271,"(255, 115, 115)","(0, 140, 140)",305
+56,Rechts vorbei,0.66837269,"(255, 115, 87)","(0, 140, 168)",361
+57,Rechts vorbei,0.4153454,"(255, 115, 59)","(0, 140, 196)",417
+58,Kreisverkehr,0.28202575,"(255, 115, 31)","(0, 140, 224)",473
+59,Kreisverkehr,0.59703982,"(255, 115, 3)","(0, 140, 252)",529
+60,Zulässige Höchstgeschwindigkeit (30),0.9970119,"(255, 87, 255)","(0, 168, 0)",591
+61,Zulässige Höchstgeschwindigkeit (30),0.98793703,"(255, 87, 227)","(0, 168, 28)",535
+62,Zulässige Höchstgeschwindigkeit (30),0.93489581,"(255, 87, 199)","(0, 168, 56)",479
+63,Zulässige Höchstgeschwindigkeit (30),0.70134789,"(255, 87, 171)","(0, 168, 84)",423
+64,Rechts vorbei,0.43917614,"(255, 87, 143)","(0, 168, 112)",367
+65,Rechts vorbei,0.43076918,"(255, 87, 115)","(0, 168, 140)",361
+66,Rechts vorbei,0.1958546,"(255, 87, 87)","(0, 168, 168)",417
+67,Rechts vorbei,0.03791762,"(255, 87, 59)","(0, 168, 196)",473
+68,Kreisverkehr,0.11297295,"(255, 87, 31)","(0, 168, 224)",529
+69,Kreisverkehr,0.4631902,"(255, 87, 3)","(0, 168, 252)",585
+70,Zulässige Höchstgeschwindigkeit (30),0.98042965,"(255, 59, 255)","(0, 196, 0)",647
+71,Zulässige Höchstgeschwindigkeit (30),0.90107757,"(255, 59, 227)","(0, 196, 28)",591
+72,Zulässige Höchstgeschwindigkeit (30),0.58345658,"(255, 59, 199)","(0, 196, 56)",535
+73,Rechts vorbei,0.23921615,"(255, 59, 171)","(0, 196, 84)",479
+74,Rechts vorbei,0.13731453,"(255, 59, 143)","(0, 196, 112)",423
+75,Rechts vorbei,0.05125619,"(255, 59, 115)","(0, 196, 140)",417
+76,Rechts vorbei,0.01012928,"(255, 59, 87)","(0, 196, 168)",473
+77,Kreisverkehr,0.00810487,"(255, 59, 59)","(0, 196, 196)",529
+78,Kreisverkehr,0.05847666,"(255, 59, 31)","(0, 196, 224)",585
+79,Kreisverkehr,0.29954886,"(255, 59, 3)","(0, 196, 252)",641
+80,Zulässige Höchstgeschwindigkeit (30),0.81915087,"(255, 31, 255)","(0, 224, 0)",703
+81,Zulässige Höchstgeschwindigkeit (30),0.364104,"(255, 31, 227)","(0, 224, 28)",647
+82,Zulässige Höchstgeschwindigkeit (70),0.09530555,"(255, 31, 199)","(0, 224, 56)",591
+83,Rechts vorbei,0.02783032,"(255, 31, 171)","(0, 224, 84)",535
+84,Rechts vorbei,0.00997157,"(255, 31, 143)","(0, 224, 112)",479
+85,Rechts vorbei,0.00240047,"(255, 31, 115)","(0, 224, 140)",473
+86,Rechts vorbei,0.00146369,"(255, 31, 87)","(0, 224, 168)",529
+87,Kurve (links),0.00544238,"(255, 31, 59)","(0, 224, 196)",585
+88,Kurve (links),0.03392816,"(255, 31, 31)","(0, 224, 224)",641
+89,Kreisverkehr,0.13848209,"(255, 31, 3)","(0, 224, 252)",697
+90,Zulässige Höchstgeschwindigkeit (70),0.21970935,"(255, 3, 255)","(0, 252, 0)",759
+91,Zulässige Höchstgeschwindigkeit (70),0.07401352,"(255, 3, 227)","(0, 252, 28)",703
+92,Zulässige Höchstgeschwindigkeit (70),0.01401436,"(255, 3, 199)","(0, 252, 56)",647
+93,Zulässige Höchstgeschwindigkeit (70),0.00287156,"(255, 3, 171)","(0, 252, 84)",591
+94,Zulässige Höchstgeschwindigkeit (70),0.00104828,"(255, 3, 143)","(0, 252, 112)",535
+95,Zulässige Höchstgeschwindigkeit (70),0.0010246,"(255, 3, 115)","(0, 252, 140)",529
+96,Zulässige Höchstgeschwindigkeit (70),0.00295352,"(255, 3, 87)","(0, 252, 168)",585
+97,Kurve (links),0.01652589,"(255, 3, 59)","(0, 252, 196)",641
+98,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.08479695,"(255, 3, 31)","(0, 252, 224)",697
+99,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.46345901,"(255, 3, 3)","(0, 252, 252)",753
+100,Verbot der Einfahrt,0.99935645,"(227, 255, 255)","(28, 0, 0)",709
+101,Verbot der Einfahrt,0.94865298,"(227, 255, 227)","(28, 0, 28)",653
+102,Zulässige Höchstgeschwindigkeit (30),0.91292077,"(227, 255, 199)","(28, 0, 56)",597
+103,Zulässige Höchstgeschwindigkeit (30),0.99857104,"(227, 255, 171)","(28, 0, 84)",541
+104,Zulässige Höchstgeschwindigkeit (30),0.99857998,"(227, 255, 143)","(28, 0, 112)",485
+105,Zulässige Höchstgeschwindigkeit (30),0.99469072,"(227, 255, 115)","(28, 0, 140)",479
+106,Zulässige Höchstgeschwindigkeit (30),0.97322434,"(227, 255, 87)","(28, 0, 168)",535
+107,Zulässige Höchstgeschwindigkeit (30),0.86560988,"(227, 255, 59)","(28, 0, 196)",591
+108,Zulässige Höchstgeschwindigkeit (30),0.50267702,"(227, 255, 31)","(28, 0, 224)",647
+109,Rechts vorbei,0.59978467,"(227, 255, 3)","(28, 0, 252)",703
+110,Verbot der Einfahrt,0.99499255,"(227, 227, 255)","(28, 28, 0)",653
+111,Verbot der Einfahrt,0.61670387,"(227, 227, 227)","(28, 28, 28)",597
+112,Zulässige Höchstgeschwindigkeit (30),0.99029607,"(227, 227, 199)","(28, 28, 56)",541
+113,Zulässige Höchstgeschwindigkeit (30),0.99893636,"(227, 227, 171)","(28, 28, 84)",485
+114,Zulässige Höchstgeschwindigkeit (30),0.99721485,"(227, 227, 143)","(28, 28, 112)",429
+115,Zulässige Höchstgeschwindigkeit (30),0.98656034,"(227, 227, 115)","(28, 28, 140)",423
+116,Zulässige Höchstgeschwindigkeit (30),0.92992926,"(227, 227, 87)","(28, 28, 168)",479
+117,Zulässige Höchstgeschwindigkeit (30),0.67926514,"(227, 227, 59)","(28, 28, 196)",535
+118,Rechts vorbei,0.55080193,"(227, 227, 31)","(28, 28, 224)",591
+119,Rechts vorbei,0.39408597,"(227, 227, 3)","(28, 28, 252)",647
+120,Verbot der Einfahrt,0.96560359,"(227, 199, 255)","(28, 56, 0)",597
+121,Zulässige Höchstgeschwindigkeit (30),0.83496308,"(227, 199, 227)","(28, 56, 28)",541
+122,Zulässige Höchstgeschwindigkeit (30),0.99810374,"(227, 199, 199)","(28, 56, 56)",485
+123,Zulässige Höchstgeschwindigkeit (30),0.99797505,"(227, 199, 171)","(28, 56, 84)",429
+124,Zulässige Höchstgeschwindigkeit (30),0.99162889,"(227, 199, 143)","(28, 56, 112)",373
+125,Zulässige Höchstgeschwindigkeit (30),0.95173776,"(227, 199, 115)","(28, 56, 140)",367
+126,Zulässige Höchstgeschwindigkeit (30),0.76432604,"(227, 199, 87)","(28, 56, 168)",423
+127,Rechts vorbei,0.48631945,"(227, 199, 59)","(28, 56, 196)",479
+128,Rechts vorbei,0.46257266,"(227, 199, 31)","(28, 56, 224)",535
+129,Rechts vorbei,0.16439122,"(227, 199, 3)","(28, 56, 252)",591
+130,Verbot der Einfahrt,0.81670171,"(227, 171, 255)","(28, 84, 0)",541
+131,Zulässige Höchstgeschwindigkeit (30),0.97043592,"(227, 171, 227)","(28, 84, 28)",485
+132,Zulässige Höchstgeschwindigkeit (30),0.99797624,"(227, 171, 199)","(28, 84, 56)",429
+133,Zulässige Höchstgeschwindigkeit (30),0.99371827,"(227, 171, 171)","(28, 84, 84)",373
+134,Zulässige Höchstgeschwindigkeit (30),0.96576995,"(227, 171, 143)","(28, 84, 112)",317
+135,Zulässige Höchstgeschwindigkeit (30),0.81721485,"(227, 171, 115)","(28, 84, 140)",311
+136,Zulässige Höchstgeschwindigkeit (30),0.4210467,"(227, 171, 87)","(28, 84, 168)",367
+137,Rechts vorbei,0.49085531,"(227, 171, 59)","(28, 84, 196)",423
+138,Rechts vorbei,0.23659573,"(227, 171, 31)","(28, 84, 224)",479
+139,Kreisverkehr,0.13132454,"(227, 171, 3)","(28, 84, 252)",535
+140,Zulässige Höchstgeschwindigkeit (30),0.57370394,"(227, 143, 255)","(28, 112, 0)",485
+141,Zulässige Höchstgeschwindigkeit (30),0.99410993,"(227, 143, 227)","(28, 112, 28)",429
+142,Zulässige Höchstgeschwindigkeit (30),0.99482203,"(227, 143, 199)","(28, 112, 56)",373
+143,Zulässige Höchstgeschwindigkeit (30),0.97591996,"(227, 143, 171)","(28, 112, 84)",317
+144,Zulässige Höchstgeschwindigkeit (30),0.8677851,"(227, 143, 143)","(28, 112, 112)",261
+145,Zulässige Höchstgeschwindigkeit (30),0.50508618,"(227, 143, 115)","(28, 112, 140)",255
+146,Rechts vorbei,0.47946444,"(227, 143, 87)","(28, 112, 168)",311
+147,Rechts vorbei,0.31324959,"(227, 143, 59)","(28, 112, 196)",367
+148,Kreisverkehr,0.18881945,"(227, 143, 31)","(28, 112, 224)",423
+149,Kreisverkehr,0.47591752,"(227, 143, 3)","(28, 112, 252)",479
+150,Zulässige Höchstgeschwindigkeit (30),0.89504415,"(227, 115, 255)","(28, 140, 0)",479
+151,Zulässige Höchstgeschwindigkeit (30),0.99467516,"(227, 115, 227)","(28, 140, 28)",423
+152,Zulässige Höchstgeschwindigkeit (30),0.98189479,"(227, 115, 199)","(28, 140, 56)",367
+153,Zulässige Höchstgeschwindigkeit (30),0.90183699,"(227, 115, 171)","(28, 140, 84)",311
+154,Zulässige Höchstgeschwindigkeit (30),0.58378541,"(227, 115, 143)","(28, 140, 112)",255
+155,Rechts vorbei,0.44133762,"(227, 115, 115)","(28, 140, 140)",249
+156,Rechts vorbei,0.38836378,"(227, 115, 87)","(28, 140, 168)",305
+157,Kreisverkehr,0.2505928,"(227, 115, 59)","(28, 140, 196)",361
+158,Kreisverkehr,0.54802555,"(227, 115, 31)","(28, 140, 224)",417
+159,Kreisverkehr,0.83381283,"(227, 115, 3)","(28, 140, 252)",473
+160,Zulässige Höchstgeschwindigkeit (30),0.97465646,"(227, 87, 255)","(28, 168, 0)",535
+161,Zulässige Höchstgeschwindigkeit (30),0.98128617,"(227, 87, 227)","(28, 168, 28)",479
+162,Zulässige Höchstgeschwindigkeit (30),0.90891093,"(227, 87, 199)","(28, 168, 56)",423
+163,Zulässige Höchstgeschwindigkeit (30),0.59596676,"(227, 87, 171)","(28, 168, 84)",367
+164,Rechts vorbei,0.33647132,"(227, 87, 143)","(28, 168, 112)",311
+165,Rechts vorbei,0.27084133,"(227, 87, 115)","(28, 168, 140)",305
+166,Rechts vorbei,0.08339378,"(227, 87, 87)","(28, 168, 168)",361
+167,Kreisverkehr,0.17829426,"(227, 87, 59)","(28, 168, 196)",417
+168,Kreisverkehr,0.52823675,"(227, 87, 31)","(28, 168, 224)",473
+169,Kreisverkehr,0.75763464,"(227, 87, 3)","(28, 168, 252)",529
+170,Zulässige Höchstgeschwindigkeit (30),0.95775795,"(227, 59, 255)","(28, 196, 0)",591
+171,Zulässige Höchstgeschwindigkeit (30),0.86239576,"(227, 59, 227)","(28, 196, 28)",535
+172,Zulässige Höchstgeschwindigkeit (30),0.46953526,"(227, 59, 199)","(28, 196, 56)",479
+173,Rechts vorbei,0.15321414,"(227, 59, 171)","(28, 196, 84)",423
+174,Rechts vorbei,0.07538485,"(227, 59, 143)","(28, 196, 112)",367
+175,Rechts vorbei,0.02450979,"(227, 59, 115)","(28, 196, 140)",361
+176,Kreisverkehr,0.01595946,"(227, 59, 87)","(28, 196, 168)",417
+177,Kreisverkehr,0.09733536,"(227, 59, 59)","(28, 196, 196)",473
+178,Kreisverkehr,0.33537689,"(227, 59, 31)","(28, 196, 224)",529
+179,Kreisverkehr,0.49462661,"(227, 59, 3)","(28, 196, 252)",585
+180,Zulässige Höchstgeschwindigkeit (30),0.71260208,"(227, 31, 255)","(28, 224, 0)",647
+181,Zulässige Höchstgeschwindigkeit (30),0.25785676,"(227, 31, 227)","(28, 224, 28)",591
+182,Zulässige Höchstgeschwindigkeit (70),0.0731303,"(227, 31, 199)","(28, 224, 56)",535
+183,Zulässige Höchstgeschwindigkeit (70),0.01448504,"(227, 31, 171)","(28, 224, 84)",479
+184,Rechts vorbei,0.00506785,"(227, 31, 143)","(28, 224, 112)",423
+185,Zulässige Höchstgeschwindigkeit (70),0.0041916,"(227, 31, 115)","(28, 224, 140)",417
+186,Kurve (links),0.01370562,"(227, 31, 87)","(28, 224, 168)",473
+187,Kurve (links),0.06679334,"(227, 31, 59)","(28, 224, 196)",529
+188,Kurve (links),0.13190074,"(227, 31, 31)","(28, 224, 224)",585
+189,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.33713415,"(227, 31, 3)","(28, 224, 252)",641
+190,Zulässige Höchstgeschwindigkeit (70),0.1482152,"(227, 3, 255)","(28, 252, 0)",703
+191,Zulässige Höchstgeschwindigkeit (70),0.04721224,"(227, 3, 227)","(28, 252, 28)",647
+192,Zulässige Höchstgeschwindigkeit (70),0.00946989,"(227, 3, 199)","(28, 252, 56)",591
+193,Zulässige Höchstgeschwindigkeit (70),0.00335128,"(227, 3, 171)","(28, 252, 84)",535
+194,Zulässige Höchstgeschwindigkeit (70),0.00315975,"(227, 3, 143)","(28, 252, 112)",479
+195,Zulässige Höchstgeschwindigkeit (70),0.00868098,"(227, 3, 115)","(28, 252, 140)",473
+196,Kurve (links),0.0385683,"(227, 3, 87)","(28, 252, 168)",529
+197,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.32217747,"(227, 3, 59)","(28, 252, 196)",585
+198,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.69958848,"(227, 3, 31)","(28, 252, 224)",641
+199,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.87128496,"(227, 3, 3)","(28, 252, 252)",697
+200,Verbot der Einfahrt,0.9999907,"(199, 255, 255)","(56, 0, 0)",653
+201,Verbot der Einfahrt,0.99959606,"(199, 255, 227)","(56, 0, 28)",597
+202,Verbot der Einfahrt,0.97247261,"(199, 255, 199)","(56, 0, 56)",541
+203,Zulässige Höchstgeschwindigkeit (30),0.8415966,"(199, 255, 171)","(56, 0, 84)",485
+204,Zulässige Höchstgeschwindigkeit (30),0.9957183,"(199, 255, 143)","(56, 0, 112)",429
+205,Zulässige Höchstgeschwindigkeit (30),0.9898302,"(199, 255, 115)","(56, 0, 140)",423
+206,Zulässige Höchstgeschwindigkeit (30),0.95088881,"(199, 255, 87)","(56, 0, 168)",479
+207,Zulässige Höchstgeschwindigkeit (30),0.76417708,"(199, 255, 59)","(56, 0, 196)",535
+208,Rechts vorbei,0.47930202,"(199, 255, 31)","(56, 0, 224)",591
+209,Rechts vorbei,0.4015024,"(199, 255, 3)","(56, 0, 252)",647
+210,Verbot der Einfahrt,0.99994135,"(199, 227, 255)","(56, 28, 0)",597
+211,Verbot der Einfahrt,0.99684119,"(199, 227, 227)","(56, 28, 28)",541
+212,Verbot der Einfahrt,0.77340043,"(199, 227, 199)","(56, 28, 56)",485
+213,Zulässige Höchstgeschwindigkeit (30),0.98192042,"(199, 227, 171)","(56, 28, 84)",429
+214,Zulässige Höchstgeschwindigkeit (30),0.99388784,"(199, 227, 143)","(56, 28, 112)",373
+215,Zulässige Höchstgeschwindigkeit (30),0.97535819,"(199, 227, 115)","(56, 28, 140)",367
+216,Zulässige Höchstgeschwindigkeit (30),0.87390864,"(199, 227, 87)","(56, 28, 168)",423
+217,Zulässige Höchstgeschwindigkeit (30),0.49883685,"(199, 227, 59)","(56, 28, 196)",479
+218,Rechts vorbei,0.42067835,"(199, 227, 31)","(56, 28, 224)",535
+219,Rechts vorbei,0.11782806,"(199, 227, 3)","(56, 28, 252)",591
+220,Verbot der Einfahrt,0.99963486,"(199, 199, 255)","(56, 56, 0)",541
+221,Verbot der Einfahrt,0.97817457,"(199, 199, 227)","(56, 56, 28)",485
+222,Zulässige Höchstgeschwindigkeit (30),0.74946809,"(199, 199, 199)","(56, 56, 56)",429
+223,Zulässige Höchstgeschwindigkeit (30),0.99375916,"(199, 199, 171)","(56, 56, 84)",373
+224,Zulässige Höchstgeschwindigkeit (30),0.98447347,"(199, 199, 143)","(56, 56, 112)",317
+225,Zulässige Höchstgeschwindigkeit (30),0.91826469,"(199, 199, 115)","(56, 56, 140)",311
+226,Zulässige Höchstgeschwindigkeit (30),0.62711066,"(199, 199, 87)","(56, 56, 168)",367
+227,Rechts vorbei,0.39891529,"(199, 199, 59)","(56, 56, 196)",423
+228,Rechts vorbei,0.157921,"(199, 199, 31)","(56, 56, 224)",479
+229,Kreisverkehr,0.05166395,"(199, 199, 3)","(56, 56, 252)",535
+230,Verbot der Einfahrt,0.99801779,"(199, 171, 255)","(56, 84, 0)",485
+231,Verbot der Einfahrt,0.88652384,"(199, 171, 227)","(56, 84, 28)",429
+232,Zulässige Höchstgeschwindigkeit (30),0.94901174,"(199, 171, 199)","(56, 84, 56)",373
+233,Zulässige Höchstgeschwindigkeit (30),0.98688483,"(199, 171, 171)","(56, 84, 84)",317
+234,Zulässige Höchstgeschwindigkeit (30),0.94060397,"(199, 171, 143)","(56, 84, 112)",261
+235,Zulässige Höchstgeschwindigkeit (30),0.70842701,"(199, 171, 115)","(56, 84, 140)",255
+236,Rechts vorbei,0.35725591,"(199, 171, 87)","(56, 84, 168)",311
+237,Rechts vorbei,0.22571272,"(199, 171, 59)","(56, 84, 196)",367
+238,Kreisverkehr,0.07609797,"(199, 171, 31)","(56, 84, 224)",423
+239,Kreisverkehr,0.2103232,"(199, 171, 3)","(56, 84, 252)",479
+240,Verbot der Einfahrt,0.99005169,"(199, 143, 255)","(56, 112, 0)",429
+241,Verbot der Einfahrt,0.55343217,"(199, 143, 227)","(56, 112, 28)",373
+242,Zulässige Höchstgeschwindigkeit (30),0.98024791,"(199, 143, 199)","(56, 112, 56)",317
+243,Zulässige Höchstgeschwindigkeit (30),0.95367539,"(199, 143, 171)","(56, 112, 84)",261
+244,Zulässige Höchstgeschwindigkeit (30),0.77437204,"(199, 143, 143)","(56, 112, 112)",205
+245,Zulässige Höchstgeschwindigkeit (30),0.32079279,"(199, 143, 115)","(56, 112, 140)",199
+246,Rechts vorbei,0.27428997,"(199, 143, 87)","(56, 112, 168)",255
+247,Kreisverkehr,0.10498013,"(199, 143, 59)","(56, 112, 196)",311
+248,Kreisverkehr,0.27615562,"(199, 143, 31)","(56, 112, 224)",367
+249,Kreisverkehr,0.63363141,"(199, 143, 3)","(56, 112, 252)",423
+250,Verbot der Einfahrt,0.9492597,"(199, 115, 255)","(56, 140, 0)",423
+251,Zulässige Höchstgeschwindigkeit (30),0.83109409,"(199, 115, 227)","(56, 140, 28)",367
+252,Zulässige Höchstgeschwindigkeit (30),0.95773256,"(199, 115, 199)","(56, 140, 56)",311
+253,Zulässige Höchstgeschwindigkeit (30),0.83034962,"(199, 115, 171)","(56, 140, 84)",255
+254,Zulässige Höchstgeschwindigkeit (30),0.41229671,"(199, 115, 143)","(56, 140, 112)",199
+255,Rechts vorbei,0.27561527,"(199, 115, 115)","(56, 140, 140)",193
+256,Kreisverkehr,0.13263001,"(199, 115, 87)","(56, 140, 168)",249
+257,Kreisverkehr,0.33213726,"(199, 115, 59)","(56, 140, 196)",305
+258,Kreisverkehr,0.63547713,"(199, 115, 31)","(56, 140, 224)",361
+259,Kreisverkehr,0.77606022,"(199, 115, 3)","(56, 140, 252)",417
+260,Verbot der Einfahrt,0.75783116,"(199, 87, 255)","(56, 168, 0)",479
+261,Zulässige Höchstgeschwindigkeit (30),0.92761952,"(199, 87, 227)","(56, 168, 28)",423
+262,Zulässige Höchstgeschwindigkeit (30),0.85701084,"(199, 87, 199)","(56, 168, 56)",367
+263,Zulässige Höchstgeschwindigkeit (30),0.48381355,"(199, 87, 171)","(56, 168, 84)",311
+264,Rechts vorbei,0.21992993,"(199, 87, 143)","(56, 168, 112)",255
+265,Rechts vorbei,0.13379528,"(199, 87, 115)","(56, 168, 140)",249
+266,Kreisverkehr,0.22928396,"(199, 87, 87)","(56, 168, 168)",305
+267,Kreisverkehr,0.47517553,"(199, 87, 59)","(56, 168, 196)",361
+268,Kreisverkehr,0.63011515,"(199, 87, 31)","(56, 168, 224)",417
+269,Kreisverkehr,0.6811797,"(199, 87, 3)","(56, 168, 252)",473
+270,Verbot der Einfahrt,0.5115515,"(199, 59, 255)","(56, 196, 0)",535
+271,Zulässige Höchstgeschwindigkeit (30),0.70140409,"(199, 59, 227)","(56, 196, 28)",479
+272,Zulässige Höchstgeschwindigkeit (30),0.34840259,"(199, 59, 199)","(56, 196, 56)",423
+273,Rechts vorbei,0.08975891,"(199, 59, 171)","(56, 196, 84)",367
+274,Rechts vorbei,0.04148219,"(199, 59, 143)","(56, 196, 112)",311
+275,Kreisverkehr,0.02796641,"(199, 59, 115)","(56, 196, 140)",305
+276,Kreisverkehr,0.11316555,"(199, 59, 87)","(56, 196, 168)",361
+277,Kreisverkehr,0.23949419,"(199, 59, 59)","(56, 196, 196)",417
+278,Kreisverkehr,0.2956773,"(199, 59, 31)","(56, 196, 224)",473
+279,Kreisverkehr,0.28786108,"(199, 59, 3)","(56, 196, 252)",529
+280,Zulässige Höchstgeschwindigkeit (30),0.21001877,"(199, 31, 255)","(56, 224, 0)",591
+281,Zulässige Höchstgeschwindigkeit (30),0.08689277,"(199, 31, 227)","(56, 224, 28)",535
+282,Zulässige Höchstgeschwindigkeit (70),0.0488837,"(199, 31, 199)","(56, 224, 56)",479
+283,Zulässige Höchstgeschwindigkeit (70),0.01280623,"(199, 31, 171)","(56, 224, 84)",423
+284,Zulässige Höchstgeschwindigkeit (70),0.01256092,"(199, 31, 143)","(56, 224, 112)",367
+285,Zulässige Höchstgeschwindigkeit (70),0.02875672,"(199, 31, 115)","(56, 224, 140)",361
+286,Kurve (links),0.0760276,"(199, 31, 87)","(56, 224, 168)",417
+287,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.2401908,"(199, 31, 59)","(56, 224, 196)",473
+288,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.51260513,"(199, 31, 31)","(56, 224, 224)",529
+289,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.7465952,"(199, 31, 3)","(56, 224, 252)",585
+290,Zulässige Höchstgeschwindigkeit (70),0.01747856,"(199, 3, 255)","(56, 252, 0)",647
+291,Zulässige Höchstgeschwindigkeit (70),0.02237663,"(199, 3, 227)","(56, 252, 28)",591
+292,Zulässige Höchstgeschwindigkeit (70),0.00776461,"(199, 3, 199)","(56, 252, 56)",535
+293,Zulässige Höchstgeschwindigkeit (70),0.0091333,"(199, 3, 171)","(56, 252, 84)",479
+294,Zulässige Höchstgeschwindigkeit (70),0.02441069,"(199, 3, 143)","(56, 252, 112)",423
+295,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.16340806,"(199, 3, 115)","(56, 252, 140)",417
+296,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.56152141,"(199, 3, 87)","(56, 252, 168)",473
+297,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.8145839,"(199, 3, 59)","(56, 252, 196)",529
+298,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.92136061,"(199, 3, 31)","(56, 252, 224)",585
+299,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.96458066,"(199, 3, 3)","(56, 252, 252)",641
+300,Verbot der Einfahrt,0.99999964,"(171, 255, 255)","(84, 0, 0)",597
+301,Verbot der Einfahrt,0.99999249,"(171, 255, 227)","(84, 0, 28)",541
+302,Verbot der Einfahrt,0.99975628,"(171, 255, 199)","(84, 0, 56)",485
+303,Verbot der Einfahrt,0.98498917,"(171, 255, 171)","(84, 0, 84)",429
+304,Zulässige Höchstgeschwindigkeit (30),0.6968075,"(171, 255, 143)","(84, 0, 112)",373
+305,Zulässige Höchstgeschwindigkeit (30),0.97377092,"(171, 255, 115)","(84, 0, 140)",367
+306,Zulässige Höchstgeschwindigkeit (30),0.90483844,"(171, 255, 87)","(84, 0, 168)",423
+307,Zulässige Höchstgeschwindigkeit (30),0.59581047,"(171, 255, 59)","(84, 0, 196)",479
+308,Rechts vorbei,0.41868657,"(171, 255, 31)","(84, 0, 224)",535
+309,Rechts vorbei,0.17960542,"(171, 255, 3)","(84, 0, 252)",591
+310,Verbot der Einfahrt,0.99999833,"(171, 227, 255)","(84, 28, 0)",541
+311,Verbot der Einfahrt,0.99995756,"(171, 227, 227)","(84, 28, 28)",485
+312,Verbot der Einfahrt,0.99808156,"(171, 227, 199)","(84, 28, 56)",429
+313,Verbot der Einfahrt,0.87336445,"(171, 227, 171)","(84, 28, 84)",373
+314,Zulässige Höchstgeschwindigkeit (30),0.95249552,"(171, 227, 143)","(84, 28, 112)",317
+315,Zulässige Höchstgeschwindigkeit (30),0.94631231,"(171, 227, 115)","(84, 28, 140)",311
+316,Zulässige Höchstgeschwindigkeit (30),0.76502937,"(171, 227, 87)","(84, 28, 168)",367
+317,Rechts vorbei,0.33265215,"(171, 227, 59)","(84, 28, 196)",423
+318,Rechts vorbei,0.22911355,"(171, 227, 31)","(84, 28, 224)",479
+319,Kreisverkehr,0.02729125,"(171, 227, 3)","(84, 28, 252)",535
+320,Verbot der Einfahrt,0.99999177,"(171, 199, 255)","(84, 56, 0)",485
+321,Verbot der Einfahrt,0.99974018,"(171, 199, 227)","(84, 56, 28)",429
+322,Verbot der Einfahrt,0.98511237,"(171, 199, 199)","(84, 56, 56)",373
+323,Zulässige Höchstgeschwindigkeit (30),0.60244417,"(171, 199, 171)","(84, 56, 84)",317
+324,Zulässige Höchstgeschwindigkeit (30),0.95715642,"(171, 199, 143)","(84, 56, 112)",261
+325,Zulässige Höchstgeschwindigkeit (30),0.85195458,"(171, 199, 115)","(84, 56, 140)",255
+326,Zulässige Höchstgeschwindigkeit (30),0.44358316,"(171, 199, 87)","(84, 56, 168)",311
+327,Rechts vorbei,0.23676321,"(171, 199, 59)","(84, 56, 196)",367
+328,Rechts vorbei,0.0439456,"(171, 199, 31)","(84, 56, 224)",423
+329,Kreisverkehr,0.07667932,"(171, 199, 3)","(84, 56, 252)",479
+330,Verbot der Einfahrt,0.99996245,"(171, 171, 255)","(84, 84, 0)",429
+331,Verbot der Einfahrt,0.9985857,"(171, 171, 227)","(84, 84, 28)",373
+332,Verbot der Einfahrt,0.92116493,"(171, 171, 199)","(84, 84, 56)",317
+333,Zulässige Höchstgeschwindigkeit (30),0.88328677,"(171, 171, 171)","(84, 84, 84)",261
+334,Zulässige Höchstgeschwindigkeit (30),0.86893499,"(171, 171, 143)","(84, 84, 112)",205
+335,Zulässige Höchstgeschwindigkeit (30),0.53627735,"(171, 171, 115)","(84, 84, 140)",199
+336,Rechts vorbei,0.22881389,"(171, 171, 87)","(84, 84, 168)",255
+337,Rechts vorbei,0.07240255,"(171, 171, 59)","(84, 84, 196)",311
+338,Kreisverkehr,0.10327358,"(171, 171, 31)","(84, 84, 224)",367
+339,Kreisverkehr,0.34564739,"(171, 171, 3)","(84, 84, 252)",423
+340,Verbot der Einfahrt,0.99983108,"(171, 143, 255)","(84, 112, 0)",373
+341,Verbot der Einfahrt,0.99262005,"(171, 143, 227)","(84, 112, 28)",317
+342,Verbot der Einfahrt,0.65915078,"(171, 143, 199)","(84, 112, 56)",261
+343,Zulässige Höchstgeschwindigkeit (30),0.84437442,"(171, 143, 171)","(84, 112, 84)",205
+344,Zulässige Höchstgeschwindigkeit (30),0.6107226,"(171, 143, 143)","(84, 112, 112)",149
+345,Rechts vorbei,0.19516458,"(171, 143, 115)","(84, 112, 140)",143
+346,Rechts vorbei,0.10287147,"(171, 143, 87)","(84, 112, 168)",199
+347,Kreisverkehr,0.13307041,"(171, 143, 59)","(84, 112, 196)",255
+348,Kreisverkehr,0.34581867,"(171, 143, 31)","(84, 112, 224)",311
+349,Kreisverkehr,0.50349361,"(171, 143, 3)","(84, 112, 252)",367
+350,Verbot der Einfahrt,0.99917418,"(171, 115, 255)","(84, 140, 0)",367
+351,Verbot der Einfahrt,0.95874548,"(171, 115, 227)","(84, 140, 28)",311
+352,Zulässige Höchstgeschwindigkeit (30),0.65421987,"(171, 115, 199)","(84, 140, 56)",255
+353,Zulässige Höchstgeschwindigkeit (30),0.60294515,"(171, 115, 171)","(84, 140, 84)",199
+354,Zulässige Höchstgeschwindigkeit (30),0.24560933,"(171, 115, 143)","(84, 140, 112)",143
+355,Rechts vorbei,0.1285677,"(171, 115, 115)","(84, 140, 140)",137
+356,Kreisverkehr,0.15565492,"(171, 115, 87)","(84, 140, 168)",193
+357,Kreisverkehr,0.3221311,"(171, 115, 59)","(84, 140, 196)",249
+358,Kreisverkehr,0.44949067,"(171, 115, 31)","(84, 140, 224)",305
+359,Kreisverkehr,0.52177387,"(171, 115, 3)","(84, 140, 252)",361
+360,Verbot der Einfahrt,0.99525636,"(171, 87, 255)","(84, 168, 0)",423
+361,Verbot der Einfahrt,0.77494454,"(171, 87, 227)","(84, 168, 28)",367
+362,Zulässige Höchstgeschwindigkeit (30),0.5241214,"(171, 87, 199)","(84, 168, 56)",311
+363,Zulässige Höchstgeschwindigkeit (30),0.27690414,"(171, 87, 171)","(84, 168, 84)",255
+364,Rechts vorbei,0.12497018,"(171, 87, 143)","(84, 168, 112)",199
+365,Kreisverkehr,0.15994585,"(171, 87, 115)","(84, 168, 140)",193
+366,Kreisverkehr,0.2834307,"(171, 87, 87)","(84, 168, 168)",249
+367,Kreisverkehr,0.38244528,"(171, 87, 59)","(84, 168, 196)",305
+368,Kreisverkehr,0.44534314,"(171, 87, 31)","(84, 168, 224)",361
+369,Kreisverkehr,0.47138897,"(171, 87, 3)","(84, 168, 252)",417
+370,Verbot der Einfahrt,0.95437151,"(171, 59, 255)","(84, 196, 0)",479
+371,Verbot der Einfahrt,0.20113662,"(171, 59, 227)","(84, 196, 28)",423
+372,Zulässige Höchstgeschwindigkeit (30),0.08480499,"(171, 59, 199)","(84, 196, 56)",367
+373,Rechts vorbei,0.05383055,"(171, 59, 171)","(84, 196, 84)",311
+374,Kreisverkehr,0.0321367,"(171, 59, 143)","(84, 196, 112)",255
+375,Kreisverkehr,0.07323725,"(171, 59, 115)","(84, 196, 140)",249
+376,Kreisverkehr,0.11179784,"(171, 59, 87)","(84, 196, 168)",305
+377,Kreisverkehr,0.12665305,"(171, 59, 59)","(84, 196, 196)",361
+378,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.24826525,"(171, 59, 31)","(84, 196, 224)",417
+379,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.48895839,"(171, 59, 3)","(84, 196, 252)",473
+380,Verbot der Einfahrt,0.16210537,"(171, 31, 255)","(84, 224, 0)",535
+381,Zulässige Höchstgeschwindigkeit (70),0.00797443,"(171, 31, 227)","(84, 224, 28)",479
+382,Zulässige Höchstgeschwindigkeit (70),0.0123426,"(171, 31, 199)","(84, 224, 56)",423
+383,Zulässige Höchstgeschwindigkeit (70),0.02682045,"(171, 31, 171)","(84, 224, 84)",367
+384,Zulässige Höchstgeschwindigkeit (70),0.0402788,"(171, 31, 143)","(84, 224, 112)",311
+385,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.11403984,"(171, 31, 115)","(84, 224, 140)",305
+386,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.33796728,"(171, 31, 87)","(84, 224, 168)",361
+387,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.62364489,"(171, 31, 59)","(84, 224, 196)",417
+388,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.82258564,"(171, 31, 31)","(84, 224, 224)",473
+389,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.91699713,"(171, 31, 3)","(84, 224, 252)",529
+390,Verbot der Einfahrt,0.00097057,"(171, 3, 255)","(84, 252, 0)",591
+391,Zulässige Höchstgeschwindigkeit (70),0.00187596,"(171, 3, 227)","(84, 252, 28)",535
+392,Zulässige Höchstgeschwindigkeit (70),0.00911436,"(171, 3, 199)","(84, 252, 56)",479
+393,Zulässige Höchstgeschwindigkeit (70),0.04135154,"(171, 3, 171)","(84, 252, 84)",423
+394,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.31628361,"(171, 3, 143)","(84, 252, 112)",367
+395,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.67403841,"(171, 3, 115)","(84, 252, 140)",361
+396,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.87071222,"(171, 3, 87)","(84, 252, 168)",417
+397,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.94779497,"(171, 3, 59)","(84, 252, 196)",473
+398,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.97669387,"(171, 3, 31)","(84, 252, 224)",529
+399,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.98768276,"(171, 3, 3)","(84, 252, 252)",585
+400,Verbot der Einfahrt,1.0,"(143, 255, 255)","(112, 0, 0)",541
+401,Verbot der Einfahrt,0.99999964,"(143, 255, 227)","(112, 0, 28)",485
+402,Verbot der Einfahrt,0.99999332,"(143, 255, 199)","(112, 0, 56)",429
+403,Verbot der Einfahrt,0.99983025,"(143, 255, 171)","(112, 0, 84)",373
+404,Verbot der Einfahrt,0.99078369,"(143, 255, 143)","(112, 0, 112)",317
+405,Zulässige Höchstgeschwindigkeit (30),0.49644935,"(143, 255, 115)","(112, 0, 140)",311
+406,Zulässige Höchstgeschwindigkeit (30),0.76015776,"(143, 255, 87)","(112, 0, 168)",367
+407,Zulässige Höchstgeschwindigkeit (30),0.39663279,"(143, 255, 59)","(112, 0, 196)",423
+408,Rechts vorbei,0.2510328,"(143, 255, 31)","(112, 0, 224)",479
+409,Rechts vorbei,0.04299316,"(143, 255, 3)","(112, 0, 252)",535
+410,Verbot der Einfahrt,0.99999988,"(143, 227, 255)","(112, 28, 0)",485
+411,Verbot der Einfahrt,0.99999845,"(143, 227, 227)","(112, 28, 28)",429
+412,Verbot der Einfahrt,0.99996221,"(143, 227, 199)","(112, 28, 56)",373
+413,Verbot der Einfahrt,0.99868852,"(143, 227, 171)","(112, 28, 84)",317
+414,Verbot der Einfahrt,0.91125977,"(143, 227, 143)","(112, 28, 112)",261
+415,Zulässige Höchstgeschwindigkeit (30),0.72889459,"(143, 227, 115)","(112, 28, 140)",255
+416,Zulässige Höchstgeschwindigkeit (30),0.56406766,"(143, 227, 87)","(112, 28, 168)",311
+417,Rechts vorbei,0.22549449,"(143, 227, 59)","(112, 28, 196)",367
+418,Rechts vorbei,0.06726608,"(143, 227, 31)","(112, 28, 224)",423
+419,Kreisverkehr,0.04220339,"(143, 227, 3)","(112, 28, 252)",479
+420,Verbot der Einfahrt,0.99999952,"(143, 199, 255)","(112, 56, 0)",429
+421,Verbot der Einfahrt,0.99999142,"(143, 199, 227)","(112, 56, 28)",373
+422,Verbot der Einfahrt,0.99973506,"(143, 199, 199)","(112, 56, 56)",317
+423,Verbot der Einfahrt,0.98785341,"(143, 199, 171)","(112, 56, 84)",261
+424,Verbot der Einfahrt,0.44339141,"(143, 199, 143)","(112, 56, 112)",205
+425,Zulässige Höchstgeschwindigkeit (30),0.58301735,"(143, 199, 115)","(112, 56, 140)",199
+426,Zulässige Höchstgeschwindigkeit (30),0.25526735,"(143, 199, 87)","(112, 56, 168)",255
+427,Rechts vorbei,0.09079758,"(143, 199, 59)","(112, 56, 196)",311
+428,Kreisverkehr,0.05669169,"(143, 199, 31)","(112, 56, 224)",367
+429,Kreisverkehr,0.14217913,"(143, 199, 3)","(112, 56, 252)",423
+430,Verbot der Einfahrt,0.99999797,"(143, 171, 255)","(112, 84, 0)",373
+431,Verbot der Einfahrt,0.99994886,"(143, 171, 227)","(112, 84, 28)",317
+432,Verbot der Einfahrt,0.99819034,"(143, 171, 199)","(112, 84, 56)",261
+433,Verbot der Einfahrt,0.90531313,"(143, 171, 171)","(112, 84, 84)",205
+434,Zulässige Höchstgeschwindigkeit (30),0.42808953,"(143, 171, 143)","(112, 84, 112)",149
+435,Zulässige Höchstgeschwindigkeit (30),0.25136319,"(143, 171, 115)","(112, 84, 140)",143
+436,Rechts vorbei,0.09538986,"(143, 171, 87)","(112, 84, 168)",199
+437,Kreisverkehr,0.059115,"(143, 171, 59)","(112, 84, 196)",255
+438,Kreisverkehr,0.13078168,"(143, 171, 31)","(112, 84, 224)",311
+439,Kreisverkehr,0.2116404,"(143, 171, 3)","(112, 84, 252)",367
+440,Verbot der Einfahrt,0.99998522,"(143, 143, 255)","(112, 112, 0)",317
+441,Verbot der Einfahrt,0.99956912,"(143, 143, 227)","(112, 112, 28)",261
+442,Verbot der Einfahrt,0.98130357,"(143, 143, 199)","(112, 112, 56)",205
+443,Verbot der Einfahrt,0.42182741,"(143, 143, 171)","(112, 112, 84)",149
+444,Zulässige Höchstgeschwindigkeit (30),0.15394488,"(143, 143, 143)","(112, 112, 112)",93
+445,Rechts vorbei,0.09065993,"(143, 143, 115)","(112, 112, 140)",87
+446,Kreisverkehr,0.06258928,"(143, 143, 87)","(112, 112, 168)",143
+447,Kreisverkehr,0.12300885,"(143, 143, 59)","(112, 112, 196)",199
+448,Kreisverkehr,0.17546718,"(143, 143, 31)","(112, 112, 224)",255
+449,Kreisverkehr,0.22094125,"(143, 143, 3)","(112, 112, 252)",311
+450,Verbot der Einfahrt,0.99978894,"(143, 115, 255)","(112, 140, 0)",311
+451,Verbot der Einfahrt,0.99263799,"(143, 115, 227)","(112, 140, 28)",255
+452,Verbot der Einfahrt,0.73635489,"(143, 115, 199)","(112, 140, 56)",199
+453,Rechts vorbei,0.0613475,"(143, 115, 171)","(112, 140, 84)",143
+454,Rechts vorbei,0.06850813,"(143, 115, 143)","(112, 140, 112)",87
+455,Kreisverkehr,0.06926801,"(143, 115, 115)","(112, 140, 140)",81
+456,Kreisverkehr,0.10892724,"(143, 115, 87)","(112, 140, 168)",137
+457,Kreisverkehr,0.13468869,"(143, 115, 59)","(112, 140, 196)",193
+458,Kreisverkehr,0.17499208,"(143, 115, 31)","(112, 140, 224)",249
+459,Kreisverkehr,0.19594283,"(143, 115, 3)","(112, 140, 252)",305
+460,Verbot der Einfahrt,0.99578118,"(143, 87, 255)","(112, 168, 0)",367
+461,Verbot der Einfahrt,0.85465825,"(143, 87, 227)","(112, 168, 28)",311
+462,Verbot der Einfahrt,0.11083771,"(143, 87, 199)","(112, 168, 56)",255
+463,Rechts vorbei,0.04146074,"(143, 87, 171)","(112, 168, 84)",199
+464,Gefahrenstelle,0.06406157,"(143, 87, 143)","(112, 168, 112)",143
+465,Kreisverkehr,0.09874041,"(143, 87, 115)","(112, 168, 140)",137
+466,Kreisverkehr,0.10355014,"(143, 87, 87)","(112, 168, 168)",193
+467,Kreisverkehr,0.13281007,"(143, 87, 59)","(112, 168, 196)",249
+468,Kreisverkehr,0.14856543,"(143, 87, 31)","(112, 168, 224)",305
+469,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.29935786,"(143, 87, 3)","(112, 168, 252)",361
+470,Verbot der Einfahrt,0.8715933,"(143, 59, 255)","(112, 196, 0)",423
+471,Verbot der Einfahrt,0.13838112,"(143, 59, 227)","(112, 196, 28)",367
+472,Gefahrenstelle,0.01198757,"(143, 59, 199)","(112, 196, 56)",311
+473,Gefahrenstelle,0.05037804,"(143, 59, 171)","(112, 196, 84)",255
+474,Kreisverkehr,0.04891418,"(143, 59, 143)","(112, 196, 112)",199
+475,Kreisverkehr,0.04247347,"(143, 59, 115)","(112, 196, 140)",193
+476,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.12746729,"(143, 59, 87)","(112, 196, 168)",249
+477,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.34059227,"(143, 59, 59)","(112, 196, 196)",305
+478,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.59540623,"(143, 59, 31)","(112, 196, 224)",361
+479,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.76701266,"(143, 59, 3)","(112, 196, 252)",417
+480,Verbot der Einfahrt,0.03829207,"(143, 31, 255)","(112, 224, 0)",479
+481,Gefahrenstelle,0.00123319,"(143, 31, 227)","(112, 224, 28)",423
+482,Gefahrenstelle,0.00831689,"(143, 31, 199)","(112, 224, 56)",367
+483,Gefahrenstelle,0.0416329,"(143, 31, 171)","(112, 224, 84)",311
+484,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.14648584,"(143, 31, 143)","(112, 224, 112)",255
+485,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.37991384,"(143, 31, 115)","(112, 224, 140)",249
+486,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.69474697,"(143, 31, 87)","(112, 224, 168)",305
+487,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.86748672,"(143, 31, 59)","(112, 224, 196)",361
+488,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.93394428,"(143, 31, 31)","(112, 224, 224)",417
+489,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.96071577,"(143, 31, 3)","(112, 224, 252)",473
+490,Verbot der Einfahrt,0.00029248,"(143, 3, 255)","(112, 252, 0)",535
+491,Gefahrenstelle,0.00084623,"(143, 3, 227)","(112, 252, 28)",479
+492,Gefahrenstelle,0.012338,"(143, 3, 199)","(112, 252, 56)",423
+493,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.36931092,"(143, 3, 171)","(112, 252, 84)",367
+494,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.71813172,"(143, 3, 143)","(112, 252, 112)",311
+495,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.89686143,"(143, 3, 115)","(112, 252, 140)",305
+496,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.96142232,"(143, 3, 87)","(112, 252, 168)",361
+497,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.9817276,"(143, 3, 59)","(112, 252, 196)",417
+498,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.98917282,"(143, 3, 31)","(112, 252, 224)",473
+499,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.99280119,"(143, 3, 3)","(112, 252, 252)",529
+500,Verbot der Einfahrt,1.0,"(115, 255, 255)","(140, 0, 0)",535
+501,Verbot der Einfahrt,1.0,"(115, 255, 227)","(140, 0, 28)",479
+502,Verbot der Einfahrt,0.9999994,"(115, 255, 199)","(140, 0, 56)",423
+503,Verbot der Einfahrt,0.99998569,"(115, 255, 171)","(140, 0, 84)",367
+504,Verbot der Einfahrt,0.99950135,"(115, 255, 143)","(140, 0, 112)",311
+505,Verbot der Einfahrt,0.97348166,"(115, 255, 115)","(140, 0, 140)",305
+506,Verbot der Einfahrt,0.18703258,"(115, 255, 87)","(140, 0, 168)",361
+507,Rechts vorbei,0.1553016,"(115, 255, 59)","(140, 0, 196)",417
+508,Rechts vorbei,0.08013994,"(115, 255, 31)","(140, 0, 224)",473
+509,Fußgänger,0.02617442,"(115, 255, 3)","(140, 0, 252)",529
+510,Verbot der Einfahrt,1.0,"(115, 227, 255)","(140, 28, 0)",479
+511,Verbot der Einfahrt,0.99999964,"(115, 227, 227)","(140, 28, 28)",423
+512,Verbot der Einfahrt,0.99999297,"(115, 227, 199)","(140, 28, 56)",367
+513,Verbot der Einfahrt,0.99978954,"(115, 227, 171)","(140, 28, 84)",311
+514,Verbot der Einfahrt,0.99060374,"(115, 227, 143)","(140, 28, 112)",255
+515,Verbot der Einfahrt,0.62625122,"(115, 227, 115)","(140, 28, 140)",249
+516,Rechts vorbei,0.10833876,"(115, 227, 87)","(140, 28, 168)",305
+517,Rechts vorbei,0.08564874,"(115, 227, 59)","(140, 28, 196)",361
+518,Fußgänger,0.03115973,"(115, 227, 31)","(140, 28, 224)",417
+519,Fußgänger,0.09306083,"(115, 227, 3)","(140, 28, 252)",473
+520,Verbot der Einfahrt,0.99999964,"(115, 199, 255)","(140, 56, 0)",423
+521,Verbot der Einfahrt,0.99999344,"(115, 199, 227)","(140, 56, 28)",367
+522,Verbot der Einfahrt,0.9998641,"(115, 199, 199)","(140, 56, 56)",311
+523,Verbot der Einfahrt,0.99547064,"(115, 199, 171)","(140, 56, 84)",255
+524,Verbot der Einfahrt,0.8162185,"(115, 199, 143)","(140, 56, 112)",199
+525,Rechts vorbei,0.06328822,"(115, 199, 115)","(140, 56, 140)",193
+526,Rechts vorbei,0.05441195,"(115, 199, 87)","(140, 56, 168)",249
+527,Kurve (links),0.04033165,"(115, 199, 59)","(140, 56, 196)",305
+528,Fußgänger,0.08783735,"(115, 199, 31)","(140, 56, 224)",361
+529,Fußgänger,0.0937386,"(115, 199, 3)","(140, 56, 252)",417
+530,Verbot der Einfahrt,0.99999106,"(115, 171, 255)","(140, 84, 0)",367
+531,Verbot der Einfahrt,0.99983168,"(115, 171, 227)","(140, 84, 28)",311
+532,Verbot der Einfahrt,0.99669075,"(115, 171, 199)","(140, 84, 56)",255
+533,Verbot der Einfahrt,0.88628042,"(115, 171, 171)","(140, 84, 84)",199
+534,Verbot der Einfahrt,0.13501818,"(115, 171, 143)","(140, 84, 112)",143
+535,Rechts vorbei,0.03131201,"(115, 171, 115)","(140, 84, 140)",137
+536,Gefahrenstelle,0.03703887,"(115, 171, 87)","(140, 84, 168)",193
+537,Kurve (links),0.07661616,"(115, 171, 59)","(140, 84, 196)",249
+538,Fußgänger,0.07893802,"(115, 171, 31)","(140, 84, 224)",305
+539,Fußgänger,0.08127425,"(115, 171, 3)","(140, 84, 252)",361
+540,Verbot der Einfahrt,0.9997471,"(115, 143, 255)","(140, 112, 0)",311
+541,Verbot der Einfahrt,0.99518615,"(115, 143, 227)","(140, 112, 28)",255
+542,Verbot der Einfahrt,0.91288304,"(115, 143, 199)","(140, 112, 56)",199
+543,Verbot der Einfahrt,0.19734561,"(115, 143, 171)","(140, 112, 84)",143
+544,Rechts vorbei,0.01168891,"(115, 143, 143)","(140, 112, 112)",87
+545,Gefahrenstelle,0.02960541,"(115, 143, 115)","(140, 112, 140)",81
+546,Kurve (links),0.06302322,"(115, 143, 87)","(140, 112, 168)",137
+547,Fußgänger,0.06271859,"(115, 143, 59)","(140, 112, 196)",193
+548,Fußgänger,0.06209201,"(115, 143, 31)","(140, 112, 224)",249
+549,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.17504075,"(115, 143, 3)","(140, 112, 252)",305
+550,Verbot der Einfahrt,0.99267584,"(115, 115, 255)","(140, 140, 0)",305
+551,Verbot der Einfahrt,0.8799234,"(115, 115, 227)","(140, 140, 28)",249
+552,Verbot der Einfahrt,0.2488503,"(115, 115, 199)","(140, 140, 56)",193
+553,Verbot der Einfahrt,0.00844915,"(115, 115, 171)","(140, 140, 84)",137
+554,Gefahrenstelle,0.01871572,"(115, 115, 143)","(140, 140, 112)",81
+555,Gefahrenstelle,0.05459074,"(115, 115, 115)","(140, 140, 140)",75
+556,Kreisverkehr,0.04683343,"(115, 115, 87)","(140, 140, 168)",131
+557,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.08423866,"(115, 115, 59)","(140, 140, 196)",187
+558,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.22208402,"(115, 115, 31)","(140, 140, 224)",243
+559,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.42789117,"(115, 115, 3)","(140, 140, 252)",299
+560,Verbot der Einfahrt,0.82683361,"(115, 87, 255)","(140, 168, 0)",361
+561,Verbot der Einfahrt,0.20708384,"(115, 87, 227)","(140, 168, 28)",305
+562,Verbot der Einfahrt,0.01254326,"(115, 87, 199)","(140, 168, 56)",249
+563,Gefahrenstelle,0.00990425,"(115, 87, 171)","(140, 168, 84)",193
+564,Gefahrenstelle,0.06734829,"(115, 87, 143)","(140, 168, 112)",137
+565,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.05147575,"(115, 87, 115)","(140, 168, 140)",131
+566,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.11572487,"(115, 87, 87)","(140, 168, 168)",187
+567,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.27285734,"(115, 87, 59)","(140, 168, 196)",243
+568,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.49575865,"(115, 87, 31)","(140, 168, 224)",299
+569,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.6486671,"(115, 87, 3)","(140, 168, 252)",355
+570,Verbot der Einfahrt,0.17090251,"(115, 59, 255)","(140, 196, 0)",417
+571,Verbot der Einfahrt,0.01153541,"(115, 59, 227)","(140, 196, 28)",361
+572,Gefahrenstelle,0.00504024,"(115, 59, 199)","(140, 196, 56)",305
+573,Gefahrenstelle,0.06061553,"(115, 59, 171)","(140, 196, 84)",249
+574,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.04874912,"(115, 59, 143)","(140, 196, 112)",193
+575,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.16979705,"(115, 59, 115)","(140, 196, 140)",187
+576,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.38003209,"(115, 59, 87)","(140, 196, 168)",243
+577,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.60703146,"(115, 59, 59)","(140, 196, 196)",299
+578,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.75754893,"(115, 59, 31)","(140, 196, 224)",355
+579,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.82849514,"(115, 59, 3)","(140, 196, 252)",411
+580,Verbot der Einfahrt,0.00212579,"(115, 31, 255)","(140, 224, 0)",473
+581,Gefahrenstelle,0.00047963,"(115, 31, 227)","(140, 224, 28)",417
+582,Gefahrenstelle,0.01111562,"(115, 31, 199)","(140, 224, 56)",361
+583,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.06491587,"(115, 31, 171)","(140, 224, 84)",305
+584,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.37633598,"(115, 31, 143)","(140, 224, 112)",249
+585,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.70740795,"(115, 31, 115)","(140, 224, 140)",243
+586,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.86289579,"(115, 31, 87)","(140, 224, 168)",299
+587,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.92420053,"(115, 31, 59)","(140, 224, 196)",355
+588,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.9488461,"(115, 31, 31)","(140, 224, 224)",411
+589,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.9607029,"(115, 31, 3)","(140, 224, 252)",467
+590,Verbot der Einfahrt,4.366e-05,"(115, 3, 255)","(140, 252, 0)",529
+591,Gefahrenstelle,0.00100419,"(115, 3, 227)","(140, 252, 28)",473
+592,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.02586938,"(115, 3, 199)","(140, 252, 56)",417
+593,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.591968,"(115, 3, 171)","(140, 252, 84)",361
+594,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.8781808,"(115, 3, 143)","(140, 252, 112)",305
+595,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.9576875,"(115, 3, 115)","(140, 252, 140)",299
+596,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.97767526,"(115, 3, 87)","(140, 252, 168)",355
+597,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.98580277,"(115, 3, 59)","(140, 252, 196)",411
+598,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.98919767,"(115, 3, 31)","(140, 252, 224)",467
+599,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.9913497,"(115, 3, 3)","(140, 252, 252)",523
+600,Verbot der Einfahrt,1.0,"(87, 255, 255)","(168, 0, 0)",591
+601,Verbot der Einfahrt,0.99999964,"(87, 255, 227)","(168, 0, 28)",535
+602,Verbot der Einfahrt,0.99999309,"(87, 255, 199)","(168, 0, 56)",479
+603,Verbot der Einfahrt,0.99987292,"(87, 255, 171)","(168, 0, 84)",423
+604,Verbot der Einfahrt,0.99743587,"(87, 255, 143)","(168, 0, 112)",367
+605,Verbot der Einfahrt,0.91750443,"(87, 255, 115)","(168, 0, 140)",361
+606,Verbot der Einfahrt,0.19143879,"(87, 255, 87)","(168, 0, 168)",417
+607,Rechts vorbei,0.0142842,"(87, 255, 59)","(168, 0, 196)",473
+608,Gefahrenstelle,0.01908699,"(87, 255, 31)","(168, 0, 224)",529
+609,Kurve (links),0.08890565,"(87, 255, 3)","(168, 0, 252)",585
+610,Verbot der Einfahrt,0.9999994,"(87, 227, 255)","(168, 28, 0)",535
+611,Verbot der Einfahrt,0.99998987,"(87, 227, 227)","(168, 28, 28)",479
+612,Verbot der Einfahrt,0.99981838,"(87, 227, 199)","(168, 28, 56)",423
+613,Verbot der Einfahrt,0.99664104,"(87, 227, 171)","(168, 28, 84)",367
+614,Verbot der Einfahrt,0.93716252,"(87, 227, 143)","(168, 28, 112)",311
+615,Verbot der Einfahrt,0.28017223,"(87, 227, 115)","(168, 28, 140)",305
+616,Rechts vorbei,0.00866946,"(87, 227, 87)","(168, 28, 168)",361
+617,Gefahrenstelle,0.01495645,"(87, 227, 59)","(168, 28, 196)",417
+618,Kurve (links),0.05013053,"(87, 227, 31)","(168, 28, 224)",473
+619,Kurve (links),0.07480871,"(87, 227, 3)","(168, 28, 252)",529
+620,Verbot der Einfahrt,0.99998438,"(87, 199, 255)","(168, 56, 0)",479
+621,Verbot der Einfahrt,0.99972707,"(87, 199, 227)","(168, 56, 28)",423
+622,Verbot der Einfahrt,0.99520051,"(87, 199, 199)","(168, 56, 56)",367
+623,Verbot der Einfahrt,0.91661024,"(87, 199, 171)","(168, 56, 84)",311
+624,Verbot der Einfahrt,0.34735152,"(87, 199, 143)","(168, 56, 112)",255
+625,Verbot der Einfahrt,0.01325703,"(87, 199, 115)","(168, 56, 140)",249
+626,Gefahrenstelle,0.01137598,"(87, 199, 87)","(168, 56, 168)",305
+627,Vorfahrt gewähren,0.04105559,"(87, 199, 59)","(168, 56, 196)",361
+628,Kurve (links),0.0666111,"(87, 199, 31)","(168, 56, 224)",417
+629,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.0845993,"(87, 199, 3)","(168, 56, 252)",473
+630,Verbot der Einfahrt,0.99957675,"(87, 171, 255)","(168, 84, 0)",423
+631,Verbot der Einfahrt,0.99254006,"(87, 171, 227)","(168, 84, 28)",367
+632,Verbot der Einfahrt,0.88321686,"(87, 171, 199)","(168, 84, 56)",311
+633,Verbot der Einfahrt,0.28678876,"(87, 171, 171)","(168, 84, 84)",255
+634,Verbot der Einfahrt,0.01794378,"(87, 171, 143)","(168, 84, 112)",199
+635,Vorfahrt,0.0072825,"(87, 171, 115)","(168, 84, 140)",193
+636,Vorfahrt gewähren,0.03804005,"(87, 171, 87)","(168, 84, 168)",249
+637,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.05136555,"(87, 171, 59)","(168, 84, 196)",305
+638,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.12571491,"(87, 171, 31)","(168, 84, 224)",361
+639,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.24134901,"(87, 171, 3)","(168, 84, 252)",417
+640,Verbot der Einfahrt,0.98769069,"(87, 143, 255)","(168, 112, 0)",367
+641,Verbot der Einfahrt,0.82094806,"(87, 143, 227)","(168, 112, 28)",311
+642,Verbot der Einfahrt,0.20204888,"(87, 143, 199)","(168, 112, 56)",255
+643,Verbot der Einfahrt,0.01379252,"(87, 143, 171)","(168, 112, 84)",199
+644,Vorfahrt,0.00449659,"(87, 143, 143)","(168, 112, 112)",143
+645,Gefahrenstelle,0.02479717,"(87, 143, 115)","(168, 112, 140)",137
+646,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.04737215,"(87, 143, 87)","(168, 112, 168)",193
+647,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.1725229,"(87, 143, 59)","(168, 112, 196)",249
+648,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.30641329,"(87, 143, 31)","(168, 112, 224)",305
+649,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.49365526,"(87, 143, 3)","(168, 112, 252)",361
+650,Verbot der Einfahrt,0.73798525,"(87, 115, 255)","(168, 140, 0)",361
+651,Verbot der Einfahrt,0.13587961,"(87, 115, 227)","(168, 140, 28)",305
+652,Verbot der Einfahrt,0.00903569,"(87, 115, 199)","(168, 140, 56)",249
+653,Vorfahrt,0.00198218,"(87, 115, 171)","(168, 140, 84)",193
+654,Gefahrenstelle,0.01269714,"(87, 115, 143)","(168, 140, 112)",137
+655,Gefahrenstelle,0.03300903,"(87, 115, 115)","(168, 140, 140)",131
+656,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.15773223,"(87, 115, 87)","(168, 140, 168)",187
+657,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.37016568,"(87, 115, 59)","(168, 140, 196)",243
+658,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.5609678,"(87, 115, 31)","(168, 140, 224)",299
+659,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.66179937,"(87, 115, 3)","(168, 140, 252)",355
+660,Verbot der Einfahrt,0.09011044,"(87, 87, 255)","(168, 168, 0)",417
+661,Verbot der Einfahrt,0.00580208,"(87, 87, 227)","(168, 168, 28)",361
+662,Vorfahrt,0.00072627,"(87, 87, 199)","(168, 168, 56)",305
+663,Vorfahrt,0.00567138,"(87, 87, 171)","(168, 168, 84)",249
+664,Gefahrenstelle,0.03660795,"(87, 87, 143)","(168, 168, 112)",193
+665,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.12953722,"(87, 87, 115)","(168, 168, 140)",187
+666,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.3572332,"(87, 87, 87)","(168, 168, 168)",243
+667,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.59174955,"(87, 87, 59)","(168, 168, 196)",299
+668,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.69854188,"(87, 87, 31)","(168, 168, 224)",355
+669,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.74446249,"(87, 87, 3)","(168, 168, 252)",411
+670,Verbot der Einfahrt,0.004091,"(87, 59, 255)","(168, 196, 0)",473
+671,Verbot der Einfahrt,0.00058302,"(87, 59, 227)","(168, 196, 28)",417
+672,Vorfahrt,0.0034182,"(87, 59, 199)","(168, 196, 56)",361
+673,Gefahrenstelle,0.02995957,"(87, 59, 171)","(168, 196, 84)",305
+674,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.09418096,"(87, 59, 143)","(168, 196, 112)",249
+675,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.30877802,"(87, 59, 115)","(168, 196, 140)",243
+676,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.58722913,"(87, 59, 87)","(168, 196, 168)",299
+677,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.69932169,"(87, 59, 59)","(168, 196, 196)",355
+678,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.74404812,"(87, 59, 31)","(168, 196, 224)",411
+679,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.7889843,"(87, 59, 3)","(168, 196, 252)",467
+680,Verbot der Einfahrt,0.00022494,"(87, 31, 255)","(168, 224, 0)",529
+681,Vorfahrt,0.00047743,"(87, 31, 227)","(168, 224, 28)",473
+682,Gefahrenstelle,0.00758559,"(87, 31, 199)","(168, 224, 56)",417
+683,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.09689555,"(87, 31, 171)","(168, 224, 84)",361
+684,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.40089041,"(87, 31, 143)","(168, 224, 112)",305
+685,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.7064814,"(87, 31, 115)","(168, 224, 140)",299
+686,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.86644465,"(87, 31, 87)","(168, 224, 168)",355
+687,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.88276511,"(87, 31, 59)","(168, 224, 196)",411
+688,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.90561819,"(87, 31, 31)","(168, 224, 224)",467
+689,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.92832989,"(87, 31, 3)","(168, 224, 252)",523
+690,Verbot der Einfahrt,2.799e-05,"(87, 3, 255)","(168, 252, 0)",585
+691,Gefahrenstelle,0.00062671,"(87, 3, 227)","(168, 252, 28)",529
+692,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.04329884,"(87, 3, 199)","(168, 252, 56)",473
+693,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.59984809,"(87, 3, 171)","(168, 252, 84)",417
+694,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.85274285,"(87, 3, 143)","(168, 252, 112)",361
+695,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.94175106,"(87, 3, 115)","(168, 252, 140)",355
+696,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.96634513,"(87, 3, 87)","(168, 252, 168)",411
+697,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.96925014,"(87, 3, 59)","(168, 252, 196)",467
+698,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.97516882,"(87, 3, 31)","(168, 252, 224)",523
+699,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.98139656,"(87, 3, 3)","(168, 252, 252)",579
+700,Verbot der Einfahrt,0.99999881,"(59, 255, 255)","(196, 0, 0)",647
+701,Verbot der Einfahrt,0.99998033,"(59, 255, 227)","(196, 0, 28)",591
+702,Verbot der Einfahrt,0.99966395,"(59, 255, 199)","(196, 0, 56)",535
+703,Verbot der Einfahrt,0.99424583,"(59, 255, 171)","(196, 0, 84)",479
+704,Verbot der Einfahrt,0.90544748,"(59, 255, 143)","(196, 0, 112)",423
+705,Verbot der Einfahrt,0.35720959,"(59, 255, 115)","(196, 0, 140)",417
+706,Verbot der Einfahrt,0.02795493,"(59, 255, 87)","(196, 0, 168)",473
+707,Vorfahrt,0.00288627,"(59, 255, 59)","(196, 0, 196)",529
+708,Gefahrenstelle,0.01488995,"(59, 255, 31)","(196, 0, 224)",585
+709,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.03540587,"(59, 255, 3)","(196, 0, 252)",641
+710,Verbot der Einfahrt,0.99996996,"(59, 227, 255)","(196, 28, 0)",591
+711,Verbot der Einfahrt,0.99948287,"(59, 227, 227)","(196, 28, 28)",535
+712,Verbot der Einfahrt,0.99137723,"(59, 227, 199)","(196, 28, 56)",479
+713,Verbot der Einfahrt,0.86844403,"(59, 227, 171)","(196, 28, 84)",423
+714,Verbot der Einfahrt,0.27491596,"(59, 227, 143)","(196, 28, 112)",367
+715,Verbot der Einfahrt,0.02223996,"(59, 227, 115)","(196, 28, 140)",361
+716,Vorfahrt,0.00341629,"(59, 227, 87)","(196, 28, 168)",417
+717,Gefahrenstelle,0.01101218,"(59, 227, 59)","(196, 28, 196)",473
+718,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.03274051,"(59, 227, 31)","(196, 28, 224)",529
+719,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.14661598,"(59, 227, 3)","(196, 28, 252)",585
+720,Verbot der Einfahrt,0.99920803,"(59, 199, 255)","(196, 56, 0)",535
+721,Verbot der Einfahrt,0.9866122,"(59, 199, 227)","(196, 56, 28)",479
+722,Verbot der Einfahrt,0.81472152,"(59, 199, 199)","(196, 56, 56)",423
+723,Verbot der Einfahrt,0.20205842,"(59, 199, 171)","(196, 56, 84)",367
+724,Verbot der Einfahrt,0.01511874,"(59, 199, 143)","(196, 56, 112)",311
+725,Vorfahrt,0.00258795,"(59, 199, 115)","(196, 56, 140)",305
+726,Vorfahrt,0.00898111,"(59, 199, 87)","(196, 56, 168)",361
+727,Ende aller Streckenverbote,0.02645443,"(59, 199, 59)","(196, 56, 196)",417
+728,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.13432732,"(59, 199, 31)","(196, 56, 224)",473
+729,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.3541593,"(59, 199, 3)","(196, 56, 252)",529
+730,Verbot der Einfahrt,0.97913718,"(59, 171, 255)","(196, 84, 0)",479
+731,Verbot der Einfahrt,0.73778754,"(59, 171, 227)","(196, 84, 28)",423
+732,Verbot der Einfahrt,0.13997565,"(59, 171, 199)","(196, 84, 56)",367
+733,Verbot der Einfahrt,0.00988078,"(59, 171, 171)","(196, 84, 84)",311
+734,Vorfahrt,0.0013754,"(59, 171, 143)","(196, 84, 112)",255
+735,Vorfahrt,0.00739992,"(59, 171, 115)","(196, 84, 140)",249
+736,Ende aller Streckenverbote,0.0333439,"(59, 171, 87)","(196, 84, 168)",305
+737,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.11578654,"(59, 171, 59)","(196, 84, 196)",361
+738,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.34332433,"(59, 171, 31)","(196, 84, 224)",417
+739,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.55914021,"(59, 171, 3)","(196, 84, 252)",473
+740,Verbot der Einfahrt,0.63240767,"(59, 143, 255)","(196, 112, 0)",423
+741,Verbot der Einfahrt,0.09119672,"(59, 143, 227)","(196, 112, 28)",367
+742,Verbot der Einfahrt,0.00599743,"(59, 143, 199)","(196, 112, 56)",311
+743,Verbot der Einfahrt,0.00078595,"(59, 143, 171)","(196, 112, 84)",255
+744,Vorfahrt,0.00363251,"(59, 143, 143)","(196, 112, 112)",199
+745,Ende aller Streckenverbote,0.02441214,"(59, 143, 115)","(196, 112, 140)",193
+746,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.08632872,"(59, 143, 87)","(196, 112, 168)",249
+747,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.29478863,"(59, 143, 59)","(196, 112, 196)",305
+748,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.56473345,"(59, 143, 31)","(196, 112, 224)",361
+749,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.6497432,"(59, 143, 3)","(196, 112, 252)",417
+750,Verbot der Einfahrt,0.05961672,"(59, 115, 255)","(196, 140, 0)",417
+751,Verbot der Einfahrt,0.00367887,"(59, 115, 227)","(196, 140, 28)",361
+752,Verbot der Einfahrt,0.00048193,"(59, 115, 199)","(196, 140, 56)",305
+753,Vorfahrt,0.00150871,"(59, 115, 171)","(196, 140, 84)",249
+754,Ende aller Streckenverbote,0.00989547,"(59, 115, 143)","(196, 140, 112)",193
+755,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.05594682,"(59, 115, 115)","(196, 140, 140)",187
+756,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.23278336,"(59, 115, 87)","(196, 140, 168)",243
+757,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.49731293,"(59, 115, 59)","(196, 140, 196)",299
+758,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.65891254,"(59, 115, 31)","(196, 140, 224)",355
+759,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.66318119,"(59, 115, 3)","(196, 140, 252)",411
+760,Verbot der Einfahrt,0.00240941,"(59, 87, 255)","(196, 168, 0)",473
+761,Verbot der Einfahrt,0.0002996,"(59, 87, 227)","(196, 168, 28)",417
+762,Vorfahrt,0.00059729,"(59, 87, 199)","(196, 168, 56)",361
+763,Vorfahrt,0.00376145,"(59, 87, 171)","(196, 168, 84)",305
+764,Ende aller Streckenverbote,0.0349477,"(59, 87, 143)","(196, 168, 112)",249
+765,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.20997919,"(59, 87, 115)","(196, 168, 140)",243
+766,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.41797009,"(59, 87, 87)","(196, 168, 168)",299
+767,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.60487682,"(59, 87, 59)","(196, 168, 196)",355
+768,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.67993844,"(59, 87, 31)","(196, 168, 224)",411
+769,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.67113376,"(59, 87, 3)","(196, 168, 252)",467
+770,Verbot der Einfahrt,0.00019299,"(59, 59, 255)","(196, 196, 0)",529
+771,Vorfahrt,0.00022675,"(59, 59, 227)","(196, 196, 28)",473
+772,Vorfahrt,0.00173227,"(59, 59, 199)","(196, 196, 56)",417
+773,Ende aller Streckenverbote,0.02299353,"(59, 59, 171)","(196, 196, 84)",361
+774,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.17755763,"(59, 59, 143)","(196, 196, 112)",305
+775,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.3881304,"(59, 59, 115)","(196, 196, 140)",299
+776,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.53457516,"(59, 59, 87)","(196, 196, 168)",355
+777,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.67752713,"(59, 59, 59)","(196, 196, 196)",411
+778,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.68862456,"(59, 59, 31)","(196, 196, 224)",467
+779,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.69119263,"(59, 59, 3)","(196, 196, 252)",523
+780,Verbot der Einfahrt,0.00013777,"(59, 31, 255)","(196, 224, 0)",585
+781,Vorfahrt,0.000689,"(59, 31, 227)","(196, 224, 28)",529
+782,Ende aller Streckenverbote,0.00769195,"(59, 31, 199)","(196, 224, 56)",473
+783,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.12776895,"(59, 31, 171)","(196, 224, 84)",417
+784,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.34082925,"(59, 31, 143)","(196, 224, 112)",361
+785,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.51464963,"(59, 31, 115)","(196, 224, 140)",355
+786,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.70263726,"(59, 31, 87)","(196, 224, 168)",411
+787,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.79614037,"(59, 31, 59)","(196, 224, 196)",467
+788,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.8006345,"(59, 31, 31)","(196, 224, 224)",523
+789,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.82339168,"(59, 31, 3)","(196, 224, 252)",579
+790,Vorfahrt,2.379e-05,"(59, 3, 255)","(196, 252, 0)",641
+791,Gefahrenstelle,0.00042065,"(59, 3, 227)","(196, 252, 28)",585
+792,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.0566424,"(59, 3, 199)","(196, 252, 56)",529
+793,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.53834146,"(59, 3, 171)","(196, 252, 84)",473
+794,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.73672926,"(59, 3, 143)","(196, 252, 112)",417
+795,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.8408944,"(59, 3, 115)","(196, 252, 140)",411
+796,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.91402161,"(59, 3, 87)","(196, 252, 168)",467
+797,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.939807,"(59, 3, 59)","(196, 252, 196)",523
+798,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.93971968,"(59, 3, 31)","(196, 252, 224)",579
+799,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.94804591,"(59, 3, 3)","(196, 252, 252)",635
+800,Verbot der Einfahrt,0.99994147,"(31, 255, 255)","(224, 0, 0)",703
+801,Verbot der Einfahrt,0.9990049,"(31, 255, 227)","(224, 0, 28)",647
+802,Verbot der Einfahrt,0.98387909,"(31, 255, 199)","(224, 0, 56)",591
+803,Verbot der Einfahrt,0.78813648,"(31, 255, 171)","(224, 0, 84)",535
+804,Verbot der Einfahrt,0.18448369,"(31, 255, 143)","(224, 0, 112)",479
+805,Verbot der Einfahrt,0.01514836,"(31, 255, 115)","(224, 0, 140)",473
+806,Verbot der Einfahrt,0.00218243,"(31, 255, 87)","(224, 0, 168)",529
+807,Vorfahrt,0.00222703,"(31, 255, 59)","(224, 0, 196)",585
+808,Ende aller Streckenverbote,0.01778344,"(31, 255, 31)","(224, 0, 224)",641
+809,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.09096605,"(31, 255, 3)","(224, 0, 252)",697
+810,Verbot der Einfahrt,0.99846077,"(31, 227, 255)","(224, 28, 0)",647
+811,Verbot der Einfahrt,0.97534227,"(31, 227, 227)","(224, 28, 28)",591
+812,Verbot der Einfahrt,0.70790565,"(31, 227, 199)","(224, 28, 56)",535
+813,Verbot der Einfahrt,0.13076267,"(31, 227, 171)","(224, 28, 84)",479
+814,Verbot der Einfahrt,0.00964458,"(31, 227, 143)","(224, 28, 112)",423
+815,Verbot der Einfahrt,0.00141059,"(31, 227, 115)","(224, 28, 140)",417
+816,Vorfahrt,0.00185638,"(31, 227, 87)","(224, 28, 168)",473
+817,Ende aller Streckenverbote,0.01389799,"(31, 227, 59)","(224, 28, 196)",529
+818,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.06652994,"(31, 227, 31)","(224, 28, 224)",585
+819,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.26547241,"(31, 227, 3)","(224, 28, 252)",641
+820,Verbot der Einfahrt,0.96238649,"(31, 199, 255)","(224, 56, 0)",591
+821,Verbot der Einfahrt,0.61254823,"(31, 199, 227)","(224, 56, 28)",535
+822,Verbot der Einfahrt,0.0891249,"(31, 199, 199)","(224, 56, 56)",479
+823,Verbot der Einfahrt,0.00630483,"(31, 199, 171)","(224, 56, 84)",423
+824,Verbot der Einfahrt,0.00084805,"(31, 199, 143)","(224, 56, 112)",367
+825,Vorfahrt,0.00130025,"(31, 199, 115)","(224, 56, 140)",361
+826,Ende aller Streckenverbote,0.00721737,"(31, 199, 87)","(224, 56, 168)",417
+827,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.03992499,"(31, 199, 59)","(224, 56, 196)",473
+828,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.21877792,"(31, 199, 31)","(224, 56, 224)",529
+829,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.49027798,"(31, 199, 3)","(224, 56, 252)",585
+830,Verbot der Einfahrt,0.50358611,"(31, 171, 255)","(224, 84, 0)",535
+831,Verbot der Einfahrt,0.05896348,"(31, 171, 227)","(224, 84, 28)",479
+832,Verbot der Einfahrt,0.00407953,"(31, 171, 199)","(224, 84, 56)",423
+833,Verbot der Einfahrt,0.00053699,"(31, 171, 171)","(224, 84, 84)",367
+834,Vorfahrt,0.00077554,"(31, 171, 143)","(224, 84, 112)",311
+835,Vorfahrt,0.00441158,"(31, 171, 115)","(224, 84, 140)",305
+836,Ende aller Streckenverbote,0.03746025,"(31, 171, 87)","(224, 84, 168)",361
+837,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.16214406,"(31, 171, 59)","(224, 84, 196)",417
+838,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.41914803,"(31, 171, 31)","(224, 84, 224)",473
+839,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.64186597,"(31, 171, 3)","(224, 84, 252)",529
+840,Verbot der Einfahrt,0.03787551,"(31, 143, 255)","(224, 112, 0)",479
+841,Verbot der Einfahrt,0.00255049,"(31, 143, 227)","(224, 112, 28)",423
+842,Verbot der Einfahrt,0.00034408,"(31, 143, 199)","(224, 112, 56)",367
+843,Vorfahrt,0.00036536,"(31, 143, 171)","(224, 112, 84)",311
+844,Vorfahrt,0.00238085,"(31, 143, 143)","(224, 112, 112)",255
+845,Ende aller Streckenverbote,0.02335987,"(31, 143, 115)","(224, 112, 140)",249
+846,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.11937787,"(31, 143, 87)","(224, 112, 168)",305
+847,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.33844072,"(31, 143, 59)","(224, 112, 196)",361
+848,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.56779283,"(31, 143, 31)","(224, 112, 224)",417
+849,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.68460315,"(31, 143, 3)","(224, 112, 252)",473
+850,Verbot der Einfahrt,0.00155754,"(31, 115, 255)","(224, 140, 0)",473
+851,Verbot der Einfahrt,0.00020966,"(31, 115, 227)","(224, 140, 28)",417
+852,Verbot der Einfahrt,0.00018407,"(31, 115, 199)","(224, 140, 56)",361
+853,Vorfahrt,0.00098553,"(31, 115, 171)","(224, 140, 84)",305
+854,Ende aller Streckenverbote,0.00866124,"(31, 115, 143)","(224, 140, 112)",249
+855,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.08970623,"(31, 115, 115)","(224, 140, 140)",243
+856,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.32071948,"(31, 115, 87)","(224, 140, 168)",299
+857,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.45482516,"(31, 115, 59)","(224, 140, 196)",355
+858,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.59877688,"(31, 115, 31)","(224, 140, 224)",411
+859,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.67747116,"(31, 115, 3)","(224, 140, 252)",467
+860,Verbot der Einfahrt,0.00012832,"(31, 87, 255)","(224, 168, 0)",529
+861,Verbot der Einfahrt,0.00011301,"(31, 87, 227)","(224, 168, 28)",473
+862,Vorfahrt,0.00039779,"(31, 87, 199)","(224, 168, 56)",417
+863,Ende aller Streckenverbote,0.00270769,"(31, 87, 171)","(224, 168, 84)",361
+864,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.04891087,"(31, 87, 143)","(224, 168, 112)",305
+865,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.30308363,"(31, 87, 115)","(224, 168, 140)",299
+866,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.48826832,"(31, 87, 87)","(224, 168, 168)",355
+867,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.48699462,"(31, 87, 59)","(224, 168, 196)",411
+868,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.63092852,"(31, 87, 31)","(224, 168, 224)",467
+869,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.67433125,"(31, 87, 3)","(224, 168, 252)",523
+870,Verbot der Einfahrt,7.071e-05,"(31, 59, 255)","(224, 196, 0)",585
+871,Vorfahrt,0.0001532,"(31, 59, 227)","(224, 196, 28)",529
+872,Vorfahrt,0.00105687,"(31, 59, 199)","(224, 196, 56)",473
+873,Ende aller Streckenverbote,0.01892664,"(31, 59, 171)","(224, 196, 84)",417
+874,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.27797431,"(31, 59, 143)","(224, 196, 112)",361
+875,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.50747842,"(31, 59, 115)","(224, 196, 140)",355
+876,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.54944968,"(31, 59, 87)","(224, 196, 168)",411
+877,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.53128517,"(31, 59, 59)","(224, 196, 196)",467
+878,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.65789145,"(31, 59, 31)","(224, 196, 224)",523
+879,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.64289159,"(31, 59, 3)","(224, 196, 252)",579
+880,Vorfahrt,5.846e-05,"(31, 31, 255)","(224, 224, 0)",641
+881,Vorfahrt,0.00043595,"(31, 31, 227)","(224, 224, 28)",585
+882,Ende aller Streckenverbote,0.00753401,"(31, 31, 199)","(224, 224, 56)",529
+883,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.21860811,"(31, 31, 171)","(224, 224, 84)",473
+884,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.49904019,"(31, 31, 143)","(224, 224, 112)",417
+885,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.58712429,"(31, 31, 115)","(224, 224, 140)",411
+886,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.53106153,"(31, 31, 87)","(224, 224, 168)",467
+887,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.60453308,"(31, 31, 59)","(224, 224, 196)",523
+888,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.70377481,"(31, 31, 31)","(224, 224, 224)",579
+889,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.69258326,"(31, 31, 3)","(224, 224, 252)",635
+890,Vorfahrt,3.302e-05,"(31, 3, 255)","(224, 252, 0)",697
+891,Ende aller Streckenverbote,0.00061396,"(31, 3, 227)","(224, 252, 28)",641
+892,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.06983378,"(31, 3, 199)","(224, 252, 56)",585
+893,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.44482967,"(31, 3, 171)","(224, 252, 84)",529
+894,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.58928132,"(31, 3, 143)","(224, 252, 112)",473
+895,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.66475898,"(31, 3, 115)","(224, 252, 140)",467
+896,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.77453083,"(31, 3, 87)","(224, 252, 168)",523
+897,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.85884744,"(31, 3, 59)","(224, 252, 196)",579
+898,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.89220268,"(31, 3, 31)","(224, 252, 224)",635
+899,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.89039677,"(31, 3, 3)","(224, 252, 252)",691
+900,Verbot der Einfahrt,0.99698973,"(3, 255, 255)","(252, 0, 0)",759
+901,Verbot der Einfahrt,0.95365644,"(3, 255, 227)","(252, 0, 28)",703
+902,Verbot der Einfahrt,0.58188188,"(3, 255, 199)","(252, 0, 56)",647
+903,Verbot der Einfahrt,0.08012124,"(3, 255, 171)","(252, 0, 84)",591
+904,Verbot der Einfahrt,0.00587307,"(3, 255, 143)","(252, 0, 112)",535
+905,Verbot der Einfahrt,0.00087215,"(3, 255, 115)","(252, 0, 140)",529
+906,Verbot der Einfahrt,0.00058349,"(3, 255, 87)","(252, 0, 168)",585
+907,Vorfahrt,0.00121042,"(3, 255, 59)","(252, 0, 196)",641
+908,Ende aller Streckenverbote,0.02100964,"(3, 255, 31)","(252, 0, 224)",697
+909,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.1426398,"(3, 255, 3)","(252, 0, 252)",753
+910,Verbot der Einfahrt,0.93031812,"(3, 227, 255)","(252, 28, 0)",703
+911,Verbot der Einfahrt,0.46672377,"(3, 227, 227)","(252, 28, 28)",647
+912,Verbot der Einfahrt,0.05400008,"(3, 227, 199)","(252, 28, 56)",591
+913,Verbot der Einfahrt,0.0039097,"(3, 227, 171)","(252, 28, 84)",535
+914,Verbot der Einfahrt,0.00054207,"(3, 227, 143)","(252, 28, 112)",479
+915,Verbot der Einfahrt,0.0003846,"(3, 227, 115)","(252, 28, 140)",473
+916,Vorfahrt,0.00089824,"(3, 227, 87)","(252, 28, 168)",529
+917,Ende aller Streckenverbote,0.01203228,"(3, 227, 59)","(252, 28, 196)",585
+918,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.09097558,"(3, 227, 31)","(252, 28, 224)",641
+919,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.33311117,"(3, 227, 3)","(252, 28, 252)",697
+920,Verbot der Einfahrt,0.35872403,"(3, 199, 255)","(252, 56, 0)",647
+921,Verbot der Einfahrt,0.03553801,"(3, 199, 227)","(252, 56, 28)",591
+922,Verbot der Einfahrt,0.00255518,"(3, 199, 199)","(252, 56, 56)",535
+923,Verbot der Einfahrt,0.00035835,"(3, 199, 171)","(252, 56, 84)",479
+924,Verbot der Einfahrt,0.00025113,"(3, 199, 143)","(252, 56, 112)",423
+925,Vorfahrt,0.00062159,"(3, 199, 115)","(252, 56, 140)",417
+926,Ende aller Streckenverbote,0.00540658,"(3, 199, 87)","(252, 56, 168)",473
+927,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.0545039,"(3, 199, 59)","(252, 56, 196)",529
+928,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.256625,"(3, 199, 31)","(252, 56, 224)",585
+929,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.48512438,"(3, 199, 3)","(252, 56, 252)",641
+930,Verbot der Einfahrt,0.02310711,"(3, 171, 255)","(252, 84, 0)",591
+931,Verbot der Einfahrt,0.00161737,"(3, 171, 227)","(252, 84, 28)",535
+932,Verbot der Einfahrt,0.000232,"(3, 171, 199)","(252, 84, 56)",479
+933,Verbot der Einfahrt,0.0001623,"(3, 171, 171)","(252, 84, 84)",423
+934,Vorfahrt,0.00039335,"(3, 171, 143)","(252, 84, 112)",367
+935,Ende aller Streckenverbote,0.00224551,"(3, 171, 115)","(252, 84, 140)",361
+936,Ende aller Streckenverbote,0.0327902,"(3, 171, 87)","(252, 84, 168)",417
+937,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.218697,"(3, 171, 59)","(252, 84, 196)",473
+938,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.40583631,"(3, 171, 31)","(252, 84, 224)",529
+939,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.54507411,"(3, 171, 3)","(252, 84, 252)",585
+940,Verbot der Einfahrt,0.00103596,"(3, 143, 255)","(252, 112, 0)",535
+941,Verbot der Einfahrt,0.00014654,"(3, 143, 227)","(252, 112, 28)",479
+942,Verbot der Einfahrt,0.00010558,"(3, 143, 199)","(252, 112, 56)",423
+943,Vorfahrt,0.0002288,"(3, 143, 171)","(252, 112, 84)",367
+944,Vorfahrt,0.00141964,"(3, 143, 143)","(252, 112, 112)",311
+945,Ende aller Streckenverbote,0.02072437,"(3, 143, 115)","(252, 112, 140)",305
+946,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.18521179,"(3, 143, 87)","(252, 112, 168)",361
+947,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.41943482,"(3, 143, 59)","(252, 112, 196)",417
+948,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.48016086,"(3, 143, 31)","(252, 112, 224)",473
+949,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.56654364,"(3, 143, 3)","(252, 112, 252)",529
+950,Verbot der Einfahrt,9.115e-05,"(3, 115, 255)","(252, 140, 0)",529
+951,Verbot der Einfahrt,6.668e-05,"(3, 115, 227)","(252, 140, 28)",473
+952,Vorfahrt,9.117e-05,"(3, 115, 199)","(252, 140, 56)",417
+953,Vorfahrt,0.00058911,"(3, 115, 171)","(252, 140, 84)",361
+954,Ende aller Streckenverbote,0.00742752,"(3, 115, 143)","(252, 140, 112)",305
+955,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.14288609,"(3, 115, 115)","(252, 140, 140)",299
+956,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.41881517,"(3, 115, 87)","(252, 140, 168)",355
+957,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.53477293,"(3, 115, 59)","(252, 140, 196)",411
+958,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.49946913,"(3, 115, 31)","(252, 140, 224)",467
+959,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.58768535,"(3, 115, 3)","(252, 140, 252)",523
+960,Verbot der Einfahrt,4.18e-05,"(3, 87, 255)","(252, 168, 0)",585
+961,Verbot der Einfahrt,4.814e-05,"(3, 87, 227)","(252, 168, 28)",529
+962,Vorfahrt,0.00023449,"(3, 87, 199)","(252, 168, 56)",473
+963,Ende aller Streckenverbote,0.00228539,"(3, 87, 171)","(252, 168, 84)",417
+964,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.07683241,"(3, 87, 143)","(252, 168, 112)",361
+965,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.40239501,"(3, 87, 115)","(252, 168, 140)",355
+966,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.57629704,"(3, 87, 87)","(252, 168, 168)",411
+967,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.57916266,"(3, 87, 59)","(252, 168, 196)",467
+968,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.50283092,"(3, 87, 31)","(252, 168, 224)",523
+969,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.60133862,"(3, 87, 3)","(252, 168, 252)",579
+970,Verbot der Einfahrt,3.056e-05,"(3, 59, 255)","(252, 196, 0)",641
+971,Vorfahrt,9.085e-05,"(3, 59, 227)","(252, 196, 28)",585
+972,Vorfahrt,0.0006513,"(3, 59, 199)","(252, 196, 56)",529
+973,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.0211963,"(3, 59, 171)","(252, 196, 84)",473
+974,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.375716,"(3, 59, 143)","(252, 196, 112)",417
+975,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.59645522,"(3, 59, 115)","(252, 196, 140)",411
+976,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.63928443,"(3, 59, 87)","(252, 196, 168)",467
+977,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.58754689,"(3, 59, 59)","(252, 196, 196)",523
+978,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.52875566,"(3, 59, 31)","(252, 196, 224)",579
+979,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.62771654,"(3, 59, 3)","(252, 196, 252)",635
+980,Vorfahrt,3.52e-05,"(3, 31, 255)","(252, 224, 0)",697
+981,Vorfahrt,0.00025007,"(3, 31, 227)","(252, 224, 28)",641
+982,Ende aller Streckenverbote,0.00574875,"(3, 31, 199)","(252, 224, 56)",585
+983,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.31584451,"(3, 31, 171)","(252, 224, 84)",529
+984,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.59072655,"(3, 31, 143)","(252, 224, 112)",473
+985,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.66203272,"(3, 31, 115)","(252, 224, 140)",467
+986,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.64026153,"(3, 31, 87)","(252, 224, 168)",523
+987,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.54206294,"(3, 31, 59)","(252, 224, 196)",579
+988,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.58026296,"(3, 31, 31)","(252, 224, 224)",635
+989,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.64766371,"(3, 31, 3)","(252, 224, 252)",691
+990,Vorfahrt,4.468e-05,"(3, 3, 255)","(252, 252, 0)",753
+991,Ende aller Streckenverbote,0.00092523,"(3, 3, 227)","(252, 252, 28)",697
+992,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.13895373,"(3, 3, 199)","(252, 252, 56)",641
+993,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.50201374,"(3, 3, 171)","(252, 252, 84)",585
+994,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.54823858,"(3, 3, 143)","(252, 252, 112)",529
+995,"Verbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse von 3,5t",0.52935076,"(3, 3, 115)","(252, 252, 140)",523
+996,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.56306356,"(3, 3, 87)","(252, 252, 168)",579
+997,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.6912111,"(3, 3, 59)","(252, 252, 196)",635
+998,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.79662132,"(3, 3, 31)","(252, 252, 224)",691
+999,"Überholverbot für Kraftfahrzeuge mit einer zulässigen Gesamtmasse über 3,5t",0.82568014,"(3, 3, 3)","(252, 252, 252)",747
