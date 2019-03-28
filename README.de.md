@@ -1,4 +1,4 @@
-# Kollektiv5
+# Kollektiv 5
 
 Dieses Tool implementiert einen evolutionären Algorithmus, mit dem Bilder generiert werden. Diese Bilder werden an ein Neuronales Netz gereicht, welches auf das Erkennen von Verkehrsschildern spezialisiert ist. Die generierten Bilder sehen allerdings keinem Verkehrsschild ähnlich und werden dennoch mit einer hohen Konfidenz erkannt.
 
@@ -56,5 +56,9 @@ $ python -m PyQt5.uic.pyuic -x ./kollektiv5gui/views/ea_options_widget.ui -o ./k
 ```
 
 ## Testen
-Unittests für den EA-Bildgenerator für Polygone können mit `python3 -m unittest -v kollektiv5gui/tests/test_ea_generator.py` ausgeführt werden.
+Unittests für den EA-Bildgenerator können mit 
+```sh
+$ python -m unittest -v kollektiv5gui/tests/test_ea_generator.py
+```
+ausgeführt werden.
 
