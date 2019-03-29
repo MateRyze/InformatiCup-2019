@@ -11,7 +11,7 @@ Create a debian package with `dpkg-deb` and install on debian based system:
 
 ```sh
 $ cd debian
-$ create_pkg.sh
+$ ./create_pkg.sh
 $ apt install ./kollektiv5.deb
 ```
 Start the program `kollektiv5` from start menu (or equivalent).
@@ -20,12 +20,12 @@ Start the program `kollektiv5` from start menu (or equivalent).
 Needs Python 3.6, install dependencies with `pip`:
 
 ```sh
-$ pip install -r requirements.txt
+$ pip3 install -r requirements.txt
 ```
 Start the program by executing:
 
 ```sh
-$ python kollektiv5.py
+$ python3 kollektiv5.py
 ```
 ### Image Generation
 
@@ -37,6 +37,7 @@ $ python kollektiv5.py
 ## Testing
 Run unit tests for the EA generator: 
 ```sh
-$ python -m unittest -v kollektiv5gui/tests/test_ea_generator.py
+$ python3 -m unittest -v kollektiv5gui/tests/test_ea_generator.py
 ```
+
 
