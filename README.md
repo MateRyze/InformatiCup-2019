@@ -1,4 +1,5 @@
-# InformatiCup 2018/2019
+# InformatiCup 2018/2019 ![example result](https://github.com/MateRyze/InformatiCup-2019/blob/master/results/polygons_preset_2_example.png "example result")
+
 Solution for the competition [InformatiCup 2018/2019](https://gi.de/informaticup/) 
 
 *Read in other language: [German](https://github.com/MateRyze/InformatiCup-2019/blob/master/README.de.md)*
@@ -28,11 +29,14 @@ Start the program by executing:
 $ python3 kollektiv5.py
 ```
 ### Image Generation
-
-* Enter API key
-* Select classes (traffic signs)
-* Select generation method and presets or options
+**Important: This implementation uses the API from the [GI](https://gi.de/informaticup/), that will be shut down in the future**  
+* (Optional: Enter API key)
+* Select classes (traffic signs) or generate any classes
+* Select generation method and presets or select options
 * Start generation
+
+![image generation](https://github.com/MateRyze/InformatiCup-2019/blob/master/results/gui_generation.png "Generation")
+
 
 ## Testing
 Run unit tests for the EA generator: 
