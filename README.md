@@ -1,8 +1,14 @@
-# InformatiCup 2018/2019 ![example result](https://github.com/MateRyze/InformatiCup-2019/blob/master/results/polygons_preset_2_example.png "example result")
-
-Solution for the competition [InformatiCup 2018/2019](https://gi.de/informaticup/) 
-
+# Submission for [InformatiCup 2018/2019](https://gi.de/informaticup/)
 *Read in other language: [German](https://github.com/MateRyze/InformatiCup-2019/blob/master/README.de.md)*
+
+The goal of this competition was to fool a traffic sign recognition system with generated images, that do not look like any traffic signs. 
+
+This tool implements an evolutionary algorithm to generate these images. For example the generated image ![example result](https://github.com/MateRyze/InformatiCup-2019/blob/master/results/polygons_preset_2_example.png "example result") 
+has been recognized as
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Zeichen_222_-_Vorgeschriebene_Vorbeifahrt%2C_Rechts_vorbei%2C_StVO_2017.svg/2000px-Zeichen_222_-_Vorgeschriebene_Vorbeifahrt%2C_Rechts_vorbei%2C_StVO_2017.svg.png" width="64" height="64">
+
+
+
 
 ## Getting Started
 
@@ -35,7 +41,7 @@ $ python3 kollektiv5.py
 * Select generation method and presets or select options
 * Start generation
 
-![image generation](https://github.com/MateRyze/InformatiCup-2019/blob/master/results/gui_generation.png "Generation")
+![image generation](https://github.com/MateRyze/InformatiCup-2019/blob/master/results/gui_generation.png "Generation"
 
 
 ## Testing
