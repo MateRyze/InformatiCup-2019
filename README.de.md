@@ -62,6 +62,6 @@ $ python -m unittest -v kollektiv5gui/tests/test_ea_generator.py
 ```
 ausgeführt werden.
 
-## Lizens
+## Lizenz
 
 Diese Projekt ist [MIT lizensiert](./LICENSE).
