@@ -49,4 +49,7 @@ Run unit tests for the EA generator:
 $ python3 -m unittest -v kollektiv5gui/tests/test_ea_generator.py
 ```
 
+## License
+
+This Project is [MIT licensed](./LICENSE). By contributing to it, you agree that your contributions will be licensed under its MIT license.
 
