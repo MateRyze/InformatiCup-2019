@@ -5,7 +5,7 @@ dask==0.20.1
 decorator==4.3.0
 idna==2.7
 networkx==2.2
-numpy==1.15.4
+numpy==1.22.0
 pandas==0.23.4
 Pillow==6.2.0
 PyWavelets==1.0.1
